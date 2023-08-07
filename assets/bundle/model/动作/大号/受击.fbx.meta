@@ -1,0 +1,81 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "eccaf7b2-44a3-47d9-88da-49382393307b",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "96058": {
+      "importer": "gltf-scene",
+      "uuid": "eccaf7b2-44a3-47d9-88da-49382393307b@96058",
+      "displayName": "",
+      "id": "96058",
+      "name": "受击.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "79e35": {
+      "importer": "gltf-animation",
+      "uuid": "eccaf7b2-44a3-47d9-88da-49382393307b@79e35",
+      "displayName": "",
+      "id": "79e35",
+      "name": "hit.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 0,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1
+        },
+        "events": []
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "mixamo.com",
+        "duration": 1,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "hit",
+            "from": 0,
+            "to": 1,
+            "wrapMode": 0
+          }
+        ]
+      }
+    ],
+    "redirect": "eccaf7b2-44a3-47d9-88da-49382393307b@96058",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "eccaf7b2-44a3-47d9-88da-49382393307b@96058"
+      ]
+    }
+  }
+}

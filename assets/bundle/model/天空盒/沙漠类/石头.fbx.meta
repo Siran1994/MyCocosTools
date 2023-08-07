@@ -1,0 +1,78 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "29e30634-d700-41f2-bec7-764a2a970afa",
+  "files": [],
+  "subMetas": {
+    "4c5ec": {
+      "importer": "gltf-mesh",
+      "uuid": "29e30634-d700-41f2-bec7-764a2a970afa@4c5ec",
+      "displayName": "",
+      "id": "4c5ec",
+      "name": "pCube53.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cf44d": {
+      "importer": "gltf-material",
+      "uuid": "29e30634-d700-41f2-bec7-764a2a970afa@cf44d",
+      "displayName": "",
+      "id": "cf44d",
+      "name": "lambert20.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ce5f5": {
+      "importer": "gltf-scene",
+      "uuid": "29e30634-d700-41f2-bec7-764a2a970afa@ce5f5",
+      "displayName": "",
+      "id": "ce5f5",
+      "name": "石头.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "29e30634-d700-41f2-bec7-764a2a970afa@ce5f5",
+    "assetFinder": {
+      "meshes": [
+        "29e30634-d700-41f2-bec7-764a2a970afa@4c5ec"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "29e30634-d700-41f2-bec7-764a2a970afa@cf44d"
+      ],
+      "scenes": [
+        "29e30634-d700-41f2-bec7-764a2a970afa@ce5f5"
+      ]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "6bbc443a-3eb3-4667-ba8f-b9c6ce1b4fbb",
+  "files": [],
+  "subMetas": {
+    "3553c": {
+      "importer": "gltf-mesh",
+      "uuid": "6bbc443a-3eb3-4667-ba8f-b9c6ce1b4fbb@3553c",
+      "displayName": "",
+      "id": "3553c",
+      "name": "对象007.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "1f97b": {
+      "importer": "gltf-material",
+      "uuid": "6bbc443a-3eb3-4667-ba8f-b9c6ce1b4fbb@1f97b",
+      "displayName": "",
+      "id": "1f97b",
+      "name": "Brown.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c9479": {
+      "importer": "gltf-scene",
+      "uuid": "6bbc443a-3eb3-4667-ba8f-b9c6ce1b4fbb@c9479",
+      "displayName": "",
+      "id": "c9479",
+      "name": "山3.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "6bbc443a-3eb3-4667-ba8f-b9c6ce1b4fbb@c9479",
+    "assetFinder": {
+      "meshes": [
+        "6bbc443a-3eb3-4667-ba8f-b9c6ce1b4fbb@3553c"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "6bbc443a-3eb3-4667-ba8f-b9c6ce1b4fbb@1f97b"
+      ],
+      "scenes": [
+        "6bbc443a-3eb3-4667-ba8f-b9c6ce1b4fbb@c9479"
+      ]
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0",
+  "files": [],
+  "subMetas": {
+    "49758": {
+      "importer": "gltf-material",
+      "uuid": "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@49758",
+      "displayName": "",
+      "id": "49758",
+      "name": "lambert16.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ace48": {
+      "importer": "gltf-mesh",
+      "uuid": "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@ace48",
+      "displayName": "",
+      "id": "ace48",
+      "name": "pCube57_Material0.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "491a8": {
+      "importer": "gltf-material",
+      "uuid": "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@491a8",
+      "displayName": "",
+      "id": "491a8",
+      "name": "lambert15.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "253b4": {
+      "importer": "gltf-material",
+      "uuid": "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@253b4",
+      "displayName": "",
+      "id": "253b4",
+      "name": "lambert17.material",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "21f1f": {
+      "importer": "gltf-scene",
+      "uuid": "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@21f1f",
+      "displayName": "",
+      "id": "21f1f",
+      "name": "电网.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@21f1f",
+    "assetFinder": {
+      "meshes": [
+        "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@ace48"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@491a8",
+        "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@49758",
+        "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@253b4"
+      ],
+      "scenes": [
+        "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@21f1f"
+      ]
+    },
+    "materials": {
+      "c06cdde4-de3f-4b3d-92e1-5855a2bfbcd0@491a8": {
+        "__type__": "cc.Material",
+        "_name": "",
+        "_objFlags": 0,
+        "_native": "",
+        "_effectAsset": {
+          "__uuid__": "f648964e-8d32-41fc-9ac9-7a1e714dd17b",
+          "__expectedType__": "cc.EffectAsset"
+        },
+        "_techIdx": 0,
+        "_defines": [
+          {
+            "DCC_APP_NAME": 5
+          },
+          {},
+          {}
+        ],
+        "_states": [
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          }
+        ],
+        "_props": [
+          {
+            "mainColor": {
+              "__type__": "cc.Color",
+              "r": 213,
+              "g": 0,
+              "b": 255,
+              "a": 255
+            },
+            "albedoScale": 73.5
+          },
+          {},
+          {}
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "ce5e2142-0a4f-4133-99ec-3c74e2856021",
+  "files": [],
+  "subMetas": {
+    "274b5": {
+      "importer": "gltf-mesh",
+      "uuid": "ce5e2142-0a4f-4133-99ec-3c74e2856021@274b5",
+      "displayName": "",
+      "id": "274b5",
+      "name": "pCube26_Material0.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "aa825": {
+      "importer": "gltf-material",
+      "uuid": "ce5e2142-0a4f-4133-99ec-3c74e2856021@aa825",
+      "displayName": "",
+      "id": "aa825",
+      "name": "lambert4.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c13ff": {
+      "importer": "gltf-material",
+      "uuid": "ce5e2142-0a4f-4133-99ec-3c74e2856021@c13ff",
+      "displayName": "",
+      "id": "c13ff",
+      "name": "tire.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "84dac": {
+      "importer": "gltf-scene",
+      "uuid": "ce5e2142-0a4f-4133-99ec-3c74e2856021@84dac",
+      "displayName": "",
+      "id": "84dac",
+      "name": "仙人掌.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "ce5e2142-0a4f-4133-99ec-3c74e2856021@84dac",
+    "assetFinder": {
+      "meshes": [
+        "ce5e2142-0a4f-4133-99ec-3c74e2856021@274b5"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "ce5e2142-0a4f-4133-99ec-3c74e2856021@aa825",
+        "ce5e2142-0a4f-4133-99ec-3c74e2856021@c13ff"
+      ],
+      "scenes": [
+        "ce5e2142-0a4f-4133-99ec-3c74e2856021@84dac"
+      ]
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "7a01233a-1a0b-436e-a9ed-4808f7f03998",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "1f586": {
+      "importer": "gltf-animation",
+      "uuid": "7a01233a-1a0b-436e-a9ed-4808f7f03998@1f586",
+      "displayName": "",
+      "id": "1f586",
+      "name": "idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 4.433333396911621
+        },
+        "events": []
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "05ab7": {
+      "importer": "gltf-scene",
+      "uuid": "7a01233a-1a0b-436e-a9ed-4808f7f03998@05ab7",
+      "displayName": "",
+      "id": "05ab7",
+      "name": "待机.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "mixamo.com",
+        "duration": 4.433333396911621,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "idle",
+            "from": 0,
+            "to": 4.433333396911621,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "7a01233a-1a0b-436e-a9ed-4808f7f03998@05ab7",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "7a01233a-1a0b-436e-a9ed-4808f7f03998@05ab7"
+      ]
+    }
+  }
+}

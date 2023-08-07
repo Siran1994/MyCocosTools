@@ -1,0 +1,81 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "5160adfc-2f21-4cf3-961d-69059d479a09",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "b4251": {
+      "importer": "gltf-animation",
+      "uuid": "5160adfc-2f21-4cf3-961d-69059d479a09@b4251",
+      "displayName": "",
+      "id": "b4251",
+      "name": "die.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 0,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 3.0333333015441895
+        },
+        "events": []
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "028a0": {
+      "importer": "gltf-scene",
+      "uuid": "5160adfc-2f21-4cf3-961d-69059d479a09@028a0",
+      "displayName": "",
+      "id": "028a0",
+      "name": "死亡.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "mixamo.com",
+        "duration": 3.0333333015441895,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "die",
+            "from": 0,
+            "to": 3.0333333015441895,
+            "wrapMode": 0
+          }
+        ]
+      }
+    ],
+    "redirect": "5160adfc-2f21-4cf3-961d-69059d479a09@028a0",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "5160adfc-2f21-4cf3-961d-69059d479a09@028a0"
+      ]
+    }
+  }
+}

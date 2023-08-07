@@ -1,0 +1,78 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "63bb872b-a159-4cef-8268-0d4a4e56cf0d",
+  "files": [],
+  "subMetas": {
+    "ff35b": {
+      "importer": "gltf-mesh",
+      "uuid": "63bb872b-a159-4cef-8268-0d4a4e56cf0d@ff35b",
+      "displayName": "",
+      "id": "ff35b",
+      "name": "pCube27.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "39a11": {
+      "importer": "gltf-material",
+      "uuid": "63bb872b-a159-4cef-8268-0d4a4e56cf0d@39a11",
+      "displayName": "",
+      "id": "39a11",
+      "name": "cactis.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "06634": {
+      "importer": "gltf-scene",
+      "uuid": "63bb872b-a159-4cef-8268-0d4a4e56cf0d@06634",
+      "displayName": "",
+      "id": "06634",
+      "name": "仙人掌3.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "63bb872b-a159-4cef-8268-0d4a4e56cf0d@06634",
+    "assetFinder": {
+      "meshes": [
+        "63bb872b-a159-4cef-8268-0d4a4e56cf0d@ff35b"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "63bb872b-a159-4cef-8268-0d4a4e56cf0d@39a11"
+      ],
+      "scenes": [
+        "63bb872b-a159-4cef-8268-0d4a4e56cf0d@06634"
+      ]
+    }
+  }
+}

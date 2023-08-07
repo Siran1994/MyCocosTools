@@ -1,0 +1,78 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "b8901136-3ac0-4899-9ab4-55caf2c91800",
+  "files": [],
+  "subMetas": {
+    "349d8": {
+      "importer": "gltf-mesh",
+      "uuid": "b8901136-3ac0-4899-9ab4-55caf2c91800@349d8",
+      "displayName": "",
+      "id": "349d8",
+      "name": "polySurface27.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b904f": {
+      "importer": "gltf-material",
+      "uuid": "b8901136-3ac0-4899-9ab4-55caf2c91800@b904f",
+      "displayName": "",
+      "id": "b904f",
+      "name": "lambert14.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3e09e": {
+      "importer": "gltf-scene",
+      "uuid": "b8901136-3ac0-4899-9ab4-55caf2c91800@3e09e",
+      "displayName": "",
+      "id": "3e09e",
+      "name": "赛道11.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "b8901136-3ac0-4899-9ab4-55caf2c91800@3e09e",
+    "assetFinder": {
+      "meshes": [
+        "b8901136-3ac0-4899-9ab4-55caf2c91800@349d8"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "b8901136-3ac0-4899-9ab4-55caf2c91800@b904f"
+      ],
+      "scenes": [
+        "b8901136-3ac0-4899-9ab4-55caf2c91800@3e09e"
+      ]
+    }
+  }
+}

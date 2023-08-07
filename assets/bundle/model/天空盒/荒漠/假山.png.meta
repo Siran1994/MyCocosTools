@@ -1,0 +1,45 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "beea4c3a-fbf7-4949-915a-f286f87c1c01",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "beea4c3a-fbf7-4949-915a-f286f87c1c01@6c48a",
+      "displayName": "假山",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "beea4c3a-fbf7-4949-915a-f286f87c1c01",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": false,
+    "type": "texture",
+    "redirect": "beea4c3a-fbf7-4949-915a-f286f87c1c01@6c48a",
+    "compressSettings": {
+      "useCompressTexture": true
+    }
+  }
+}

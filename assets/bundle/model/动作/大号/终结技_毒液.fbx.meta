@@ -1,0 +1,96 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "17155b22-df56-4889-937a-03a9d0e9791f",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "dc560": {
+      "importer": "gltf-animation",
+      "uuid": "17155b22-df56-4889-937a-03a9d0e9791f@dc560",
+      "displayName": "",
+      "id": "dc560",
+      "name": "final.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 0,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.4333332777023315
+        },
+        "events": [
+          {
+            "frame": 0.6333333333333333,
+            "func": "AtkEvent",
+            "params": [
+              2
+            ],
+            "x": 152.8372093023256
+          },
+          {
+            "frame": 1.3,
+            "func": "AtkOver",
+            "params": [],
+            "x": 322.13953488372096
+          }
+        ]
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "ffcdf": {
+      "importer": "gltf-scene",
+      "uuid": "17155b22-df56-4889-937a-03a9d0e9791f@ffcdf",
+      "displayName": "",
+      "id": "ffcdf",
+      "name": "终结技_毒液.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "mixamo.com",
+        "duration": 1.4333332777023315,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "final",
+            "from": 0,
+            "to": 1.4333332777023315,
+            "wrapMode": 0
+          }
+        ]
+      }
+    ],
+    "redirect": "17155b22-df56-4889-937a-03a9d0e9791f@ffcdf",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "17155b22-df56-4889-937a-03a9d0e9791f@ffcdf"
+      ]
+    }
+  }
+}

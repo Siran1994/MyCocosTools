@@ -1,0 +1,81 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "90a6a103-793d-4682-aba7-367aed42f714",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "dc560": {
+      "importer": "gltf-animation",
+      "uuid": "90a6a103-793d-4682-aba7-367aed42f714@dc560",
+      "displayName": "",
+      "id": "dc560",
+      "name": "final.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 0,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 2.6666667461395264
+        },
+        "events": []
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "8ea57": {
+      "importer": "gltf-scene",
+      "uuid": "90a6a103-793d-4682-aba7-367aed42f714@8ea57",
+      "displayName": "",
+      "id": "8ea57",
+      "name": "终结技能.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "mixamo.com",
+        "duration": 2.6666667461395264,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "final",
+            "from": 0,
+            "to": 2.6666667461395264,
+            "wrapMode": 0
+          }
+        ]
+      }
+    ],
+    "redirect": "90a6a103-793d-4682-aba7-367aed42f714@8ea57",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "90a6a103-793d-4682-aba7-367aed42f714@8ea57"
+      ]
+    }
+  }
+}

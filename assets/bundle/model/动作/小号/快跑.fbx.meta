@@ -1,0 +1,81 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "6f1fa3ee-7489-4da1-925e-f1bd142a4bfd",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "cf5ee": {
+      "importer": "gltf-animation",
+      "uuid": "6f1fa3ee-7489-4da1-925e-f1bd142a4bfd@cf5ee",
+      "displayName": "",
+      "id": "cf5ee",
+      "name": "run.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.5333333611488342
+        },
+        "events": []
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "f24d5": {
+      "importer": "gltf-scene",
+      "uuid": "6f1fa3ee-7489-4da1-925e-f1bd142a4bfd@f24d5",
+      "displayName": "",
+      "id": "f24d5",
+      "name": "快跑.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "mixamo.com",
+        "duration": 0.5333333611488342,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "run",
+            "from": 0,
+            "to": 0.5333333611488342,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "6f1fa3ee-7489-4da1-925e-f1bd142a4bfd@f24d5",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "6f1fa3ee-7489-4da1-925e-f1bd142a4bfd@f24d5"
+      ]
+    }
+  }
+}

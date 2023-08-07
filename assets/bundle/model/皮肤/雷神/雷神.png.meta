@@ -1,0 +1,45 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "1bc21bfd-f169-4a50-8d9e-0a6392fddc6a",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "1bc21bfd-f169-4a50-8d9e-0a6392fddc6a@6c48a",
+      "displayName": "雷神",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "1bc21bfd-f169-4a50-8d9e-0a6392fddc6a",
+        "visible": true
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": false,
+    "type": "texture",
+    "redirect": "1bc21bfd-f169-4a50-8d9e-0a6392fddc6a@6c48a",
+    "compressSettings": {
+      "useCompressTexture": true
+    }
+  }
+}

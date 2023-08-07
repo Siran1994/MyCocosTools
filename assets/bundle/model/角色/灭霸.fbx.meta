@@ -1,0 +1,337 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10",
+  "files": [],
+  "subMetas": {
+    "bbb9d": {
+      "importer": "gltf-mesh",
+      "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@bbb9d",
+      "displayName": "",
+      "id": "bbb9d",
+      "name": "mieba_Material0.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "438fe": {
+      "importer": "gltf-skeleton",
+      "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@438fe",
+      "displayName": "",
+      "id": "438fe",
+      "name": "UnnamedSkeleton.skeleton",
+      "userData": {
+        "gltfIndex": 0,
+        "jointsLength": 52
+      },
+      "ver": "1.0.1",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a2a2d": {
+      "importer": "gltf-embeded-image",
+      "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@a2a2d",
+      "displayName": "",
+      "id": "a2a2d",
+      "name": "file14.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".json",
+        ".png"
+      ],
+      "subMetas": {}
+    },
+    "ee6e5": {
+      "importer": "gltf-embeded-image",
+      "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@ee6e5",
+      "displayName": "",
+      "id": "ee6e5",
+      "name": "mieba2:defaultMat1F.image",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".json",
+        ".png"
+      ],
+      "subMetas": {}
+    },
+    "8852e": {
+      "importer": "texture",
+      "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@8852e",
+      "displayName": "",
+      "id": "8852e",
+      "name": "file14.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@a2a2d"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "25c24": {
+      "importer": "texture",
+      "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@25c24",
+      "displayName": "",
+      "id": "25c24",
+      "name": "mieba2:defaultMat1F.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@ee6e5"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c7780": {
+      "importer": "gltf-material",
+      "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@c7780",
+      "displayName": "",
+      "id": "c7780",
+      "name": "lambert11.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b29f1": {
+      "importer": "gltf-material",
+      "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@b29f1",
+      "displayName": "",
+      "id": "b29f1",
+      "name": "mieba2:defaultMat1.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d7463": {
+      "importer": "gltf-scene",
+      "uuid": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@d7463",
+      "displayName": "",
+      "id": "d7463",
+      "name": "灭霸.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "file14",
+        "uri": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@a2a2d"
+      },
+      {
+        "name": "mieba2:defaultMat1F",
+        "uri": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@ee6e5"
+      }
+    ],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@d7463",
+    "assetFinder": {
+      "meshes": [
+        "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@bbb9d"
+      ],
+      "skeletons": [
+        "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@438fe"
+      ],
+      "textures": [
+        "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@8852e",
+        "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@25c24"
+      ],
+      "materials": [
+        "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@c7780",
+        "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@b29f1"
+      ],
+      "scenes": [
+        "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@d7463"
+      ]
+    },
+    "meshOptimizer": {
+      "enable": false
+    },
+    "materials": {
+      "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@c7780": {
+        "__type__": "cc.Material",
+        "_name": "",
+        "_objFlags": 0,
+        "_native": "",
+        "_effectAsset": {
+          "__uuid__": "f648964e-8d32-41fc-9ac9-7a1e714dd17b",
+          "__expectedType__": "cc.EffectAsset"
+        },
+        "_techIdx": 0,
+        "_defines": [
+          {
+            "USE_ALBEDO_MAP": true
+          },
+          {},
+          {}
+        ],
+        "_states": [
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          }
+        ],
+        "_props": [
+          {
+            "mainTexture": {
+              "__uuid__": "bef6873a-1598-4ee9-8221-f9e4389d9b73@6c48a",
+              "__expectedType__": "cc.Texture2D"
+            }
+          },
+          {},
+          {}
+        ]
+      },
+      "7bbf54ef-4a62-4f4d-b6b7-de3d279fdc10@b29f1": {
+        "__type__": "cc.Material",
+        "_name": "",
+        "_objFlags": 0,
+        "_native": "",
+        "_effectAsset": {
+          "__uuid__": "c8f66d17-351a-48da-a12c-0212d28575c4",
+          "__expectedType__": "cc.EffectAsset"
+        },
+        "_techIdx": 0,
+        "_defines": [
+          {
+            "USE_ALBEDO_MAP": true
+          },
+          {},
+          {},
+          {}
+        ],
+        "_states": [
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          },
+          {
+            "rasterizerState": {},
+            "depthStencilState": {},
+            "blendState": {
+              "targets": [
+                {}
+              ]
+            }
+          }
+        ],
+        "_props": [
+          {
+            "roughness": 1,
+            "mainTexture": {
+              "__uuid__": "5ee213da-16b9-4b63-8acf-c1de960793a1@6c48a",
+              "__expectedType__": "cc.Texture2D"
+            }
+          },
+          {},
+          {},
+          {}
+        ]
+      }
+    }
+  }
+}

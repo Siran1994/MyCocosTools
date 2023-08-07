@@ -1,0 +1,81 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "2a4dac0f-89f2-48e7-afc6-a0b8581a996f",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "7f3dc": {
+      "importer": "gltf-animation",
+      "uuid": "2a4dac0f-89f2-48e7-afc6-a0b8581a996f@7f3dc",
+      "displayName": "",
+      "id": "7f3dc",
+      "name": "walk.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.699999988079071
+        },
+        "events": []
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "05704": {
+      "importer": "gltf-scene",
+      "uuid": "2a4dac0f-89f2-48e7-afc6-a0b8581a996f@05704",
+      "displayName": "",
+      "id": "05704",
+      "name": "慢跑.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "mixamo.com",
+        "duration": 0.699999988079071,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "walk",
+            "from": 0,
+            "to": 0.699999988079071,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "2a4dac0f-89f2-48e7-afc6-a0b8581a996f@05704",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "2a4dac0f-89f2-48e7-afc6-a0b8581a996f@05704"
+      ]
+    }
+  }
+}

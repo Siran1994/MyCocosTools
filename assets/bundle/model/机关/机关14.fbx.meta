@@ -1,0 +1,206 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "59394": {
+      "importer": "gltf-material",
+      "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465@59394",
+      "displayName": "",
+      "id": "59394",
+      "name": "Material.007.material",
+      "userData": {
+        "gltfIndex": 2
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "73366": {
+      "importer": "gltf-mesh",
+      "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465@73366",
+      "displayName": "",
+      "id": "73366",
+      "name": "Cube2_Material0.mesh",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "92258": {
+      "importer": "gltf-scene",
+      "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465@92258",
+      "displayName": "",
+      "id": "92258",
+      "name": "机关14.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "579d0": {
+      "importer": "gltf-mesh",
+      "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465@579d0",
+      "displayName": "",
+      "id": "579d0",
+      "name": "Cylin.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "73b7f": {
+      "importer": "gltf-animation",
+      "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465@73b7f",
+      "displayName": "",
+      "id": "73b7f",
+      "name": "Take 001.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.9583333134651184
+        },
+        "events": [],
+        "speed": 0.5
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "afeef": {
+      "importer": "gltf-material",
+      "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465@afeef",
+      "displayName": "",
+      "id": "afeef",
+      "name": "Material.024.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "3ca4b": {
+      "importer": "gltf-material",
+      "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465@3ca4b",
+      "displayName": "",
+      "id": "3ca4b",
+      "name": "Material.008.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e736c": {
+      "importer": "gltf-material",
+      "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465@e736c",
+      "displayName": "",
+      "id": "e736c",
+      "name": "Material.004.material",
+      "userData": {
+        "gltfIndex": 3
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "710dd": {
+      "importer": "gltf-material",
+      "uuid": "d39a3789-71d2-461e-bdc5-e81b9207b465@710dd",
+      "displayName": "",
+      "id": "710dd",
+      "name": "Material.013.material",
+      "userData": {
+        "gltfIndex": 4
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 0.9583333134651184,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "Take 001",
+            "from": 0,
+            "to": 0.9583333134651184,
+            "wrapMode": 2,
+            "speed": 0.5
+          }
+        ]
+      }
+    ],
+    "redirect": "d39a3789-71d2-461e-bdc5-e81b9207b465@92258",
+    "assetFinder": {
+      "meshes": [
+        "d39a3789-71d2-461e-bdc5-e81b9207b465@579d0",
+        "d39a3789-71d2-461e-bdc5-e81b9207b465@73366"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "d39a3789-71d2-461e-bdc5-e81b9207b465@afeef",
+        "d39a3789-71d2-461e-bdc5-e81b9207b465@3ca4b",
+        "d39a3789-71d2-461e-bdc5-e81b9207b465@59394",
+        "d39a3789-71d2-461e-bdc5-e81b9207b465@e736c",
+        "d39a3789-71d2-461e-bdc5-e81b9207b465@710dd"
+      ],
+      "scenes": [
+        "d39a3789-71d2-461e-bdc5-e81b9207b465@92258"
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+    "package_version": 2,
+    "version": "1.0.0",
+    "name": "mytools",
+    "description": "i18n:mytools.description",
+    "main": "./dist/main.js",
+    "devDependencies": {
+        "@types/node": "^16.0.1",
+        "typescript": "^4.3.4"
+    },
+    "author": "Siran",
+    "editor": ">=3.7.2",
+    "scripts": {
+        "build": "tsc -b",
+        "watch": "tsc -w"
+    },
+    "contributions": {
+        "menu": [
+            {
+                "path": "工具箱",
+                "label": "清理数据",
+                "message": "log"
+            }
+        ],
+        "messages": {
+            "log": {
+                "methods": [
+                    "log"
+                ]
+            }
+        }
+    }
+}

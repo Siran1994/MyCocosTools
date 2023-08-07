@@ -1,0 +1,81 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "ac9badc3-cac2-4b07-bdcf-60266b96a9ad",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "ee525": {
+      "importer": "gltf-animation",
+      "uuid": "ac9badc3-cac2-4b07-bdcf-60266b96a9ad@ee525",
+      "displayName": "",
+      "id": "ee525",
+      "name": "win.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.6666666269302368
+        },
+        "events": []
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "f567a": {
+      "importer": "gltf-scene",
+      "uuid": "ac9badc3-cac2-4b07-bdcf-60266b96a9ad@f567a",
+      "displayName": "",
+      "id": "f567a",
+      "name": "胜利.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "mixamo.com",
+        "duration": 1.6666666269302368,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "win",
+            "from": 0,
+            "to": 1.6666666269302368,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "ac9badc3-cac2-4b07-bdcf-60266b96a9ad@f567a",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "ac9badc3-cac2-4b07-bdcf-60266b96a9ad@f567a"
+      ]
+    }
+  }
+}
