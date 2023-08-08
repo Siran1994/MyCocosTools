@@ -1,0 +1,187 @@
+// Copyright (c) 2017-2020 Xiamen Yaji Software Co., Ltd.
+CCEffect %{
+  techniques:
+  - name: opaque
+    passes:
+    - vert: unlit-vs:vert
+      frag: unlit-fs:frag
+      properties: &props
+        mainTexture:    { value: grey }
+        tilingOffset:   { value: [1, 1, 0, 0] }
+        mainColor:      { value: [1, 1, 1, 1], linear: true, editor: { type: color } }
+        
+        depthTexture:   { value: white }
+        fogStart:       { value: 0.0 }
+        fogEnd:         { value: 1.0 }
+        fogDensity:     { value: 1.0 }
+        fogColor:       { value: [1, 1, 1, 1], linear: true, editor: { type: color } }     
+        fogAtten:       { value: 1.0 }  
+
+        fogXSpeed:      { value: 0.01, target: fogSpeed.x, editor: { slide: true, range: [0.0, 0.2], step: 0.001 } }
+        fogYSpeed:      { value: 0.01, target: fogSpeed.y, editor: { slide: true, range: [0.0, 0.2], step: 0.001 } }
+        noiseTexture:   { value: white }
+        noiseIntensity: { value: 1.0, editor: { slide: true, range: [0.0, 5.0], step: 0.01 } }
+      migrations: &migs
+        properties:
+          mainColor:    { formerlySerializedAs: color }
+  - name: transparent
+    passes:
+    - vert: unlit-vs:vert
+      frag: unlit-fs:frag
+      depthStencilState: &d1
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: *props
+      migrations: *migs
+  - name: add
+    passes:
+    - vert: unlit-vs:vert
+      frag: unlit-fs:frag
+      rasterizerState: &r1 { cullMode: none }
+      depthStencilState: *d1
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one
+          blendSrcAlpha: src_alpha
+          blendDstAlpha: one
+      properties: *props
+      migrations: *migs
+  - name: alpha-blend
+    passes:
+    - vert: unlit-vs:vert
+      frag: unlit-fs:frag
+      rasterizerState: *r1
+      depthStencilState: *d1
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: *props
+      migrations: *migs
+}%
+
+CCProgram unlit-vs %{
+  precision highp float;
+  #include <legacy/input>
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/decode-base>
+  #include <legacy/local-batch>
+  #include <legacy/input>
+  #include <legacy/fog-vs>
+
+  out vec2 v_uv;
+  
+  uniform TexCoords {
+    vec4 tilingOffset;
+  };
+
+  vec4 vert () {
+    vec4 position;
+    CCVertInput(position);
+
+    mat4 matWorld;
+    CCGetWorldMatrix(matWorld);
+
+    v_uv = a_texCoord * tilingOffset.xy + tilingOffset.zw;
+    #if SAMPLE_FROM_RT
+      CC_HANDLE_RT_SAMPLE_FLIP(v_uv);
+    #endif
+
+    // return cc_matProj * (cc_matView * matWorld) * position;
+    vec4 outPos = vec4(sign(position.x), sign(position.y), 0.0, 1.0);
+    return outPos;
+  }
+}%
+
+CCProgram unlit-fs %{
+  precision highp float;
+  #include <legacy/output-standard>
+  #include <common/data/unpack>
+  #include <legacy/fog-fs>
+
+  in vec2 v_uv;
+
+  uniform Constant {
+    vec4 mainColor;
+    
+    mat4 matViewProjInv;
+    vec4 cameraWorldPos;
+    vec4 fogColor;
+    vec2 fogSpeed;
+    float fogStart;
+    float fogEnd;
+    float fogDensity;
+    float fogAtten;
+    float noiseIntensity;
+  };
+  uniform sampler2D mainTexture;
+  uniform sampler2D depthTexture;
+  uniform sampler2D noiseTexture;
+
+  float LinearEyeDepth (float depth) {
+    float near = cc_nearFar.x;
+    float far = cc_nearFar.y;
+    float zc0 = (near - far) / near;
+    float zc1 = far / near;
+    vec4 ZBufferParams = vec4(zc0, zc1, zc0/far, zc1/far);
+
+    float linearDepth = 1.0 / (ZBufferParams.z * depth + ZBufferParams.w);
+    return linearDepth;
+  }
+
+  float LinearFog (vec4 wPos, vec4 cameraPos, float fogStart, float fogEnd) {
+    vec3 diff = cameraPos.xyz - wPos.xyz;
+    float cam_dis = sqrt(dot(diff, diff));
+    return clamp((fogEnd - cam_dis) / (fogEnd - fogStart), 0.0, 1.0);
+  }
+
+  float ExpFog (vec4 wPos, vec4 cameraPos, float fogStart, float fogDensity, float fogAtten) {
+    vec3 diff = cameraPos.xyz - wPos.xyz;
+    float dist = sqrt(dot(diff, diff));
+    float cam_dis = max(dist - fogStart, 0.0) / fogAtten * 4.0;
+    float noise = (texture(noiseTexture, v_uv + cc_time.xx * fogSpeed.xy).r - 0.5) * noiseIntensity;
+    float f = exp(-cam_dis * fogDensity * (1.0 + noise));
+    return f;
+  }
+
+  float ExpSquaredFog (vec4 wPos, vec4 cameraPos, float fogStart, float fogDensity, float fogAtten) {
+    vec3 diff = cameraPos.xyz - wPos.xyz;
+    float cam_dis = sqrt(dot(diff, diff));
+    cam_dis = max(cam_dis - fogStart, 0.0) / fogAtten * 4.0;
+    float f = exp(-cam_dis * cam_dis * fogDensity * fogDensity);
+    return f;
+  }
+
+  vec4 frag () {
+    vec4 o = texture(mainTexture, v_uv);
+    float depth = LinearEyeDepth(texture(depthTexture, v_uv).r);
+
+    // world position
+    vec4 ndcPos;
+    ndcPos.x = 2.0 * v_uv.x - 1.0;
+    ndcPos.y = 2.0 * v_uv.y - 1.0;
+    ndcPos.z = 2.0 * depth - 1.0;
+    ndcPos.w = 1.0;
+
+    vec4 worldPos = matViewProjInv * ndcPos;
+    worldPos /= worldPos.w;
+
+    float fogFactor = ExpFog(worldPos, cameraWorldPos, fogStart, fogDensity, fogAtten);
+
+    o.rgb = mix(fogColor.rgb, o.rgb, fogFactor);
+    o.a = 1.0;
+
+    return o;
+  }
+}%

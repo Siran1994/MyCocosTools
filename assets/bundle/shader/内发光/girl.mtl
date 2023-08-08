@@ -1,0 +1,51 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "d2e92f20-1378-4864-aeaa-4f177ce88af6",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {
+      "USE_INSTANCING": true,
+      "USE_ALBEDO_MAP": true
+    },
+    {},
+    {}
+  ],
+  "_states": [
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {},
+    {}
+  ],
+  "_props": [
+    {
+      "mainTexture": {
+        "__uuid__": "c3730213-f28c-4415-8a0e-78de27bb77da@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "rimLightColor": {
+        "__type__": "cc.Color",
+        "r": 0,
+        "g": 255,
+        "b": 0,
+        "a": 255
+      },
+      "rimLightStrengthen": 10,
+      "rimLightPow": 2
+    },
+    {},
+    {}
+  ]
+}
