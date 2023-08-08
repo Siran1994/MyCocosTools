@@ -735,7 +735,7 @@
     "_cameraComponent": {
       "__id__": 4
     },
-    "_alignCanvasWithScreen": false,
+    "_alignCanvasWithScreen": true,
     "_id": "d101jHaYJA2KWAUGZKawHm"
   },
   {
