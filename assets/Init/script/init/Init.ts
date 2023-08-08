@@ -3,6 +3,7 @@ import { ResMgr } from '../manager/ResMgr';
 import { GameData } from '../data/GameData';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { AudioMgr } from '../manager/AudioMgr';
+import { PlayerPrefs } from '../data/PlayerPrefs';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'Init' )
@@ -13,8 +14,7 @@ export class Init extends Component
 
     protected onLoad (): void
     {
-        // PlayerPrefs.DeleteAll();
-
+        PlayerPrefs.DeleteAll();
         ResMgr.loadBundle( 'bundle', () =>
         {
             if ( GameData.Lv == 0 || GameData.Lv == null )

@@ -1,0 +1,92 @@
+{
+  "__type__": "cc.Material",
+  "_name": "",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "8cb6bb2d-e563-4e35-bd12-589e4be9143b",
+    "__expectedType__": "cc.EffectAsset"
+  },
+  "_techIdx": 0,
+  "_defines": [
+    {
+      "USE_INSTANCING": true
+    },
+    {
+      "USE_INSTANCING": true,
+      "USE_RIM_LIGHT": true,
+      "USE_GRAYCOLOR": true,
+      "USE_EMISSIVE": true,
+      "USE_BASE_COLOR_MAP": true
+    },
+    {}
+  ],
+  "_states": [
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {}
+  ],
+  "_props": [
+    {
+      "lineWidth": 35,
+      "baseColor": {
+        "__type__": "cc.Color",
+        "r": 231,
+        "g": 231,
+        "b": 231,
+        "a": 255
+      }
+    },
+    {
+      "textureColor": {
+        "__type__": "cc.Color",
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 255
+      },
+      "mainTexture": {
+        "__uuid__": "5f4dd798-2ae6-4bbf-84b4-504bb6cceaed@6c48a",
+        "__expectedType__": "cc.Texture2D"
+      },
+      "grayColor": {
+        "__type__": "cc.Color",
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 0
+      },
+      "rimLightColor": {
+        "__type__": "cc.Color",
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 0
+      },
+      "emissive": {
+        "__type__": "cc.Color",
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 0
+      }
+    },
+    {}
+  ]
+}

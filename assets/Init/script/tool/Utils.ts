@@ -2,10 +2,11 @@ import { director, resources } from "cc";
 
 export class Utils 
 {
+
     /**
- * 根据秒数换算时钟单位(时：分：秒)
- * @param time 
- */
+     * 根据秒数换算时钟单位(时：分：秒)
+     * @param time 
+     */
     public static clock ( time: number ): string
     {
         time = Math.floor( time );
@@ -466,7 +467,9 @@ export class Utils
         return string;
     }
 
-    public static remove ( array: any[], predicate: { ( obj: any ): boolean; ( arg0: any ): any; } )
+    public static remove ( array: any[], predicate: {
+        ( obj: any ): boolean; ( arg0: any ): any;
+    } )
     {
         var result: any[] = [];
         var indexes: any[] = [];

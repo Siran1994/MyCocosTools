@@ -1,0 +1,155 @@
+// Effect Syntax Guide: https://docs.cocos.com/creator/manual/zh/shader/index.html
+
+CCEffect %{
+  techniques:
+  - name: opaque
+    passes:
+    - vert: unlit-vs:vert # builtin header
+      frag: unlit-fs:frag
+      properties: &props
+        mainTexture:    { value: white }
+        mainColor:      { value: [1, 1, 1, 1], editor: { type: color } }
+
+        matCapTexture:  { value: white, editor: { parent: USE_EFFECT } }
+        specularColor:  { value: [1, 1, 1, 1], editor: { type: color } }
+        thicknessTexture: { value: white, editor: { parent: USE_EFFECT } }
+        edgeThickness:  { value: 1.0, editor: {slide: true, range: [0, 10.0], step: 0.01 } }
+        refMatCapTexture: { value: white, editor: { parent: USE_EFFECT } }
+        refIntensity:   { value: 0.5, editor: { slide: true, range: [0, 1.0], step: 0.01 } }
+        normalTexture:  { value: white, editor: { parent: USE_EFFECT } }
+        tilingOffset:   { value: [1, 1, 1, 1] }
+  - name: transparent
+    passes:
+    - vert: unlit-vs:vert # builtin header
+      frag: unlit-fs:frag
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      properties: *props
+}%
+
+CCProgram unlit-vs %{
+  precision highp float;
+  #include <legacy/input-standard>
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/local-batch>
+  #include <legacy/input-standard>
+  #include <legacy/fog-vs>
+  #include <legacy/shadow-map-vs>
+
+  in vec4 a_color;
+  #if HAS_SECOND_UV
+    in vec2 a_texCoord1;
+  #endif
+
+  out vec3 v_position;
+  out vec3 v_normal;
+  out vec3 v_tangent;
+  out vec3 v_bitangent;
+  out vec2 v_uv;
+  out vec2 v_uv1;
+  out vec4 v_color;
+
+  vec4 vert () {
+    StandardVertInput In;
+    CCVertInput(In);
+
+    mat4 matWorld, matWorldIT;
+    CCGetWorldMatrixFull(matWorld, matWorldIT);
+
+    vec4 pos = matWorld * In.position;
+
+    v_position = pos.xyz;
+    v_normal = normalize((matWorldIT * vec4(In.normal, 0.0)).xyz);
+    v_tangent = normalize((matWorld * vec4(In.tangent.xyz, 0.0)).xyz);
+    v_bitangent = cross(v_normal, v_tangent) * In.tangent.w; // note the cross order
+
+    v_uv = a_texCoord;
+    #if HAS_SECOND_UV
+      v_uv1 = a_texCoord1;
+    #endif
+    v_color = a_color;
+
+    CC_TRANSFER_FOG(pos);
+    CC_TRANSFER_SHADOW(pos);
+
+    return cc_matProj * (cc_matView * matWorld) * In.position;
+}
+
+}%
+
+CCProgram unlit-fs %{
+  precision highp float;
+  #include <legacy/output>
+  #include <legacy/fog-fs>
+
+  in vec2 v_uv;
+  in vec3 v_position;
+
+  in vec3 v_normal;
+  in vec3 v_tangent;
+  in vec3 v_bitangent;
+
+  uniform sampler2D mainTexture;
+
+  #if USE_EFFECT
+    uniform sampler2D matCapTexture;
+    uniform sampler2D thicknessTexture;
+    uniform sampler2D refMatCapTexture;
+    uniform sampler2D normalTexture;
+  #endif
+
+  uniform Constant {
+    vec4 mainColor;
+
+    vec4 specularColor;
+    vec4 tilingOffset;
+    float edgeThickness;
+    float refIntensity;
+  };
+
+  vec4 frag () {
+    #if USE_EFFECT
+      // glass pattern
+      vec2 normalUV = v_uv * tilingOffset.xy + tilingOffset.zw;
+      vec3 newNormal = texture(normalTexture, normalUV).rgb;
+      newNormal = normalize(newNormal * 2.0 - 1.0);
+
+      mat3 tbn = mat3(v_tangent, v_bitangent, v_normal);
+      vec3 newWorldNormal = normalize(tbn * newNormal);
+
+      // specular
+      // vec3 N = normalize(v_normal);
+      vec3 N = newWorldNormal;
+      vec3 v_view_normal = normalize((cc_matView * vec4(N, 0.0)).xyz);
+      vec2 matCapUV = v_view_normal.xy;
+      matCapUV = matCapUV * 0.5 + 0.5;
+      vec3 matCapColor = texture(matCapTexture, matCapUV).rgb;
+
+      // thickness
+      float thickness = texture(thicknessTexture, v_uv).r;
+
+      vec3 V = normalize(v_position - cc_cameraPos.xyz);
+      float fresnel = pow(1.0 - dot(-V, N), edgeThickness);
+
+      thickness += fresnel;
+
+      // refraction
+      vec3 refColor = texture(refMatCapTexture, matCapUV + thickness * refIntensity).rgb;
+
+    #endif
+
+    // vec4 col = mainColor * texture(mainTexture, v_uv);
+    vec4 col;
+    col.rgb = matCapColor * specularColor.rgb + refColor * mainColor.rgb;
+    // col.rgb *= thickness;
+    col.a = matCapColor.r;
+
+    CC_APPLY_FOG(col, v_position);
+    return CCFragOutput(col);
+  }
+}%

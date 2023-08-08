@@ -16,6 +16,7 @@ import { AudioMgr } from './AudioMgr';
 import { FreeTryPanel } from '../panel/FreeTryPanel';
 import { tips } from '../tip/tips';
 import { FightTip } from '../tip/fightTip';
+import { view, UITransform } from 'cc';
 
 const { ccclass, property } = _decorator;
 const SHOW_STR_INTERVAL_TIME = 800;
@@ -202,4 +203,6 @@ export class UiManager extends Component
             scriptTip.show( type, txt, callback );
         } );
     }
+
+   
 }
