@@ -1,3 +1,4 @@
+import { resources, Sprite, director } from 'cc';
 import { _decorator, assetManager, AssetManager, Prefab, Node, SpriteAtlas, AudioClip, SpriteFrame } from 'cc';
 export type ICallback<T = any> = ( bundle: AssetManager.Bundle ) => void;
 export type IcallBack = ( go: Prefab ) => void;
@@ -92,7 +93,7 @@ export class ResMgr
         }
     }
 
-    public static loadPrefab ( path: string, onComplete: IcallBack, isDontDes: boolean = false )
+    public static async loadPrefab ( path: string, onComplete: IcallBack, isDontDes: boolean = false )
     {
         ResMgr.loadBundle( this, ( bundle: AssetManager.Bundle ) =>
         {
@@ -102,5 +103,19 @@ export class ResMgr
                 onComplete( prefab );
             } );
         } );
+    }
+
+    public static async loadResource ( path: string, onComplete: IcallBack )
+    {
+        // 例如加载一个图片资源
+        await resources.load( path, ( err: any, res: any ) =>
+        {
+            if ( err )
+            {
+                onComplete( res );
+                return;
+            }
+            onComplete( res );
+        } )
     }
 }

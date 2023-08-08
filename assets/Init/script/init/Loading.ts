@@ -29,10 +29,10 @@ export class Loading extends Component
                 }
                 else
                 {
-                    console.log( '场景加载完成' );
                     director.loadScene( targetlv, ( err, scene: any ) =>
                     {
                         callback();
+                        console.log( '场景加载完成' );
                     } );
                 }
             } );

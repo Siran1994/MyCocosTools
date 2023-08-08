@@ -1,44 +1,45 @@
-import { _decorator, Component, director, ProgressBar } from 'cc';
+import { _decorator, Component, director, ProgressBar, Node } from 'cc';
 import { ResMgr } from '../manager/ResMgr';
 import { GameData } from '../data/GameData';
-import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { AudioMgr } from '../manager/AudioMgr';
 import { PlayerPrefs } from '../data/PlayerPrefs';
-const { ccclass, property } = _decorator;
+import { SceneAsset } from 'cc';
+import { resources } from 'cc';
+import { Prefab } from 'cc';
+import { find } from 'cc';
+import { PoolManager } from '../manager/PoolManager';
+import { Loading } from './Loading';
+const { ccclass } = _decorator;
 
 @ccclass( 'Init' )
 export class Init extends Component
 {
-    @property( { type: ProgressBar } )
-    m_progress: ProgressBar = null!;
-
     protected onLoad (): void
     {
         PlayerPrefs.DeleteAll();
-        ResMgr.loadBundle( 'bundle', () =>
+        this.loadRes();
+    }
+
+    async loadRes ()
+    {
+        await ResMgr.loadBundle( 'bundle', () =>
         {
             if ( GameData.Lv == 0 || GameData.Lv == null )
                 GameData.Lv = 1;
-
-            director.preloadScene( GameData.Lv.toString(), () =>
+            ResMgr.loadResource( 'prefab/Loading', ( obj: Prefab ) =>
             {
-                director.loadScene( GameData.Lv.toString() );
+                let go = PoolManager.getNode( obj, this.node ) as Node;
+                var loader = go.getComponent( Loading );
+                loader.showProgress( GameData.Lv.toString(), () =>
+                {
+                    PoolManager.putNode( go );
+                } );
             } );
-
-            AudioMgr.init( this.node.parent, () =>
-            {
-                AudioMgr.Instance.首页背景乐.playMusic();
-            }, this );
         } );
-    }
 
-    start () 
-    {
-        this.m_progress.progress = 0;
-        var ani = DOTweenAnimation.stepNumProgressFly( this.m_progress, 0, 0.001, 1, 0, () =>
+        await AudioMgr.init( this.node.parent, () =>
         {
-            ani.stop();
-            this.m_progress.progress = 1;
-        } );
+            AudioMgr.Instance.首页背景乐.playMusic();
+        }, this );
     }
 }
