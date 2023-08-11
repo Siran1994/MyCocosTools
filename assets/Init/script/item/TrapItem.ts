@@ -1,8 +1,8 @@
 import { _decorator, AnimationComponent, Collider, Component, ITriggerEvent } from 'cc';
+import { AudioMgr } from '../manager/AudioMgr';
 import { PropType } from '../data/Enum';
 import { Messager } from '../manager/Messager';
 import { GameData } from '../data/GameData';
-import { AudioMgr } from '../manager/AudioMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'TrapItem' )

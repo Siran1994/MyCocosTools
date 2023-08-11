@@ -1,6 +1,6 @@
 
 import { find } from "cc";
-import { Prefab, instantiate, loader, Canvas, Vec3, Node } from "cc";
+import { Prefab, instantiate, loader, Vec3, Node } from "cc";
 import { Messager } from "../manager/Messager";
 import AssetManager from "./AssetManager";
 

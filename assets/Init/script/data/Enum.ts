@@ -3,12 +3,12 @@ import { Enum } from "cc";
 export enum HeroType//商店道具
 {
     None,
-    美国队长,
-    蜘蛛侠,
-    钢铁侠,
-    毒液,
-    绿巨人,
-    雷神,
+    城市队长,
+    城市飞侠,
+    钢铁英雄,
+    黑液人,
+    超级巨人,
+    雷公,
 }
 Enum( HeroType );
 

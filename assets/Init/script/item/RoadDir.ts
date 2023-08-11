@@ -1,5 +1,6 @@
 import { _decorator, BoxCollider, Component, ITriggerEvent } from 'cc';
 import { Messager } from '../manager/Messager';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'RoadDir' )

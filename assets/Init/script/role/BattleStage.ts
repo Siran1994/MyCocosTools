@@ -1,13 +1,15 @@
-import { _decorator, Camera, Component, Node, tween, Vec3 } from 'cc';
-import { Messager } from '../manager/Messager';
+import { _decorator, Camera, Component, find, Node, Prefab, tween, Vec3 } from 'cc';
+import { FinishPanel } from '../panel/FinishPanel';
+import { CameraMgr } from '../camera/CameraMgr';
 import { PlayerState } from '../data/Enum';
 import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
+import { Messager } from '../manager/Messager';
+import { PoolManager } from '../manager/PoolManager';
+import { ResMgr } from '../manager/ResMgr';
 import { Utils } from '../tool/Utils';
-import { PlayerCtrl } from './PlayerCtrl';
-import { UiManager } from '../manager/UiManager';
 import { Boss } from './Boss';
-import { CameraMgr } from '../camera/CameraMgr';
+import { PlayerCtrl } from './PlayerCtrl';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'BattleStage' )
@@ -62,13 +64,13 @@ export class BattleStage extends Component
     {
         PlayerCtrl.Instance.ShowEffect( 3, true );
         PlayerCtrl.Instance.Play( PlayerState.战架 );
-        UiManager.Instance.gamePanel.node.active = false;
+        PoolManager.putNodeByName( 'Canvas/GamePanel' );
         GameManager.Instance.target.worldPosition = this.PlayerPos.worldPosition;
         Utils.DelayCallBack( 0.1, () =>
         {
-            CameraMgr.Instance.node.active=false;
+            CameraMgr.Instance.node.active = false;
             GameManager.Instance.IsStart = false;
-            GameManager.Instance.MainCamera.active=true;
+            GameManager.Instance.MainCamera.active = true;
             GameManager.Instance.MainCamera.setParent( this.node );
             GameManager.Instance.MainCamera.getComponent( Camera ).fov = 60;
             this.CameraAni();
@@ -91,9 +93,12 @@ export class BattleStage extends Component
                 tween().call( () =>
                 {
                     //战斗开始
-                    UiManager.Instance.finishPanel.node.active = true;
+                    ResMgr.loadPrefab( 'prefab/panel/FinishPanel', ( obj: Prefab ) =>
+                    {
+                        PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
+                    } );
                     GameManager.Instance.BossPower = GameManager.Instance.GetBossPower();
-                    console.log( '当前Player战力是:' + UiManager.Instance.gamePanel.power );
+                    console.log( '当前Player战力是:' + GameManager.Instance.PlayerPower );
                     console.log( '当前boss战力是:' + GameManager.Instance.BossPower );
                     Messager.Broadcast( 'atkStart' );
                 } ),
@@ -101,9 +106,10 @@ export class BattleStage extends Component
             .start();
     }
 
+
     bossFlyAni ()//Boss飞行动画
     {
-        let index = UiManager.Instance.finishPanel.calculateDis();//获取飞行距离
+        let index = PoolManager.getNodeInfo( 'FinishPanel' ).getComponent( FinishPanel ).calculateDis();//获取飞行距离
         let lastTime = 0.5 * index;
         GameManager.Instance.MainCamera.active = false;
         this.followCamera.active = true;

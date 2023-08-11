@@ -1,5 +1,5 @@
-import { resources, Sprite, director } from 'cc';
-import { _decorator, assetManager, AssetManager, Prefab, Node, SpriteAtlas, AudioClip, SpriteFrame } from 'cc';
+import { resources } from 'cc';
+import { _decorator, assetManager, AssetManager, Prefab, SpriteAtlas, AudioClip, SpriteFrame } from 'cc';
 export type ICallback<T = any> = ( bundle: AssetManager.Bundle ) => void;
 export type IcallBack = ( go: Prefab ) => void;
 export class ResMgr  

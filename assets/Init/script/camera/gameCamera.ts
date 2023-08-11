@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3, isValid, tween, Quat, cclegacy } from 'cc';
+import { _decorator, Component, Node, Vec3, isValid, tween, Quat } from 'cc';
 
 const { ccclass, property } = _decorator;
 

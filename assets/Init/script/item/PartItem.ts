@@ -1,9 +1,10 @@
 import { _decorator, Collider, Component, ITriggerEvent, Label, Node, Sprite, SpriteFrame } from 'cc';
-import { HeroType, PropType } from '../data/Enum';
-import { Messager } from '../manager/Messager';
+
 import { PlayerCtrl } from '../role/PlayerCtrl';
 import { Utils } from '../tool/Utils';
 import { GameManager } from '../manager/GameManager';
+import { PropType, HeroType } from '../data/Enum';
+import { Messager } from '../manager/Messager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'PartItem' )
@@ -93,26 +94,26 @@ export class PartItem extends Component
     {
         switch ( targetName )
         {
-            case '美国队长':
-                return '雷神';
-            case '蜘蛛侠':
-                return '钢铁侠';
-            case '钢铁侠':
-                return '蜘蛛侠';
-            case '毒液':
-                return '绿巨人';
-            case '绿巨人':
-                return '毒液';
-            case '雷神':
-                return '美国队长';
+            case '城市队长':
+                return '雷公';
+            case '城市飞侠':
+                return '钢铁英雄';
+            case '钢铁英雄':
+                return '城市飞侠';
+            case '黑液人':
+                return '超级巨人';
+            case '超级巨人':
+                return '黑液人';
+            case '雷公':
+                return '城市队长';
         }
     }
     setHeroType ( targetName: string )
     {
         switch ( targetName )
         {
-            case '美国队长':
-                this.heroType = HeroType.美国队长;
+            case '城市队长':
+                this.heroType = HeroType.城市队长;
                 switch ( this.propType )
                 {
                     case PropType.头:
@@ -131,8 +132,8 @@ export class PartItem extends Component
                         break;
                 }
                 break;
-            case '蜘蛛侠':
-                this.heroType = HeroType.蜘蛛侠;
+            case '城市飞侠':
+                this.heroType = HeroType.城市飞侠;
                 switch ( this.propType )
                 {
                     case PropType.头:
@@ -151,8 +152,8 @@ export class PartItem extends Component
                         break;
                 }
                 break;
-            case '钢铁侠':
-                this.heroType = HeroType.钢铁侠;
+            case '钢铁英雄':
+                this.heroType = HeroType.钢铁英雄;
                 switch ( this.propType )
                 {
                     case PropType.头:
@@ -171,8 +172,8 @@ export class PartItem extends Component
                         break;
                 }
                 break;
-            case '毒液':
-                this.heroType = HeroType.毒液;
+            case '黑液人':
+                this.heroType = HeroType.黑液人;
                 switch ( this.propType )
                 {
                     case PropType.头:
@@ -191,8 +192,8 @@ export class PartItem extends Component
                         break;
                 }
                 break;
-            case '绿巨人':
-                this.heroType = HeroType.绿巨人;
+            case '超级巨人':
+                this.heroType = HeroType.超级巨人;
                 switch ( this.propType )
                 {
                     case PropType.头:
@@ -211,8 +212,8 @@ export class PartItem extends Component
                         break;
                 }
                 break;
-            case '雷神':
-                this.heroType = HeroType.雷神;
+            case '雷公':
+                this.heroType = HeroType.雷公;
                 switch ( this.propType )
                 {
                     case PropType.头:
@@ -241,22 +242,22 @@ export class PartItem extends Component
     {
         switch ( targetName )
         {
-            case '美国队长':
+            case '城市队长':
                 this.Icon.spriteFrame = this.icons[ 0 ];
                 break;
-            case '蜘蛛侠':
+            case '城市飞侠':
                 this.Icon.spriteFrame = this.icons[ 1 ];
                 break;
-            case '钢铁侠':
+            case '钢铁英雄':
                 this.Icon.spriteFrame = this.icons[ 2 ];
                 break;
-            case '毒液':
+            case '黑液人':
                 this.Icon.spriteFrame = this.icons[ 3 ];
                 break;
-            case '绿巨人':
+            case '超级巨人':
                 this.Icon.spriteFrame = this.icons[ 4 ];
                 break;
-            case '雷神':
+            case '雷公':
                 this.Icon.spriteFrame = this.icons[ 5 ];
                 break;
         }

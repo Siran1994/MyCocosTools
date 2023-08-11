@@ -1,10 +1,9 @@
 import { _decorator, Component, Node, ParticleSystem, SkeletalAnimation, Vec3 } from 'cc';
-import { BossState } from '../data/Enum';
 import { GameManager } from '../manager/GameManager';
-import { UiManager } from '../manager/UiManager';
 import { Utils } from '../tool/Utils';
-import { Messager } from '../manager/Messager';
 import { AudioMgr } from '../manager/AudioMgr';
+import { BossState } from '../data/Enum';
+import { Messager } from '../manager/Messager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'Boss' )
@@ -49,7 +48,7 @@ export class Boss extends Component
 
     atkStart ()
     {
-        if ( UiManager.Instance.gamePanel.power < GameManager.Instance.BossPower )
+        if ( GameManager.Instance.PlayerPower < GameManager.Instance.BossPower )
             this.PlayNextAni( 0, 2 );
         else//交战
         {

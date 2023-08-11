@@ -1,6 +1,6 @@
 
-import { _decorator, Component, director, Node } from 'cc';
-const { ccclass, property } = _decorator;
+import { _decorator, director } from 'cc';
+const { ccclass } = _decorator;
 
 // electron模块，打包web-mobil后在HTML中定义全局变量electron
 const electron = ( window as any ).electron;

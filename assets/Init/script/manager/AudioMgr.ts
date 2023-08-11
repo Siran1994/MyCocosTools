@@ -1,7 +1,8 @@
 import { _decorator, AudioSource, Component, director, instantiate, Node, Prefab } from 'cc';
-import { AudioClipExit } from '../tool/AudioClipExit';
 import { PlayerPrefs } from '../data/PlayerPrefs';
+import { AudioClipExit } from '../tool/AudioClipExit';
 import { ResMgr } from './ResMgr';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'AudioMgr' )

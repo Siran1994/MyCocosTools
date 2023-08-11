@@ -1,8 +1,9 @@
 import { _decorator, Component, Material, Node, SkinnedMeshRenderer } from 'cc';
-import { HeroType, PropType } from '../data/Enum';
-import { Messager } from '../manager/Messager';
 import { GameManager } from '../manager/GameManager';
+import { HeroType, PropType } from '../data/Enum';
 import { PlayerPrefs } from '../data/PlayerPrefs';
+import { Messager } from '../manager/Messager';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'HeroInfo' )

@@ -1,11 +1,11 @@
 import { _decorator, Component, SkeletalAnimation, Node, ParticleSystem, Vec3, tween } from 'cc';
-import { HeroType, PlayerState, PropType } from '../data/Enum';
 import { Utils } from '../tool/Utils';
-import { Messager } from '../manager/Messager';
 import { GameManager } from '../manager/GameManager';
 import { UiManager } from '../manager/UiManager';
 import { AudioMgr } from '../manager/AudioMgr';
 import { DecorateCtrl } from './DecorateCtrl';
+import { PlayerState, HeroType, PropType } from '../data/Enum';
+import { Messager } from '../manager/Messager';
 
 const { ccclass, property } = _decorator;
 @ccclass( 'PlayerCtrl' )

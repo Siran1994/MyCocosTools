@@ -1,11 +1,13 @@
 import { _decorator, Button, Component, Label } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
-import { Messager } from '../manager/Messager';
-import { GameData } from '../data/GameData';
 import CoinFly from '../animation/CoinFly';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
-import { Utils } from '../tool/Utils';
+import { GameData } from '../data/GameData';
 import { GameManager } from '../manager/GameManager';
+import { Messager } from '../manager/Messager';
+import { PoolManager } from '../manager/PoolManager';
+import { Utils } from '../tool/Utils';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'RewardPanel' )
@@ -111,6 +113,7 @@ export class RewardPanel extends Component
 
         Utils.DelayCallBack( 2, () =>
         {
+            PoolManager.putNode( this.node );
             GameManager.Instance.NextLevel( true, true );
         } );
         Utils.DelayCallBack( 1, () =>

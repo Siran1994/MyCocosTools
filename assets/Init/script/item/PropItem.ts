@@ -1,7 +1,7 @@
 import { _decorator, Component, tween } from 'cc';
-import { PropType } from '../data/Enum';
 import { Collider } from 'cc';
 import { ITriggerEvent, Vec3 } from 'cc';
+import { PropType } from '../data/Enum';
 import { Messager } from '../manager/Messager';
 const { ccclass, property } = _decorator;
 

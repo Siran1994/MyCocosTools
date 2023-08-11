@@ -1,4 +1,4 @@
-import { _decorator, Node, Prefab, instantiate, NodePool } from "cc";
+import { _decorator, Node, Prefab, instantiate, NodePool, find } from "cc";
 const { ccclass } = _decorator;
 
 @ccclass( "PoolManager" )
@@ -19,11 +19,13 @@ export class PoolManager
             if ( pool.size() > 0 )
             {
                 node = pool.get()!;
-            } else
+            }
+            else
             {
                 node = instantiate( prefab );
             }
-        } else
+        }
+        else
         {
             //没有对应对象池，创建他！
             let pool = new NodePool();
@@ -35,7 +37,20 @@ export class PoolManager
         node.parent = parent;
         return node;
     }
-
+    public static getNodeInfo ( name: string )
+    {
+        let node: Node;
+        if ( this.dictPool.hasOwnProperty( name ) )
+        {
+            if ( this.dictPrefab.hasOwnProperty( name ) )
+            {
+                node = this.dictPrefab[ name ].data as Node;
+            }
+        }
+        else
+            node = null;
+        return node;
+    }
     /**
      * 将对应节点放回对象池中
      */
@@ -54,6 +69,13 @@ export class PoolManager
             this.dictPool[ name ] = pool;
         }
         pool.put( node );
+    }
+    /**
+         * 将对应节点放回对象池中
+         */
+    public static putNodeByName ( name: string )
+    {
+        this.putNode( find( name ) );
     }
 
     public static clearPool ( name: string )

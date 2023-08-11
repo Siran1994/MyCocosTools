@@ -1,12 +1,12 @@
-import { _decorator, Component, Node, ParticleSystem, Vec3 } from 'cc';
-import { Messager } from '../manager/Messager';
-import { PlayerCtrl } from './PlayerCtrl';
+import { _decorator, Component, find, Node, ParticleSystem, Vec3 } from 'cc';
 import { PlayerState } from '../data/Enum';
-import { Utils } from '../tool/Utils';
-import { GameManager } from '../manager/GameManager';
-import { UiManager } from '../manager/UiManager';
-import { Boss } from './Boss';
 import { AudioMgr } from '../manager/AudioMgr';
+import { GameManager } from '../manager/GameManager';
+import { Messager } from '../manager/Messager';
+import { PoolManager } from '../manager/PoolManager';
+import { Utils } from '../tool/Utils';
+import { Boss } from './Boss';
+import { PlayerCtrl } from './PlayerCtrl';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'BattleEffect' )
@@ -40,7 +40,7 @@ export class BattleEffect extends Component
 
     AtkStart ( index: number )
     {
-        if ( UiManager.Instance.gamePanel.power < GameManager.Instance.BossPower )
+        if ( GameManager.Instance.PlayerPower < GameManager.Instance.BossPower )
             return;
         else
         {
@@ -105,6 +105,7 @@ export class BattleEffect extends Component
     {
         if ( isfinal )//Boss处决
         {
+            PoolManager.putNode( find( 'Canvas/FinishPanel' ) );
             Messager.Broadcast( 'gameOver', true );
             PlayerCtrl.Instance.Play( PlayerState.死亡 );
         }

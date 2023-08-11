@@ -1,12 +1,9 @@
-import { _decorator, Component, director, ProgressBar, Node } from 'cc';
+import { _decorator, Component, Node } from 'cc';
 import { ResMgr } from '../manager/ResMgr';
 import { GameData } from '../data/GameData';
 import { AudioMgr } from '../manager/AudioMgr';
 import { PlayerPrefs } from '../data/PlayerPrefs';
-import { SceneAsset } from 'cc';
-import { resources } from 'cc';
 import { Prefab } from 'cc';
-import { find } from 'cc';
 import { PoolManager } from '../manager/PoolManager';
 import { Loading } from './Loading';
 const { ccclass } = _decorator;

@@ -1,10 +1,10 @@
 import { _decorator, Button, Component, Label, Sprite, SpriteFrame } from 'cc';
-import { AudioMgr } from '../manager/AudioMgr';
-import { PlayerPrefs } from '../data/PlayerPrefs';
-import { Messager } from '../manager/Messager';
-import { UiManager } from '../manager/UiManager';
 import { GameManager } from '../manager/GameManager';
-import { Utils } from '../tool/Utils';
+import { AudioMgr } from '../manager/AudioMgr';
+import { Messager } from '../manager/Messager';
+import { PoolManager } from '../manager/PoolManager';
+import { UiManager } from '../manager/UiManager';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'FreeTryPanel' )
@@ -34,43 +34,44 @@ export class FreeTryPanel extends Component
 
         this.adGetBtn.node.on( Button.EventType.CLICK, () =>
         {
-            this.node.active = false;
             AudioMgr.Instance.点击广告按钮.Play();
             Messager.Broadcast( 'ChangeDress', GameManager.Instance.PackageName );//换皮肤
             Messager.Broadcast( 'ChangePart', GameManager.Instance.PackageName );//设置当前目标英雄
             GameManager.Instance.MainHero = GameManager.Instance.PackageName;
-            UiManager.Instance.gamePanel.CheckHeroCollect( true );
+            Messager.Broadcast( 'CollectAll', true );
             UiManager.Instance.mainPanel.autoStart();
+            PoolManager.putNode( this.node );
+
         }, this );
         this.cancelBtn.node.on( Button.EventType.CLICK, () =>
         {
-            this.node.active = false;
             AudioMgr.Instance.通用按钮.Play();
+            PoolManager.putNode( this.node );
+
         }, this );
     }
 
     ShowPackage ( heroName: string )
     {
-        this.node.active = true;
         switch ( heroName )
         {
-            case '蜘蛛侠':
+            case '城市飞侠':
                 this.heroImage.spriteFrame = this.Icons[ 0 ];
                 this.HeroPower.string = '战力:1140';
                 break;
-            case '雷神':
+            case '雷公':
                 this.heroImage.spriteFrame = this.Icons[ 1 ];
                 this.HeroPower.string = '战力:2600';
                 break;
-            case '钢铁侠':
+            case '钢铁英雄':
                 this.heroImage.spriteFrame = this.Icons[ 2 ];
                 this.HeroPower.string = '战力:3450';
                 break;
-            case '毒液':
+            case '黑液人':
                 this.heroImage.spriteFrame = this.Icons[ 3 ];
                 this.HeroPower.string = '战力:4250';
                 break;
-            case '浩克':
+            case '超级巨人':
                 this.heroImage.spriteFrame = this.Icons[ 4 ];
                 this.HeroPower.string = '战力:5050';
                 break;

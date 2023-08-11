@@ -1,13 +1,15 @@
-import { _decorator, Component, Label, Node, SpriteFrame, tween, Quat, Vec3, Sprite } from 'cc';
-import { Messager } from '../manager/Messager';
-import { GameData } from '../data/GameData';
-import DOTweenAnimation from '../animation/DOTweenAnimation';
-import { Utils } from '../tool/Utils';
-import { GameManager } from '../manager/GameManager';
-import { HeroType, PlayerState, PropType } from '../data/Enum';
-import { PlayerCtrl } from '../role/PlayerCtrl';
-import { UiManager } from '../manager/UiManager';
-import { AudioMgr } from '../manager/AudioMgr';
+import { _decorator, SpriteFrame, Sprite, Label, tween, Vec3, Quat, Prefab, Component, Node } from "cc";
+import DOTweenAnimation from "../animation/DOTweenAnimation";
+import { HeroType, PropType, PlayerState } from "../data/Enum";
+import { GameData } from "../data/GameData";
+import { AudioMgr } from "../manager/AudioMgr";
+import { GameManager } from "../manager/GameManager";
+import { Messager } from "../manager/Messager";
+import { PoolManager } from "../manager/PoolManager";
+import { ResMgr } from "../manager/ResMgr";
+import { TipManager } from "../manager/TipManager";
+import { PlayerCtrl } from "../role/PlayerCtrl";
+import { Utils } from "../tool/Utils";
 
 const { ccclass, property } = _decorator;
 
@@ -98,7 +100,6 @@ export class GamePanel extends Component
     @property( Node )
     target: Node = null;
     public coin: number = 0;
-    public power: number = 500;
 
     isGetHead = false;
     isGetBody = false;
@@ -107,7 +108,7 @@ export class GamePanel extends Component
     isGetR_Leg = false;
     isGetL_Leg = false;
 
-    start () 
+    init () 
     {
         this.coin = 0;
         this.LvTxt.string = '关卡' + GameData.Lv.toString();
@@ -148,12 +149,21 @@ export class GamePanel extends Component
 
     onEnable ()
     {
+        this.init();
         Messager.AddListener( 'showPartUi', this, this.ShowPartUi );
+        Messager.AddListener( 'updateCoin', this, this.UpdateCoin );
+        Messager.AddListener( 'updatePower', this, this.UpdatePower );
+        Messager.AddListener( 'coinDoFly', this, this.CoinDoFly );
+        Messager.AddListener( 'CollectAll', this, this.CheckHeroCollect );
     }
 
     onDisable ()
     {
         Messager.RemoveListener( 'showPartUi', this, this.ShowPartUi );
+        Messager.RemoveListener( 'updateCoin', this, this.UpdateCoin );
+        Messager.RemoveListener( 'updatePower', this, this.UpdatePower );
+        Messager.RemoveListener( 'coinDoFly', this, this.CoinDoFly );
+        Messager.RemoveListener( 'CollectAll', this, this.CheckHeroCollect );
     }
 
     ShowPartUi ( heroType: HeroType, propType: PropType, isTarget: boolean )
@@ -206,6 +216,49 @@ export class GamePanel extends Component
         }
     }
 
+    UpdateCoin ( num: number )
+    {
+        this.showCoin( num );
+    }
+
+    UpdatePower ( num: number )
+    {
+        this.showPower( num );
+    }
+
+    CoinDoFly ()
+    {
+        ResMgr.loadPrefab( 'prefab/ui/Coin', ( obj: Prefab ) =>
+        {
+            let go = PoolManager.getNode( obj, this.target.parent ) as Node;
+            go.scale = Vec3.ONE;
+            go.setPosition( new Vec3( -286, -750, 0 ) );
+            tween( go )
+                .sequence
+                (
+                    tween().to( 0.3,
+                        {
+                            position: new Vec3( go.position.x - 50, go.position.y - 80, go.position.z ),               // 位置缓动
+                        },
+                        { easing: "linear" } ),
+                    tween().delay( 0.2 ),
+                    tween().to( 0.5,
+                        {
+                            position: this.target.position,               // 位置缓动
+                            scale: new Vec3( 0.5, 0.5, 0.5 ),                     // 缩放缓动
+                            eulerAngles: Quat.IDENTITY                       // 旋转缓动
+                        },
+                        { easing: "sineIn" } ),
+
+                    tween().call( () =>
+                    {
+                        PoolManager.putNode( go );
+                    } ),
+                )
+                .start();
+        } );
+    }
+
     CheckHeroCollect ( isOver: boolean )
     {
         if ( isOver )//集齐套装
@@ -214,25 +267,25 @@ export class GamePanel extends Component
             let target = GameManager.Instance.GetHeroType();
             switch ( target )
             {
-                case HeroType.美国队长:
-                    UiManager.Instance.gamePanel.power += 350;
+                case HeroType.城市队长:
+                    GameManager.Instance.PlayerPower += 350;
                     break;
-                case HeroType.蜘蛛侠:
-                    UiManager.Instance.gamePanel.power += 840;
+                case HeroType.城市飞侠:
+                    GameManager.Instance.PlayerPower += 840;
                     break;
-                case HeroType.钢铁侠:
-                    UiManager.Instance.gamePanel.power += 2300;
+                case HeroType.钢铁英雄:
+                    GameManager.Instance.PlayerPower += 2300;
                     break;
-                case HeroType.毒液:
-                    UiManager.Instance.gamePanel.power += 2980;
-                    Messager.Broadcast( 'changeBody', HeroType.毒液 );
+                case HeroType.黑液人:
+                    GameManager.Instance.PlayerPower += 2980;
+                    Messager.Broadcast( 'changeBody', HeroType.黑液人 );
                     break;
-                case HeroType.绿巨人:
-                    UiManager.Instance.gamePanel.power += 3660;
-                    Messager.Broadcast( 'changeBody', HeroType.绿巨人 );
+                case HeroType.超级巨人:
+                    GameManager.Instance.PlayerPower += 3660;
+                    Messager.Broadcast( 'changeBody', HeroType.超级巨人 );
                     break;
-                case HeroType.雷神:
-                    UiManager.Instance.gamePanel.power += 1570;
+                case HeroType.雷公:
+                    GameManager.Instance.PlayerPower += 1570;
                     break;
             }
             GameManager.Instance.Speed += GameManager.Instance.AddSpeed;
@@ -265,29 +318,29 @@ export class GamePanel extends Component
 
     showPower ( addnum: number )
     {
-        var tmpNum = this.power;
+        var tmpNum = GameManager.Instance.PlayerPower;
         var targetNum = tmpNum + addnum;
 
         if ( targetNum < 0 )
         {
-            this.power = 0;
+            GameManager.Instance.PlayerPower = 0;
             this.powerTxt.string = '0';
             return;
         }
         if ( addnum > 0 )
-            UiManager.Instance.showFightTips( 0, addnum.toString(), new Vec3( 100, 0, 0 ) );
+            TipManager.Instance.showFightTips( 0, addnum.toString(), new Vec3( 100, 0, 0 ) );
         else
-            UiManager.Instance.showFightTips( 1, ( Math.abs( addnum ) ).toString(), new Vec3( 100, 0, 0 ) );
+            TipManager.Instance.showFightTips( 1, ( Math.abs( addnum ) ).toString(), new Vec3( 100, 0, 0 ) );
         var ani = DOTweenAnimation.stepNum( this.powerTxt, tmpNum, 20, targetNum, 0, '', () =>
         {
             ani.stop();
-            this.power = targetNum;
-            this.powerTxt.string = this.power.toString();
+            GameManager.Instance.PlayerPower = targetNum;
+            this.powerTxt.string = GameManager.Instance.PlayerPower.toString();
         } );
 
         let ori = tmpNum * 0.01;
         let tar = targetNum * 0.01;
-        var ani2 = DOTweenAnimation.stepNumProgress( this.progress, ori, 0.05, tar / 50, 0, null, () =>
+        var ani2 = DOTweenAnimation.stepNumProgress( this.progress, ori, 0.05, tar / 15, 0, null, () =>
         {
             ani2.stop();
         } );

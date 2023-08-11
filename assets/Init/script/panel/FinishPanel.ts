@@ -1,8 +1,9 @@
 import { _decorator, Component, EventTouch, input, Input, Label, Node, Sprite, Vec3 } from 'cc';
-import { UiManager } from '../manager/UiManager';
-import { Messager } from '../manager/Messager';
 import { GameManager } from '../manager/GameManager';
+import { Messager } from '../manager/Messager';
+import { PoolManager } from '../manager/PoolManager';
 import { Boss } from '../role/Boss';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'FinishPanel' )
@@ -17,20 +18,20 @@ export class FinishPanel extends Component
    @property( Label )
    Power: Label = null;
 
-   @property( { type: Node } )
-   rewardPanel: Node = null;
-
    isfinal = false;
-   protected start (): void
+
+   init ()
    {
+      this.isfinal = false;
       this.blue.fillStart = 0.5;
       this.red.fillStart = 0.5;
       this.pointer.position = Vec3.ZERO;
-      this.Power.string = '战斗力:' + UiManager.Instance.gamePanel.power.toString();//战力
+      this.Power.string = '战斗力:' + GameManager.Instance.PlayerPower.toString();//战力
    }
 
    onEnable ()
    {
+      this.init();
       input.on( Input.EventType.TOUCH_END, this.touchEnd, this );
       Messager.AddListener( 'addProgress', this, this.addProgress );
    }
@@ -71,6 +72,7 @@ export class FinishPanel extends Component
          this.red.fillStart = 1;
          Messager.Broadcast( 'isAtking', 2 );
          this.isfinal = true;
+         PoolManager.putNode( this.node );
       }
       else if ( this.red.fillStart <= 0 || this.blue.fillStart <= 0 )
       {
@@ -85,7 +87,7 @@ export class FinishPanel extends Component
    {
       this.pointer.parent.parent.active = false;
       // var dis = UiManager.Instance.gamePanel.power - GameManager.Instance.BossPower;
-      let index = Math.floor( UiManager.Instance.gamePanel.power / GameManager.Instance.BossPower );
+      let index = Math.floor( GameManager.Instance.PlayerPower / GameManager.Instance.BossPower );
       if ( index >= 6 )
          index = 6;
       return index;

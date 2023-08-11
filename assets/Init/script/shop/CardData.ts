@@ -1,5 +1,5 @@
 import { SpriteFrame } from "cc"
-import { HeroType } from "../data/Enum"
+import { HeroType } from "../data/Enum";
 
 /**
  * 卡片数据类，若数据结构不够，可以继承该类继续扩展自己的CardData

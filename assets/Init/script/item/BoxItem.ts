@@ -1,8 +1,9 @@
 import { _decorator, AnimationComponent, Button, Component, Label } from 'cc';
-import { GameData } from '../data/GameData';
 import { Utils } from '../tool/Utils';
 import { AudioMgr } from '../manager/AudioMgr';
+import { GameData } from '../data/GameData';
 import { Messager } from '../manager/Messager';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'BoxItem' )

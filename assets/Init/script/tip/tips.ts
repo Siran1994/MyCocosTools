@@ -3,7 +3,6 @@ import { PoolManager } from '../manager/PoolManager';
 const { ccclass, property } = _decorator;
 
 let color0 = new Color( 214, 132, 53, 255 );
-let color1 = new Color( 255, 255, 255, 255 );
 let v3_targetPos = new Vec3( 0, 100, 0 );
 
 @ccclass( 'tips' )

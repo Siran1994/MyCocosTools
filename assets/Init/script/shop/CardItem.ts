@@ -2,11 +2,11 @@ import { CardData } from './CardData';
 import { _decorator, Button, Component, Label, Sprite, SpriteFrame, Vec3, Node } from 'cc'
 import { TF } from './TF';
 import { AudioMgr } from '../manager/AudioMgr';
+import { TipManager } from '../manager/TipManager';
 import { HeroType } from '../data/Enum';
-import { PlayerPrefs } from '../data/PlayerPrefs';
 import { GameData } from '../data/GameData';
+import { PlayerPrefs } from '../data/PlayerPrefs';
 import { Messager } from '../manager/Messager';
-import { UiManager } from '../manager/UiManager';
 const { ccclass, property } = _decorator
 /**
  * 卡片物品类，目前之提供了一张图片和标签，若想更多功能，继承该类，继续扩展此方法
@@ -68,7 +68,7 @@ export class CardItem extends Component
             switch ( this.BtnTxt.string )
             {
                 case '已装备':
-                    UiManager.Instance.showTips( '当前已装备!' );
+                    TipManager.Instance.showTips( '当前已装备!' );
                     break;
                 case '装备':
                     PlayerPrefs.SetString( 'HeroDress', this.Name.string );
@@ -85,7 +85,7 @@ export class CardItem extends Component
                         this.checkUnLock( cardItem );
                     }
                     else
-                        UiManager.Instance.showTips( '当前金币不足!' );
+                        TipManager.Instance.showTips( '当前金币不足!' );
                     break;
             }
         }, this );
