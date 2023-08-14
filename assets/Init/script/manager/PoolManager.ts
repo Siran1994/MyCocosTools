@@ -86,4 +86,9 @@ export class PoolManager
             pool.clear();
         }
     }
+    /** 清理所有对象池 */
+    public static clear ()
+    {
+
+    }
 }

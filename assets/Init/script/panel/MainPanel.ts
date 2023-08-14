@@ -8,6 +8,8 @@ import { Messager } from '../manager/Messager';
 import { PoolManager } from '../manager/PoolManager';
 import { ResMgr } from '../manager/ResMgr';
 import { PlayerCtrl } from '../role/PlayerCtrl';
+import { Utils } from '../tool/Utils';
+
 
 const { ccclass, property } = _decorator;
 
