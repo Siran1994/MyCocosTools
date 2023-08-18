@@ -5,13 +5,7 @@ export type IcallBack = ( go: Prefab ) => void;
 export class ResMgr  
 {
 
-    /**自定义资源包名 */
-    public static BundleName =
-        {
-            Ui: "ui",//Ui         
-            Audio: "audio",//音频音效
-            Prefab: "prefab",//预制体
-        }
+
 
     static m_bundle: AssetManager.Bundle;
 

@@ -1,20 +1,29 @@
+
 import { _decorator, Component } from 'cc';
+import { TipManager } from '../manager/TipManager';
 const { ccclass } = _decorator;
 
 @ccclass( 'VibrateManager' )
-export class VibrateManager extends Component
+export class VibrateManager 
 {
-    public static Instance: VibrateManager = null;
-    onLoad ()
+    private static instance: VibrateManager = null;
+    static get Instance ()
     {
-        VibrateManager.Instance = this;
+        if ( VibrateManager.instance == null )
+        {
+            VibrateManager.instance = new VibrateManager();
+        }
+        return VibrateManager.instance;
+    }
+    static set Instance ( value: VibrateManager )
+    {
+        this.instance = value;
     }
 
     //#region 安卓震动开启方法
     //1.开启权限:<uses-permission android: name =“android.permission.VIBRATE” / >
     //2.jsb.Device.vibrate(5.0);// 震动时间
     //#endregion
-
     isSupport ()
     {
         // navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
@@ -27,13 +36,14 @@ export class VibrateManager extends Component
             return false;
     }
 
-
     vibrateInterval;
     // 开始震动
     startVibrate ( duration )
     {
         if ( this.isSupport() )
             navigator.vibrate( duration );
+        else
+            TipManager.Instance.showTips( '当前设备不支持震动:' );
     }
 
     // 停止震动

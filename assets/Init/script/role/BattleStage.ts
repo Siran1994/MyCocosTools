@@ -10,6 +10,7 @@ import { ResMgr } from '../manager/ResMgr';
 import { Utils } from '../tool/Utils';
 import { Boss } from './Boss';
 import { PlayerCtrl } from './PlayerCtrl';
+import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'BattleStage' )
@@ -93,7 +94,7 @@ export class BattleStage extends Component
                 tween().call( () =>
                 {
                     //战斗开始
-                    ResMgr.loadPrefab( 'prefab/panel/FinishPanel', ( obj: Prefab ) =>
+                    ResMgr.loadPrefab( Config.Path.FinishPanel, ( obj: Prefab ) =>
                     {
                         PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
                     } );

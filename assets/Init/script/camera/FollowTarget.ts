@@ -1,5 +1,6 @@
 import { find } from 'cc';
 import { _decorator, Component, Node, Vec3 } from 'cc';
+import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'FollowTarget' )
@@ -26,7 +27,7 @@ export class FollowTarget extends Component
         {
             this.target.getPosition( this.tmpPos );
             this.tmpPos.add( this.offset );
-            this.node.position = this.tmpPos;
+            this.node.position = this.node.position.lerp( this.tmpPos, Config.CameraLerp );
         }
     }
 }

@@ -1,5 +1,6 @@
 import { _decorator, Component, LabelComponent, Vec3, tween, UIOpacityComponent, isValid, SpriteFrame, SpriteComponent, UITransformComponent, Color } from 'cc';
 import { PoolManager } from '../manager/PoolManager';
+import { RichText } from 'cc';
 const { ccclass, property } = _decorator;
 
 let color0 = new Color( 214, 132, 53, 255 );
@@ -9,8 +10,8 @@ let v3_targetPos = new Vec3( 0, 100, 0 );
 export class tips extends Component
 {
 
-    @property( LabelComponent )
-    public lbTips: LabelComponent = null!;
+    @property( RichText )
+    public lbTips: RichText = null!;
 
     @property( SpriteComponent )
     public spIcon: SpriteComponent = null!;
@@ -39,7 +40,7 @@ export class tips extends Component
         }
 
         this.lbTips.string = content;
-        this.lbTips.color = color0;
+        // this.lbTips.color = color0;
 
         //纯文字提示
         this.spBg.enabled = true;

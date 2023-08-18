@@ -1,10 +1,11 @@
-
 import { _decorator, Component, Sprite, Label } from "cc";
 import CoinFly from "../animation/CoinFly";
 import DOTweenAnimation from "../animation/DOTweenAnimation";
 import { GameData } from "../data/GameData";
 import { UiManager } from "../manager/UiManager";
-
+import { Config } from "../data/Config";
+import { TipManager } from "../manager/TipManager";
+import { AudioMgr } from "../manager/AudioMgr";
 const { ccclass, property } = _decorator;
 
 @ccclass( "online" )
@@ -22,12 +23,7 @@ export class online extends Component
     @property( CoinFly )
     coinfly: CoinFly = null;
 
-    @property
-    public timeToRecover = 0;
-    @property
-    public totalCount = 0;
-    @property
-    public currentCount = 0;
+    private currentCount = 0;
     private _timer = 0;
 
     onLoad ()
@@ -40,9 +36,15 @@ export class online extends Component
     onBtnOnlineClick ()
     {
         if ( this.currentCount <= 0 )
+        {
+            AudioMgr.Instance.通用按钮.Play();
+            TipManager.Instance.showTips( '在线时间不足,请稍后!' );
             return;
+        }
         else
         {
+            AudioMgr.Instance.点击广告按钮.Play();
+            TipManager.Instance.showTips( '恭喜您获得' + this.currentCount + '钻石!' );
             this.coinfly.playAnim( () =>
             {
                 var tmpNum = GameData.Coin;
@@ -60,21 +62,21 @@ export class online extends Component
 
     update ( dt: number )
     {
-        if ( this.currentCount > this.totalCount )
+        if ( this.currentCount > Config.OnLine.Total )
         {
-            this.currentCount = this.totalCount;
+            this.currentCount = Config.OnLine.Total;
             return;
         }
-        let ratio = this._timer / this.timeToRecover;
+        let ratio = this._timer / Config.OnLine.Time;
         this.spTimeProgress.fillStart = ratio;
         this.perTimeProgress.fillRange = ratio;
 
         this.lbGold.string = this.currentCount.toString();
         this._timer += dt;
-        if ( this._timer >= this.timeToRecover )
+        if ( this._timer >= Config.OnLine.Time )
         {
             this._timer = 0;
-            this.currentCount += 50;
+            this.currentCount += Config.OnLine.Per;
         }
     }
 

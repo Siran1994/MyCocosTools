@@ -10,6 +10,7 @@ import { ResMgr } from "../manager/ResMgr";
 import { TipManager } from "../manager/TipManager";
 import { PlayerCtrl } from "../role/PlayerCtrl";
 import { Utils } from "../tool/Utils";
+import { Config } from "../data/Config";
 
 const { ccclass, property } = _decorator;
 
@@ -228,7 +229,7 @@ export class GamePanel extends Component
 
     CoinDoFly ()
     {
-        ResMgr.loadPrefab( 'prefab/ui/Coin', ( obj: Prefab ) =>
+        ResMgr.loadPrefab( Config.Path.Coin, ( obj: Prefab ) =>
         {
             let go = PoolManager.getNode( obj, this.target.parent ) as Node;
             go.scale = Vec3.ONE;

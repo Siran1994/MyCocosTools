@@ -3,6 +3,8 @@ import { FightTip } from '../tip/fightTip';
 import { tips } from '../tip/tips';
 import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
+import { Config } from '../data/Config';
+import { tipPanel } from '../tip/tipPanel';
 
 const { ccclass } = _decorator;
 
@@ -59,6 +61,26 @@ export class TipManager
         }
     }
 
+    //弹窗展示
+    showTipPanel ( title: string, content: string, callback: Function, isAd = false )
+    {
+        ResMgr.loadResource( Config.Path.tipPanel, ( obj: Prefab ) =>
+        {
+            let parentNode = null
+            if ( find( "Canvas" ) )
+                parentNode = find( "Canvas" );
+            else
+                parentNode = find( "Init" );
+
+            let tipsNode = PoolManager.getNode( obj, parentNode as Node );
+
+            tipsNode.getComponent( UITransformComponent ).priority = 900;
+
+            let tipScript = tipsNode.getComponent( tipPanel ) as tipPanel;
+            tipScript.show( title, content, callback, isAd );
+        } );
+    }
+
     /**
         * 内部函数
         * @param {String} content 
@@ -66,9 +88,15 @@ export class TipManager
         */
     _showTipsAni ( content: string, targetPos: Vec3, scale: number, callback?: Function )
     {
-        ResMgr.loadPrefab( 'prefab/common/tips', ( obj: Prefab ) =>
+        ResMgr.loadResource( Config.Path.tips, ( obj: Prefab ) =>
         {
-            let tipsNode = PoolManager.getNode( obj, find( "Canvas" ) as Node );
+            let parentNode = null
+            if ( find( "Canvas" ) )
+                parentNode = find( "Canvas" );
+            else
+                parentNode = find( "Init" );
+
+            let tipsNode = PoolManager.getNode( obj, parentNode as Node );
 
             tipsNode.getComponent( UITransformComponent ).priority = 900;
 
@@ -79,9 +107,15 @@ export class TipManager
 
     showFightTips ( type: number, txt: string, pos: Vec3, callback?: Function )
     {
-        ResMgr.loadPrefab( 'prefab/common/fightTip', ( obj: Prefab ) =>
+        ResMgr.loadResource( Config.Path.fightTip, ( obj: Prefab ) =>
         {
-            let ndTip = <Node> PoolManager.getNode( obj, <Node> find( "Canvas" ) );
+            let parentNode = null
+            if ( find( "Canvas" ) )
+                parentNode = find( "Canvas" );
+            else
+                parentNode = find( "Init" );
+
+            let ndTip = <Node> PoolManager.getNode( obj, <Node> parentNode );
             ndTip.setPosition( pos );
 
             let UICom = ndTip.getComponent( UITransformComponent ) as UITransformComponent;

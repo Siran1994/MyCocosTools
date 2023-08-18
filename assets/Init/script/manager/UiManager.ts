@@ -4,11 +4,12 @@ import { GamePanel } from '../panel/GamePanel';
 import { PlayerState } from '../data/Enum';
 import { MainPanel } from '../panel/MainPanel';
 import { PlayerCtrl } from '../role/PlayerCtrl';
-import { Utils } from '../tool/Utils';
 import { GameManager } from './GameManager';
 import { Messager } from './Messager';
 import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
+import { GameData } from '../data/GameData';
+import { Config } from '../data/Config';
 
 const { ccclass, property } = _decorator;
 
@@ -47,25 +48,19 @@ export class UiManager extends Component
         {
             GameManager.Instance.IsStart = false;
             PlayerCtrl.Instance.Play( PlayerState.死亡 );
-            Utils.DelayCallBack( 1, () =>
+            ResMgr.loadPrefab( Config.Path.FailedPanel, ( obj: Prefab ) =>
             {
-                PoolManager.putNodeByName( 'Canvas/GamePanel' );
-                ResMgr.loadPrefab( 'prefab/panel/FailedPanel', ( obj: Prefab ) =>
-                {
-                    PoolManager.getNode( obj, this.node ) as Node;
-                } );
-                AudioMgr.Instance.失败结算.Play();
+                PoolManager.getNode( obj, this.node ) as Node;
             } );
+            AudioMgr.Instance.失败结算.Play();
         }
         else //游戏通关
         {
-            Utils.DelayCallBack( 2, () =>
+            AudioMgr.Instance.胜利结算.Play();
+            GameData.Coin += this.gamePanel.coin * Config.Rate;
+            ResMgr.loadPrefab( Config.Path.RewardPanel, ( obj: Prefab ) =>
             {
-                ResMgr.loadPrefab( 'prefab/panel/RewardPanel', ( obj: Prefab ) =>
-                {
-                    PoolManager.getNode( obj, this.node ) as Node;
-                } );
-                AudioMgr.Instance.胜利结算.Play();
+                PoolManager.getNode( obj, this.node ) as Node;
             } );
         }
     }

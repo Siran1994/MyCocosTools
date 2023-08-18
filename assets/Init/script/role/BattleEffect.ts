@@ -105,7 +105,7 @@ export class BattleEffect extends Component
     {
         if ( isfinal )//Boss处决
         {
-            PoolManager.putNode( find( 'Canvas/FinishPanel' ) );
+            find( 'Canvas/FinishPanel' ).destroy();
             Messager.Broadcast( 'gameOver', true );
             PlayerCtrl.Instance.Play( PlayerState.死亡 );
         }

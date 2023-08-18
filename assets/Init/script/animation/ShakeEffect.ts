@@ -1,7 +1,6 @@
 import { _decorator, Component, Node, Tween, tween, v3 } from 'cc';
 const { ccclass } = _decorator;
 
-
 /** 震动效果  */
 @ccclass( 'ScreenShake' )
 export class ShakeEffect extends Component

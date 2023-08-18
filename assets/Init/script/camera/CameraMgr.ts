@@ -127,14 +127,14 @@ export class CameraMgr extends Component
         //这里计算出相机距离目标的位置的所在坐标先，距离多高Y，距离多远Z
         //下面四句代码等同于：targetPosition+Up*updistance-forwardView*backDistance
         let u = Vec3.multiplyScalar( new Vec3(), Vec3.UP, this.positionOffset.y );
-        console.log( 'u' + u );
+
         let f = Vec3.multiplyScalar( new Vec3(), this.target.forward, this.positionOffset.z );
-        console.log( 'f' + u );
+
         let pos = Vec3.add( new Vec3(), this.target.position, u );
         //本来这里应该是减的，可是下面的lookat默认前方是-z，所有这里倒转过来变为加
-        console.log( 'pos' + pos );
+
         Vec3.add( pos, pos, f );
-        console.log( 'addpos' + pos );
+
         //球形差值移动，我发现cocos只有Lerp差值移动，而我看unity是有球形差值移动的，所有我这里照搬过来了一个球形差值
         this.node.position = VectorTool.SmoothDampV3( this.node.position, pos, this.velocity, this.moveSmooth, 100000, 0.02 );
         // this.node.position = this.node.position.lerp( pos, this.moveSmooth );

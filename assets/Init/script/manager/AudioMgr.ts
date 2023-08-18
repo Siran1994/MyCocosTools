@@ -2,6 +2,7 @@ import { _decorator, AudioSource, Component, director, instantiate, Node, Prefab
 import { PlayerPrefs } from '../data/PlayerPrefs';
 import { AudioClipExit } from '../tool/AudioClipExit';
 import { ResMgr } from './ResMgr';
+import { Config } from '../data/Config';
 
 const { ccclass, property } = _decorator;
 
@@ -83,7 +84,7 @@ export class AudioMgr extends Component
     {
         if ( AudioMgr.Instance == null )
         {
-            ResMgr.loadPrefab( 'prefab/audiomgr/AudioMgr', ( obj: Prefab ) =>
+            ResMgr.loadPrefab( Config.Path.AudioMgr, ( obj: Prefab ) =>
             {
                 let go = instantiate( obj );
                 go.parent = node;

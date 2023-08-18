@@ -58,7 +58,7 @@ export class CardItem extends Component
         if ( this.m_icon_sp && cardItem.icon )
             this.m_icon_sp.spriteFrame = cardItem.icon
 
-        this.Name.string = HeroType[ cardItem.heroType ];
+        this.Name.string = HeroType[ cardItem.itemType ];
 
         this.checkUnLock( cardItem );
 

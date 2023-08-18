@@ -24,15 +24,12 @@ export class Loading extends Component
             {
                 // 加载完成的回调函数
                 if ( error )
-                {
                     console.error( '场景加载失败:', error );
-                }
                 else
                 {
                     director.loadScene( targetlv, ( err, scene: any ) =>
                     {
                         callback();
-                        console.log( '场景加载完成' );
                     } );
                 }
             } );

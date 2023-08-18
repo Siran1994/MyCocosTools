@@ -8,8 +8,8 @@ import { Messager } from '../manager/Messager';
 import { PoolManager } from '../manager/PoolManager';
 import { ResMgr } from '../manager/ResMgr';
 import { PlayerCtrl } from '../role/PlayerCtrl';
-import { Utils } from '../tool/Utils';
-
+import { Config } from '../data/Config';
+import { SignPanel } from './SignPanel';
 
 const { ccclass, property } = _decorator;
 
@@ -32,7 +32,12 @@ export class MainPanel extends Component
     LvTips: Label;//关卡信息
 
     @property( Label )
-    CoinTxt: Label;//金币信息  
+    CoinTxt: Label;//金币信息
+
+    onLoad ()
+    {
+        this.showSignPanel();
+    }
 
     start () 
     {
@@ -42,7 +47,7 @@ export class MainPanel extends Component
         this.shopBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            ResMgr.loadPrefab( 'prefab/panel/ShopPanel', ( obj: Prefab ) =>
+            ResMgr.loadPrefab( Config.Path.ShopPanel, ( obj: Prefab ) =>
             {
                 PoolManager.getNode( obj, this.node.parent ) as Node;
             } );
@@ -52,7 +57,7 @@ export class MainPanel extends Component
         this.setBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            ResMgr.loadPrefab( 'prefab/panel/SettingPanel', ( obj: Prefab ) =>
+            ResMgr.loadPrefab( Config.Path.SettingPanel, ( obj: Prefab ) =>
             {
                 PoolManager.getNode( obj, this.node.parent ) as Node;
             } );
@@ -61,7 +66,7 @@ export class MainPanel extends Component
         this.signBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            ResMgr.loadPrefab( 'prefab/panel/SignPanel', ( obj: Prefab ) =>
+            ResMgr.loadPrefab( Config.Path.SignPanel, ( obj: Prefab ) =>
             {
                 PoolManager.getNode( obj, this.node.parent ) as Node;
             } );
@@ -72,7 +77,7 @@ export class MainPanel extends Component
         this.drawBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            ResMgr.loadPrefab( 'prefab/panel/DrawPanel', ( obj: Prefab ) =>
+            ResMgr.loadPrefab( Config.Path.DrawPanel, ( obj: Prefab ) =>
             {
                 PoolManager.getNode( obj, this.node.parent ) as Node;
             } );
@@ -98,6 +103,18 @@ export class MainPanel extends Component
         PlayerCtrl.Instance.Play( PlayerState.慢跑 );
         AudioMgr.Instance.游戏背景乐.playMusic();
         Messager.Broadcast( 'IsStart' );
+    }
+
+    showSignPanel ()
+    {
+        if ( SignPanel.isCanSign() )
+        {
+            ResMgr.loadPrefab( 'prefab/panel/SignPanel', ( obj: Prefab ) =>
+            {
+                PoolManager.getNode( obj, this.node.parent ) as Node;
+            } );
+            this.node.active = false;
+        }
     }
 
     autoStart ()

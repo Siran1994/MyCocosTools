@@ -7,6 +7,7 @@ import { Utils } from '../tool/Utils';
 import { Messager } from './Messager';
 import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
+import { Config } from '../data/Config';
 
 const { ccclass, property } = _decorator;
 
@@ -49,10 +50,7 @@ export class GameManager extends Component
 
     protected onDestroy (): void
     {
-        PoolManager.clearPool( 'Coin' );
-        PoolManager.clearPool( 'Loading' );
-        PoolManager.clearPool( 'fightTip' );
-        PoolManager.clearPool( 'tips' );
+        PoolManager.clear();
     }
 
     start ()
@@ -71,12 +69,12 @@ export class GameManager extends Component
     {
         if ( isNextLv )
             GameData.Lv += 1;
-        if ( GameData.Lv > 15 )
+        if ( GameData.Lv > Config.MaxLv )
         {
-            var targetlv = ( Utils.random( 5, 15 ) ).toString();
+            var targetlv = ( Utils.random( 5, Config.MaxLv ) ).toString();
             if ( isShowProgress )
             {
-                ResMgr.loadResource( 'prefab/Loading', ( obj: Prefab ) =>
+                ResMgr.loadResource( Config.Path.Loading, ( obj: Prefab ) =>
                 {
                     let go = PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
 
@@ -94,7 +92,7 @@ export class GameManager extends Component
         {
             if ( isShowProgress )
             {
-                ResMgr.loadResource( 'prefab/Loading', ( obj: Prefab ) =>
+                ResMgr.loadResource( Config.Path.Loading, ( obj: Prefab ) =>
                 {
                     let go = PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
 
@@ -115,7 +113,7 @@ export class GameManager extends Component
         if ( Lv > 4 )
         {
             let goinfo = null;
-            ResMgr.loadPrefab( 'prefab/panel/FreeTryPanel', ( obj: Prefab ) =>
+            ResMgr.loadPrefab( Config.Path.FreeTryPanel, ( obj: Prefab ) =>
             {
                 let go = PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
                 goinfo = go.getComponent( FreeTryPanel );

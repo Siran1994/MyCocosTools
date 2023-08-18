@@ -1,11 +1,11 @@
 
 import { _decorator, Component, Vec3, input, Input, EventTouch, RigidBodyComponent, tween, Node, PhysicsSystem, game } from 'cc';
 import { HeroType } from '../data/Enum';
-import { GameData } from '../data/GameData';
 import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
 import { PlayerCtrl } from './PlayerCtrl';
+import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 const v3_0 = new Vec3( 0, 0, 0 );
 
@@ -30,8 +30,8 @@ export class RigidCharactorController extends Component
 
     protected start (): void
     {
-        PhysicsSystem.instance.gravity = new Vec3( 0, -50, 0 ); // 设置重力向量为向下的 1000 米/秒²//设置重力
-        game.frameRate = GameData.GameFrame;//帧率设置
+        PhysicsSystem.instance.gravity = new Vec3( 0, Config.Gravity, 0 ); // 设置重力向量为向下的 1000 米/秒²//设置重力
+        game.frameRate = Config.GameFrame;//帧率设置
         PhysicsSystem.instance.fixedTimeStep = 1 / game.frameRate;//优化物理引擎计算次数
     }
     update ( deltaTime: number )

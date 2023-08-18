@@ -2,7 +2,6 @@ import { Label, ProgressBar, Sprite, tween, Vec3 } from "cc";
 
 export default class DOTweenAnimation
 {
-
     /**
      * 永久摇动
      * @param {any} target          目标对象

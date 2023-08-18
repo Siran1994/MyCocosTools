@@ -2,10 +2,11 @@ import { _decorator, Component, Node } from 'cc';
 import { ResMgr } from '../manager/ResMgr';
 import { GameData } from '../data/GameData';
 import { AudioMgr } from '../manager/AudioMgr';
-import { PlayerPrefs } from '../data/PlayerPrefs';
 import { Prefab } from 'cc';
 import { PoolManager } from '../manager/PoolManager';
 import { Loading } from './Loading';
+import { Config } from '../data/Config';
+import { PlatformMgr } from '../manager/PlatformMgr';
 const { ccclass } = _decorator;
 
 @ccclass( 'Init' )
@@ -13,7 +14,6 @@ export class Init extends Component
 {
     protected onLoad (): void
     {
-        PlayerPrefs.DeleteAll();
         this.loadRes();
     }
 
@@ -23,11 +23,10 @@ export class Init extends Component
         {
             if ( GameData.Lv == 0 || GameData.Lv == null )
                 GameData.Lv = 1;
-            ResMgr.loadResource( 'prefab/Loading', ( obj: Prefab ) =>
+            ResMgr.loadResource( Config.Path.Loading, ( obj: Prefab ) =>
             {
                 let go = PoolManager.getNode( obj, this.node ) as Node;
-                var loader = go.getComponent( Loading );
-                loader.showProgress( GameData.Lv.toString(), () =>
+                go.getComponent( Loading ).showProgress( GameData.Lv.toString(), () =>
                 {
                     PoolManager.putNode( go );
                 } );
@@ -37,6 +36,9 @@ export class Init extends Component
         await AudioMgr.init( this.node.parent, () =>
         {
             AudioMgr.Instance.首页背景乐.playMusic();
+
         }, this );
+
+        await PlatformMgr.Instance.getCurrentPlatform();
     }
 }
