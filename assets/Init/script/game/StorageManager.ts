@@ -5,13 +5,13 @@ const { ccclass } = _decorator;
 export class StorageManager 
 {
     private static instance: StorageManager = null;
-    public static getInstance (): StorageManager
+
+    public static get Instance ()
     {
-        if ( StorageManager.instance == null )
-        {
-            StorageManager.instance = new StorageManager();
-        }
-        return StorageManager.instance;
+        if ( this.instance )
+            return this.instance;
+        this.instance = new StorageManager();
+        return this.instance;
     }
 
     private userData: any;

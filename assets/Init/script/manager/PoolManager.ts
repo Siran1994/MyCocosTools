@@ -33,6 +33,26 @@ export class PoolManager
         return node;
     }
 
+    /**
+        * 预生成对象池
+        * @param prefab 
+        * @param nodeNum 
+        * 使用——PoolManager.instance.prePool(prefab, 40);
+        */
+    public static prePool ( prefab: Prefab, nodeNum: number )
+    {
+        const name = prefab.name;
+
+        let pool = new NodePool();
+        this.dictPool[ name ] = pool;
+
+        for ( let i = 0; i < nodeNum; i++ )
+        {
+            const node = instantiate( prefab );
+            pool.put( node );
+        }
+    }
+
     public static getNodeInfo ( name: string )
     {
         let node: Node;

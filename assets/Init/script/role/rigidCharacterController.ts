@@ -1,10 +1,6 @@
-
 import { _decorator, Component, Vec3, input, Input, EventTouch, RigidBodyComponent, tween, Node, PhysicsSystem, game } from 'cc';
-import { HeroType } from '../data/Enum';
-import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
-import { PlayerCtrl } from './PlayerCtrl';
 import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 const v3_0 = new Vec3( 0, 0, 0 );
@@ -12,15 +8,6 @@ const v3_0 = new Vec3( 0, 0, 0 );
 @ccclass( 'RigidCharacterController' )
 export class RigidCharactorController extends Component
 {
-    @property( { displayName: '小号', type: Node } ) //玩家站位
-    Player: Node = null;
-
-    @property( { displayName: '黑液人', type: Node } ) //玩家站位
-    Venom: Node = null;
-
-    @property( { displayName: '浩克', type: Node } ) //玩家站位
-    Huk: Node = null;
-
     @property( { type: RigidBodyComponent } )
     rigidBody: RigidBodyComponent;
 
@@ -48,7 +35,6 @@ export class RigidCharactorController extends Component
         input.on( Input.EventType.TOUCH_CANCEL, this.touchCancel, this );
         Messager.AddListener( 'battleStart', this, this.BattleStart );
         Messager.AddListener( 'changeDir', this, this.ChangeDir );
-        Messager.AddListener( 'changeBody', this, this.ChangeBody );
     }
 
     onDisable ()
@@ -59,11 +45,10 @@ export class RigidCharactorController extends Component
         input.off( Input.EventType.TOUCH_CANCEL, this.touchCancel, this );
         Messager.RemoveListener( 'battleStart', this, this.BattleStart );
         Messager.RemoveListener( 'changeDir', this, this.ChangeDir );
-        Messager.RemoveListener( 'changeBody', this, this.ChangeBody );
     }
     BattleStart ()
     {
-        GameManager.Instance.Speed = 0;
+        Config.Speed = 0;
         this.node.worldPosition = new Vec3( this.node.worldPosition.x, 0.1, this.node.worldPosition.z );
     }
     isturing = false;
@@ -87,24 +72,6 @@ export class RigidCharactorController extends Component
                 } ),
             )
             .start();
-    }
-
-    ChangeBody ( heroType: HeroType )
-    {
-        if ( heroType == HeroType.黑液人 ) 
-        {
-            this.Player.active = false;
-            this.Venom.active = true;
-            this.Huk.active = false;
-        }
-        if ( heroType == HeroType.超级巨人 ) 
-        {
-            this.Player.active = false;
-            this.Venom.active = false;
-            this.Huk.active = true;
-        }
-        PlayerCtrl.Instance.ShowEffect( 2 );
-        AudioMgr.Instance.吃到服装.Play();
     }
 
     touchStart ( touch: EventTouch )
@@ -145,7 +112,7 @@ export class RigidCharactorController extends Component
         else if ( this._angle == 90 )
             v3_0.set( this.node.forward.x, 0, this.node.forward.z - this._stateX );
         v3_0.normalize();
-        v3_0.multiplyScalar( GameManager.Instance.Speed * deltaTime );
+        v3_0.multiplyScalar( Config.Speed * deltaTime );
         // 更新物体的位置
         this.node.setPosition( position.x + v3_0.x, position.y + v3_0.y, position.z + v3_0.z );
     }

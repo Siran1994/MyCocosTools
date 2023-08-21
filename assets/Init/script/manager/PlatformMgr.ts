@@ -8,17 +8,13 @@ const { ccclass } = _decorator;
 export class PlatformMgr 
 {
     private static instance: PlatformMgr = null;
-    static get Instance ()
+
+    public static get Instance ()
     {
-        if ( PlatformMgr.instance == null )
-        {
-            PlatformMgr.instance = new PlatformMgr();
-        }
-        return PlatformMgr.instance;
-    }
-    static set Instance ( value: PlatformMgr )
-    {
-        this.instance = value;
+        if ( this.instance )
+            return this.instance;
+        this.instance = new PlatformMgr();
+        return this.instance;
     }
 
     getCurrentPlatform ()

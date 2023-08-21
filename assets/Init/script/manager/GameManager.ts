@@ -32,19 +32,7 @@ export class GameManager extends Component
     @property( { displayName: '当前目标英雄', type: String } )
     MainHero: string = '';
 
-    @property( { displayName: '是否收集齐', type: Boolean } )
-    isCollected: boolean = false;
 
-    @property( { displayName: '通关钻石奖励', type: Number } )
-    RewardCoin: number = 30;
-
-    @property( { displayName: '移动速度', type: Number } )
-    Speed: number = 6;
-
-    @property( { displayName: '集齐套装增加速度', type: Number } )
-    AddSpeed: number = 6;
-
-    PackageName = '城市飞侠';
     BossPower = 0;
     PlayerPower = 500;
 
@@ -112,36 +100,16 @@ export class GameManager extends Component
     {
         if ( Lv > 4 )
         {
-            let goinfo = null;
-            ResMgr.loadPrefab( Config.Path.FreeTryPanel, ( obj: Prefab ) =>
+            if ( Lv % 2 == 0 )
             {
-                let go = PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
-                goinfo = go.getComponent( FreeTryPanel );
-            } );
-            if ( Lv % 5 == 0 )
-            {
-                this.PackageName = '城市飞侠';
-                goinfo.ShowPackage( this.PackageName );
-            }
-            if ( Lv % 7 == 0 )
-            {
-                this.PackageName = '雷公';
-                goinfo.ShowPackage( this.PackageName );
-            }
-            if ( Lv % 9 == 0 )
-            {
-                this.PackageName = '钢铁英雄';
-                goinfo.ShowPackage( this.PackageName );
-            }
-            if ( Lv % 11 == 0 )
-            {
-                this.PackageName = '黑液人';
-                goinfo.ShowPackage( this.PackageName );
-            }
-            if ( Lv % 13 == 0 )
-            {
-                this.PackageName = '超级巨人';
-                goinfo.ShowPackage( this.PackageName );
+                let goinfo = null;
+                ResMgr.loadPrefab( Config.Path.FreeTryPanel, ( obj: Prefab ) =>
+                {
+                    let go = PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
+                    goinfo = go.getComponent( FreeTryPanel );
+                    Config.PackageName = '城市飞侠';
+                    goinfo.ShowPackage( Config.PackageName );
+                } );
             }
         }
     }

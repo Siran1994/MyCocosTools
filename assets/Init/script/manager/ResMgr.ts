@@ -4,9 +4,6 @@ export type ICallback<T = any> = ( bundle: AssetManager.Bundle ) => void;
 export type IcallBack = ( go: Prefab ) => void;
 export class ResMgr  
 {
-
-
-
     static m_bundle: AssetManager.Bundle;
 
     demo ()//示例用法

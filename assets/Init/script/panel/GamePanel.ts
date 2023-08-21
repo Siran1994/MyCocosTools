@@ -96,7 +96,13 @@ export class GamePanel extends Component
     LvTxt: Label;//关卡信息
 
     @property( Label )
-    CoinTxt: Label;//金币信息  
+    CoinTxt: Label;//金币信息
+
+    @property( { displayName: '是否收集齐', type: Boolean } )
+    isCollected: boolean = false;
+
+    @property( { displayName: '集齐套装增加速度', type: Number } )
+    AddSpeed: number = 6;
 
     @property( Node )
     target: Node = null;
@@ -212,8 +218,8 @@ export class GamePanel extends Component
             this.isGetL_Arm = false;
             this.isGetR_Leg = false;
             this.isGetL_Leg = false;
-            GameManager.Instance.isCollected = true;
-            this.CheckHeroCollect( GameManager.Instance.isCollected );
+            this.isCollected = true;
+            this.CheckHeroCollect( this.isCollected );
         }
     }
 
@@ -279,17 +285,15 @@ export class GamePanel extends Component
                     break;
                 case HeroType.黑液人:
                     GameManager.Instance.PlayerPower += 2980;
-                    Messager.Broadcast( 'changeBody', HeroType.黑液人 );
                     break;
                 case HeroType.超级巨人:
                     GameManager.Instance.PlayerPower += 3660;
-                    Messager.Broadcast( 'changeBody', HeroType.超级巨人 );
                     break;
                 case HeroType.雷公:
                     GameManager.Instance.PlayerPower += 1570;
                     break;
             }
-            GameManager.Instance.Speed += GameManager.Instance.AddSpeed;
+            Config.Speed += this.AddSpeed;
             PlayerCtrl.Instance.Play( PlayerState.快跑 );
             PlayerCtrl.Instance.ShowEffect( 3 );
         }

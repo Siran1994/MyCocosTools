@@ -7,17 +7,13 @@ const { ccclass } = _decorator;
 export class VibrateManager 
 {
     private static instance: VibrateManager = null;
-    static get Instance ()
+
+    public static get Instance ()
     {
-        if ( VibrateManager.instance == null )
-        {
-            VibrateManager.instance = new VibrateManager();
-        }
-        return VibrateManager.instance;
-    }
-    static set Instance ( value: VibrateManager )
-    {
-        this.instance = value;
+        if ( this.instance )
+            return this.instance;
+        this.instance = new VibrateManager();
+        return this.instance;
     }
 
     //#region 安卓震动开启方法

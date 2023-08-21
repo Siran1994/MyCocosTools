@@ -106,7 +106,6 @@ export class RewardPanel extends Component
             {
                 ani.stop();
                 this.tmpCoin = targetNum;
-                GameData.Coin += GameManager.Instance.RewardCoin;
                 this.CoinTxt.string = GameData.Coin.toString();
             } );
         } );

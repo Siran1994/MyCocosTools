@@ -6,6 +6,7 @@ import { AudioMgr } from '../manager/AudioMgr';
 import { DecorateCtrl } from './DecorateCtrl';
 import { PlayerState, HeroType, PropType } from '../data/Enum';
 import { Messager } from '../manager/Messager';
+import { Config } from '../data/Config';
 
 const { ccclass, property } = _decorator;
 @ccclass( 'PlayerCtrl' )
@@ -98,16 +99,14 @@ export class PlayerCtrl extends Component
 
     PlayNextAni ( delay: number )
     {
-
-        GameManager.Instance.Speed -= 2;
-
+        Config.Speed -= 2;
         Utils.DelayCallBack( delay, () =>
         {
-            GameManager.Instance.Speed += 2;
+            Config.Speed += 2;
             if ( GameManager.Instance.IsStart )
             {
 
-                if ( GameManager.Instance.isCollected )
+                if ( UiManager.Instance.gamePanel.isCollected )
                     this.Play( PlayerState.快跑 );
                 else
                     this.Play( PlayerState.慢跑 );
@@ -219,7 +218,7 @@ export class PlayerCtrl extends Component
             AudioMgr.Instance.玩家受击.Play();
             Messager.Broadcast( 'updatePower', -power );
             Messager.Broadcast( 'showPartUi', heroType, propType, false );
-            GameManager.Instance.isCollected = false;
+            UiManager.Instance.gamePanel.isCollected = false;
             PlayerCtrl.Instance.ShowEffect( 3, true );
         }
     }

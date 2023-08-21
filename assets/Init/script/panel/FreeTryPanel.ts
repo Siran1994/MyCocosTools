@@ -4,6 +4,7 @@ import { AudioMgr } from '../manager/AudioMgr';
 import { Messager } from '../manager/Messager';
 import { PoolManager } from '../manager/PoolManager';
 import { UiManager } from '../manager/UiManager';
+import { Config } from '../data/Config';
 
 const { ccclass, property } = _decorator;
 
@@ -28,6 +29,8 @@ export class FreeTryPanel extends Component
     @property( Label )
     HeroPower: Label = null;
 
+
+
     start ()
     {
         AudioMgr.Instance.奖励弹窗.Play();
@@ -35,9 +38,8 @@ export class FreeTryPanel extends Component
         this.adGetBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.点击广告按钮.Play();
-            Messager.Broadcast( 'ChangeDress', GameManager.Instance.PackageName );//换皮肤
-            Messager.Broadcast( 'ChangePart', GameManager.Instance.PackageName );//设置当前目标英雄
-            GameManager.Instance.MainHero = GameManager.Instance.PackageName;
+            Messager.Broadcast( 'ChangeDress', Config.PackageName );//换皮肤
+            Messager.Broadcast( 'ChangePart', Config.PackageName );//设置当前目标英雄           
             Messager.Broadcast( 'CollectAll', true );
             UiManager.Instance.mainPanel.autoStart();
             PoolManager.putNode( this.node );

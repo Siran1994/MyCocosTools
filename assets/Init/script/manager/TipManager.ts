@@ -17,16 +17,10 @@ export class TipManager
 
     public static get Instance ()
     {
-        if ( TipManager.instance == null )
-        {
-            TipManager.instance = new TipManager();
-        }
-        return TipManager.instance;
-    }
-
-    public static set Instance ( value: TipManager )
-    {
-        this.instance = value;
+        if ( this.instance )
+            return this.instance;
+        this.instance = new TipManager();
+        return this.instance;
     }
 
     showTipsTime: number = 0

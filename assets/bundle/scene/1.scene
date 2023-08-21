@@ -4366,10 +4366,6 @@
     "MainCamera": null,
     "IsStart": false,
     "MainHero": "",
-    "isCollected": false,
-    "RewardCoin": 100,
-    "Speed": 6,
-    "AddSpeed": 4,
     "_id": "47khxSo4RFuYKTyvpTnAt3"
   },
   {

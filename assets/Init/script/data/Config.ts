@@ -14,6 +14,7 @@ export class Config
 
     public static Rate = 1//结算奖励倍率 
 
+    public static PackageName = '城市飞侠';
     //本地化存储
     public static Path =
         {
