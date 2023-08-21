@@ -96,6 +96,7 @@ export class BattleStage extends Component
                     //战斗开始
                     ResMgr.loadPrefab( Config.Path.FinishPanel, ( obj: Prefab ) =>
                     {
+                        PoolManager.prePool( obj, 1 );
                         PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
                     } );
                     GameManager.Instance.BossPower = GameManager.Instance.GetBossPower();

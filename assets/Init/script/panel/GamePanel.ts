@@ -237,6 +237,7 @@ export class GamePanel extends Component
     {
         ResMgr.loadPrefab( Config.Path.Coin, ( obj: Prefab ) =>
         {
+            PoolManager.prePool( obj, 20 );
             let go = PoolManager.getNode( obj, this.target.parent ) as Node;
             go.scale = Vec3.ONE;
             go.setPosition( new Vec3( -286, -750, 0 ) );

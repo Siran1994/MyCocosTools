@@ -2,7 +2,6 @@ import { director, resources } from "cc";
 
 export class Utils 
 {
-
     /**
     * 返回今天的日期,格式20200101
     */

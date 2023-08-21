@@ -8,6 +8,7 @@ import { Messager } from './Messager';
 import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
 import { Config } from '../data/Config';
+import { DeviceManager } from '../game/DeviceManager';
 
 const { ccclass, property } = _decorator;
 
@@ -18,6 +19,7 @@ export class GameManager extends Component
     protected onLoad (): void 
     {
         GameManager.Instance = this;
+        this.init();
     }
 
     @property( { displayName: '玩家', type: Node } )
@@ -36,10 +38,13 @@ export class GameManager extends Component
     BossPower = 0;
     PlayerPower = 500;
 
-    protected onDestroy (): void
+    init ()
     {
-        PoolManager.clear();
+        DeviceManager.Instance.setTargetFPS();
+        DeviceManager.Instance.showFPS( true );
+        console.log( DeviceManager.Instance.getGpuInfo() );
     }
+
 
     start ()
     {
@@ -168,5 +173,10 @@ export class GameManager extends Component
                 break;
         }
         return heroType;
+    }
+
+    protected onDestroy (): void
+    {
+        PoolManager.clear();
     }
 }

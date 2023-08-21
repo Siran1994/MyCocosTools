@@ -15,12 +15,6 @@ export class RigidCharactorController extends Component
     _angle = 0;
     TargetPos = new Vec3();
 
-    protected start (): void
-    {
-        PhysicsSystem.instance.gravity = new Vec3( 0, Config.Gravity, 0 ); // 设置重力向量为向下的 1000 米/秒²//设置重力
-        game.frameRate = Config.GameFrame;//帧率设置
-        PhysicsSystem.instance.fixedTimeStep = 1 / game.frameRate;//优化物理引擎计算次数
-    }
     update ( deltaTime: number )
     {
         if ( GameManager.Instance.IsStart )

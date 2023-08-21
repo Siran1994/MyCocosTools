@@ -35,7 +35,6 @@ export class Config
             tipPanel: 'prefab/tipPanel',//弹窗提示
         }
 
-
     //声音音量设置
     public static Volume =
         {
@@ -93,5 +92,4 @@ export class Config
             ANDROID: 'android',
             APPSTORE: 'appstore'
         }
-
 }

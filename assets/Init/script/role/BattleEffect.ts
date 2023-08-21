@@ -3,7 +3,6 @@ import { PlayerState } from '../data/Enum';
 import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
-import { PoolManager } from '../manager/PoolManager';
 import { Utils } from '../tool/Utils';
 import { Boss } from './Boss';
 import { PlayerCtrl } from './PlayerCtrl';

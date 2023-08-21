@@ -10,7 +10,6 @@ import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
 import { GameData } from '../data/GameData';
 import { Config } from '../data/Config';
-
 const { ccclass, property } = _decorator;
 
 @ccclass( 'UiManager' )
@@ -23,10 +22,10 @@ export class UiManager extends Component
     }
 
     @property( MainPanel )
-    mainPanel: MainPanel;//主界面
+    mainPanel: MainPanel = null;//主界面
 
     @property( GamePanel )
-    gamePanel: GamePanel = null;
+    gamePanel: GamePanel = null;//游戏界面
 
     @property( { displayName: '游戏状态', type: Boolean } )
     IsFailed: boolean = false;//是否失败

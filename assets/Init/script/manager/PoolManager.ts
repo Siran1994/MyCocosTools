@@ -96,10 +96,6 @@ export class PoolManager
 
     public static clear ()//清理所有对象池
     {
-        // PoolManager.clearPool( 'Coin' );
-        // PoolManager.clearPool( 'Loading' );
-        // PoolManager.clearPool( 'fightTip' );
-        // PoolManager.clearPool( 'tips' );
         PoolManager.clearPool( 'RewardPanel' );
     }
 }

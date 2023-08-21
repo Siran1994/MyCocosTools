@@ -1,5 +1,8 @@
 
+import { PhysicsSystem, Vec3, game } from 'cc';
+import { profiler } from 'cc';
 import { _decorator, director } from 'cc';
+import { Config } from '../data/Config';
 const { ccclass } = _decorator;
 
 // electron模块，打包web-mobil后在HTML中定义全局变量electron
@@ -8,75 +11,101 @@ const electron = ( window as any ).electron;
 @ccclass( "DeviceManager" )
 export class DeviceManager 
 {
+    private static instance: DeviceManager = null;
+
+    public static get Instance ()
+    {
+        if ( this.instance )
+            return this.instance;
+        this.instance = new DeviceManager();
+        return this.instance;
+    }
+
+    public getGpuInfo ()
+    {
+        return director.root.device.renderer;
+    }
+
+    public setTargetFPS ()
+    {
+        PhysicsSystem.instance.gravity = new Vec3( 0, Config.Gravity, 0 ); // 设置重力向量为向下的 1000 米/秒²//设置重力
+        game.frameRate = Config.GameFrame;//帧率设置
+        PhysicsSystem.instance.fixedTimeStep = 1 / game.frameRate;//优化物理引擎计算次数
+    }
+
+    public showFPS ( isDebugOpen: boolean = true )
+    {
+        isDebugOpen === true ? profiler.showStats() : profiler.hideStats();
+    }
 
     // 开关阴影
-    static setShadow ( isOpen = false )
+    public setShadow ( isOpen = false )
     {
         director.getScene()!.globals.shadows.enabled = isOpen;
     }
 
     // 开关天空盒
-    static setSkyBox ( isOpen = false )
+    public setSkyBox ( isOpen = false )
     {
         director.getScene()!.globals.skybox.enabled = isOpen;
     }
 
     // 开关全局雾
-    static setFog ( isOpen = false )
+    public setFog ( isOpen = false )
     {
         director.getScene()!.globals.fog.enabled = isOpen;
     }
 
     // 移动窗口到中心
-    static center ()
+    public center ()
     {
         electron.ipcRenderer.send( "e_center" );
     }
 
     // 全屏专用函数，e代表electron
-    static fullScreen ()
+    public fullScreen ()
     {
         electron.ipcRenderer.send( "e_fullScreen" );
     }
 
     // 窗口化专用函数
-    static window ()
+    public window ()
     {
         electron.ipcRenderer.send( "e_window" );
     }
 
     // 打开开发者工具
-    static openDevTools ()
+    public openDevTools ()
     {
         electron.ipcRenderer.send( "e_openDevTools" );
     }
 
     // 关闭开发者工具
-    static closeDevTools ()
+    public closeDevTools ()
     {
         electron.ipcRenderer.send( "e_closeDevTools" );
     }
 
     // 设置窗口大小
-    static setSize ( width: number, height: number )
+    public setSize ( width: number, height: number )
     {
         electron.ipcRenderer.send( "e_setSize", width.toString(), height.toString() );
     }
 
     // 设置分辨率，修改的电脑的分辨率
-    static setResolution ( width: number, height: number )
+    public setResolution ( width: number, height: number )
     {
         electron.ipcRenderer.send( "e_setResolution", width.toString(), height.toString() );
     }
 
     // 当前是否全屏
-    static isFullScreen (): boolean
+    public isFullScreen (): boolean
     {
         return electron.ipcRenderer.sendSync( "e_isFullScreen" );
     }
 
     // 设置分辨率，这才是最终调用的接口，如果全屏设置分辨率，不全屏设置窗口大小
-    static setScreenResolution ( width: number, height: number )
+    public setScreenResolution ( width: number, height: number )
     {
         if ( this.isFullScreen() == true )
         {
@@ -88,31 +117,31 @@ export class DeviceManager
     }
 
     // 获取一些信息，返回string
-    static getMassage (): string
+    public getMassage (): string
     {
         return electron.ipcRenderer.sendSync( "e_getMassage" );
     }
 
 
     // 获取屏幕支持的所有分辨率，是一个string的数组，eg:[1920×1080, 800×600]
-    static getAllResolutions (): string[]
+    public getAllResolutions (): string[]
     {
         return electron.ipcRenderer.sendSync( "e_getAllResolutions" );
     }
 
     // 获取当前的屏幕分辨率，是一个string变量，eg:1920×1080
-    static getCurrentResolution (): string
+    public getCurrentResolution (): string
     {
         return electron.ipcRenderer.sendSync( "e_getCurrentResolution" );
     }
 
     // 退出游戏
-    static quit ()
+    public quit ()
     {
         electron.ipcRenderer.send( "e_quit" );
     }
     // 自定义nircmd命令，不需要在前面输入nircmd.exe
-    static nircmdUD ( order: string )
+    public nircmdUD ( order: string )
     {
         electron.ipcRenderer.send( "e_nircmdUD", order );
     }

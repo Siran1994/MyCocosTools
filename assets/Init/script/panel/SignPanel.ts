@@ -26,6 +26,14 @@ export class SignPanel extends Component
     @property( SignItem )
     signItems: SignItem[] = [];
 
+    protected onEnable (): void
+    {
+        if ( SignPanel.isCanSign() == false )
+        {
+            PoolManager.putNode( this.node );
+        }
+    }
+
     start ()
     {
         this.closeBtn.node.on( Button.EventType.CLICK, () =>

@@ -34,10 +34,10 @@ export class MainPanel extends Component
     @property( Label )
     CoinTxt: Label;//金币信息
 
-    onLoad ()
-    {
-        this.showSignPanel();
-    }
+    // onLoad ()
+    // {
+    //     this.showSignPanel();
+    // }
 
     start () 
     {
@@ -109,7 +109,7 @@ export class MainPanel extends Component
     {
         if ( SignPanel.isCanSign() )
         {
-            ResMgr.loadPrefab( 'prefab/panel/SignPanel', ( obj: Prefab ) =>
+            ResMgr.loadPrefab( Config.Path.SignPanel, ( obj: Prefab ) =>
             {
                 PoolManager.getNode( obj, this.node.parent ) as Node;
             } );
