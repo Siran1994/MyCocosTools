@@ -1,4 +1,4 @@
-import { loader } from "cc";
+import { assetManager } from "cc";
 import { Prefab } from "cc";
 
 export default class PrefabManager
@@ -46,7 +46,7 @@ export default class PrefabManager
             var asset: Prefab = this.prefabMap.get( key );
 
             this.prefabMap.delete( key );
-            loader.release( asset );
+            assetManager.releaseAsset( asset );
             console.log( "release asset with " + key );
         }
     };

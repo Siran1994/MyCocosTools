@@ -2,12 +2,12 @@
   "ver": "1.1.43",
   "importer": "prefab",
   "imported": true,
-  "uuid": "c0864e73-a018-4f55-a55e-cd5c48ee8d77",
+  "uuid": "921eace0-a68d-40aa-9048-46506f8ae3d5",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "DrawPanel"
+    "syncNodeName": "SignPanel"
   }
 }

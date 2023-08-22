@@ -1,7 +1,8 @@
 
-import { AudioClip, loader } from "cc";
+import { AudioClip } from "cc";
 import AssetManager from "./AssetManager";
 import { AudioSource } from "cc";
+import { assetManager } from "cc";
 export default class AudioManager
 {
     /**音频名 */
@@ -159,7 +160,7 @@ export default class AudioManager
         if ( asset )
         {
             this.audioMap.delete( key );
-            loader.release( asset );
+            assetManager.releaseAsset( asset );
             console.log( "release asset with " + key );
         }
     };

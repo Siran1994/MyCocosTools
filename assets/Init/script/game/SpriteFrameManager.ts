@@ -1,4 +1,5 @@
-import { SpriteFrame, loader } from "cc";
+import { assetManager } from "cc";
+import { SpriteFrame } from "cc";
 
 export default class SpriteFrameManager
 {
@@ -39,7 +40,7 @@ export default class SpriteFrameManager
             var asset: SpriteFrame = this.spriteFrameMap.get( key );
 
             this.spriteFrameMap.delete( key );
-            loader.release( asset );
+            assetManager.releaseAsset( asset );
             console.log( "release asset with " + key );
         }
     };

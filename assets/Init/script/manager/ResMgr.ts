@@ -25,8 +25,6 @@ export class ResMgr
                 assetManager.releaseAll();
             } );
 
-
-
             ab.load( 'path', SpriteAtlas, ( err, atlas ) => //加载图集
             {
                 if ( err )

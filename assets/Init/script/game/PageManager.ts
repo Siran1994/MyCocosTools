@@ -1,8 +1,9 @@
 
 import { find } from "cc";
-import { Prefab, instantiate, loader, Vec3, Node } from "cc";
+import { Prefab, instantiate, Vec3, Node } from "cc";
 import { Messager } from "../manager/Messager";
 import AssetManager from "./AssetManager";
+import { resources } from "cc";
 
 
 
@@ -56,7 +57,7 @@ export default class PageManager
      */
     public static loadPage ( callback: Function ): void
     {
-        loader.loadResDir( "Page", Prefab, ( completedCount, totalCount ) =>
+        resources.loadDir( "Page", Prefab, ( completedCount, totalCount ) =>
         {
             callback( completedCount, totalCount );
         }, ( error, assets ) =>
