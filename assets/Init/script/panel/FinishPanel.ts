@@ -1,7 +1,6 @@
 import { _decorator, Component, EventTouch, input, Input, Label, Node, Sprite, Vec3 } from 'cc';
 import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
-import { PoolManager } from '../manager/PoolManager';
 import { Boss } from '../role/Boss';
 import { UiManager } from '../manager/UiManager';
 

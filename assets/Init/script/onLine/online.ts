@@ -6,6 +6,9 @@ import { UiManager } from "../manager/UiManager";
 import { Config } from "../data/Config";
 import { TipManager } from "../manager/TipManager";
 import { AudioMgr } from "../manager/AudioMgr";
+import { Messager } from "../manager/Messager";
+import { MainPanel } from "../panel/MainPanel";
+import { find } from "cc";
 const { ccclass, property } = _decorator;
 
 @ccclass( "online" )
@@ -49,11 +52,13 @@ export class online extends Component
             {
                 var tmpNum = GameData.Coin;
                 var targetNum = tmpNum + this.currentCount;
-                var ani = DOTweenAnimation.stepNum( UiManager.Instance.mainPanel.CoinTxt, tmpNum, 10, targetNum, 0, '', () =>
+
+                let targetTxt = find( 'Canvas/MainPanel' ).getComponent( MainPanel ).CoinTxt;
+                var ani = DOTweenAnimation.stepNum( targetTxt, tmpNum, 10, targetNum, 0, '', () =>
                 {
                     ani.stop();
                     GameData.Coin = targetNum;
-                    UiManager.Instance.mainPanel.CoinTxt.string = GameData.Coin.toString();
+                    targetTxt.string = GameData.Coin.toString();
                     this.clear();
                 } );
             } );

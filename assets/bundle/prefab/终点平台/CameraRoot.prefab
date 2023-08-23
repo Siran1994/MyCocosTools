@@ -80,7 +80,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 1.5,
-      "z": 6.4
+      "z": 8
     },
     "_lrot": {
       "__type__": "cc.Quat",
@@ -122,7 +122,7 @@
     "_fovAxis": 0,
     "_orthoHeight": 10,
     "_near": 1,
-    "_far": 1000,
+    "_far": 100,
     "_color": {
       "__type__": "cc.Color",
       "r": 51,
@@ -204,6 +204,7 @@
       "__id__": 0
     },
     "fileId": "f94LwVRzNCs5jbb2PmWNGf",
+    "instance": null,
     "targetOverrides": null
   }
 ]

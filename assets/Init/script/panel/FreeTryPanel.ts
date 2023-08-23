@@ -5,6 +5,8 @@ import { Messager } from '../manager/Messager';
 import { PoolManager } from '../manager/PoolManager';
 import { UiManager } from '../manager/UiManager';
 import { Config } from '../data/Config';
+import { MainPanel } from './MainPanel';
+import { find } from 'cc';
 
 const { ccclass, property } = _decorator;
 
@@ -29,8 +31,6 @@ export class FreeTryPanel extends Component
     @property( Label )
     HeroPower: Label = null;
 
-
-
     start ()
     {
         AudioMgr.Instance.奖励弹窗.Play();
@@ -41,8 +41,8 @@ export class FreeTryPanel extends Component
             Messager.Broadcast( 'ChangeDress', Config.PackageName );//换皮肤
             Messager.Broadcast( 'ChangePart', Config.PackageName );//设置当前目标英雄           
             Messager.Broadcast( 'CollectAll', true );
-            UiManager.Instance.mainPanel.autoStart();
-            UiManager.hidePage( this.name );
+            find( 'Canvas/MainPanel' ).getComponent( MainPanel ).autoStart();
+            UiManager.hidePage( Config.PanelName.FreeTryPanel );
 
         }, this );
         this.cancelBtn.node.on( Button.EventType.CLICK, () =>

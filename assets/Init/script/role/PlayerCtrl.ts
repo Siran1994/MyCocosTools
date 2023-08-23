@@ -1,7 +1,6 @@
 import { _decorator, Component, SkeletalAnimation, Node, ParticleSystem, Vec3, tween } from 'cc';
 import { Utils } from '../tool/Utils';
 import { GameManager } from '../manager/GameManager';
-import { UiManager } from '../manager/UiManager';
 import { AudioMgr } from '../manager/AudioMgr';
 import { DecorateCtrl } from './DecorateCtrl';
 import { PlayerState, HeroType, PropType } from '../data/Enum';
@@ -106,14 +105,14 @@ export class PlayerCtrl extends Component
             if ( GameManager.Instance.IsStart )
             {
 
-                if ( UiManager.Instance.gamePanel.isCollected )
+                if ( Config.isCollected )
                     this.Play( PlayerState.快跑 );
                 else
                     this.Play( PlayerState.慢跑 );
             }
             else
             {
-                if ( UiManager.Instance.IsFailed )
+                if ( GameManager.Instance.IsFailed )
                     this.Play( PlayerState.受击 );
                 else
                     this.Play( PlayerState.待机 );
@@ -218,7 +217,7 @@ export class PlayerCtrl extends Component
             AudioMgr.Instance.玩家受击.Play();
             Messager.Broadcast( 'updatePower', -power );
             Messager.Broadcast( 'showPartUi', heroType, propType, false );
-            UiManager.Instance.gamePanel.isCollected = false;
+            Config.isCollected = false;
             PlayerCtrl.Instance.ShowEffect( 3, true );
         }
     }

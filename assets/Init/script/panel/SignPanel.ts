@@ -8,6 +8,7 @@ import { TipManager } from '../manager/TipManager';
 import { UiManager } from '../manager/UiManager';
 import DateUtils from '../tool/DateUtils';
 import { SignItem } from '../item/SignItem';
+import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SignPanel' )
@@ -30,8 +31,9 @@ export class SignPanel extends Component
         this.closeBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.Instance.mainPanel.node.active = true;
-            UiManager.hidePage( this.node.name );
+            UiManager.hidePage( Config.PanelName.SignPanel );
+            UiManager.showPage( Config.PanelName.MainPanel );
+
         }, this );
 
         this.SignBtn.node.on( Button.EventType.CLICK, () =>

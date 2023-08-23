@@ -1,14 +1,5 @@
 import { _decorator, Component, Prefab, Node } from 'cc';
-import { AudioMgr } from './AudioMgr';
-import { GamePanel } from '../panel/GamePanel';
-import { PlayerState } from '../data/Enum';
-import { MainPanel } from '../panel/MainPanel';
-import { PlayerCtrl } from '../role/PlayerCtrl';
-import { GameManager } from './GameManager';
-import { Messager } from './Messager';
-import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
-import { GameData } from '../data/GameData';
 import { Config } from '../data/Config';
 import { find, Vec3 } from 'cc';
 import { instantiate } from 'cc';
@@ -23,8 +14,10 @@ export class UiManager extends Component
         UiManager.Instance = this;
     }
 
-    @property( MainPanel )
-    mainPanel: MainPanel = null;//主界面       
+    start ()
+    {
+        UiManager.showPage( Config.PanelName.SignPanel );
+    }
 
     /**pageMap容器 */
     private static pageMap: Map<string, Node> = new Map();
@@ -67,7 +60,7 @@ export class UiManager extends Component
                 node.parent = find( 'Canvas' );
                 node.position = Vec3.ZERO;
             }
-            callback && callback();
+            callback && callback( node );
         } else
         {
             console.error( `showPage fail: ${ key } not exsit in the pageMap` );

@@ -5,7 +5,6 @@ import { UiManager } from '../manager/UiManager';
 import { TipManager } from '../manager/TipManager';
 import { GameData } from '../data/GameData';
 import { PlayerPrefs } from '../data/PlayerPrefs';
-import { PoolManager } from '../manager/PoolManager';
 import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 
@@ -51,8 +50,8 @@ export class DrawPanel extends Component
         this.closeBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.Instance.mainPanel.node.active = true;
-            UiManager.hidePage( this.name );
+            UiManager.showPage( Config.PanelName.MainPanel );
+            UiManager.hidePage( Config.PanelName.DrawPanel );
         }, this );
 
         this.FreeGetBtn.node.on( Button.EventType.CLICK, () =>
@@ -209,4 +208,3 @@ export class DrawPanel extends Component
         }
     }
 }
-

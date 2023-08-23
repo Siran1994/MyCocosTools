@@ -32,12 +32,7 @@ export class MainPanel extends Component
     LvTips: Label;//关卡信息
 
     @property( Label )
-    CoinTxt: Label;//金币信息
-
-    onLoad ()
-    {
-        this.showSignPanel();
-    }
+    CoinTxt: Label;//金币信息   
 
     start () 
     {
@@ -47,29 +42,30 @@ export class MainPanel extends Component
         this.shopBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( 'ShopPanel' );
-            this.node.active = false;
+            UiManager.showPage( Config.PanelName.ShopPanel );
+            UiManager.hidePage( Config.PanelName.MainPanel );
         }, this );
 
         this.setBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( 'SettingPanel' );
+            UiManager.showPage( Config.PanelName.SettingPanel );
+            UiManager.hidePage( Config.PanelName.MainPanel );
         }, this );
 
         this.signBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( 'SignPanel' );
-            this.node.active = false;
+            UiManager.showPage( Config.PanelName.SignPanel );
+            UiManager.hidePage( Config.PanelName.MainPanel );
 
         }, this );
 
         this.drawBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( 'DrawPanel' );
-            this.node.active = false;
+            UiManager.showPage( Config.PanelName.DrawPanel );
+            UiManager.hidePage( Config.PanelName.MainPanel );
         }, this );
     }
 
@@ -86,27 +82,18 @@ export class MainPanel extends Component
     touchStart ( touch: EventTouch )
     {
         GameManager.Instance.IsStart = true;
-        this.node.active = false;
-        UiManager.Instance.gamePanel.node.active = true;
+        UiManager.hidePage( Config.PanelName.MainPanel );
+        UiManager.showPage( Config.PanelName.GamePanel );
         PlayerCtrl.Instance.Play( PlayerState.慢跑 );
         AudioMgr.Instance.游戏背景乐.playMusic();
         Messager.Broadcast( 'IsStart' );
     }
 
-    showSignPanel ()
-    {
-        if ( SignPanel.isCanSign() )
-        {
-            UiManager.showPage( 'SignPanel' );
-            this.node.active = false;
-        }
-    }
-
     autoStart ()
     {
         GameManager.Instance.IsStart = true;
-        this.node.active = false;
-        UiManager.Instance.gamePanel.node.active = true;
+        UiManager.hidePage( Config.PanelName.MainPanel );
+        UiManager.showPage( Config.PanelName.GamePanel );
         PlayerCtrl.Instance.Play( PlayerState.快跑 );
         AudioMgr.Instance.游戏背景乐.playMusic();
         Messager.Broadcast( 'IsStart' );

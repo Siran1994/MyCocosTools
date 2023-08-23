@@ -12,7 +12,9 @@ export class Config
 
     public static CameraLerp = 0.15//相机跟随插值
 
-    public static Speed = 6//玩家移动速度   
+    public static Speed = 6//玩家移动速度
+
+    public static isCollected = false;//是否集齐套装
 
     public static Rate = 1//结算奖励倍率 
 
@@ -28,6 +30,7 @@ export class Config
 
     public static PanelName =//自定义资源包名
         {
+            MainPanel: "MainPanel",//主界面
             GamePanel: "GamePanel",//游戏
             SettingPanel: "SettingPanel",//设置
             SignPanel: "SignPanel",//签到

@@ -98,9 +98,6 @@ export class GamePanel extends Component
     @property( Label )
     CoinTxt: Label;//金币信息
 
-    @property( { displayName: '是否收集齐', type: Boolean } )
-    isCollected: boolean = false;
-
     @property( { displayName: '集齐套装增加速度', type: Number } )
     AddSpeed: number = 6;
 
@@ -222,8 +219,8 @@ export class GamePanel extends Component
             this.isGetL_Arm = false;
             this.isGetR_Leg = false;
             this.isGetL_Leg = false;
-            this.isCollected = true;
-            this.CheckHeroCollect( this.isCollected );
+            Config.isCollected = true;
+            this.CheckHeroCollect( Config.isCollected );
         }
     }
 

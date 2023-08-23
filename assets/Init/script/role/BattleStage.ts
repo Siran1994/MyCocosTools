@@ -95,7 +95,7 @@ export class BattleStage extends Component
                 tween().call( () =>
                 {
                     //战斗开始
-                    UiManager.showPage( 'FinishPanel' );
+                    UiManager.showPage( Config.PanelName.FinishPanel );
                     GameManager.Instance.BossPower = GameManager.Instance.GetBossPower();
                     console.log( '当前Player战力是:' + GameManager.Instance.PlayerPower );
                     console.log( '当前boss战力是:' + GameManager.Instance.BossPower );
@@ -107,7 +107,7 @@ export class BattleStage extends Component
 
     bossFlyAni ()//Boss飞行动画
     {
-        let index = find( 'FinishPanel' ).getComponent( FinishPanel ).calculateDis();//获取飞行距离
+        let index = find( 'Canvas/FinishPanel' ).getComponent( FinishPanel ).calculateDis();//获取飞行距离
         let lastTime = 0.5 * index;
         GameManager.Instance.MainCamera.active = false;
         this.followCamera.active = true;

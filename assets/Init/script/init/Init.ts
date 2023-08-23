@@ -22,7 +22,6 @@ export class Init extends Component
     {
         await ResMgr.loadBundle( 'bundle', () =>
         {
-
             UiManager.loadPanel();
 
             if ( GameData.Lv == 0 || GameData.Lv == null )

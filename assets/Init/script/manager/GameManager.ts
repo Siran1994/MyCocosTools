@@ -22,7 +22,6 @@ export class GameManager extends Component
     protected onLoad (): void 
     {
         GameManager.Instance = this;
-        this.init();
     }
 
     @property( { displayName: '玩家', type: Node } )
@@ -61,6 +60,8 @@ export class GameManager extends Component
 
         this.SetCurrentHero();//设置当局收集英雄   
         this.ShowFreeTryPanel( GameData.Lv );
+
+        this.init();
     }
 
     onEnable ()
@@ -137,15 +138,13 @@ export class GameManager extends Component
 
     ShowFreeTryPanel ( Lv: number )
     {
-        if ( Lv > 4 )
+        if ( Lv >= 4 )
         {
             if ( Lv % 2 == 0 )
             {
-                let goinfo = null;
-                ResMgr.loadPrefab( Config.Path.FreeTryPanel, ( obj: Prefab ) =>
+                UiManager.showPage( Config.PanelName.FreeTryPanel, ( go: Node ) =>
                 {
-                    let go = PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
-                    goinfo = go.getComponent( FreeTryPanel );
+                    let goinfo = go.getComponent( FreeTryPanel );
                     Config.PackageName = '城市飞侠';
                     goinfo.ShowPackage( Config.PackageName );
                 } );

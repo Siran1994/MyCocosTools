@@ -15,6 +15,11 @@ export class RigidCharactorController extends Component
     _angle = 0;
     TargetPos = new Vec3();
 
+    protected start (): void
+    {
+        Config.Speed = 6;
+    }
+
     update ( deltaTime: number )
     {
         if ( GameManager.Instance.IsStart )

@@ -29,6 +29,7 @@ export class Loading extends Component
                 {
                     director.loadScene( targetlv, ( err, scene: any ) =>
                     {
+                        console.log( '加载完成!' );
                         callback();
                     } );
                 }
