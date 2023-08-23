@@ -1,5 +1,7 @@
 export class Config
 {
+
+    public static Coin = 0;
     public static GameFrame = 60;//游戏帧率
 
     public static Gravity = -10;//游戏重力
@@ -15,17 +17,40 @@ export class Config
     public static Rate = 1//结算奖励倍率 
 
     public static PackageName = '城市飞侠';
+
+    public static BundleName =//自定义资源包名
+        {
+            Ui: "panel",
+            Audio: "audio",
+            Prefab: "prefab",
+            Config: "config",
+        }
+
+    public static PanelName =//自定义资源包名
+        {
+            GamePanel: "GamePanel",//游戏
+            SettingPanel: "SettingPanel",//设置
+            SignPanel: "SignPanel",//签到
+            DrawPanel: "DrawPanel",//抽奖
+            ShopPanel: "ShopPanel",//商店
+            FinishPanel: "FinishPanel",//完成
+            FailedPanel: "ShopPanel",//失败
+            RewardPanel: "RewardPanel",//奖励
+            FreeTryPanel: "FreeTryPanel",//试用
+        }
+
+
     //本地化存储
     public static Path =
         {
-            ShopPanel: 'prefab/panel/ShopPanel',//商店
-            SettingPanel: 'prefab/panel/SettingPanel',//设置
-            SignPanel: 'prefab/panel/SignPanel',//签到
-            DrawPanel: 'prefab/panel/DrawPanel',//抽奖
-            FinishPanel: 'prefab/panel/FinishPanel',//结束
-            FailedPanel: 'prefab/panel/FailedPanel',//失败
-            RewardPanel: 'prefab/panel/RewardPanel',//奖励
-            FreeTryPanel: 'prefab/panel/FreeTryPanel',//试用
+            //ShopPanel: 'prefab/panel/ShopPanel',
+            // SettingPanel: 'prefab/panel/SettingPanel',//设置
+            //SignPanel: 'prefab/panel/SignPanel',//签到
+            // DrawPanel: 'prefab/panel/DrawPanel',//抽奖
+            //FinishPanel: 'prefab/panel/FinishPanel',//结束
+            // FailedPanel: 'prefab/panel/FailedPanel',//失败
+            //RewardPanel: 'prefab/panel/RewardPanel',//奖励
+            //FreeTryPanel: 'prefab/panel/FreeTryPanel',//试用
 
             Coin: 'prefab/ui/Coin',//金币
             Loading: 'prefab/Loading',//加载
@@ -74,14 +99,6 @@ export class Config
             Fail: 'fail',
             Dead: 'dead',
             Fly: 'fly',
-        }
-
-    /**自定义资源包名 */
-    public static BundleName =
-        {
-            Ui: "ui",//Ui         
-            Audio: "audio",//音频音效
-            Prefab: "prefab",//预制体
         }
 
     //平台

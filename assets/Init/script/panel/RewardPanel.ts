@@ -7,6 +7,7 @@ import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
 import { PoolManager } from '../manager/PoolManager';
 import { Utils } from '../tool/Utils';
+import { UiManager } from '../manager/UiManager';
 
 const { ccclass, property } = _decorator;
 
@@ -112,7 +113,7 @@ export class RewardPanel extends Component
 
         Utils.DelayCallBack( 2, () =>
         {
-            PoolManager.putNode( this.node );
+            UiManager.hidePage( this.name );
             GameManager.Instance.NextLevel( true, true );
         } );
         Utils.DelayCallBack( 1, () =>

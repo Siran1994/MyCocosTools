@@ -3,6 +3,7 @@ import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
 import { PoolManager } from '../manager/PoolManager';
 import { Boss } from '../role/Boss';
+import { UiManager } from '../manager/UiManager';
 
 const { ccclass, property } = _decorator;
 
@@ -72,7 +73,7 @@ export class FinishPanel extends Component
          this.red.fillStart = 1;
          Messager.Broadcast( 'isAtking', 2 );
          this.isfinal = true;
-         PoolManager.putNode( this.node );
+         UiManager.hidePage( this.name );
       }
       else if ( this.red.fillStart <= 0 || this.blue.fillStart <= 0 )
       {

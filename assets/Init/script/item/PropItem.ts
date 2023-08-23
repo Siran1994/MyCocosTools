@@ -36,21 +36,21 @@ export class PropItem extends Component
             this.node.parent.destroy();
         } );
 
-        // tween( this.node )
-        //     .sequence
-        //     (
-        //         tween().to( 2,
-        //             {
-        //                 position: new Vec3( this.node.position.x, this.posY, this.node.position.z ),               // 位置缓动                           
-        //             },
-        //             { easing: "linear" } ),
-        //         tween().to( 2,
-        //             {
-        //                 position: new Vec3( this.node.position.x, this.posY - 0.2, this.node.position.z ),               // 位置缓动   
-        //             },
-        //             { easing: "linear" } ),
-        //     )
-        //     .repeatForever()
-        //     .start();
+        tween( this.node )
+            .sequence
+            (
+                tween().to( 2,
+                    {
+                        position: new Vec3( this.node.position.x, this.posY, this.node.position.z ),               // 位置缓动                           
+                    },
+                    { easing: "linear" } ),
+                tween().to( 2,
+                    {
+                        position: new Vec3( this.node.position.x, this.posY - 0.2, this.node.position.z ),               // 位置缓动   
+                    },
+                    { easing: "linear" } ),
+            )
+            .repeatForever()
+            .start();
     }
 }

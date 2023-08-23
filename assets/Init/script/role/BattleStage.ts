@@ -11,6 +11,7 @@ import { Utils } from '../tool/Utils';
 import { Boss } from './Boss';
 import { PlayerCtrl } from './PlayerCtrl';
 import { Config } from '../data/Config';
+import { UiManager } from '../manager/UiManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'BattleStage' )
@@ -65,7 +66,7 @@ export class BattleStage extends Component
     {
         PlayerCtrl.Instance.ShowEffect( 3, true );
         PlayerCtrl.Instance.Play( PlayerState.战架 );
-        PoolManager.putNodeByName( 'Canvas/GamePanel' );
+        UiManager.hidePage( 'GamePanel' );
         GameManager.Instance.target.worldPosition = this.PlayerPos.worldPosition;
         Utils.DelayCallBack( 0.1, () =>
         {
@@ -94,10 +95,7 @@ export class BattleStage extends Component
                 tween().call( () =>
                 {
                     //战斗开始
-                    ResMgr.loadPrefab( Config.Path.FinishPanel, ( obj: Prefab ) =>
-                    {
-                        PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
-                    } );
+                    UiManager.showPage( 'FinishPanel' );
                     GameManager.Instance.BossPower = GameManager.Instance.GetBossPower();
                     console.log( '当前Player战力是:' + GameManager.Instance.PlayerPower );
                     console.log( '当前boss战力是:' + GameManager.Instance.BossPower );
@@ -109,7 +107,7 @@ export class BattleStage extends Component
 
     bossFlyAni ()//Boss飞行动画
     {
-        let index = PoolManager.getNodeInfo( 'FinishPanel' ).getComponent( FinishPanel ).calculateDis();//获取飞行距离
+        let index = find( 'FinishPanel' ).getComponent( FinishPanel ).calculateDis();//获取飞行距离
         let lastTime = 0.5 * index;
         GameManager.Instance.MainCamera.active = false;
         this.followCamera.active = true;

@@ -13,7 +13,6 @@ const { ccclass, property } = _decorator;
 @ccclass( 'SignPanel' )
 export class SignPanel extends Component
 {
-
     @property( Button )
     closeBtn: Button;//关闭按钮
 
@@ -26,21 +25,13 @@ export class SignPanel extends Component
     @property( SignItem )
     signItems: SignItem[] = [];
 
-    protected onEnable (): void
-    {
-        if ( SignPanel.isCanSign() == false )
-        {
-            PoolManager.putNode( this.node );
-        }
-    }
-
     start ()
     {
         this.closeBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
             UiManager.Instance.mainPanel.node.active = true;
-            PoolManager.putNode( this.node );
+            UiManager.hidePage( this.node.name );
         }, this );
 
         this.SignBtn.node.on( Button.EventType.CLICK, () =>

@@ -3,7 +3,6 @@ import { PlayerPrefs } from '../data/PlayerPrefs';
 import { AudioMgr } from '../manager/AudioMgr';
 import { PoolManager } from '../manager/PoolManager';
 import { UiManager } from '../manager/UiManager';
-
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SettingPanel' )
@@ -26,7 +25,7 @@ export class SettingPanel extends Component
         {
             AudioMgr.Instance.通用按钮.Play();
             UiManager.Instance.mainPanel.node.active = true;
-            PoolManager.putNode( this.node );
+            UiManager.hidePage( this.name );
         }, this );
 
         this.AudioBtn.node.on( Toggle.EventType.TOGGLE, ( event: Toggle ) =>

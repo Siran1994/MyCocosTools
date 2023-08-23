@@ -42,14 +42,13 @@ export class FreeTryPanel extends Component
             Messager.Broadcast( 'ChangePart', Config.PackageName );//设置当前目标英雄           
             Messager.Broadcast( 'CollectAll', true );
             UiManager.Instance.mainPanel.autoStart();
-            PoolManager.putNode( this.node );
+            UiManager.hidePage( this.name );
 
         }, this );
         this.cancelBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            PoolManager.putNode( this.node );
-
+            UiManager.hidePage( this.name );
         }, this );
     }
 

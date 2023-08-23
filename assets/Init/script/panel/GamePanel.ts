@@ -106,7 +106,6 @@ export class GamePanel extends Component
 
     @property( Node )
     target: Node = null;
-    public coin: number = 0;
 
     isGetHead = false;
     isGetBody = false;
@@ -117,7 +116,7 @@ export class GamePanel extends Component
 
     init () 
     {
-        this.coin = 0;
+        Config.Coin = 0;
         this.LvTxt.string = '关卡' + GameData.Lv.toString();
         this.CoinTxt.string = '0';
 
@@ -131,6 +130,11 @@ export class GamePanel extends Component
         this.isGetR_Leg = false;
         this.isGetL_Leg = false;
         this.initPartUi();
+
+        ResMgr.loadPrefab( Config.Path.Coin, ( obj: Prefab ) =>
+        {
+            PoolManager.prePool( obj, 40 );
+        } );
     }
 
     initPartUi ()
@@ -302,11 +306,11 @@ export class GamePanel extends Component
 
     showCoin ( addnum: number )
     {
-        var tmpNum = this.coin;
+        var tmpNum = Config.Coin;
         var targetNum = tmpNum + addnum;
         if ( targetNum < 0 )
         {
-            this.coin = 0;
+            Config.Coin = 0;
             this.CoinTxt.string = '0';
             Messager.Broadcast( 'gameOver', true );
             return;
@@ -314,10 +318,10 @@ export class GamePanel extends Component
         var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 1, targetNum, 0, '', () =>
         {
             ani.stop();
-            this.coin = targetNum;
+            Config.Coin = targetNum;
             Utils.DelayCallBack( 1, () =>
             {
-                this.CoinTxt.string = this.coin.toString();
+                this.CoinTxt.string = Config.Coin.toString();
             } );
         } );
     }

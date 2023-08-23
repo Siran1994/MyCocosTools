@@ -7,6 +7,7 @@ import { PoolManager } from '../manager/PoolManager';
 import { Loading } from './Loading';
 import { Config } from '../data/Config';
 import { PlatformMgr } from '../manager/PlatformMgr';
+import { UiManager } from '../manager/UiManager';
 const { ccclass } = _decorator;
 
 @ccclass( 'Init' )
@@ -21,8 +22,12 @@ export class Init extends Component
     {
         await ResMgr.loadBundle( 'bundle', () =>
         {
+
+            UiManager.loadPanel();
+
             if ( GameData.Lv == 0 || GameData.Lv == null )
                 GameData.Lv = 1;
+
             ResMgr.loadResource( Config.Path.Loading, ( obj: Prefab ) =>
             {
                 let go = PoolManager.getNode( obj, this.node ) as Node;

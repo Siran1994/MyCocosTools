@@ -10,6 +10,8 @@ import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
 import { GameData } from '../data/GameData';
 import { Config } from '../data/Config';
+import { find, Vec3 } from 'cc';
+import { instantiate } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'UiManager' )
@@ -22,45 +24,130 @@ export class UiManager extends Component
     }
 
     @property( MainPanel )
-    mainPanel: MainPanel = null;//主界面
+    mainPanel: MainPanel = null;//主界面       
 
-    @property( GamePanel )
-    gamePanel: GamePanel = null;//游戏界面
+    /**pageMap容器 */
+    private static pageMap: Map<string, Node> = new Map();
 
-    @property( { displayName: '游戏状态', type: Boolean } )
-    IsFailed: boolean = false;//是否失败
-
-    onEnable ()
+    /**
+        * 加载page界面
+        * @param callback 回调函数
+        */
+    public static loadPanel ()
     {
-        Messager.AddListener( 'gameOver', this, this.GameOver );
-    }
-
-    onDisable ()
-    {
-        Messager.RemoveListener( 'gameOver', this, this.GameOver );
-    }
-
-    GameOver ( isfailed: boolean )
-    {
-        this.IsFailed = isfailed;
-        if ( isfailed ) //游戏失败
+        ResMgr.loadDir( "panel", 'prefab/panel', Prefab, ( completedCount, totalCount ) =>
         {
-            GameManager.Instance.IsStart = false;
-            PlayerCtrl.Instance.Play( PlayerState.死亡 );
-            ResMgr.loadPrefab( Config.Path.FailedPanel, ( obj: Prefab ) =>
-            {
-                PoolManager.getNode( obj, this.node ) as Node;
-            } );
-            AudioMgr.Instance.失败结算.Play();
-        }
-        else //游戏通关
+            console.log( '完成个数:' + completedCount + '总数:' + totalCount );
+        }, ( assets: Prefab[] ) =>
         {
-            AudioMgr.Instance.胜利结算.Play();
-            GameData.Coin += this.gamePanel.coin * Config.Rate;
-            ResMgr.loadPrefab( Config.Path.RewardPanel, ( obj: Prefab ) =>
+            assets.forEach( asset =>
             {
-                PoolManager.getNode( obj, this.node ) as Node;
+                console.log( "加载资源界面和弹窗" );
+                //if ( asset.name.includes( "panel" ) )
+                this.setPage( asset.name, instantiate( asset ) );
             } );
+        } );
+    }
+
+
+    /**
+       * 展示page界面
+       * @param key  page名称
+       * @param callback  回调函数
+       */
+    public static showPage ( key: string, callback?: Function ): void
+    {
+        console.log( `showPage ${ key }` );
+
+        if ( this.pageMap.has( key ) )
+        {
+            let node: Node = this.pageMap.get( key );
+            if ( node.parent == null )
+            {
+                node.parent = find( 'Canvas' );
+                node.position = Vec3.ZERO;
+            }
+            callback && callback();
+        } else
+        {
+            console.error( `showPage fail: ${ key } not exsit in the pageMap` );
+
         }
     }
+
+    /**
+    * 隐藏page界面
+    * @param key  page名称
+    */
+    public static hidePage ( key: string ): void
+    {
+        if ( this.pageMap.has( key ) )
+        {
+            console.log( `hidePage ${ key }` );
+            let node: Node = this.pageMap.get( key );
+
+            if ( node.parent != null )
+                node.parent = null;
+        } else
+        {
+            console.warn( `hidePage fail: ${ key } not exsit in the pageMap` );
+        }
+    }
+
+    /**
+        *  添加page界面
+        * @param key   page名称
+        * @param value page界面
+        */
+    public static setPage ( key: string, value: Node ): void
+    {
+        if ( this.pageMap.has( key ) )
+        {
+            console.warn( `set fail: ${ key } already exsit in the pageMap` );
+        } else
+        {
+            // console.log(`set ${key} in the pageMap`);
+            this.pageMap.set( key, value );
+        }
+    }
+
+    /**
+     * 获取page界面
+     * @param key  page名称
+     */
+    public static getPage ( key: string ): Node
+    {
+        if ( this.pageMap.has( key ) )
+        {
+            // console.log(`get ${key} in the pageMap`);
+            return this.pageMap.get( key );
+        } else
+        {
+            console.warn( `get fail: ${ key } not exsit in the pageMap` );
+        }
+    }
+
+    /**
+        * 删除page界面
+        * @param key  page名称
+        */
+    public static deletePage ( key: string ): void
+    {
+        if ( this.pageMap.has( key ) )
+        {
+            console.log( `delete ${ key } in the pageMap` );
+            this.pageMap.delete( key );
+        } else
+        {
+            console.warn( `delete fail: ${ key } not exsit in the pageMap` );
+        }
+    }
+
+    /**清空pageMap */
+    public static clearPage (): void
+    {
+        this.pageMap.clear();
+        console.log( "clear pageMap" );
+    }
+
 }

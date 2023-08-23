@@ -34,10 +34,10 @@ export class MainPanel extends Component
     @property( Label )
     CoinTxt: Label;//金币信息
 
-    // onLoad ()
-    // {
-    //     this.showSignPanel();
-    // }
+    onLoad ()
+    {
+        this.showSignPanel();
+    }
 
     start () 
     {
@@ -47,29 +47,20 @@ export class MainPanel extends Component
         this.shopBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            ResMgr.loadPrefab( Config.Path.ShopPanel, ( obj: Prefab ) =>
-            {
-                PoolManager.getNode( obj, this.node.parent ) as Node;
-            } );
+            UiManager.showPage( 'ShopPanel' );
             this.node.active = false;
         }, this );
 
         this.setBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            ResMgr.loadPrefab( Config.Path.SettingPanel, ( obj: Prefab ) =>
-            {
-                PoolManager.getNode( obj, this.node.parent ) as Node;
-            } );
+            UiManager.showPage( 'SettingPanel' );
         }, this );
 
         this.signBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            ResMgr.loadPrefab( Config.Path.SignPanel, ( obj: Prefab ) =>
-            {
-                PoolManager.getNode( obj, this.node.parent ) as Node;
-            } );
+            UiManager.showPage( 'SignPanel' );
             this.node.active = false;
 
         }, this );
@@ -77,10 +68,7 @@ export class MainPanel extends Component
         this.drawBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            ResMgr.loadPrefab( Config.Path.DrawPanel, ( obj: Prefab ) =>
-            {
-                PoolManager.getNode( obj, this.node.parent ) as Node;
-            } );
+            UiManager.showPage( 'DrawPanel' );
             this.node.active = false;
         }, this );
     }
@@ -109,10 +97,7 @@ export class MainPanel extends Component
     {
         if ( SignPanel.isCanSign() )
         {
-            ResMgr.loadPrefab( Config.Path.SignPanel, ( obj: Prefab ) =>
-            {
-                PoolManager.getNode( obj, this.node.parent ) as Node;
-            } );
+            UiManager.showPage( 'SignPanel' );
             this.node.active = false;
         }
     }

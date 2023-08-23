@@ -52,7 +52,7 @@ export class DrawPanel extends Component
         {
             AudioMgr.Instance.通用按钮.Play();
             UiManager.Instance.mainPanel.node.active = true;
-            PoolManager.putNode( this.node );
+            UiManager.hidePage( this.name );
         }, this );
 
         this.FreeGetBtn.node.on( Button.EventType.CLICK, () =>

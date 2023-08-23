@@ -28,7 +28,7 @@ export class ShopPanel extends Component
         {
             AudioMgr.Instance.通用按钮.Play();
             UiManager.Instance.mainPanel.node.active = true;
-            PoolManager.putNode( this.node );
+            UiManager.hidePage( this.name );
         }, this );
 
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>

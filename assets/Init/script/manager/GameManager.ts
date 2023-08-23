@@ -1,5 +1,5 @@
 import { _decorator, Component, director, find, Node, Prefab } from 'cc';
-import { HeroType } from '../data/Enum';
+import { HeroType, PlayerState } from '../data/Enum';
 import { GameData } from '../data/GameData';
 import { Loading } from '../init/Loading';
 import { FreeTryPanel } from '../panel/FreeTryPanel';
@@ -9,6 +9,9 @@ import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
 import { Config } from '../data/Config';
 import { DeviceManager } from '../game/DeviceManager';
+import { PlayerCtrl } from '../role/PlayerCtrl';
+import { AudioMgr } from './AudioMgr';
+import { UiManager } from './UiManager';
 
 const { ccclass, property } = _decorator;
 
@@ -29,7 +32,10 @@ export class GameManager extends Component
     MainCamera: Node = null;
 
     @property( { displayName: '游戏状态', type: Boolean } )
-    IsStart: boolean = false;//是否开始游戏      
+    IsStart: boolean = false;//是否开始游戏
+
+    @property( { displayName: '游戏状态', type: Boolean } )
+    IsFailed: boolean = false;//是否失败
 
     @property( { displayName: '当前目标英雄', type: String } )
     MainHero: string = '';
@@ -45,7 +51,6 @@ export class GameManager extends Component
         console.log( DeviceManager.Instance.getGpuInfo() );
     }
 
-
     start ()
     {
         this.node.scene.autoReleaseAssets = false;
@@ -57,6 +62,35 @@ export class GameManager extends Component
         this.SetCurrentHero();//设置当局收集英雄   
         this.ShowFreeTryPanel( GameData.Lv );
     }
+
+    onEnable ()
+    {
+        Messager.AddListener( 'gameOver', this, this.GameOver );
+    }
+
+    onDisable ()
+    {
+        Messager.RemoveListener( 'gameOver', this, this.GameOver );
+    }
+
+    GameOver ( isfailed: boolean )
+    {
+        this.IsFailed = isfailed;
+        if ( isfailed ) //游戏失败
+        {
+            GameManager.Instance.IsStart = false;
+            PlayerCtrl.Instance.Play( PlayerState.死亡 );
+            UiManager.showPage( 'FailedPanel' );
+            AudioMgr.Instance.失败结算.Play();
+        }
+        else //游戏通关
+        {
+            AudioMgr.Instance.胜利结算.Play();
+            GameData.Coin += Config.Coin * Config.Rate;
+            UiManager.showPage( 'RewardPanel' );
+        }
+    }
+
 
     NextLevel ( isNextLv = false, isShowProgress = false )
     {

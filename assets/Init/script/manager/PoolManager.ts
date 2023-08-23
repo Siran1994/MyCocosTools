@@ -53,19 +53,6 @@ export class PoolManager
         }
     }
 
-    public static getNodeInfo ( name: string )
-    {
-        let node: Node;
-        if ( this.dictPool.hasOwnProperty( name ) )
-        {
-            if ( this.dictPrefab.hasOwnProperty( name ) )
-                node = this.dictPrefab[ name ].data as Node;
-        }
-        else
-            node = null;
-        return node;
-    }
-
     public static putNode ( node: Node ) //将对应节点放回对象池中
     {
         let name = node.name;
@@ -78,11 +65,6 @@ export class PoolManager
             this.dictPool[ name ] = pool;
         }
         pool.put( node );
-    }
-
-    public static putNodeByName ( name: string )//将对应节点放回对象池中
-    {
-        this.putNode( find( name ) );
     }
 
     public static clearPool ( name: string )//清理指定对象池

@@ -3030,6 +3030,7 @@
     "target": null,
     "MainCamera": null,
     "IsStart": false,
+    "IsFailed": false,
     "MainHero": "",
     "_id": "47khxSo4RFuYKTyvpTnAt3"
   },

@@ -1,5 +1,6 @@
+import { AssetManager, Prefab, assetManager, SpriteAtlas, SpriteFrame, AudioClip } from 'cc';
+import { Asset } from 'cc';
 import { resources } from 'cc';
-import { _decorator, assetManager, AssetManager, Prefab, SpriteAtlas, AudioClip, SpriteFrame } from 'cc';
 export type ICallback<T = any> = ( bundle: AssetManager.Bundle ) => void;
 export type IcallBack = ( go: Prefab ) => void;
 export class ResMgr  
@@ -106,5 +107,32 @@ export class ResMgr
             }
             onComplete( res );
         } )
+    }
+
+    public static async loadDir ( name: string, paths: string, type: typeof Prefab, progressCallback?: Function, completedCallback?: Function )
+    {
+        let bundle: AssetManager.Bundle = this.m_bundle;
+        if ( bundle )
+        {
+            bundle.loadDir( paths, type, ( completedCount: number, totalCount: number ) =>
+            {
+                progressCallback && progressCallback( completedCount, totalCount );
+            }, ( error: Error, assets: Asset[] ) =>
+            {
+                if ( error )
+                    console.log( error.message );
+
+                if ( assets.length == 0 )
+                    console.log( `Bundle ${ bundle.name } doesn't contain ${ paths }` );
+
+                assets.forEach( asset =>
+                {
+                    console.log( `load ${ asset.name } completed` );
+                } )
+                completedCallback && completedCallback( assets );
+            } )
+        }
+        else
+            console.warn( `load ${ name } bundle first` );
     }
 }
