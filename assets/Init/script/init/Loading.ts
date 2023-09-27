@@ -1,4 +1,5 @@
-import { _decorator, Component, director, Label, ProgressBar, SceneAsset } from 'cc';
+import { Vec3 } from 'cc';
+import { _decorator, Component, director, Label, ProgressBar, SceneAsset, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'Loading' )
@@ -10,7 +11,10 @@ export class Loading extends Component
     @property( { type: Label } )
     m_progresstxt: Label = null!;
 
-    public showProgress ( targetlv: string, callback: Function )
+    // @property( Node )
+    // tank: Node = null;
+
+    public showProgress ( targetlv: string, cb?: Function )
     {
         // 预加载场景资源
         director.preloadScene( targetlv, ( completedCount: number, totalCount: number, item: any ) =>
@@ -19,6 +23,7 @@ export class Loading extends Component
             this.m_progress.progress = completedCount / totalCount;
 
             this.m_progresstxt.string = '加载中：' + Math.floor( this.m_progress.progress * 100 ) + '%';
+            // this.tank.position = new Vec3( 540 * this.m_progress.progress - 320, this.tank.position.y );
         },
             ( error: Error, sceneAsset: SceneAsset ) =>
             {
@@ -29,8 +34,7 @@ export class Loading extends Component
                 {
                     director.loadScene( targetlv, ( err, scene: any ) =>
                     {
-                        console.log( '加载完成!' );
-                        callback();
+                        cb && cb();
                     } );
                 }
             } );

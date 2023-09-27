@@ -1,17 +1,16 @@
-import { _decorator, Button, Component } from 'cc';
+import { _decorator, Button } from 'cc';
 import { Label } from 'cc';
-import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { GameData } from '../data/GameData';
 import { AudioMgr } from '../manager/AudioMgr';
-import { Messager } from '../manager/Messager';
+import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { UiManager } from '../manager/UiManager';
-import { Config } from '../data/Config';
-
+import { Messager } from '../manager/Messager';
+import { BasePanel } from './BasePanel';
 
 const { ccclass, property } = _decorator;
 
 @ccclass( 'ShopPanel' )
-export class ShopPanel extends Component 
+export class ShopPanel extends BasePanel 
 {
     @property( Label )
     CoinTxt: Label;//金币信息
@@ -22,13 +21,18 @@ export class ShopPanel extends Component
     @property( Button )
     AddCoinBtn: Button;//关闭
 
+    init ()
+    {
+        this.CoinTxt.string = GameData.Coin.toString();
+    }
+
     start () 
     {
         this.CloseBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( Config.PanelName.MainPanel );
-            UiManager.hidePage( Config.PanelName.ShopPanel );
+            UiManager.Instance.mainPanel.node.active = true;
+            this.HidePanel();
         }, this );
 
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
@@ -47,8 +51,8 @@ export class ShopPanel extends Component
 
     onEnable ()
     {
+        this.init();
         Messager.AddListener( 'CoinUpdate', this, this.UpdateCoin );
-        this.CoinTxt.string = GameData.Coin.toString();
     }
 
     onDisable ()

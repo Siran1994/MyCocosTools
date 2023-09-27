@@ -1,4 +1,4 @@
-import { Label, ProgressBar, Sprite, tween, Vec3 } from "cc";
+import { Label, ProgressBar, Sprite, tween, Vec3, Node } from "cc";
 
 export default class DOTweenAnimation
 {
@@ -82,13 +82,17 @@ export default class DOTweenAnimation
      * @param range                 回弹幅度
      * @param delayTime             停顿时间
      */
-    public static move_Left_Right ( target, duration: number, startVal: Vec3, posXC_Left: number, posXC_right: number, delayTime: number )
+    public static move_Left_Right ( target, duration: number, startVal: Vec3, posXC_Left: number, posXC_right: number, delayTime: number, fun?: Function )
     {
         return tween( target )
             .sequence(
                 tween().to( duration, { position: new Vec3( posXC_Left, startVal.y ) } ),
                 tween().to( duration, { position: new Vec3( posXC_right, startVal.y ) } ),
-                tween().delay( delayTime )
+                tween().delay( delayTime ),
+                tween().call( () =>
+                {
+                    fun();
+                } )
             )
             .repeatForever()
             .start()
@@ -251,5 +255,16 @@ export default class DOTweenAnimation
             )
             .repeatForever()
             .start()
+    }
+
+    public static ScaleLoop ( target: Node, toScale: Vec3, bcakScale: Vec3, toTime: number = 0.12, backTime: number = 0.1 )
+    {
+        tween( target )
+            .sequence
+            (
+                tween().to( toTime, { scale: toScale }, { easing: "linear" } ),
+                tween().to( backTime, { scale: bcakScale }, { easing: "linear" } ),
+            )
+            .start();
     }
 }

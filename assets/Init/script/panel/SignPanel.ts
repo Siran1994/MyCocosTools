@@ -1,18 +1,19 @@
-import { _decorator, Button, Component } from 'cc';
-import { GameData } from '../data/GameData';
-import { PlayerPrefs } from '../data/PlayerPrefs';
+import { _decorator, Button, sys } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
-import { Messager } from '../manager/Messager';
-import { PoolManager } from '../manager/PoolManager';
-import { TipManager } from '../manager/TipManager';
 import { UiManager } from '../manager/UiManager';
-import DateUtils from '../tool/DateUtils';
 import { SignItem } from '../item/SignItem';
+import DateUtils from '../tool/DateUtils';
+import { GameData } from '../data/GameData';
+import { TipManager } from '../manager/TipManager';
+import { PlayerPrefs } from '../data/PlayerPrefs';
+import { Messager } from '../manager/Messager';
+import { BasePanel } from './BasePanel';
 import { Config } from '../data/Config';
+import { SpriteManager } from '../manager/SpriteManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SignPanel' )
-export class SignPanel extends Component
+export class SignPanel extends BasePanel
 {
     @property( Button )
     closeBtn: Button;//关闭按钮
@@ -31,32 +32,27 @@ export class SignPanel extends Component
         this.closeBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.hidePage( Config.PanelName.SignPanel );
-            UiManager.showPage( Config.PanelName.MainPanel );
-
+            UiManager.Instance.mainPanel.node.active = true;
+            this.HidePanel();
         }, this );
 
         this.SignBtn.node.on( Button.EventType.CLICK, () =>
         {
-            if ( SignPanel.isCanSign() )
-                AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.通用按钮.Play();
             this.DoSign( false );
         }, this );
 
         this.Get2XBtn.node.on( Button.EventType.CLICK, () =>
         {
-            if ( SignPanel.isCanSign() )
-                AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.点击广告按钮.Play();
             this.DoSign( true );
         }, this );
-
-        PlayerPrefs.SetInt( 'signDate', DateUtils.getDate().day + 1 );
     }
 
 
     DoSign ( isGet2x = false )
     {
-        if ( SignPanel.isCanSign() )
+        if ( this.isCanSign() )
         {
             Messager.Broadcast( 'SignItem', PlayerPrefs.GetInt( 'signDay', 1 ) );
             PlayerPrefs.SetInt( 'signDay', PlayerPrefs.GetInt( 'signDay', 1 ) + 1 );
@@ -70,7 +66,7 @@ export class SignPanel extends Component
 
     }
 
-    static isCanSign ()
+    isCanSign ()
     {
         if ( PlayerPrefs.GetInt( 'signDate', 0 ) != DateUtils.getDate().day )
             return true;
@@ -80,7 +76,11 @@ export class SignPanel extends Component
 
     GetReward ( isGet2x = false )
     {
-        var str = this.signItems[ PlayerPrefs.GetInt( 'signDay', 1 ) - 2 ].rewardtxt.string;
+        let str = '';
+        if ( sys.platform == sys.Platform.VIVO_MINI_GAME )
+            str = this.signItems[ PlayerPrefs.GetInt( 'signDay', 1 ) - 1 ].rewardtxt.string;
+        else
+            str = this.signItems[ PlayerPrefs.GetInt( 'signDay', 1 ) - 2 ].rewardtxt.string;
         let coin = 0;
         switch ( str )
         {
@@ -89,48 +89,43 @@ export class SignPanel extends Component
                 if ( isGet2x )
                     coin *= 2;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
-            case '城市飞侠':
-                PlayerPrefs.SetBool( "城市飞侠" + 'UnLocked', true );
-                TipManager.Instance.showTips( '恭喜您获得城市飞侠!' );
+            case '美女电视人':
+                PlayerPrefs.SetBool( "美女电视人" + 'UnLocked', true );
+                TipManager.Instance.showTips( '恭喜您获得美女电视人!' );
                 break;
             case '500':
                 coin = 500;
                 if ( isGet2x )
                     coin *= 2;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case '1000':
                 coin = 1000;
                 if ( isGet2x )
                     coin *= 2;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case '1500':
                 coin = 1500;
                 if ( isGet2x )
                     coin *= 2;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case '2000':
                 coin = 2000;
                 if ( isGet2x )
                     coin *= 2;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
-            case '黑液人':
-                PlayerPrefs.SetBool( "黑液人" + 'UnLocked', true );
-                TipManager.Instance.showTips( '恭喜您获得黑液人!' );
+            case '黄电视人':
+                PlayerPrefs.SetBool( "黄电视人" + 'UnLocked', true );
+                TipManager.Instance.showTips( '恭喜您获得黄电视人!' );
                 break;
         }
     }

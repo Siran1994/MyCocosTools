@@ -1,13 +1,12 @@
 import { _decorator, Button, Component, Toggle } from 'cc';
-import { PlayerPrefs } from '../data/PlayerPrefs';
 import { AudioMgr } from '../manager/AudioMgr';
-import { PoolManager } from '../manager/PoolManager';
 import { UiManager } from '../manager/UiManager';
-import { Config } from '../data/Config';
+import { GameData } from '../data/GameData';
+import { BasePanel } from './BasePanel';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SettingPanel' )
-export class SettingPanel extends Component 
+export class SettingPanel extends BasePanel 
 {
     @property( Button )
     closeBtn: Button;//关闭按钮
@@ -20,21 +19,19 @@ export class SettingPanel extends Component
 
     start () 
     {
-        this.init();
-
         this.closeBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( Config.PanelName.MainPanel );
-            UiManager.hidePage( Config.PanelName.SettingPanel );
+            UiManager.Instance.mainPanel.node.active = true;
+            this.HidePanel();
         }, this );
 
         this.AudioBtn.node.on( Toggle.EventType.TOGGLE, ( event: Toggle ) =>
         {
             if ( event.isChecked )
-                PlayerPrefs.SetInt( 'soundOn', 1 );
+                GameData.SoundOn = 1;
             else
-                PlayerPrefs.SetInt( 'soundOn', 0 );
+                GameData.SoundOn = 0;
             AudioMgr.Instance.UpdateState();
             AudioMgr.Instance.通用按钮.Play();
         }, this );
@@ -42,22 +39,27 @@ export class SettingPanel extends Component
         this.MusicBtn.node.on( Toggle.EventType.TOGGLE, ( event: Toggle ) =>
         {
             if ( event.isChecked )
-                PlayerPrefs.SetInt( 'musicOn', 1 );
+                GameData.MusicOn = 1;
             else
-                PlayerPrefs.SetInt( 'musicOn', 0 );
+                GameData.MusicOn = 0;
             AudioMgr.Instance.UpdateState();
             AudioMgr.Instance.通用按钮.Play();
         }, this );
     }
 
+    onEnable ()
+    {
+        this.init();
+    }
+
     init ()
     {
-        if ( PlayerPrefs.GetInt( 'soundOn', 1 ) == 1 )
+        if ( GameData.SoundOn == 1 )
             this.AudioBtn.isChecked = true;
         else
             this.AudioBtn.isChecked = false;
 
-        if ( PlayerPrefs.GetInt( 'musicOn', 1 ) == 1 )
+        if ( GameData.MusicOn == 1 )
             this.MusicBtn.isChecked = true;
         else
             this.MusicBtn.isChecked = false;

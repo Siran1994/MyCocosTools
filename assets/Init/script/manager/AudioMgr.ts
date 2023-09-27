@@ -1,9 +1,8 @@
 import { _decorator, AudioSource, Component, director, instantiate, Node, Prefab } from 'cc';
-import { PlayerPrefs } from '../data/PlayerPrefs';
-import { AudioClipExit } from '../tool/AudioClipExit';
 import { ResMgr } from './ResMgr';
+import { GameData } from '../data/GameData';
+import { AudioClipExit } from '../tool/AudioClipExit';
 import { Config } from '../data/Config';
-
 const { ccclass, property } = _decorator;
 
 @ccclass( 'AudioMgr' )
@@ -14,8 +13,8 @@ export class AudioMgr extends Component
     onLoad ()
     {
         AudioMgr.Instance = this;
-        this.aisOn = PlayerPrefs.GetInt( 'soundOn', 1 ) == 1;
-        this.misOn = PlayerPrefs.GetInt( 'musicOn', 1 ) == 1;
+        this.aisOn = GameData.SoundOn == 1;
+        this.misOn = GameData.MusicOn == 1;
     }
 
     @property( { type: AudioClipExit } )
@@ -66,8 +65,8 @@ export class AudioMgr extends Component
 
     UpdateState ()
     {
-        this.aisOn = PlayerPrefs.GetInt( 'soundOn', 1 ) == 1;
-        this.misOn = PlayerPrefs.GetInt( 'musicOn', 1 ) == 1;
+        this.aisOn = GameData.SoundOn == 1;
+        this.misOn = GameData.MusicOn == 1;
 
         if ( this.aisOn )
             AudioMgr.Instance.audioPlayer.play();

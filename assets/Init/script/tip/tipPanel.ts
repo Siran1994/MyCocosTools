@@ -1,59 +1,44 @@
-import { Button, Label } from 'cc';
-import { _decorator, Component, Node } from 'cc';
+import { Button, Label, Sprite, SpriteFrame } from 'cc';
+import { _decorator } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
 import { PoolManager } from '../manager/PoolManager';
+import { BasePanel } from '../panel/BasePanel';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'tipPanel' )
-export class tipPanel extends Component
+export class tipPanel extends BasePanel
 {
-    @property( Label )
-    Title: Label;//标题
+    @property( Sprite )
+    Icon: Sprite = null;
 
     @property( Label )
-    Content: Label;//内容  
+    num: Label = null;//内容
+
+    @property( Label )
+    IconName: Label = null;//内容
 
     @property( Button )
-    CloseBtn: Button;//关闭
+    ConfirmBtn: Button;//确认    
 
-    @property( Button )
-    ConfirmBtn: Button;//确认
-
-    @property( Node )
-    Ad: Node = null;//广告标识
-
-    start ()
-    {
-        this.CloseBtn.node.on( Button.EventType.CLICK, () =>
-        {
-            AudioMgr.Instance.通用按钮.Play();
-            PoolManager.putNode( this.node );
-        }, this );
-    }
-    onEnable ()
-    {
-        this.Ad.active = false;
-    }
     callback = null;
-    show ( title: string, content: string, callback: Function, isAd = false )
+    show ( icon: SpriteFrame, count: number, name: string, callback: Function )
     {
-        this.Title.string = title;
-        this.Content.string = content;
-        this.Ad.active = isAd;
+        this.Icon.spriteFrame = icon;
+        this.num.string = 'x' + count.toString();
+        this.IconName.string = name;
         this.callback = callback;
         this.ConfirmBtn.node.on( Button.EventType.CLICK, this.ConfirmClick, this );
+        this.ShowPanel();
     }
 
     ConfirmClick ()
     {
-        if ( this.Ad.active )
-            AudioMgr.Instance.点击广告按钮.Play();
-        else
-            AudioMgr.Instance.通用按钮.Play();
-
-        this.callback();
-
-        this.ConfirmBtn.node.off( Button.EventType.CLICK, this.ConfirmClick, this );
-        PoolManager.putNode( this.node );
+        AudioMgr.Instance.通用按钮.Play();
+        this.HidePanel( 0.2, () =>
+        {
+            this.callback();
+            this.ConfirmBtn.node.off( Button.EventType.CLICK, this.ConfirmClick, this );
+            PoolManager.putNode( this.node );
+        } );
     }
 }

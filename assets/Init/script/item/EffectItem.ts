@@ -1,65 +1,32 @@
-import { _decorator, Component, ParticleSystem } from 'cc';
+import { _decorator, Component } from 'cc';
 import { Utils } from 'db://assets/Init/script/tool/Utils';
+import { PoolManager } from '../manager/PoolManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'EffectItem' )
 export class EffectItem extends Component
 {
-    @property( Number )
-    disTime: number = 1.5;
-
-    @property( Number )
-    interval: number = 1.5;
-
     @property( Boolean )
-    isDis: boolean = true;
+    isDisOrDes: boolean = true;
 
-    @property( Boolean )
-    isDes: boolean = false;
+    @property( { type: Number } )
+    lastTime: number = 0.5;
 
-    effcet: ParticleSystem = null;
-
-    @property( {
-        type: Number, visible: function ( this: EffectItem )
-        {
-            return this.isDes == true;
-        }
-    } )
-    desTime: number = 2;
-
-    onLoad ()
+    onEnable ()
     {
-        if ( this.isDis )
+        if ( this.isDisOrDes == true )
         {
-            Utils.DelayCallBack( this.disTime, () =>
+            Utils.DelayCallBack( this.lastTime, () =>
             {
                 this.node.active = false;
             } );
         }
-
-        if ( this.isDes )
+        else
         {
-            Utils.DelayCallBack( this.desTime, () =>
+            Utils.DelayCallBack( this.lastTime, () =>
             {
-                this.node.destroy();
+                PoolManager.putNode( this.node );
             } );
         }
-    }
-
-    start ()
-    {
-        if ( this.effcet == null )
-            this.effcet = this.getComponent( ParticleSystem );
-        this.schedule( this.play, this.interval );
-    }
-
-    play ()
-    {
-        this.effcet.play();
-    }
-
-    onDisable ()
-    {
-        this.unschedule( this.play );
     }
 }

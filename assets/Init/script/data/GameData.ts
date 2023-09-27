@@ -1,9 +1,37 @@
 import { _decorator } from 'cc';
 import { PlayerPrefs } from './PlayerPrefs';
-
 export class GameData 
 {
-    private static coin: number = 0;
+    static initData ()
+    {
+        if ( GameData.Lv == 0 || GameData.Lv == null )
+            GameData.Lv = 1;
+        if ( GameData.Star == 0 || GameData.Star == null )
+            GameData.Star = 0;
+        if ( GameData.Coin == 0 || GameData.Coin == null )
+            GameData.Coin = 0;
+        if ( GameData.PackPlan == 0 || GameData.PackPlan == null )
+            GameData.PackPlan = 0;
+        if ( GameData.SoundOn == 0 || GameData.SoundOn == null )
+            GameData.SoundOn = 1;
+        if ( GameData.MusicOn == 0 || GameData.MusicOn == null )
+            GameData.MusicOn = 1;
+        if ( GameData.FreeNum == 0 || GameData.FreeNum == null )
+            GameData.FreeNum = 1;
+        if ( GameData.BulletType == 0 || GameData.BulletType == null )
+            GameData.BulletType = 0;
+        if ( GameData.PlayerType == '' || GameData.PlayerType == null )
+            GameData.PlayerType = '普通马桶';
+    }
+
+    static get Star ()
+    {
+        return PlayerPrefs.GetInt( 'star', 0 );
+    }
+    static set Star ( value: number )
+    {
+        PlayerPrefs.SetInt( 'star', value );
+    }
 
     static get Coin ()
     {
@@ -11,11 +39,8 @@ export class GameData
     }
     static set Coin ( value: number )
     {
-        this.coin = value;
         PlayerPrefs.SetInt( 'coin', value );
     }
-
-    private static level: number = 1;
 
     static get Lv ()
     {
@@ -23,8 +48,63 @@ export class GameData
     }
     static set Lv ( value: number )
     {
-        this.level = value;
+
         PlayerPrefs.SetInt( 'level', value );
     }
+
+    static get SoundOn ()
+    {
+        return PlayerPrefs.GetInt( 'soundOn', 1 );
+    }
+    static set SoundOn ( value: number )
+    {
+        PlayerPrefs.SetInt( 'soundOn', value );
+    }
+
+    static get MusicOn ()
+    {
+        return PlayerPrefs.GetInt( 'musicOn', 1 );
+    }
+    static set MusicOn ( value: number )
+    {
+        PlayerPrefs.SetInt( 'musicOn', value );
+    }
+
+    static get PackPlan ()
+    {
+        return PlayerPrefs.GetInt( 'packplan', 0 );
+    }
+    static set PackPlan ( value: number )
+    {
+        PlayerPrefs.SetInt( 'packplan', value );
+    }
+
+    static get FreeNum ()
+    {
+        return PlayerPrefs.GetInt( 'freenum', 1 );
+    }
+    static set FreeNum ( value: number )
+    {
+        PlayerPrefs.SetInt( 'freenum', value );
+    }
+
+    static get BulletType ()
+    {
+        return PlayerPrefs.GetInt( 'bulletType', 0 );//默认小黄弹
+    }
+    static set BulletType ( value: number )
+    {
+        PlayerPrefs.SetInt( 'bulletType', value );
+    }
+
+    static get PlayerType ()
+    {
+        return PlayerPrefs.GetString( 'playerType', '普通马桶' );//默认普通马桶
+    }
+    static set PlayerType ( value: string )
+    {
+        PlayerPrefs.SetString( 'playerType', value );
+    }
+
 }
 

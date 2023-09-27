@@ -1,7 +1,7 @@
-import { _decorator, Component, Label, Node } from 'cc';
+import { _decorator, Component, Label, Node, sys } from 'cc';
+import { Messager } from '../manager/Messager';
 import DateUtils from '../tool/DateUtils';
 import { PlayerPrefs } from '../data/PlayerPrefs';
-import { Messager } from '../manager/Messager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SignItem' )
@@ -49,14 +49,16 @@ export class SignItem extends Component
 
     SignItem ( i: number )
     {
-        if ( this.index == i )
+        if ( sys.platform == sys.Platform.VIVO_MINI_GAME )
         {
-            this.Signed.active = true;
-            this.Selected.active = true;
+            if ( this.index == i + 1 )
+                this.Signed.active = true;
         }
         else
-            this.Selected.active = false;
-
+        {
+            if ( this.index == i )
+                this.Signed.active = true;
+        }
     }
 }
 

@@ -1,17 +1,18 @@
-import { _decorator, Button, Component, Label, Node, tween, Vec3 } from 'cc';
+import { _decorator, Button, Label, Node, tween, Vec3 } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
 import { Utils } from '../tool/Utils';
 import { UiManager } from '../manager/UiManager';
-import { TipManager } from '../manager/TipManager';
 import { GameData } from '../data/GameData';
+import { TipManager } from '../manager/TipManager';
 import { PlayerPrefs } from '../data/PlayerPrefs';
+import { BasePanel } from './BasePanel';
 import { Config } from '../data/Config';
+import { SpriteManager } from '../manager/SpriteManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'DrawPanel' )
-export class DrawPanel extends Component
+export class DrawPanel extends BasePanel
 {
-
     @property( { type: Node } )
     Pointer: Node = null;
 
@@ -27,11 +28,10 @@ export class DrawPanel extends Component
     @property( Label )
     TipTxt: Label = null;
 
-
     init ()
     {
-        this.TipTxt.string = '剩余免费次数:' + PlayerPrefs.GetInt( 'freeCount', Config.FreeDrawCount );
-        if ( PlayerPrefs.GetInt( 'freeCount', Config.FreeDrawCount ) > 0 )
+        this.TipTxt.string = '剩余免费次数:' + GameData.FreeNum.toString();
+        if ( GameData.FreeNum > 0 )
         {
             this.FreeGetBtn.node.active = true;
             this.AdGetBtn.node.active = false;
@@ -46,12 +46,11 @@ export class DrawPanel extends Component
 
     start ()
     {
-        this.init();
         this.closeBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( Config.PanelName.MainPanel );
-            UiManager.hidePage( Config.PanelName.DrawPanel );
+            UiManager.Instance.mainPanel.node.active = true;
+            this.HidePanel();
         }, this );
 
         this.FreeGetBtn.node.on( Button.EventType.CLICK, () =>
@@ -67,6 +66,11 @@ export class DrawPanel extends Component
         }, this );
     }
 
+    onEnable ()
+    {
+        this.init();
+    }
+
     updateCount ( isAd = false )
     {
         if ( isAd )
@@ -75,9 +79,9 @@ export class DrawPanel extends Component
         }
         else
         {
-            let count = PlayerPrefs.GetInt( 'freeCount', Config.FreeDrawCount );
+            let count = GameData.FreeNum;
             count -= 1;
-            PlayerPrefs.SetInt( 'freeCount', count );
+            GameData.FreeNum = count;
             if ( count <= 0 )
             {
                 count == 0;
@@ -89,7 +93,7 @@ export class DrawPanel extends Component
                 this.FreeGetBtn.node.active = true;
                 this.AdGetBtn.node.active = false;
             }
-            this.TipTxt.string = '剩余免费次数:' + PlayerPrefs.GetInt( 'freeCount', Config.FreeDrawCount );
+            this.TipTxt.string = '剩余免费次数:' + GameData.FreeNum;
             this.draw();
         }
     }
@@ -119,31 +123,31 @@ export class DrawPanel extends Component
     {
         let rang = Utils.random( 1, 100 );
         let angle = 0;
-        if ( rang >= 1 && rang <= 30 ) //30% 100
+        if ( rang >= 1 && rang <= 40 ) //40% 100
         {
             angle = 0;
         }
-        else if ( rang >= 31 && rang <= 55 )//25% 200
+        else if ( rang >= 41 && rang <= 70 )//30% 200
         {
             angle = 1;
         }
-        else if ( rang >= 56 && rang <= 75 )//20% 300
+        else if ( rang >= 71 && rang <= 80 )//10% 300
         {
             angle = 2;
         }
-        else if ( rang >= 76 && rang <= 80 )//15% 500
+        else if ( rang >= 81 && rang <= 90 )//10% 500
         {
             angle = 3;
         }
-        else if ( rang >= 81 && rang <= 90 )//10% 1000
+        else if ( rang >= 91 && rang <= 93 )//5% 1000
         {
             angle = 4;
         }
-        else if ( rang >= 91 && rang <= 95 )//5% 3000
+        else if ( rang >= 94 && rang <= 96 )//5% 3000
         {
             angle = 5;
         }
-        else if ( rang >= 96 && rang <= 98 )//3% 5000
+        else if ( rang >= 97 && rang <= 99 )//3% 5000
         {
             angle = 6;
         }
@@ -162,49 +166,43 @@ export class DrawPanel extends Component
             case 0:
                 coin = 100;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case 1:
                 coin = 200;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case 2:
                 coin = 300;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case 3:
                 coin = 500;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case 4:
                 coin = 1000;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case 5:
                 coin = 3000;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case 6:
                 coin = 5000;
                 GameData.Coin += coin;
-                AudioMgr.Instance.点击广告按钮.Play();
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
+                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
                 break;
             case 7:
-                PlayerPrefs.SetBool( "超级巨人" + 'UnLocked', true );
-                TipManager.Instance.showTips( '恭喜您获得超级巨人!' );
+                PlayerPrefs.SetBool( "蓝电视人" + 'UnLocked', true );
+                TipManager.Instance.showTips( '恭喜您获得蓝电视人!' );
                 break;
         }
     }
 }
+

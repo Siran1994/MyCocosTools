@@ -1,10 +1,8 @@
 import { _decorator, AnimationComponent, Button, Component, Label } from 'cc';
 import { Utils } from '../tool/Utils';
 import { AudioMgr } from '../manager/AudioMgr';
-import { GameData } from '../data/GameData';
 import { Messager } from '../manager/Messager';
-import { Config } from '../data/Config';
-
+import { GameData } from '../data/GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'BoxItem' )
@@ -33,7 +31,7 @@ export class BoxItem extends Component
         this.FreeGetBtn.node.on( Button.EventType.CLICK, () =>
         {
             this.FreeGetBtn.interactable = false;
-            let coin = Utils.random( Config.BoxReward.Min, Config.BoxReward.Max );
+            let coin = Utils.random( 20, 40 );
             this.CoinNum.node.active = true;
             GameData.Coin += coin;
             this.CoinNum.string = coin.toString();
@@ -49,7 +47,7 @@ export class BoxItem extends Component
             this.AdGetBtn.interactable = false;
             this.FreeGetBtn.interactable = false;
             this.AdGetBtn.node.active = false;
-            let coin = Utils.random( Config.BoxReward.Min, Config.BoxReward.Max );
+            let coin = Utils.random( 20, 40 );
             this.CoinNum.node.active = true;
             GameData.Coin += coin;
             this.CoinNum.string = coin.toString();
@@ -86,7 +84,7 @@ export class BoxItem extends Component
             this.AdGetBtn.interactable = false;
             this.FreeGetBtn.interactable = false;
             this.AdGetBtn.node.active = false;
-            let coin = Utils.random( Config.BoxReward.Min, Config.BoxReward.Max );
+            let coin = Utils.random( 20, 40 );
             this.CoinNum.node.active = true;
             GameData.Coin += coin;
             this.CoinNum.string = coin.toString();

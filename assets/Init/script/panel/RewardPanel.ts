@@ -1,18 +1,16 @@
-import { _decorator, Button, Component, Label } from 'cc';
+import { _decorator, Button, Label } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
+import { Messager } from '../manager/Messager';
+import { GameData } from '../data/GameData';
 import CoinFly from '../animation/CoinFly';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
-import { GameData } from '../data/GameData';
-import { GameManager } from '../manager/GameManager';
-import { Messager } from '../manager/Messager';
-import { PoolManager } from '../manager/PoolManager';
 import { Utils } from '../tool/Utils';
-import { UiManager } from '../manager/UiManager';
-
+import { GameManager } from '../manager/GameManager';
+import { BasePanel } from './BasePanel';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'RewardPanel' )
-export class RewardPanel extends Component
+export class RewardPanel extends BasePanel
 {
     @property( Button )
     AdGetAllBtn: Button = null;
@@ -35,16 +33,27 @@ export class RewardPanel extends Component
     totalCount = 3;
     tmpCoin = 0;
 
-    start ()
+    init ()
     {
         this.totalCount = 3;
         this.TipTxt.string = '免费开启次数:' + this.totalCount;
         this.CoinTxt.string = GameData.Coin.toString();
         this.tmpCoin = GameData.Coin;
 
+        this.AdGetAllBtn.node.active = true;
+        this.AdGetAllBtn.interactable = true;
+
+        this.CancelBtn.node.active = true;
+        this.CancelBtn.interactable = true;
+
+        this.NextLvBtn.node.active = false;
+        this.NextLvBtn.interactable = true;
+    }
+
+    start ()
+    {
         this.AdGetAllBtn.node.on( Button.EventType.CLICK, () =>
         {
-            this.AdGetAllBtn.interactable = false;
             AudioMgr.Instance.点击广告按钮.Play();
             Messager.Broadcast( 'OpenAllBox' );
             this.TipTxt.string = '免费开启次数:' + 0;
@@ -56,14 +65,12 @@ export class RewardPanel extends Component
 
         this.CancelBtn.node.on( Button.EventType.CLICK, () =>
         {
-            this.CancelBtn.interactable = false;
             AudioMgr.Instance.通用按钮.Play();
             this.GetAllCoin();
         }, this );
 
         this.NextLvBtn.node.on( Button.EventType.CLICK, () =>
         {
-            this.NextLvBtn.interactable = false;
             AudioMgr.Instance.通用按钮.Play();
             this.GetAllCoin();
         }, this );
@@ -71,15 +78,7 @@ export class RewardPanel extends Component
 
     onEnable ()
     {
-        this.AdGetAllBtn.node.active = true;
-        this.AdGetAllBtn.interactable = true;
-
-        this.CancelBtn.node.active = true;
-        this.CancelBtn.interactable = true;
-
-        this.NextLvBtn.node.active = false;
-        this.NextLvBtn.interactable = true;
-
+        this.init();
         Messager.AddListener( 'addCount', this, this.addCount );
     }
 
@@ -113,8 +112,11 @@ export class RewardPanel extends Component
 
         Utils.DelayCallBack( 2, () =>
         {
-            UiManager.hidePage( this.name );
-            GameManager.Instance.NextLevel( true, true );
+            this.HidePanel();
+            GameManager.Instance.NextLevel( true, true, () =>
+            {
+                GameManager.Instance.init();
+            } );
         } );
         Utils.DelayCallBack( 1, () =>
         {

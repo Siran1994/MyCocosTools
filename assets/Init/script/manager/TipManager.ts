@@ -1,4 +1,4 @@
-import { Prefab, UITransformComponent, Vec3, _decorator, find, Node } from 'cc';
+import { Prefab, UITransformComponent, Vec3, _decorator, find, Node, SpriteFrame } from 'cc';
 import { FightTip } from '../tip/fightTip';
 import { tips } from '../tip/tips';
 import { PoolManager } from './PoolManager';
@@ -56,9 +56,9 @@ export class TipManager
     }
 
     //弹窗展示
-    showTipPanel ( title: string, content: string, callback: Function, isAd = false )
+    showTipPanel ( icon: SpriteFrame, count: number, name: string, callback: Function )
     {
-        ResMgr.loadResource( Config.Path.tipPanel, ( obj: Prefab ) =>
+        ResMgr.loadPrefab( Config.Path.tipPanel, ( obj: Prefab ) =>
         {
             let parentNode = null
             if ( find( "Canvas" ) )
@@ -71,7 +71,7 @@ export class TipManager
             tipsNode.getComponent( UITransformComponent ).priority = 900;
 
             let tipScript = tipsNode.getComponent( tipPanel ) as tipPanel;
-            tipScript.show( title, content, callback, isAd );
+            tipScript.show( icon, count, name, callback );
         } );
     }
 
@@ -82,7 +82,7 @@ export class TipManager
         */
     _showTipsAni ( content: string, targetPos: Vec3, scale: number, callback?: Function )
     {
-        ResMgr.loadResource( Config.Path.tips, ( obj: Prefab ) =>
+        ResMgr.loadPrefab( Config.Path.tips, ( obj: Prefab ) =>
         {
             let parentNode = null
             if ( find( "Canvas" ) )
@@ -101,7 +101,7 @@ export class TipManager
 
     showFightTips ( type: number, txt: string, pos: Vec3, callback?: Function )
     {
-        ResMgr.loadResource( Config.Path.fightTip, ( obj: Prefab ) =>
+        ResMgr.loadPrefab( Config.Path.fightTip, ( obj: Prefab ) =>
         {
             let parentNode = null
             if ( find( "Canvas" ) )

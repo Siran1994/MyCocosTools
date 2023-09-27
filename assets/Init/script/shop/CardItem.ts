@@ -2,9 +2,9 @@ import { CardData } from './CardData';
 import { _decorator, Button, Component, Label, Sprite, SpriteFrame, Vec3, Node } from 'cc'
 import { TF } from './TF';
 import { AudioMgr } from '../manager/AudioMgr';
-import { TipManager } from '../manager/TipManager';
 import { HeroType } from '../data/Enum';
 import { GameData } from '../data/GameData';
+import { TipManager } from '../manager/TipManager';
 import { PlayerPrefs } from '../data/PlayerPrefs';
 import { Messager } from '../manager/Messager';
 const { ccclass, property } = _decorator
@@ -58,7 +58,7 @@ export class CardItem extends Component
         if ( this.m_icon_sp && cardItem.icon )
             this.m_icon_sp.spriteFrame = cardItem.icon
 
-        this.Name.string = HeroType[ cardItem.itemType ];
+        this.Name.string = HeroType[ cardItem.heroType ];
 
         this.checkUnLock( cardItem );
 

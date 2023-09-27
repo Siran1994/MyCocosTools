@@ -1,7 +1,7 @@
 import { _decorator, AnimationComponent, Collider, Component, ITriggerEvent } from 'cc';
+import { Messager } from '../manager/Messager';
 import { AudioMgr } from '../manager/AudioMgr';
 import { PropType } from '../data/Enum';
-import { Messager } from '../manager/Messager';
 import { GameData } from '../data/GameData';
 const { ccclass, property } = _decorator;
 

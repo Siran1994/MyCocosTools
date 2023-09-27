@@ -1,6 +1,7 @@
 import { _decorator, AudioClip } from 'cc';
 import { Time } from './Time';
-import { AudioMgr } from 'db://assets/Init/script/manager/AudioMgr';
+import { AudioMgr } from '../manager/AudioMgr';
+import { Config } from '../data/Config';
 
 const { ccclass, property } = _decorator;
 
@@ -14,7 +15,7 @@ export class AudioClipExit
     minRate = 0;//最小播放间隔,限制高频率,优化性能
     preTime = 0;
 
-    public playMusic ( volume: number = 0.5 )
+    public playMusic ( volume: number = Config.Volume.Music )
     {
         if ( !AudioMgr.Instance.misOn ) return;
         if ( AudioMgr.Instance.musicPlayer.clip != null )
@@ -43,6 +44,6 @@ export class AudioClipExit
 
         this.preTime = Time.time;
 
-        AudioMgr.Instance.audioPlayer.playOneShot( this.audioClip, 1 );
+        AudioMgr.Instance.audioPlayer.playOneShot( this.audioClip, Config.Volume.Audio );
     }
 }

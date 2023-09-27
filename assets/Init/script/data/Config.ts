@@ -1,32 +1,14 @@
 export class Config
 {
-
-    public static Coin = 0;
     public static GameFrame = 60;//游戏帧率
 
     public static Gravity = -10;//游戏重力
 
-    public static MaxLv = 15;//关卡数
+    public static MaxLv = 12;//关卡数   
 
-    public static FreeDrawCount = 1;//免费抽奖次数
+    public static CameraLerp = 0.15//相机跟随插值   
 
-    public static CameraLerp = 0.15//相机跟随插值
-
-    public static Speed = 6//玩家移动速度
-
-    public static isCollected = false;//是否集齐套装
-
-    public static Rate = 1//结算奖励倍率 
-
-    public static PackageName = '城市飞侠';
-
-    public static BundleName =//自定义资源包名
-        {
-            Ui: "panel",
-            Audio: "audio",
-            Prefab: "prefab",
-            Config: "config",
-        }
+    public static PackageName = '城市飞侠';//默认礼包名称   
 
     public static PanelName =//自定义资源包名
         {
@@ -42,39 +24,43 @@ export class Config
             FreeTryPanel: "FreeTryPanel",//试用
         }
 
-
-    //本地化存储
-    public static Path =
+    public static Path = //本地化存储
         {
-            //ShopPanel: 'prefab/panel/ShopPanel',
-            // SettingPanel: 'prefab/panel/SettingPanel',//设置
-            //SignPanel: 'prefab/panel/SignPanel',//签到
-            // DrawPanel: 'prefab/panel/DrawPanel',//抽奖
-            //FinishPanel: 'prefab/panel/FinishPanel',//结束
-            // FailedPanel: 'prefab/panel/FailedPanel',//失败
-            //RewardPanel: 'prefab/panel/RewardPanel',//奖励
-            //FreeTryPanel: 'prefab/panel/FreeTryPanel',//试用
-
             Coin: 'prefab/ui/Coin',//金币
-            Loading: 'prefab/Loading',//加载
+            Loading: 'prefab/ui/Loading',//加载
             AudioMgr: 'prefab/audiomgr/AudioMgr',//音效
-            tips: 'prefab/tips',//提示
-            fightTip: 'prefab/fightTip',//战斗提示
-            tipPanel: 'prefab/tipPanel',//弹窗提示
+            tips: 'prefab/ui/tips',//提示
+            fightTip: 'prefab/ui/fightTip',//战斗提示
+            tipPanel: 'prefab/ui/tipPanel',//弹窗提示
+        }
+
+    public static PowerType =
+        {
+            射速: '<color=#534B73>增加</color><color=#ff860f>10%</color><color=#534B73>的射速</color>',
+            攻击力: '<color=#534B73>增加</color><color=#ff860f>50%</color><color=#534B73>的攻击力</color>',
+            人数: '<color=#534B73>己方人数增加</color><color=#ff860f>1</color><color=#534B73>人</color>',
+            弹道: '<color=#534B73>弹道变成</color><color=#ff860f>2</color><color=#534B73>条</color>',
+        }
+
+    public static Icon =
+        {
+            抽奖劵: 'cjq_img',
+            幸运值: 'xyz_img',
+            钻石: 'zuanshi_img',
         }
 
     //声音音量设置
     public static Volume =
         {
-            Bgm: 0.5,
+            Music: 0.5,
             Audio: 1
         }
 
     //宝箱抽奖数值
     public static BoxReward =
         {
-            Min: 40,
-            Max: 100
+            Min: 30,
+            Max: 50
         }
 
     //声音音量设置
@@ -85,31 +71,12 @@ export class Config
             Total: 500//最高累积
         }
 
-    //本地化存储
-    public static Key =
+    //自定义资源包名 
+    public static BundleName =
         {
-            Lv: 'lv',
-            Coin: 'coin'
+            Ui: "ui",//Ui         
+            Audio: "audio",//音频音效
+            Prefab: "prefab",//预制体
         }
 
-    //本地化存储
-    public static AniClip =
-        {
-            Idle: 'idle',
-            Walk: 'walk',
-            Run: 'run',
-            Win: 'win',
-            Fail: 'fail',
-            Dead: 'dead',
-            Fly: 'fly',
-        }
-
-    //平台
-    public static Platform =
-        {
-            WX: 'wx',
-            COCOSPLAY: 'cocosplay',
-            ANDROID: 'android',
-            APPSTORE: 'appstore'
-        }
 }

@@ -1,4 +1,4 @@
-import { _decorator, Node, Prefab, instantiate, NodePool, find } from "cc";
+import { _decorator, Node, Prefab, instantiate, NodePool, director } from "cc";
 const { ccclass } = _decorator;
 
 @ccclass( "PoolManager" )
@@ -7,7 +7,7 @@ export class PoolManager
     static dictPool: any = {}
     static dictPrefab: any = {}
 
-    public static getNode ( prefab: Prefab, parent: Node )//从对象池中获取对象
+    public static getNode ( prefab: Prefab, parent?: Node )//从对象池中获取对象
     {
         let name = prefab.data.name;
         this.dictPrefab[ name ] = prefab;
@@ -28,7 +28,10 @@ export class PoolManager
             this.dictPool[ name ] = pool;
             node = instantiate( prefab );
         }
-        node.parent = parent;
+        if ( parent == null )
+            director.getScene().addChild( node );
+        else
+            node.parent = parent;
         node.active = true;
         return node;
     }
@@ -78,6 +81,10 @@ export class PoolManager
 
     public static clear ()//清理所有对象池
     {
-        PoolManager.clearPool( 'RewardPanel' );
+        // PoolManager.clearPool( 'Coin' );
+        // PoolManager.clearPool( 'Loading' );
+        // PoolManager.clearPool( 'fightTip' );
+        // PoolManager.clearPool( 'tips' );
+        //PoolManager.clearPool( 'RewardPanel' );
     }
 }

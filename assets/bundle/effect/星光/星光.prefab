@@ -751,11 +751,8 @@
     "__prefab": {
       "__id__": 59
     },
-    "disTime": 0.4,
-    "interval": 1.5,
-    "isDis": true,
-    "isDes": false,
-    "desTime": 2,
+    "isDisOrDes": true,
+    "lastTime": 0.5,
     "_id": ""
   },
   {

@@ -1,6 +1,5 @@
-import { AssetManager, Prefab, assetManager, SpriteAtlas, SpriteFrame, AudioClip } from 'cc';
-import { Asset } from 'cc';
-import { resources } from 'cc';
+import { Asset, resources } from 'cc';
+import { _decorator, assetManager, AssetManager, Prefab, SpriteAtlas, AudioClip, SpriteFrame } from 'cc';
 export type ICallback<T = any> = ( bundle: AssetManager.Bundle ) => void;
 export type IcallBack = ( go: Prefab ) => void;
 export class ResMgr  
@@ -25,7 +24,6 @@ export class ResMgr
                 assetManager.releaseAsset( prefab );
                 assetManager.releaseAll();
             } );
-
             ab.load( 'path', SpriteAtlas, ( err, atlas ) => //加载图集
             {
                 if ( err )
@@ -85,14 +83,27 @@ export class ResMgr
 
     public static async loadPrefab ( path: string, onComplete: IcallBack, isDontDes: boolean = false )
     {
-        ResMgr.loadBundle( this, ( bundle: AssetManager.Bundle ) =>
+        let bundle: AssetManager.Bundle = this.m_bundle;
+        if ( bundle )
         {
             //加载预制体                
             bundle.load( path, Prefab, function ( err, prefab )
             {
                 onComplete( prefab );
             } );
-        } );
+        }
+        else
+        {
+            assetManager.loadBundle( 'bundle', ( err, bundle: AssetManager.Bundle ) =>
+            {
+                ResMgr.m_bundle = bundle;
+                //加载预制体                
+                bundle.load( path, Prefab, function ( err, prefab )
+                {
+                    onComplete( prefab );
+                } );
+            } );
+        }
     }
 
     public static async loadResource ( path: string, onComplete: IcallBack )
@@ -109,7 +120,7 @@ export class ResMgr
         } )
     }
 
-    public static async loadDir ( name: string, paths: string, type: typeof Prefab, progressCallback?: Function, completedCallback?: Function )
+    public static async loadDir ( paths: string, type: any, progressCallback?: Function, completedCallback?: Function )
     {
         let bundle: AssetManager.Bundle = this.m_bundle;
         if ( bundle )
@@ -120,19 +131,39 @@ export class ResMgr
             }, ( error: Error, assets: Asset[] ) =>
             {
                 if ( error )
-                    console.log( error.message );
-
-                if ( assets.length == 0 )
-                    console.log( `Bundle ${ bundle.name } doesn't contain ${ paths }` );
-
+                {
+                    console.error( error.message );
+                    return;
+                }
                 assets.forEach( asset =>
                 {
-                    console.log( `load ${ asset.name } completed` );
+                    // console.log( `load ${ asset.name } completed` );
                 } )
                 completedCallback && completedCallback( assets );
-            } )
+            } );
         }
         else
-            console.warn( `load ${ name } bundle first` );
+        { //异步加载,加载好会调用你的函数
+            assetManager.loadBundle( 'bundle', ( err, bundle: AssetManager.Bundle ) =>
+            {
+                ResMgr.m_bundle = bundle;
+                bundle.loadDir( paths, type, ( completedCount: number, totalCount: number ) =>
+                {
+                    progressCallback && progressCallback( completedCount, totalCount );
+                }, ( error: Error, assets: Asset[] ) =>
+                {
+                    if ( error )
+                    {
+                        console.error( error.message );
+                        return;
+                    }
+                    assets.forEach( asset =>
+                    {
+                        // console.log( `load ${ asset.name } completed` );
+                    } )
+                    completedCallback && completedCallback( assets );
+                } );
+            } );
+        }
     }
 }

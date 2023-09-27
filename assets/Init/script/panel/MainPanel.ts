@@ -1,15 +1,10 @@
-import { _decorator, Button, Component, EventTouch, input, Input, Label, Prefab, Node } from 'cc';
+import { _decorator, Button, Component, EventTouch, input, Input, Label } from 'cc';
 import { UiManager } from '../manager/UiManager';
-import { PlayerState } from '../data/Enum';
 import { GameData } from '../data/GameData';
-import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
-import { Messager } from '../manager/Messager';
-import { PoolManager } from '../manager/PoolManager';
-import { ResMgr } from '../manager/ResMgr';
 import { PlayerCtrl } from '../role/PlayerCtrl';
-import { Config } from '../data/Config';
-import { SignPanel } from './SignPanel';
+import { AudioMgr } from '../manager/AudioMgr';
+import { AniType } from '../data/Enum';
 
 const { ccclass, property } = _decorator;
 
@@ -32,45 +27,49 @@ export class MainPanel extends Component
     LvTips: Label;//关卡信息
 
     @property( Label )
-    CoinTxt: Label;//金币信息   
+    CoinTxt: Label;//金币信息
+
+    init ()
+    {
+        this.LvTips.string = '关卡' + GameData.Lv.toString();
+        this.CoinTxt.string = GameData.Coin.toString();
+    }
 
     start () 
     {
-        this.CoinTxt.string = GameData.Coin.toString();
-        this.LvTips.string = '关卡' + GameData.Lv.toString();
-
         this.shopBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( Config.PanelName.ShopPanel );
-            UiManager.hidePage( Config.PanelName.MainPanel );
+            UiManager.Instance.shopPanel.ShowPanel();
+            this.node.active = false;
         }, this );
 
         this.setBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( Config.PanelName.SettingPanel );
-            UiManager.hidePage( Config.PanelName.MainPanel );
+            UiManager.Instance.settingPanel.ShowPanel();
+            this.node.active = false;
         }, this );
 
         this.signBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( Config.PanelName.SignPanel );
-            UiManager.hidePage( Config.PanelName.MainPanel );
+            UiManager.Instance.signPanel.ShowPanel();
+            this.node.active = false;
 
         }, this );
 
         this.drawBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            UiManager.showPage( Config.PanelName.DrawPanel );
-            UiManager.hidePage( Config.PanelName.MainPanel );
+            UiManager.Instance.drawPanel.ShowPanel();
+            this.node.active = false;
         }, this );
     }
 
     onEnable ()
     {
+        this.init();
         input.on( Input.EventType.TOUCH_MOVE, this.touchStart, this );
     }
 
@@ -82,20 +81,9 @@ export class MainPanel extends Component
     touchStart ( touch: EventTouch )
     {
         GameManager.Instance.IsStart = true;
-        UiManager.hidePage( Config.PanelName.MainPanel );
-        UiManager.showPage( Config.PanelName.GamePanel );
-        PlayerCtrl.Instance.Play( PlayerState.慢跑 );
+        this.node.active = false;
+        UiManager.Instance.gamePanel.node.active = true;
+        PlayerCtrl.Instance.Play( AniType.奔跑 );
         AudioMgr.Instance.游戏背景乐.playMusic();
-        Messager.Broadcast( 'IsStart' );
-    }
-
-    autoStart ()
-    {
-        GameManager.Instance.IsStart = true;
-        UiManager.hidePage( Config.PanelName.MainPanel );
-        UiManager.showPage( Config.PanelName.GamePanel );
-        PlayerCtrl.Instance.Play( PlayerState.快跑 );
-        AudioMgr.Instance.游戏背景乐.playMusic();
-        Messager.Broadcast( 'IsStart' );
     }
 }

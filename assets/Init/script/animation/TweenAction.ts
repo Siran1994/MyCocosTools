@@ -109,31 +109,49 @@ export class TweenAction extends Component
 
         if ( this.isLoop ) 
         {
-            tween( this.target )
-                .sequence
-                (
-                    tween().to( this.duration,
+            if ( this.toOrby )
+            {
+                tween( this.target )
+                    .sequence
+                    (
+                        tween().to( this.duration,
+                            {
+                                position: this.position,               // 位置缓动
+                                scale: this.scale,                     // 缩放缓动
+                                eulerAngles: this.rotation                       // 旋转缓动
+                            },
+                            opts ),
+                        tween().delay( this.delayTime ),
+                        tween().call( () =>
                         {
-                            position: this.position,               // 位置缓动
-                            scale: this.scale,                     // 缩放缓动
-                            eulerAngles: this.rotation                       // 旋转缓动
-                        },
-                        opts ),
-                    tween().to( this.duration,
+                            this.callback.emit( [ this.customEventData ] );
+                        } ),
+                    )
+                    .repeatForever()
+                    .start();
+            }
+            else
+            {
+                tween( this.target )
+                    .sequence
+                    (
+                        tween().by( this.duration,
+                            {
+                                position: this.position,               // 位置缓动
+                                scale: this.scale,                     // 缩放缓动
+                                eulerAngles: this.rotation                       // 旋转缓动
+                            },
+                            opts ),
+                        tween().delay( this.delayTime ),
+                        tween().call( () =>
                         {
-                            position: -this.position,               // 位置缓动
-                            scale: this.scale,                     // 缩放缓动
-                            eulerAngles: this.rotation                       // 旋转缓动
-                        },
-                        opts ),
-                    tween().delay( this.delayTime ),
-                    tween().call( () =>
-                    {
-                        this.callback.emit( [ this.customEventData ] );
-                    } ),
-                )
-                .repeatForever()
-                .start();
+                            this.callback.emit( [ this.customEventData ] );
+                        } ),
+                    )
+                    .repeatForever()
+                    .start();
+            }
+
         }
         else
         {

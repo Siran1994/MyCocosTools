@@ -12,7 +12,8 @@
       "id": "d043b",
       "name": "colorLight.mesh",
       "userData": {
-        "gltfIndex": 0
+        "gltfIndex": 0,
+        "triangleCount": 64
       },
       "ver": "1.1.0",
       "imported": true,
@@ -53,14 +54,33 @@
       "skeletons": [],
       "textures": [],
       "materials": [
-        "e1b89e72-2b6a-4bda-bf6c-3db8f724b0e1"
+        "c3b0a4c4-a7b2-4d21-9f1f-401b26c06ef6"
       ],
       "scenes": [
         "cc4b4556-2456-49b0-9825-25e9e86ed3f3@65c50"
       ]
     },
     "fbx": {
-      "smartMaterialEnabled": false
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
     }
   }
 }

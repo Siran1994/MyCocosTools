@@ -6,8 +6,11 @@
   "files": [],
   "subMetas": {},
   "userData": {
+    "bundleConfigID": "auto_e6aiTEXMVDqKdeote8MjVo",
     "compressionType": {},
-    "isRemoteBundle": {},
+    "isRemoteBundle": {
+      "web-desktop": true
+    },
     "isBundle": true
   }
 }

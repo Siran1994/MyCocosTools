@@ -1,4 +1,5 @@
-import { _decorator, Component, Prefab, NodePool, instantiate, Vec2, v3, Node, Vec3, tween } from "cc";
+import { _decorator, Component, Prefab, Vec2, v3, Node, Vec3, tween } from "cc";
+import { PoolManager } from "../manager/PoolManager";
 
 const { ccclass, property } = _decorator;
 
@@ -12,21 +13,9 @@ export default class CoinFly extends Component
     @property( Prefab )
     coinPrefab: Prefab = null;
 
-    coinPool: NodePool = null;
-
     onLoad ()
     {
-        this.coinPool = new NodePool();
-        this.initCoinPool();
-    }
-
-    initCoinPool ( count: number = 25 )
-    {
-        for ( let i = 0; i < count; i++ )
-        {
-            let coin = instantiate( this.coinPrefab );
-            this.coinPool.put( coin );
-        }
+        PoolManager.prePool( this.coinPrefab, 20 )
     }
 
     playAnim ( callback: Function )
@@ -39,18 +28,12 @@ export default class CoinFly extends Component
 
     playCoinFlyAnim ( count: number, stPos: Vec3, edPos: Vec3, r: number = 150, callback: Function )
     {
-        // 确保当前节点池有足够的金币
-        // const poolSize = this.coinPool.size();
-        // const reCreateCoinCount = poolSize > count ? 0 : count - poolSize;
-        // this.initCoinPool( reCreateCoinCount );
-
         // 生成圆，并且对圆上的点进行排序
         let points = this.getCirclePoints( r, stPos, count );
         let coinNodeList = points.map( pos =>
         {
-            let coin = this.coinPool.get();
+            let coin = PoolManager.getNode( this.coinPrefab, this.node );
             coin.setPosition( stPos );
-            this.node.addChild( coin );
             return {
                 node: coin,
                 stPos: stPos,
@@ -77,7 +60,7 @@ export default class CoinFly extends Component
                     tween().call( () =>
                     {
                         callback();
-                        this.coinPool.put( item.node );
+                        PoolManager.putNode( item.node );
                     } )
                 )
                 .start();
