@@ -113,7 +113,7 @@ export class RewardPanel extends BasePanel
         Utils.DelayCallBack( 2, () =>
         {
             this.HidePanel();
-            GameManager.Instance.NextLevel( true, true, () =>
+            GameManager.Instance.NextLevel( false, false, () =>
             {
                 GameManager.Instance.init();
             } );

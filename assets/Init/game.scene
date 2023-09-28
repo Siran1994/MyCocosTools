@@ -4300,7 +4300,6 @@
     "anmator": {
       "__id__": 108
     },
-    "decorateCtrl": null,
     "ChangeGreen": {
       "__id__": 110
     },
@@ -10656,6 +10655,7 @@
       "__id__": 599
     },
     "width": 3.5,
+    "MaxAngle": 60,
     "_id": "322EPb49lESb/gM44mRaRk"
   },
   {

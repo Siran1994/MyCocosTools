@@ -96,7 +96,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -116.75,
+      "x": -134.42,
       "y": 0,
       "z": 0
     },
@@ -266,8 +266,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 223.5,
-      "height": 30
+      "width": 258.84,
+      "height": 30.240000000000002
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -281,7 +281,7 @@
     "fileId": "c6sZ+GWApLr5GoHAgt8MlZ"
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.RichText",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -291,38 +291,24 @@
     "__prefab": {
       "__id__": 12
     },
-    "_customMaterial": null,
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 214,
-      "g": 132,
-      "b": 53,
-      "a": 255
-    },
-    "_string": "提示语!!!!!!!!!!!!!!!!!!!",
+    "_lineHeight": 24,
+    "_string": "提示语1111111111111111",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 27,
-    "_fontSize": 27,
+    "_fontSize": 24,
+    "_maxWidth": 0,
     "_fontFamily": "Arial",
-    "_lineHeight": 30,
-    "_overflow": 0,
-    "_enableWrapText": true,
     "_font": null,
     "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_isItalic": false,
-    "_isBold": false,
-    "_isUnderline": false,
-    "_underlineHeight": 2,
-    "_cacheMode": 2,
+    "_userDefinedFont": null,
+    "_cacheMode": 0,
+    "_imageAtlas": null,
+    "_handleTouchEvent": true,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "27AGY5sMVLwJ6d1KG7/aKo"
+    "fileId": "f0E996WuRIRJXR1t6+bKp5"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -350,7 +336,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 361.5,
+      "width": 396.84,
       "height": 60
     },
     "_anchorPoint": {
@@ -385,7 +371,10 @@
       "b": 255,
       "a": 255
     },
-    "_spriteFrame": null,
+    "_spriteFrame": {
+      "__uuid__": "e9606253-6af2-46ad-8326-d502a616744e@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_type": 1,
     "_fillType": 0,
     "_sizeMode": 0,

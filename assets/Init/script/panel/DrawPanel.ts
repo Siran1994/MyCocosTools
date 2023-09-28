@@ -166,37 +166,37 @@ export class DrawPanel extends BasePanel
             case 0:
                 coin = 100;
                 GameData.Coin += coin;
-                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
+                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 1:
                 coin = 200;
                 GameData.Coin += coin;
-                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
+                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 2:
                 coin = 300;
                 GameData.Coin += coin;
-                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
+                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 3:
                 coin = 500;
                 GameData.Coin += coin;
-                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
+                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 4:
                 coin = 1000;
                 GameData.Coin += coin;
-                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
+                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 5:
                 coin = 3000;
                 GameData.Coin += coin;
-                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
+                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 6:
                 coin = 5000;
                 GameData.Coin += coin;
-                TipManager.Instance.showTipPanel( SpriteManager.get( Config.Icon.钻石 ), coin, '钻石', () => { } );
+                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 7:
                 PlayerPrefs.SetBool( "蓝电视人" + 'UnLocked', true );

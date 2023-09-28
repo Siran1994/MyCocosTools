@@ -1,8 +1,5 @@
 import { _decorator, Collider, Component, ITriggerEvent, Label, Node, Sprite, SpriteFrame } from 'cc';
 import { Messager } from '../manager/Messager';
-import { PlayerCtrl } from '../role/PlayerCtrl';
-import { Utils } from '../tool/Utils';
-import { GameManager } from '../manager/GameManager';
 import { PropType, HeroType } from '../data/Enum';
 const { ccclass, property } = _decorator;
 

@@ -20,7 +20,7 @@ export default class CoinFly extends Component
 
     playAnim ( callback: Function )
     {
-        let randomCount = Math.random() * 15 + 10;
+        let randomCount = 20;
         let stPos = this.startPoint.getPosition();
         let edPos = this.endPoint.getPosition();
         this.playCoinFlyAnim( randomCount, stPos, edPos, 150, callback );
@@ -84,7 +84,7 @@ export default class CoinFly extends Component
         {
             let x = pos.x + r * Math.sin( radians * i );
             let y = pos.y + r * Math.cos( radians * i );
-            points.unshift( v3( x + Math.random() * randomScope, y + Math.random() * randomScope, 0 ) );
+            points.unshift( v3( x + randomScope, y + randomScope, 0 ) );
         }
         return points;
     }

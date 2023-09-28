@@ -257,14 +257,15 @@ export default class DOTweenAnimation
             .start()
     }
 
-    public static ScaleLoop ( target: Node, toScale: Vec3, bcakScale: Vec3, toTime: number = 0.12, backTime: number = 0.1 )
+    public static ScaleLoop ( target: Node, toScale: number, bcakScale: number, toTime: number = 0.12, backTime: number = 0.1 )
     {
         tween( target )
             .sequence
             (
-                tween().to( toTime, { scale: toScale }, { easing: "linear" } ),
-                tween().to( backTime, { scale: bcakScale }, { easing: "linear" } ),
+                tween().to( toTime, { scale: new Vec3( toScale, toScale, toScale ) }, { easing: "linear" } ),
+                tween().to( backTime, { scale: new Vec3( bcakScale, bcakScale, bcakScale ) }, { easing: "linear" } ),
             )
+            .repeatForever()
             .start();
     }
 }

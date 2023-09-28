@@ -688,7 +688,7 @@
     "_alignSpace": 2
   },
   {
-    "__type__": "30a82K5n/JOYomhrhhhjgwk",
+    "__type__": "ba648LE1tlDkrt9Vr+VR9TF",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -698,13 +698,13 @@
     "__prefab": {
       "__id__": 56
     },
-    "isDisOrDes": false,
+    "isDisOrDes": true,
     "lastTime": 0.5,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "5eovTyM0VEB6S4lQcOdKAp"
+    "fileId": "270n2qoFJNTZNyeqVSu061"
   },
   {
     "__type__": "cc.PrefabInfo",

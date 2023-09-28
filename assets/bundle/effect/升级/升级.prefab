@@ -122,7 +122,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "fb610328-e6aa-4551-8d7f-f1af3e8e6448",
+        "__uuid__": "741f9e9b-168d-4a6b-8fbd-ce9a17dcc1f7",
         "__expectedType__": "cc.Material"
       }
     ],
@@ -859,12 +859,12 @@
     "_lengthScale": 1,
     "_mesh": null,
     "_cpuMaterial": {
-      "__uuid__": "fb610328-e6aa-4551-8d7f-f1af3e8e6448",
+      "__uuid__": "741f9e9b-168d-4a6b-8fbd-ce9a17dcc1f7",
       "__expectedType__": "cc.Material"
     },
     "_gpuMaterial": null,
     "_mainTexture": {
-      "__uuid__": "ffdfe9b5-4296-47df-a6a9-462c7c35879e@6c48a",
+      "__uuid__": "a17f63f1-b14e-406b-8fd1-0c5784247854@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
     "_useGPU": false,
@@ -1679,7 +1679,7 @@
     "nestedPrefabInstanceRoots": null
   },
   {
-    "__type__": "30a82K5n/JOYomhrhhhjgwk",
+    "__type__": "ba648LE1tlDkrt9Vr+VR9TF",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -1689,16 +1689,13 @@
     "__prefab": {
       "__id__": 132
     },
-    "disTime": 1,
-    "interval": 1.5,
-    "isDis": true,
-    "isDes": false,
-    "desTime": 2,
+    "isDisOrDes": true,
+    "lastTime": 0.5,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "8f1zScp15E967Rq0Qr+JdD"
+    "fileId": "a0AFpPgVpL4ZDcElosR3WX"
   },
   {
     "__type__": "cc.PrefabInfo",

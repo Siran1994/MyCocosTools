@@ -121,6 +121,6 @@ export class GameManager extends Component
 
     protected onDestroy (): void
     {
-        PoolManager.clear();
+        // PoolManager.clear();
     }
 }

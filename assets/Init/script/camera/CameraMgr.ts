@@ -77,7 +77,6 @@ export class CameraMgr extends Component
 
     private MouseMove ( e: EventMouse )
     {
-
         if ( this.cameraType == ThirdPersonCameraType.FollowIndependentRotation )
         {
             this.SetIndependentRotation( e );

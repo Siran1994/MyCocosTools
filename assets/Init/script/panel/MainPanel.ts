@@ -5,6 +5,7 @@ import { GameManager } from '../manager/GameManager';
 import { PlayerCtrl } from '../role/PlayerCtrl';
 import { AudioMgr } from '../manager/AudioMgr';
 import { AniType } from '../data/Enum';
+import { VibrateManager } from '../other/VibrateManager';
 
 const { ccclass, property } = _decorator;
 

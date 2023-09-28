@@ -1,6 +1,6 @@
 
 import { _decorator, Component, Vec3, input, Input, EventTouch, RigidBodyComponent, Node } from 'cc';
-import { GameManager } from 'db://assets/Init/script/manager/GameManager';
+import { GameManager } from '../manager/GameManager';
 const { ccclass, property } = _decorator;
 const v3_0 = new Vec3( 0, 0, 0 );
 @ccclass( 'RigidCharacterController' )
@@ -10,9 +10,10 @@ export class RigidCharactorController extends Component
     rigidBody: RigidBodyComponent;
     @property
     width = 3.5;
-    protected _stateX: number = 0;
-    TargetPos = new Vec3();
-
+    @property
+    MaxAngle = 60;
+    _stateX: number = 0;
+    deltaSpeed = 0.2;
 
     update ( deltaTime: number )
     {
@@ -69,18 +70,29 @@ export class RigidCharactorController extends Component
         this.node.setPosition( position.x + v3_0.x, position.y + v3_0.y, position.z + v3_0.z );
     }
 
-    deltaSpeed = 0.2;
-
     //丝滑移动
     silkMove ( touch: EventTouch )
     {
         const delta = touch.getDelta();
         let pos = this.node.position;
         let x = pos.x + this.deltaSpeed * delta.x;
-        if ( x >= this.width + this.TargetPos.x )
-            x = this.width + this.TargetPos.x;
-        if ( x <= -this.width + this.TargetPos.x )
-            x = -this.width + this.TargetPos.x;
+        if ( x >= this.width )
+            x = this.width;
+        if ( x <= -this.width )
+            x = -this.width;
         this.node.position = this.node.position.lerp( new Vec3( x, this.node.position.y, this.node.position.z ), 0.1 );
+    }
+
+    //丝滑转动
+    silkRotate ( touch: EventTouch )
+    {
+        const delta = touch.getDelta();
+        let ros = this.node.eulerAngles;
+        let z = ros.z - this.deltaSpeed * delta.x;
+        if ( z >= this.MaxAngle )
+            z = this.MaxAngle;
+        if ( z <= -this.MaxAngle )
+            z = -this.MaxAngle;
+        this.node.eulerAngles = this.node.eulerAngles.lerp( new Vec3( 0, 0, z ), 0.1 );
     }
 }

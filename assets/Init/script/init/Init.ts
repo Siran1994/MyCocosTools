@@ -5,6 +5,7 @@ import { ResMgr } from '../manager/ResMgr';
 import { GameData } from '../data/GameData';
 import { GameManager } from '../manager/GameManager';
 import { PrefabManager } from '../manager/PrefabManager';
+import { PlatformMgr } from '../manager/PlatformMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'Init' )
@@ -25,8 +26,8 @@ export class Init extends Component
         {
             this.loader.showProgress( 'game', () => { GameManager.Instance.init() } );
         } );
+        await PlatformMgr.Instance.getCurrentPlatform();
         await PrefabManager.loadPrefab( 'Lv', PrefabManager.Path.Lv );
-
         await AudioMgr.init( this.node.parent, () =>
         {
             AudioMgr.Instance.首页背景乐.playMusic();

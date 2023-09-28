@@ -1,10 +1,12 @@
 import { _decorator, Component, SkeletalAnimation, Node, ParticleSystem, Vec3 } from 'cc';
-import { AniType, HeroType, PropType } from '../data/Enum';
-import { Utils } from '../tool/Utils';
-import { Messager } from '../manager/Messager';
-import { GameManager } from '../manager/GameManager';
-import { AudioMgr } from '../manager/AudioMgr';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
+import { AniType, HeroType, PropType } from '../data/Enum';
+import { AudioMgr } from '../manager/AudioMgr';
+import { GameManager } from '../manager/GameManager';
+import { Messager } from '../manager/Messager';
+import { Utils } from '../tool/Utils';
+
+
 
 const { ccclass, property } = _decorator;
 @ccclass( 'PlayerCtrl' )
@@ -70,7 +72,7 @@ export class PlayerCtrl extends Component
                 AudioMgr.Instance.玩家受击.Play();
                 break;
             case PropType.头:
-                DOTweenAnimation.ScaleLoop( this.node, new Vec3( 1.2, 1.2, 1.2 ), Vec3.ONE );
+                DOTweenAnimation.ScaleLoop( this.node, 1.2, 1 );
                 break;
             case PropType.结束:
                 Messager.Broadcast( 'battleStart' );

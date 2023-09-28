@@ -46,7 +46,7 @@ export class PrefabManager
     public static set ( key: string, value: Prefab, targetMap: Map<string, Prefab> )
     {
         if ( targetMap.has( key ) )
-            console.error( `set fail: ${ key } already exsit in the prefabMap` );
+            console.warn( `set fail: ${ key } already exsit in the prefabMap` );
         else
             targetMap.set( key, value );
     }

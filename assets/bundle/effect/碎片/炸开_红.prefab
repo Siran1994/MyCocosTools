@@ -17,7 +17,7 @@
     "__editorExtras__": {},
     "_parent": null,
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 2
@@ -734,7 +734,7 @@
     "_alignSpace": 2
   },
   {
-    "__type__": "30a82K5n/JOYomhrhhhjgwk",
+    "__type__": "ba648LE1tlDkrt9Vr+VR9TF",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -750,7 +750,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "58lThbya1O2Z4paZSpRYyo"
+    "fileId": "6b9WeoLWNLGocsyAzGzQzs"
   },
   {
     "__type__": "cc.PrefabInfo",

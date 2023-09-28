@@ -49,14 +49,14 @@ export class Boss extends Component
 
     atkStart ()
     {
-        if ( GameManager.Instance.PlayerPower < GameManager.Instance.BossPower )
-            this.PlayNextAni( 0, 2 );
-        else//交战
-        {
-            let index = Math.floor( Math.random() * 2 );
-            this.PlayNextAni( 0, index );
-            this.schedule( this.AutoAtk, 1 );
-        }
+        // if ( GameManager.Instance.PlayerPower < GameManager.Instance.BossPower )
+        //     this.PlayNextAni( 0, 2 );
+        // else//交战
+        // {
+        //     let index = Math.floor( Math.random() * 2 );
+        //     this.PlayNextAni( 0, index );
+        //     this.schedule( this.AutoAtk, 1 );
+        // }
     }
     onDestroy ()
     {

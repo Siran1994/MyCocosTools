@@ -5,6 +5,7 @@ import { GameManager } from '../manager/GameManager';
 import { BasePanel } from './BasePanel';
 import { Label } from 'cc';
 import { GameData } from '../data/GameData';
+import DOTweenAnimation from '../animation/DOTweenAnimation';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'FailedPanel' )
@@ -33,7 +34,6 @@ export class FailedPanel extends BasePanel
             GameManager.Instance.NextLevel( false, true, () =>
             {
                 GameManager.Instance.init();
-                //UiManager.Instance.mainPanel.autoStart();
             } );
         }, this );
 
@@ -46,12 +46,14 @@ export class FailedPanel extends BasePanel
                 GameManager.Instance.init()
             } );
         }, this );
+
         this.ReLife.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
             this.node.active = false;
             GameManager.Instance.IsStart = true;
-
         }, this );
+
+        DOTweenAnimation.ScaleLoop( this.Reward3x.node, 1.1, 1 );
     }
 }

@@ -1,8 +1,9 @@
 import { _decorator, Component, Material, Node, SkinnedMeshRenderer } from 'cc';
 import { HeroType, PropType } from '../data/Enum';
-import { Messager } from '../manager/Messager';
-import { GameManager } from '../manager/GameManager';
 import { PlayerPrefs } from '../data/PlayerPrefs';
+import { GameManager } from '../manager/GameManager';
+import { Messager } from '../manager/Messager';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'HeroInfo' )
@@ -101,20 +102,20 @@ export class DecorateCtrl extends Component
 
     ChangeDress ( heroName: string )
     {
-        var heroType = GameManager.Instance.GetHeroType( heroName );
+        // var heroType = GameManager.Instance.GetHeroType( heroName );
 
-        for ( let i = 0; i < this.heroinfo.length; i++ )
-        {
-            if ( this.heroinfo[ i ].heroType == heroType )
-            {
-                this.initHeadState();
-                this.heroinfo[ i ].Head.active = true;
-                this.Body.material = this.heroinfo[ i ].skin;
-                this.R_Arm.material = this.heroinfo[ i ].skin;
-                this.L_Arm.material = this.heroinfo[ i ].skin;
-                this.R_Leg.material = this.heroinfo[ i ].skin;
-                this.L_Leg.material = this.heroinfo[ i ].skin;
-            }
-        }
+        // for ( let i = 0; i < this.heroinfo.length; i++ )
+        // {
+        //     if ( this.heroinfo[ i ].heroType == heroType )
+        //     {
+        //         this.initHeadState();
+        //         this.heroinfo[ i ].Head.active = true;
+        //         this.Body.material = this.heroinfo[ i ].skin;
+        //         this.R_Arm.material = this.heroinfo[ i ].skin;
+        //         this.L_Arm.material = this.heroinfo[ i ].skin;
+        //         this.R_Leg.material = this.heroinfo[ i ].skin;
+        //         this.L_Leg.material = this.heroinfo[ i ].skin;
+        //     }
+        // }
     }
 }

@@ -56,9 +56,9 @@ export class TipManager
     }
 
     //弹窗展示
-    showTipPanel ( icon: SpriteFrame, count: number, name: string, callback: Function )
+    showTipPanel ( title: string, content: string, callback: Function, isAd = false )
     {
-        ResMgr.loadPrefab( Config.Path.tipPanel, ( obj: Prefab ) =>
+        ResMgr.loadResource( Config.Path.tipPanel, ( obj: Prefab ) =>
         {
             let parentNode = null
             if ( find( "Canvas" ) )
@@ -71,7 +71,7 @@ export class TipManager
             tipsNode.getComponent( UITransformComponent ).priority = 900;
 
             let tipScript = tipsNode.getComponent( tipPanel ) as tipPanel;
-            tipScript.show( icon, count, name, callback );
+            tipScript.show( title, content, callback, isAd );
         } );
     }
 

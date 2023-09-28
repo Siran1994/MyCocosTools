@@ -715,7 +715,7 @@
     "_alignSpace": 2
   },
   {
-    "__type__": "30a82K5n/JOYomhrhhhjgwk",
+    "__type__": "ba648LE1tlDkrt9Vr+VR9TF",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -725,13 +725,13 @@
     "__prefab": {
       "__id__": 60
     },
-    "isDisOrDes": false,
+    "isDisOrDes": true,
     "lastTime": 0.5,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "23Ud8P915NbLYRyn8jIw9w"
+    "fileId": "36yxakPzBP0psKlTOf2Bpa"
   },
   {
     "__type__": "cc.PrefabInfo",
