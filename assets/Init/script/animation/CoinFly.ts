@@ -15,12 +15,12 @@ export default class CoinFly extends Component
 
     onLoad ()
     {
-        PoolManager.prePool( this.coinPrefab, 20 )
+        PoolManager.prePool( this.coinPrefab, 10 )
     }
 
     playAnim ( callback: Function )
     {
-        let randomCount = 20;
+        let randomCount = 10;
         let stPos = this.startPoint.getPosition();
         let edPos = this.endPoint.getPosition();
         this.playCoinFlyAnim( randomCount, stPos, edPos, 150, callback );

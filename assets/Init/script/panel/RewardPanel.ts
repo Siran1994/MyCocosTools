@@ -74,6 +74,8 @@ export class RewardPanel extends BasePanel
             AudioMgr.Instance.通用按钮.Play();
             this.GetAllCoin();
         }, this );
+
+        DOTweenAnimation.ScaleLoop( this.AdGetAllBtn.node, 1.1, 1, 0.5, 0.5 );
     }
 
     onEnable ()
