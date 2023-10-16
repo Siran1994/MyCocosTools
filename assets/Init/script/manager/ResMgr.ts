@@ -1,7 +1,8 @@
+import { TextAsset } from 'cc';
 import { Asset, resources } from 'cc';
 import { _decorator, assetManager, AssetManager, Prefab, SpriteAtlas, AudioClip, SpriteFrame } from 'cc';
 export type ICallback<T = any> = ( bundle: AssetManager.Bundle ) => void;
-export type IcallBack = ( go: Prefab ) => void;
+export type IcallBack = ( go: any ) => void;
 export class ResMgr  
 {
     static m_bundle: AssetManager.Bundle;
@@ -120,12 +121,12 @@ export class ResMgr
         } )
     }
 
-    public static async loadDir ( paths: string, type: any, progressCallback?: Function, completedCallback?: Function )
+    public static async loadDir ( path: string, type: any, progressCallback?: Function, completedCallback?: Function )
     {
         let bundle: AssetManager.Bundle = this.m_bundle;
         if ( bundle )
         {
-            bundle.loadDir( paths, type, ( completedCount: number, totalCount: number ) =>
+            bundle.loadDir( path, type, ( completedCount: number, totalCount: number ) =>
             {
                 progressCallback && progressCallback( completedCount, totalCount );
             }, ( error: Error, assets: Asset[] ) =>
@@ -147,7 +148,7 @@ export class ResMgr
             assetManager.loadBundle( 'bundle', ( err, bundle: AssetManager.Bundle ) =>
             {
                 ResMgr.m_bundle = bundle;
-                bundle.loadDir( paths, type, ( completedCount: number, totalCount: number ) =>
+                bundle.loadDir( path, type, ( completedCount: number, totalCount: number ) =>
                 {
                     progressCallback && progressCallback( completedCount, totalCount );
                 }, ( error: Error, assets: Asset[] ) =>
@@ -162,6 +163,31 @@ export class ResMgr
                         // console.log( `load ${ asset.name } completed` );
                     } )
                     completedCallback && completedCallback( assets );
+                } );
+            } );
+        }
+    }
+
+    public static async loadData ( path: string, onComplete: IcallBack, isDontDes: boolean = false )
+    {
+        let bundle: AssetManager.Bundle = this.m_bundle;
+        if ( bundle )
+        {
+            //加载预制体                
+            bundle.load( path, TextAsset, function ( err, textAsset )
+            {
+                onComplete( textAsset );
+            } );
+        }
+        else
+        {
+            assetManager.loadBundle( 'bundle', ( err, bundle: AssetManager.Bundle ) =>
+            {
+                ResMgr.m_bundle = bundle;
+                //加载预制体                
+                bundle.load( path, TextAsset, function ( err, textAsset )
+                {
+                    onComplete( textAsset );
                 } );
             } );
         }

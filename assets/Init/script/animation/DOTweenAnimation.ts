@@ -257,6 +257,7 @@ export default class DOTweenAnimation
             .start()
     }
 
+    //放大缩小
     public static ScaleLoop ( target: Node, toScale: number, bcakScale: number, toTime: number = 0.12, backTime: number = 0.1 )
     {
         tween( target )

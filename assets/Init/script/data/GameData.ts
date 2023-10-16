@@ -22,6 +22,10 @@ export class GameData
             GameData.BulletType = 0;
         if ( GameData.PlayerType == '' || GameData.PlayerType == null )
             GameData.PlayerType = '普通马桶';
+        if ( GameData.KnifeType == 0 || GameData.KnifeType == null )
+            GameData.KnifeType = 0;
+        if ( GameData.HandType == 0 || GameData.HandType == null )
+            GameData.HandType = 0;
     }
 
     static get Star ()
@@ -104,6 +108,24 @@ export class GameData
     static set PlayerType ( value: string )
     {
         PlayerPrefs.SetString( 'playerType', value );
+    }
+
+    static get KnifeType ()
+    {
+        return PlayerPrefs.GetInt( 'KnifeType', 0 );//刀的类型
+    }
+    static set KnifeType ( value: number )
+    {
+        PlayerPrefs.SetInt( 'KnifeType', value );
+    }
+
+    static get HandType ()
+    {
+        return PlayerPrefs.GetInt( 'HandType', 0 );//手的类型
+    }
+    static set HandType ( value: number )
+    {
+        PlayerPrefs.SetInt( 'HandType', value );
     }
 
 }

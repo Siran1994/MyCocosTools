@@ -9,6 +9,8 @@ import { PlayerPrefs } from '../data/PlayerPrefs';
 import { Messager } from '../manager/Messager';
 import { BasePanel } from './BasePanel';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
+import { Label } from 'cc';
+import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SignPanel' )
@@ -22,6 +24,11 @@ export class SignPanel extends BasePanel
 
     @property( Button )
     Get2XBtn: Button;
+
+    @property( Label )
+    CoinTxt: Label;//金币信息
+    @property( Button )
+    AddCoinBtn: Button;//关闭
 
     @property( SignItem )
     signItems: SignItem[] = [];
@@ -47,9 +54,26 @@ export class SignPanel extends BasePanel
             this.DoSign( true );
         }, this );
 
+        this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
+        {
+            AudioMgr.Instance.点击广告按钮.Play();
+            var tmpNum = GameData.Coin;
+            var targetNum = tmpNum + Config.BoxReward.AdGet;
+            var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 10, targetNum, 0.001, '', () =>
+            {
+                ani.stop();
+                GameData.Coin = targetNum;
+                this.CoinTxt.string = GameData.Coin.toString();
+            } );
+        }, this );
+
         DOTweenAnimation.ScaleLoop( this.Get2XBtn.node, 1.1, 1, 0.5, 0.5 );
     }
 
+    onEnable ()
+    {
+        this.CoinTxt.string = GameData.Coin.toString();
+    }
 
     DoSign ( isGet2x = false )
     {
@@ -89,8 +113,6 @@ export class SignPanel extends BasePanel
                 coin = 200;
                 if ( isGet2x )
                     coin *= 2;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case '美女电视人':
                 PlayerPrefs.SetBool( "美女电视人" + 'UnLocked', true );
@@ -100,34 +122,34 @@ export class SignPanel extends BasePanel
                 coin = 500;
                 if ( isGet2x )
                     coin *= 2;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case '1000':
                 coin = 1000;
                 if ( isGet2x )
                     coin *= 2;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case '1500':
                 coin = 1500;
                 if ( isGet2x )
                     coin *= 2;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case '2000':
                 coin = 2000;
                 if ( isGet2x )
                     coin *= 2;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case '黄电视人':
                 PlayerPrefs.SetBool( "黄电视人" + 'UnLocked', true );
                 TipManager.Instance.showTips( '恭喜您获得黄电视人!' );
                 break;
+        }
+        if ( str != '美女电视人' && str != '黄电视人' )
+        {
+            UiManager.Instance.coinfly.playAnim( () =>
+            {
+                GameData.Coin += coin;
+                this.CoinTxt.string = GameData.Coin.toString();
+            } );
         }
     }
 }

@@ -6,11 +6,17 @@ import { Utils } from '../tool/Utils';
 import { GameManager } from '../manager/GameManager';
 import { PoolManager } from '../manager/PoolManager';
 import { ResMgr } from '../manager/ResMgr';
+import { Config } from '../data/Config';
+import { Button } from 'cc';
+import { AudioMgr } from '../manager/AudioMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'GamePanel' )
 export class GamePanel extends Component 
 {
+    @property( Button )
+    AddCoinBtn: Button;//获取金币
+
     @property( Label )
     LvTxt: Label;//关卡信息
 
@@ -24,6 +30,22 @@ export class GamePanel extends Component
     {
         this.LvTxt.string = '关卡' + GameData.Lv.toString();
         this.CoinTxt.string = GameManager.Instance.Coin.toString();
+    }
+
+    start ()
+    {
+        this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
+        {
+            AudioMgr.Instance.点击广告按钮.Play();
+            var tmpNum = GameData.Coin;
+            var targetNum = tmpNum + 100;
+            var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 20, targetNum, 0.001, '', () =>
+            {
+                ani.stop();
+                GameData.Coin = targetNum;
+                this.CoinTxt.string = GameData.Coin.toString();
+            } );
+        }, this );
     }
 
     onEnable ()
@@ -46,7 +68,7 @@ export class GamePanel extends Component
 
     CoinDoFly ( addnum: number )
     {
-        ResMgr.loadPrefab( 'prefab/ui/Coin', ( obj: Prefab ) =>
+        ResMgr.loadPrefab( Config.Path.Coin, ( obj: Prefab ) =>
         {
             let go = PoolManager.getNode( obj, this.target.parent ) as Node;
             go.scale = Vec3.ONE;

@@ -4,25 +4,33 @@ import { GameData } from '../data/GameData';
 import { GameManager } from '../manager/GameManager';
 import { PlayerCtrl } from '../role/PlayerCtrl';
 import { AudioMgr } from '../manager/AudioMgr';
-import { AniType } from '../data/Enum';
-import { VibrateManager } from '../other/VibrateManager';
+import { AniState } from '../data/Enum';
+import DOTweenAnimation from '../animation/DOTweenAnimation';
+import { Config } from '../data/Config';
 
 const { ccclass, property } = _decorator;
 
 @ccclass( 'MainPanel' )
 export class MainPanel extends Component 
 {
-    @property( Button )
-    shopBtn: Button;//商店
 
     @property( Button )
     setBtn: Button;//设置
+
+    @property( Button )
+    AddCoinBtn: Button;//获取金币
 
     @property( Button )
     signBtn: Button;//签到
 
     @property( Button )
     drawBtn: Button;//抽奖
+
+    @property( Button )
+    shopBtn: Button;//商店
+
+    @property( Button )
+    shopBtn2: Button;//商店
 
     @property( Label )
     LvTips: Label;//关卡信息
@@ -38,18 +46,24 @@ export class MainPanel extends Component
 
     start () 
     {
-        this.shopBtn.node.on( Button.EventType.CLICK, () =>
-        {
-            AudioMgr.Instance.通用按钮.Play();
-            UiManager.Instance.shopPanel.ShowPanel();
-            this.node.active = false;
-        }, this );
-
         this.setBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
             UiManager.Instance.settingPanel.ShowPanel();
             this.node.active = false;
+        }, this );
+
+        this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
+        {
+            AudioMgr.Instance.点击广告按钮.Play();
+            var tmpNum = GameData.Coin;
+            var targetNum = tmpNum + Config.BoxReward.AdGet;
+            var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 10, targetNum, 0.001, '', () =>
+            {
+                ani.stop();
+                GameData.Coin = targetNum;
+                this.CoinTxt.string = GameData.Coin.toString();
+            } );
         }, this );
 
         this.signBtn.node.on( Button.EventType.CLICK, () =>
@@ -64,6 +78,20 @@ export class MainPanel extends Component
         {
             AudioMgr.Instance.通用按钮.Play();
             UiManager.Instance.drawPanel.ShowPanel();
+            this.node.active = false;
+        }, this );
+
+        this.shopBtn.node.on( Button.EventType.CLICK, () =>
+        {
+            AudioMgr.Instance.通用按钮.Play();
+            UiManager.Instance.shopList.ShowPanel();
+            this.node.active = false;
+        }, this );
+
+        this.shopBtn2.node.on( Button.EventType.CLICK, () =>
+        {
+            AudioMgr.Instance.通用按钮.Play();
+            UiManager.Instance.shopPanel.ShowPanel();
             this.node.active = false;
         }, this );
     }
@@ -84,7 +112,7 @@ export class MainPanel extends Component
         GameManager.Instance.IsStart = true;
         this.node.active = false;
         UiManager.Instance.gamePanel.node.active = true;
-        PlayerCtrl.Instance.Play( AniType.奔跑 );
+        GameManager.Instance.Play( PlayerCtrl.Instance.anmator, AniState.行走 );
         AudioMgr.Instance.游戏背景乐.playMusic();
     }
 }

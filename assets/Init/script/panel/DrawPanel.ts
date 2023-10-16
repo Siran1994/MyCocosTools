@@ -1,4 +1,4 @@
-import { _decorator, Button, Label, Node, tween, Vec3 } from 'cc';
+import { _decorator, Button, Node, tween, Vec3 } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
 import { Utils } from '../tool/Utils';
 import { UiManager } from '../manager/UiManager';
@@ -6,8 +6,9 @@ import { GameData } from '../data/GameData';
 import { TipManager } from '../manager/TipManager';
 import { PlayerPrefs } from '../data/PlayerPrefs';
 import { BasePanel } from './BasePanel';
+import { Label } from 'cc';
+import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { Config } from '../data/Config';
-import { SpriteManager } from '../manager/SpriteManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'DrawPanel' )
@@ -26,11 +27,12 @@ export class DrawPanel extends BasePanel
     AdGetBtn: Button;
 
     @property( Label )
-    TipTxt: Label = null;
+    CoinTxt: Label;//金币信息
+    @property( Button )
+    AddCoinBtn: Button;//关闭   
 
     init ()
     {
-        this.TipTxt.string = '剩余免费次数:' + GameData.FreeNum.toString();
         if ( GameData.FreeNum > 0 )
         {
             this.FreeGetBtn.node.active = true;
@@ -38,10 +40,11 @@ export class DrawPanel extends BasePanel
         }
         else
         {
-            this.TipTxt.node.active = false;
             this.FreeGetBtn.node.active = false;
             this.AdGetBtn.node.active = true;
         }
+
+        this.CoinTxt.string = GameData.Coin.toString();
     }
 
     start ()
@@ -64,6 +67,22 @@ export class DrawPanel extends BasePanel
             AudioMgr.Instance.点击广告按钮.Play();
             this.updateCount( true );
         }, this );
+
+        this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
+        {
+            AudioMgr.Instance.点击广告按钮.Play();
+            var tmpNum = GameData.Coin;
+            var targetNum = tmpNum + Config.BoxReward.AdGet;
+            var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 10, targetNum, 0.001, '', () =>
+            {
+                ani.stop();
+                GameData.Coin = targetNum;
+                this.CoinTxt.string = GameData.Coin.toString();
+            } );
+        }, this );
+
+        DOTweenAnimation.ScaleLoop( this.FreeGetBtn.node, 1.1, 1, 0.5, 0.5 );
+        DOTweenAnimation.ScaleLoop( this.AdGetBtn.node, 1.1, 1, 0.5, 0.5 );
     }
 
     onEnable ()
@@ -93,7 +112,6 @@ export class DrawPanel extends BasePanel
                 this.FreeGetBtn.node.active = true;
                 this.AdGetBtn.node.active = false;
             }
-            this.TipTxt.string = '剩余免费次数:' + GameData.FreeNum;
             this.draw();
         }
     }
@@ -123,38 +141,22 @@ export class DrawPanel extends BasePanel
     {
         let rang = Utils.random( 1, 100 );
         let angle = 0;
-        if ( rang >= 1 && rang <= 40 ) //40% 100
-        {
+        if ( rang >= 1 && rang <= 30 ) //30% 100
             angle = 0;
-        }
-        else if ( rang >= 41 && rang <= 70 )//30% 200
-        {
+        else if ( rang >= 31 && rang <= 55 )//25% 200
             angle = 1;
-        }
-        else if ( rang >= 71 && rang <= 80 )//10% 300
-        {
+        else if ( rang >= 56 && rang <= 75 )//20% 300
             angle = 2;
-        }
-        else if ( rang >= 81 && rang <= 90 )//10% 500
-        {
+        else if ( rang >= 76 && rang <= 80 )//15% 500
             angle = 3;
-        }
-        else if ( rang >= 91 && rang <= 93 )//5% 1000
-        {
+        else if ( rang >= 81 && rang <= 90 )//10% 1000
             angle = 4;
-        }
-        else if ( rang >= 94 && rang <= 96 )//5% 3000
-        {
+        else if ( rang >= 91 && rang <= 95 )//5% 3000
             angle = 5;
-        }
-        else if ( rang >= 97 && rang <= 99 )//3% 5000
-        {
+        else if ( rang >= 96 && rang <= 98 )//3% 5000
             angle = 6;
-        }
         else //2% 绿巨人
-        {
             angle = 7;
-        }
         return angle;
     }
 
@@ -165,43 +167,37 @@ export class DrawPanel extends BasePanel
         {
             case 0:
                 coin = 100;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 1:
                 coin = 200;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 2:
                 coin = 300;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 3:
                 coin = 500;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 4:
                 coin = 1000;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 5:
                 coin = 3000;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 6:
                 coin = 5000;
-                GameData.Coin += coin;
-                TipManager.Instance.showTips( '恭喜您获得' + coin + '钻石!' );
                 break;
             case 7:
                 PlayerPrefs.SetBool( "蓝电视人" + 'UnLocked', true );
                 TipManager.Instance.showTips( '恭喜您获得蓝电视人!' );
                 break;
+        }
+        if ( index != 7 )
+        {
+            UiManager.Instance.coinfly.playAnim( () =>
+            {
+                GameData.Coin += coin;
+                this.CoinTxt.string = GameData.Coin.toString();
+            } );
         }
     }
 }

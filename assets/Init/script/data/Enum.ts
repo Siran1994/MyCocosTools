@@ -20,7 +20,7 @@ export enum PropType//场景道具
 }
 Enum( PropType );
 
-export enum AniType
+export enum AniState
 {
     待机,
     行走,
@@ -32,7 +32,7 @@ export enum AniType
     胜利,
     失败
 }
-Enum( AniType )
+Enum( AniState )
 
 export enum HeroType//商店道具
 {
@@ -57,3 +57,27 @@ export enum BossState
     死亡,
 }
 Enum( BossState )
+
+export enum ItemType
+{
+    None,
+    短小刀,
+    太刀,
+    爪子刀,
+    蝴蝶刀,
+    长小刀,
+
+    蓝手套,
+    橙手套,
+    粉手套,
+    绿手套,
+    黄手套
+}
+Enum( ItemType )
+
+export enum ItemPoolType//商店道具
+{
+    武器,
+    手套
+}
+Enum( ItemPoolType );

@@ -11,8 +11,8 @@ export class Loading extends Component
     @property( { type: Label } )
     m_progresstxt: Label = null!;
 
-    // @property( Node )
-    // tank: Node = null;
+    @property( Node )
+    tank: Node = null;
 
     public showProgress ( targetlv: string, cb?: Function )
     {
@@ -23,7 +23,7 @@ export class Loading extends Component
             this.m_progress.progress = completedCount / totalCount;
 
             this.m_progresstxt.string = '加载中：' + Math.floor( this.m_progress.progress * 100 ) + '%';
-            // this.tank.position = new Vec3( 540 * this.m_progress.progress - 320, this.tank.position.y );
+            this.tank.position = new Vec3( 540 * this.m_progress.progress - 320, this.tank.position.y );
         },
             ( error: Error, sceneAsset: SceneAsset ) =>
             {

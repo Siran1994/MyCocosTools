@@ -1,5 +1,16 @@
+import { Prefab } from "cc";
 import { Constructor, _decorator } from "cc";
+import { ResMgr } from "../manager/ResMgr";
+import { error } from "cc";
 const { ccclass } = _decorator;
+
+interface ITextAsset
+{
+    text?: string;
+    _file?: string;
+    json?: string
+}
+
 
 const CELL_DELIMITERS = [ ",", ";", "\t", "|", "^" ];
 const LINE_DELIMITERS = [ "\r\n", "\r", "\n" ];
@@ -42,12 +53,6 @@ const getterCast = function ( value: any, index: number, cast: any, d: any )
 };
 
 const CSV = {
-    //
-
-    /* =========================================
-        * Constants ===============================
-        * ========================================= */
-
     STANDARD_DECODE_OPTS: {
         skip: 0,
         limit: false,
@@ -488,13 +493,29 @@ const CSV = {
     }
 };
 
-type ObjType<T = any> = Constructor<T>;
-// type ObjData<T> =
-
 @ccclass( "CsvManager" )
 export class CsvManager
 {
-    /* class member could be defined like this */
+    private static instance: CsvManager = null;
+
+    public static get Instance ()
+    {
+        if ( this.instance )
+            return this.instance;
+        this.instance = new CsvManager();
+        return this.instance;
+    }
+
+    public getData ( fileName: string, cb?: ( asset: any ) => void )
+    {
+        // ResMgr.loadData( "prefab/data/" + fileName, () =>
+        // {
+
+
+
+        //     cb(  text );
+        // } );
+    }
 
     csvTables: any = {};
     csvTableForArr: any = {};
@@ -590,7 +611,6 @@ export class CsvManager
                 ret[ tbItem ] = table[ tbItem ];
             }
         }
-
         return ret;
     }
 

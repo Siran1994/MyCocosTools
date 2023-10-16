@@ -1,14 +1,16 @@
 import { _decorator, Component } from 'cc';
-import { MainPanel } from '../panel/MainPanel';
-import { GamePanel } from '../panel/GamePanel';
 import { DrawPanel } from '../panel/DrawPanel';
-import { SignPanel } from '../panel/SignPanel';
 import { FailedPanel } from '../panel/FailedPanel';
 import { FinishPanel } from '../panel/FinishPanel';
+import { FreeTryPanel } from '../panel/FreeTryPanel';
+import { GamePanel } from '../panel/GamePanel';
+import { MainPanel } from '../panel/MainPanel';
 import { RewardPanel } from '../panel/RewardPanel';
 import { SettingPanel } from '../panel/SettingPanel';
-import { FreeTryPanel } from '../panel/FreeTryPanel';
 import { ShopPanel } from '../panel/ShopPanel';
+import { SignPanel } from '../panel/SignPanel';
+import { ShopList } from '../shopList/ShopList';
+import CoinFly from '../animation/CoinFly';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'UiManager' )
@@ -35,6 +37,9 @@ export class UiManager extends Component
     @property( DrawPanel )
     drawPanel: DrawPanel = null;//抽奖
 
+    @property( ShopList )
+    shopList: ShopList = null;//抽奖
+
     @property( ShopPanel )
     shopPanel: ShopPanel = null;//抽奖
 
@@ -49,4 +54,7 @@ export class UiManager extends Component
 
     @property( FreeTryPanel )
     freeTryPanel: FreeTryPanel = null;//试用
+
+    @property( CoinFly )
+    coinfly: CoinFly = null;
 }

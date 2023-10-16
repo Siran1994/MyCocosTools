@@ -47,6 +47,18 @@ export class Config
             抽奖劵: 'cjq_img',
             幸运值: 'xyz_img',
             钻石: 'zuanshi_img',
+
+            短小刀: 'lb_1',
+            太刀: 'lb_2',
+            爪子刀: 'lb_3',
+            蝴蝶刀: 'lb_4',
+            长小刀: 'lb_5',
+
+            蓝手套: '蓝手',
+            橙手套: '橙手',
+            粉手套: '粉手',
+            绿手套: '绿手',
+            黄手套: '黄手',
         }
 
     //声音音量设置
@@ -60,7 +72,8 @@ export class Config
     public static BoxReward =
         {
             Min: 30,
-            Max: 50
+            Max: 50,
+            AdGet: 100
         }
 
     //声音音量设置

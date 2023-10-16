@@ -1,12 +1,10 @@
 import { _decorator, Component, SkeletalAnimation, Node, ParticleSystem, Vec3 } from 'cc';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
-import { AniType, HeroType, PropType } from '../data/Enum';
+import { AniState, HeroType, PropType } from '../data/Enum';
 import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
 import { Utils } from '../tool/Utils';
-
-
 
 const { ccclass, property } = _decorator;
 @ccclass( 'PlayerCtrl' )
@@ -18,34 +16,19 @@ export class PlayerCtrl extends Component
         PlayerCtrl.Instance = this;
     }
 
-    @property( { type: AniType } )
-    state: AniType = AniType.待机;
+    @property( { type: AniState } )
+    state: AniState = AniState.待机;
 
     @property( { type: SkeletalAnimation } )
     anmator: SkeletalAnimation;
 
     @property( Node )
-    ChangeGreen: Node = null;//变装特效
-
-    @property( Node )
-    ChangeRed: Node = null;//变装特效
-
-    @property( Node )
-    HitEffect: Node = null;//吃钻石特效
-
-    @property( Node )
-    LoseCoin: Node = null;//丢失特效
-
-    @property( Node )
-    Smoke: Node = null;//烟雾特效
+    Effects: Node[] = [];
 
     start ()
     {
-        this.Play( this.state );
-        this.ChangeGreen.active = false;
-        this.ChangeRed.active = false;
-        this.HitEffect.active = false;
-        this.LoseCoin.active = false;
+        for ( let i = 0; i < this.Effects.length; i++ )
+            this.Effects[ i ].active = false;
     }
     onEnable ()
     {
@@ -67,7 +50,7 @@ export class PlayerCtrl extends Component
                 AudioMgr.Instance.吃到钻石.Play();
                 break;
             case PropType.陷阱:
-                this.Play( AniType.受击 );
+                GameManager.Instance.Play( this.anmator, AniState.受击 );
                 this.ShowEffect( 1 );
                 AudioMgr.Instance.玩家受击.Play();
                 break;
@@ -81,36 +64,6 @@ export class PlayerCtrl extends Component
         }
     }
 
-
-    Play ( state: AniType )
-    {
-        switch ( state )
-        {
-            case AniType.待机:
-                this.anmator.crossFade( 'idle', 0.3 );
-                break;
-            case AniType.行走:
-                this.anmator.crossFade( 'walk', 0.3 );
-                break;
-            case AniType.奔跑:
-                this.anmator.crossFade( 'run', 0.3 );
-                break;
-            case AniType.起跳:
-                this.anmator.crossFade( 'jump', 0.3 );
-                break;
-            case AniType.受击:
-                this.anmator.crossFade( 'hit', 0.3 );
-                this.PlayNextAni( 0.5 );
-                break;
-            case AniType.死亡:
-                this.anmator.crossFade( 'die', 0.3 );
-                break;
-            case AniType.胜利:
-                this.anmator.crossFade( 'win', 0.3 );
-                break;
-        }
-    }
-
     PlayNextAni ( delay: number )
     {
         GameManager.Instance.Speed -= 2;
@@ -118,42 +71,25 @@ export class PlayerCtrl extends Component
         {
             GameManager.Instance.Speed += 2;
             if ( GameManager.Instance.IsStart )
-                this.Play( AniType.奔跑 );
+                GameManager.Instance.Play( this.anmator, AniState.奔跑 );
             else
-                this.Play( AniType.待机 );
+                GameManager.Instance.Play( this.anmator, AniState.待机 );
         } );
     }
 
-    ShowEffect ( index: number, isActive = false )//特效展示
+    ShowEffect ( index: number, isHasPar = false )//特效展示
     {
-        switch ( index )
+        if ( isHasPar )
         {
-            case 0://吃钻石
-                this.HitEffect.active = true;
-                this.HitEffect.getComponent( ParticleSystem ).play();
-                break;
-            case 1://掉金币
-                this.LoseCoin.active = true;
-                this.LoseCoin.getComponent( ParticleSystem ).play();
-                break;
-            case 2://变装
-                this.ChangeGreen.active = true;
-                var effcets = this.ChangeGreen.getComponentsInChildren( ParticleSystem );
-                for ( let index = 0; index < effcets.length; index++ )
-                    effcets[ index ].play();
-                break;
-            case 3://烟雾
-                this.Smoke.active = true;
-                this.Smoke.getComponent( ParticleSystem ).play();
-                break;
-            case 4://变装
-                this.ChangeRed.active = true;
-                var effcets = this.ChangeRed.getComponentsInChildren( ParticleSystem );
-                for ( let index = 0; index < effcets.length; index++ )
-                    effcets[ index ].play();
-                break;
+            this.Effects[ index ].active = true;
+            var effcets = this.Effects[ index ].getComponentsInChildren( ParticleSystem );
+            for ( let index = 0; index < effcets.length; index++ )
+                effcets[ index ].play();
         }
-        if ( isActive )
-            this.Smoke.active = false;
+        else
+        {
+            this.Effects[ index ].active = true;
+            this.Effects[ index ].getComponent( ParticleSystem ).play();
+        }
     }
 }

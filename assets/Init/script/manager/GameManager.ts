@@ -7,10 +7,11 @@ import { PrefabManager } from './PrefabManager';
 import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
 import { Config } from '../data/Config';
-import { AniType } from '../data/Enum';
+import { AniState } from '../data/Enum';
 import { PlayerCtrl } from '../role/PlayerCtrl';
 import { AudioMgr } from './AudioMgr';
 import { Messager } from './Messager';
+import { SkeletalAnimation, AnimationComponent } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'GameManager' )
@@ -70,7 +71,7 @@ export class GameManager extends Component
         if ( isfailed ) //游戏失败
         {
             GameManager.Instance.IsStart = false;
-            PlayerCtrl.Instance.Play( AniType.死亡 );
+            GameManager.Instance.Play( PlayerCtrl.Instance.anmator, AniState.死亡 );
             UiManager.Instance.faildPanel.node.active = true;
             AudioMgr.Instance.失败结算.Play();
         }
@@ -119,8 +120,39 @@ export class GameManager extends Component
         }
     }
 
-    protected onDestroy (): void
+    Play ( anmator: SkeletalAnimation | AnimationComponent, state: AniState )
     {
-        // PoolManager.clear();
+        switch ( state )
+        {
+            case AniState.待机:
+                anmator.crossFade( 'idle', 0.3 );
+                break;
+            case AniState.行走:
+                anmator.crossFade( 'walk', 0.3 );
+                break;
+            case AniState.奔跑:
+                anmator.crossFade( 'run', 0.3 );
+                break;
+            case AniState.起跳:
+                anmator.crossFade( 'jump', 0.3 );
+                break;
+            case AniState.攻击:
+                anmator.crossFade( 'fly', 0.3 );
+                break;
+            case AniState.受击:
+                anmator.crossFade( 'flying', 0.3 );
+                break;
+            case AniState.死亡:
+                anmator.crossFade( 'die', 0.3 );
+                break;
+            case AniState.胜利:
+                anmator.crossFade( 'win', 0.3 );
+                break;
+        }
+    }
+
+    onDestroy ()
+    {
+        PoolManager.clear();
     }
 }

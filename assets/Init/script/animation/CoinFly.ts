@@ -18,12 +18,16 @@ export default class CoinFly extends Component
         PoolManager.prePool( this.coinPrefab, 10 )
     }
 
-    playAnim ( callback: Function )
+    playAnim ( callback: Function, startPos: Node = null )
     {
         let randomCount = 10;
-        let stPos = this.startPoint.getPosition();
-        let edPos = this.endPoint.getPosition();
-        this.playCoinFlyAnim( randomCount, stPos, edPos, 150, callback );
+        if ( startPos == null )
+        {
+            let stPos = this.startPoint.getPosition();
+            this.playCoinFlyAnim( randomCount, stPos, this.endPoint.getPosition(), 150, callback );
+        }
+        else
+            this.playCoinFlyAnim( randomCount, startPos.getPosition(), this.endPoint.getPosition(), 150, callback );
     }
 
     playCoinFlyAnim ( count: number, stPos: Vec3, edPos: Vec3, r: number = 150, callback: Function )
@@ -59,12 +63,12 @@ export default class CoinFly extends Component
                     tween().to( 0.5, { position: item.edPos } ),
                     tween().call( () =>
                     {
-                        callback();
                         PoolManager.putNode( item.node );
                     } )
                 )
                 .start();
         } );
+        callback();
     }
 
     /**

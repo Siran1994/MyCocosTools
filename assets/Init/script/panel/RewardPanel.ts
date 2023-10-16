@@ -2,9 +2,7 @@ import { _decorator, Button, Label } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
 import { Messager } from '../manager/Messager';
 import { GameData } from '../data/GameData';
-import CoinFly from '../animation/CoinFly';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
-import { Utils } from '../tool/Utils';
 import { GameManager } from '../manager/GameManager';
 import { BasePanel } from './BasePanel';
 const { ccclass, property } = _decorator;
@@ -25,10 +23,7 @@ export class RewardPanel extends BasePanel
     TipTxt: Label = null;
 
     @property( Label )
-    CoinTxt: Label;//金币信息  
-
-    @property( CoinFly )
-    coinfly: CoinFly = null;
+    CoinTxt: Label;//金币信息      
 
     totalCount = 3;
     tmpCoin = 0;
@@ -66,13 +61,21 @@ export class RewardPanel extends BasePanel
         this.CancelBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            this.GetAllCoin();
+            GameManager.Instance.NextLevel( false, false, () =>
+            {
+                GameManager.Instance.init();
+            } );
+            this.HidePanel();
         }, this );
 
         this.NextLvBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            this.GetAllCoin();
+            GameManager.Instance.NextLevel( false, false, () =>
+            {
+                GameManager.Instance.init();
+            } );
+            this.HidePanel();
         }, this );
 
         DOTweenAnimation.ScaleLoop( this.AdGetAllBtn.node, 1.1, 1, 0.5, 0.5 );
@@ -97,32 +100,5 @@ export class RewardPanel extends BasePanel
         this.TipTxt.string = '免费开启次数:' + this.totalCount;
         if ( this.totalCount == 0 )
             Messager.Broadcast( 'NoCount' );
-    }
-
-    GetAllCoin ()
-    {
-        this.coinfly.playAnim( () =>
-        {
-            var targetNum = GameData.Coin;
-            var ani = DOTweenAnimation.stepNum( this.CoinTxt, this.tmpCoin, 10, targetNum, 0, '', () =>
-            {
-                ani.stop();
-                this.tmpCoin = targetNum;
-                this.CoinTxt.string = GameData.Coin.toString();
-            } );
-        } );
-
-        Utils.DelayCallBack( 2, () =>
-        {
-            this.HidePanel();
-            GameManager.Instance.NextLevel( false, false, () =>
-            {
-                GameManager.Instance.init();
-            } );
-        } );
-        Utils.DelayCallBack( 1, () =>
-        {
-            AudioMgr.Instance.奖励解锁进度.Play();
-        } );
     }
 }
