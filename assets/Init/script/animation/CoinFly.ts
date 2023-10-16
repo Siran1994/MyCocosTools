@@ -64,11 +64,12 @@ export default class CoinFly extends Component
                     tween().call( () =>
                     {
                         PoolManager.putNode( item.node );
+                        if ( idx == count - 1 )
+                            callback();
                     } )
                 )
                 .start();
         } );
-        callback();
     }
 
     /**

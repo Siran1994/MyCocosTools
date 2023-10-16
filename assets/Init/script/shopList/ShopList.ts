@@ -5,7 +5,8 @@ import { AudioMgr } from '../manager/AudioMgr';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { UiManager } from '../manager/UiManager';
 import { Messager } from '../manager/Messager';
-import { BasePanel } from 'db://assets/Init/script/panel/BasePanel';
+import { Config } from '../data/Config';
+import { BasePanel } from '../panel/BasePanel';
 
 const { ccclass, property } = _decorator;
 
@@ -39,8 +40,8 @@ export class ShopList extends BasePanel
         {
             AudioMgr.Instance.点击广告按钮.Play();
             var tmpNum = GameData.Coin;
-            var targetNum = tmpNum + 400;
-            var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 20, targetNum, 0.001, '', () =>
+            var targetNum = tmpNum + Config.BoxReward.AdGet;
+            var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 10, targetNum, 0.001, '', () =>
             {
                 ani.stop();
                 GameData.Coin = targetNum;

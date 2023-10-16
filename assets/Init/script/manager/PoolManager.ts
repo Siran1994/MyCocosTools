@@ -7,7 +7,8 @@ export class PoolManager
     static dictPool: any = {}
     static dictPrefab: any = {}
 
-    public static getNode ( prefab: Prefab, parent?: Node )//从对象池中获取对象
+    //从对象池中获取对象
+    public static getNode ( prefab: Prefab, parent?: Node )
     {
         let name = prefab.data.name;
         this.dictPrefab[ name ] = prefab;
@@ -36,12 +37,7 @@ export class PoolManager
         return node;
     }
 
-    /**
-        * 预生成对象池
-        * @param prefab 
-        * @param nodeNum 
-        * 使用——PoolManager.instance.prePool(prefab, 40);
-        */
+    //预生成对象池
     public static prePool ( prefab: Prefab, nodeNum: number )
     {
         const name = prefab.name;
@@ -56,7 +52,8 @@ export class PoolManager
         }
     }
 
-    public static putNode ( node: Node ) //将对应节点放回对象池中
+    //将对应节点放回对象池中
+    public static putNode ( node: Node ) 
     {
         let name = node.name;
         let pool = null;
@@ -70,7 +67,8 @@ export class PoolManager
         pool.put( node );
     }
 
-    public static clearPool ( name: string )//清理指定对象池
+    //清理指定对象池
+    public static clearPool ( name: string )
     {
         if ( this.dictPool.hasOwnProperty( name ) )
         {
@@ -81,10 +79,6 @@ export class PoolManager
 
     public static clear ()//清理所有对象池
     {
-        // PoolManager.clearPool( 'Coin' );
-        // PoolManager.clearPool( 'Loading' );
-        // PoolManager.clearPool( 'fightTip' );
-        // PoolManager.clearPool( 'tips' );
-        //PoolManager.clearPool( 'RewardPanel' );
+        // PoolManager.clearPool( 'Coin' );       
     }
 }

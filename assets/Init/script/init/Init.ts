@@ -24,14 +24,14 @@ export class Init extends Component
     {
         await ResMgr.loadBundle( 'bundle', () =>
         {
+            PlatformMgr.Instance.getCurrentPlatform();
+            PrefabManager.loadPrefab( 'Lv', PrefabManager.Path.Lv );
+            AudioMgr.init( this.node.parent, () =>
+            {
+                AudioMgr.Instance.首页背景乐.playMusic();
+
+            }, this );
             this.loader.showProgress( 'game', () => { GameManager.Instance.init() } );
         } );
-        await PlatformMgr.Instance.getCurrentPlatform();
-        await PrefabManager.loadPrefab( 'Lv', PrefabManager.Path.Lv );
-        await AudioMgr.init( this.node.parent, () =>
-        {
-            AudioMgr.Instance.首页背景乐.playMusic();
-
-        }, this );
     }
 }

@@ -46,7 +46,7 @@ export class online extends Component
         }
         else
         {
-            this.coinfly.playAnim( () =>
+            this.UpdateCoin( () =>
             {
                 var tmpNum = GameData.Coin;
                 var targetNum = tmpNum + this.currentCount;

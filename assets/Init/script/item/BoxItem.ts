@@ -2,8 +2,8 @@ import { _decorator, AnimationComponent, Button, Component, Label } from 'cc';
 import { Utils } from '../tool/Utils';
 import { AudioMgr } from '../manager/AudioMgr';
 import { Messager } from '../manager/Messager';
-import { GameData } from '../data/GameData';
 import { UiManager } from '../manager/UiManager';
+import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'BoxItem' )
@@ -32,7 +32,7 @@ export class BoxItem extends Component
         this.FreeGetBtn.node.on( Button.EventType.CLICK, () =>
         {
             this.FreeGetBtn.interactable = false;
-            let coin = Utils.random( 10, 20 );
+            let coin = Utils.random( Config.BoxReward.Min, Config.BoxReward.Max );
             this.CoinNum.node.active = true;
             this.CoinNum.string = coin.toString();
             AudioMgr.Instance.通用按钮.Play();
@@ -40,11 +40,7 @@ export class BoxItem extends Component
             this.ani.play();
             this.isOpened = true;
             Messager.Broadcast( 'addCount' );
-            UiManager.Instance.coinfly.playAnim( () =>
-            {
-                GameData.Coin += coin;
-                UiManager.Instance.rewardPanel.CoinTxt.string = GameData.Coin.toString();
-            } );
+            UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt );
         }, this );
 
         this.AdGetBtn.node.on( Button.EventType.CLICK, () =>
@@ -52,17 +48,13 @@ export class BoxItem extends Component
             this.AdGetBtn.interactable = false;
             this.FreeGetBtn.interactable = false;
             this.AdGetBtn.node.active = false;
-            let coin = Utils.random( 10, 20 );
+            let coin = Utils.random( Config.BoxReward.Min, Config.BoxReward.Max );
             this.CoinNum.node.active = true;
             this.CoinNum.string = coin.toString();
             AudioMgr.Instance.点击广告按钮.Play();
             this.ani.playOnLoad = true;
             this.ani.play();
-            UiManager.Instance.coinfly.playAnim( () =>
-            {
-                GameData.Coin += coin;
-                UiManager.Instance.rewardPanel.CoinTxt.string = GameData.Coin.toString();
-            } );
+            UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt );
         }, this );
     }
 
@@ -93,17 +85,13 @@ export class BoxItem extends Component
             this.AdGetBtn.interactable = false;
             this.FreeGetBtn.interactable = false;
             this.AdGetBtn.node.active = false;
-            let coin = Utils.random( 10, 20 );
+            let coin = Utils.random( Config.BoxReward.Min, Config.BoxReward.Max );
             this.CoinNum.node.active = true;
             this.CoinNum.string = coin.toString();
             AudioMgr.Instance.点击广告按钮.Play();
             this.ani.playOnLoad = true;
             this.ani.play();
-            UiManager.Instance.coinfly.playAnim( () =>
-            {
-                GameData.Coin += coin;
-                UiManager.Instance.rewardPanel.CoinTxt.string = GameData.Coin.toString();
-            } );
+            UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt );
         }
     }
 }

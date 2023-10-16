@@ -6,6 +6,7 @@ import { BasePanel } from './BasePanel';
 import { Label } from 'cc';
 import { GameData } from '../data/GameData';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
+import { UiManager } from '../manager/UiManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'FailedPanel' )
@@ -30,7 +31,7 @@ export class FailedPanel extends BasePanel
         this.RestartBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            GameData.Coin += GameManager.Instance.Coin;
+            UiManager.Instance.UpdateCoin( GameManager.Instance.Coin, null );
             GameManager.Instance.NextLevel( false, true, () =>
             {
                 GameManager.Instance.init();
@@ -40,7 +41,7 @@ export class FailedPanel extends BasePanel
         this.Reward3x.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.通用按钮.Play();
-            GameData.Coin += GameManager.Instance.Coin * 3;
+            UiManager.Instance.UpdateCoin( GameManager.Instance.Coin * 3, null );
             GameManager.Instance.NextLevel( false, true, () =>
             {
                 GameManager.Instance.init()

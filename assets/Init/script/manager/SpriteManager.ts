@@ -26,7 +26,7 @@ export class SpriteManager
     public static set ( key: string, value: SpriteFrame ): void
     {
         if ( this.spriteFrameMap.has( key ) )
-            console.error( `set fail: ${ key } already exsit in the textureMap` );
+            console.warn( `set fail: ${ key } already exsit in the textureMap` );
         else
             this.spriteFrameMap.set( key, value );
     }
@@ -37,7 +37,7 @@ export class SpriteManager
         if ( this.spriteFrameMap.has( key ) )
             return this.spriteFrameMap.get( key );
         else
-            console.error( `get fail: ${ key } not exsit in the textureMap` );
+            console.warn( `get fail: ${ key } not exsit in the textureMap` );
     };
 
     //释放单个纹理资源

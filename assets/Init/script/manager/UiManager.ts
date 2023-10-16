@@ -1,16 +1,19 @@
-import { _decorator, Component } from 'cc';
-import { DrawPanel } from '../panel/DrawPanel';
-import { FailedPanel } from '../panel/FailedPanel';
-import { FinishPanel } from '../panel/FinishPanel';
-import { FreeTryPanel } from '../panel/FreeTryPanel';
-import { GamePanel } from '../panel/GamePanel';
-import { MainPanel } from '../panel/MainPanel';
-import { RewardPanel } from '../panel/RewardPanel';
-import { SettingPanel } from '../panel/SettingPanel';
-import { ShopPanel } from '../panel/ShopPanel';
-import { SignPanel } from '../panel/SignPanel';
-import { ShopList } from '../shopList/ShopList';
-import CoinFly from '../animation/CoinFly';
+import { _decorator, Component, Label, Node } from "cc";
+import CoinFly from "../animation/CoinFly";
+import DOTweenAnimation from "../animation/DOTweenAnimation";
+import { GameData } from "../data/GameData";
+import { DrawPanel } from "../panel/DrawPanel";
+import { FailedPanel } from "../panel/FailedPanel";
+import { FinishPanel } from "../panel/FinishPanel";
+import { FreeTryPanel } from "../panel/FreeTryPanel";
+import { GamePanel } from "../panel/GamePanel";
+import { MainPanel } from "../panel/MainPanel";
+import { RewardPanel } from "../panel/RewardPanel";
+import { SettingPanel } from "../panel/SettingPanel";
+import { ShopPanel } from "../panel/ShopPanel";
+import { SignPanel } from "../panel/SignPanel";
+import { ShopList } from "../shopList/ShopList";
+import { SpriteManager } from "./SpriteManager";
 const { ccclass, property } = _decorator;
 
 @ccclass( 'UiManager' )
@@ -20,6 +23,8 @@ export class UiManager extends Component
     onLoad ()
     {
         UiManager.Instance = this;
+
+        SpriteManager.loadTexture( SpriteManager.Path );
     }
 
     @property( MainPanel )
@@ -57,4 +62,25 @@ export class UiManager extends Component
 
     @property( CoinFly )
     coinfly: CoinFly = null;
+
+    UpdateCoin ( num: number, txt: Label, startPos: Node = null )
+    {
+        this.coinfly.playAnim( () =>
+        {
+            if ( txt != null )
+            {
+                var tmpNum = GameData.Coin;
+                var targetNum = tmpNum + num;
+                var ani = DOTweenAnimation.stepNum( txt, tmpNum, 10, targetNum, 0.001, '', () =>
+                {
+                    ani.stop();
+                    GameData.Coin = targetNum;
+                    txt.string = GameData.Coin.toString();
+                } );
+            }
+            else
+                GameData.Coin + num;
+
+        }, startPos );
+    }
 }

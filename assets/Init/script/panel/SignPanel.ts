@@ -144,13 +144,7 @@ export class SignPanel extends BasePanel
                 break;
         }
         if ( str != '美女电视人' && str != '黄电视人' )
-        {
-            UiManager.Instance.coinfly.playAnim( () =>
-            {
-                GameData.Coin += coin;
-                this.CoinTxt.string = GameData.Coin.toString();
-            } );
-        }
+            UiManager.Instance.UpdateCoin( coin, this.CoinTxt );
     }
 }
 

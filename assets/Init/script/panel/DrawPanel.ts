@@ -193,11 +193,7 @@ export class DrawPanel extends BasePanel
         }
         if ( index != 7 )
         {
-            UiManager.Instance.coinfly.playAnim( () =>
-            {
-                GameData.Coin += coin;
-                this.CoinTxt.string = GameData.Coin.toString();
-            } );
+            UiManager.Instance.UpdateCoin( coin, this.CoinTxt );
         }
     }
 }

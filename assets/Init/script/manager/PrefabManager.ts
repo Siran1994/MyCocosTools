@@ -56,7 +56,7 @@ export class PrefabManager
         if ( targetMap.has( key ) )
             return targetMap.get( key );
         else
-            console.error( `get fail: ${ key } not exsit in the prefabMap` );
+            console.warn( `get fail: ${ key } not exsit in the prefabMap` );
     };
 
     public static releaseAsset ( key, targetMap: Map<string, Prefab> )
