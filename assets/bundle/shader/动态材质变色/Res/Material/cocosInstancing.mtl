@@ -16,8 +16,7 @@
       "USE_INSTANCING": true,
       "USE_RIM_LIGHT": true,
       "USE_GRAYCOLOR": true,
-      "USE_EMISSIVE": true,
-      "USE_BASE_COLOR_MAP": true
+      "USE_EMISSIVE": true
     },
     {}
   ],
@@ -40,7 +39,15 @@
         ]
       }
     },
-    {}
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    }
   ],
   "_props": [
     {

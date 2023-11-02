@@ -45,20 +45,7 @@ export class online extends Component
             return;
         }
         else
-        {
-            this.UpdateCoin( () =>
-            {
-                var tmpNum = GameData.Coin;
-                var targetNum = tmpNum + this.currentCount;
-                var ani = DOTweenAnimation.stepNum( UiManager.Instance.mainPanel.CoinTxt, tmpNum, 10, targetNum, 0, '', () =>
-                {
-                    ani.stop();
-                    GameData.Coin = targetNum;
-                    UiManager.Instance.mainPanel.CoinTxt.string = GameData.Coin.toString();
-                    this.clear();
-                } );
-            } );
-        }
+            UiManager.Instance.UpdateCoin( this.currentCount, UiManager.Instance.mainPanel.CoinTxt );
     }
 
     update ( dt: number )

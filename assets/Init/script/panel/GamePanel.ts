@@ -1,4 +1,4 @@
-import { _decorator, Component, Label, Node, tween, Quat, Vec3, Sprite, Prefab } from 'cc';
+import { _decorator, Component, Label, Node, tween, Quat, Vec3, Prefab } from 'cc';
 import { Messager } from '../manager/Messager';
 import { GameData } from '../data/GameData';
 import DOTweenAnimation from '../animation/DOTweenAnimation';

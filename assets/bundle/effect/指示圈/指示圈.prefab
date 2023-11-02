@@ -118,7 +118,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "dac597e4-d139-486c-8aaa-4621be504d28",
+        "__uuid__": "f1081ff3-eaa2-4ba4-bec6-2aaf5b8027c9",
         "__expectedType__": "cc.Material"
       }
     ],
@@ -816,12 +816,12 @@
     "_lengthScale": 1,
     "_mesh": null,
     "_cpuMaterial": {
-      "__uuid__": "dac597e4-d139-486c-8aaa-4621be504d28",
+      "__uuid__": "f1081ff3-eaa2-4ba4-bec6-2aaf5b8027c9",
       "__expectedType__": "cc.Material"
     },
     "_gpuMaterial": null,
     "_mainTexture": {
-      "__uuid__": "3d3710e4-43b3-4453-a133-8390520e403c@6c48a",
+      "__uuid__": "136de26d-94ac-450f-a00a-41f9fa1a1a31@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
     "_useGPU": false,
@@ -900,7 +900,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "7691a9fb-82f1-42ec-8ab5-eece343c4843",
+        "__uuid__": "f1081ff3-eaa2-4ba4-bec6-2aaf5b8027c9",
         "__expectedType__": "cc.Material"
       }
     ],
@@ -1553,12 +1553,12 @@
     "_lengthScale": 1,
     "_mesh": null,
     "_cpuMaterial": {
-      "__uuid__": "7691a9fb-82f1-42ec-8ab5-eece343c4843",
+      "__uuid__": "f1081ff3-eaa2-4ba4-bec6-2aaf5b8027c9",
       "__expectedType__": "cc.Material"
     },
     "_gpuMaterial": null,
     "_mainTexture": {
-      "__uuid__": "cbd8e295-d934-41bb-a7ef-da88fd8d3a48@6c48a",
+      "__uuid__": "136de26d-94ac-450f-a00a-41f9fa1a1a31@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
     "_useGPU": false,

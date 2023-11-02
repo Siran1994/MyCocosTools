@@ -1,7 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
 import { ItemInfo } from './ItemInfo';
 import { item } from './item';
-import { ItemPoolType } from '../script/data/Enum';
+import { ItemPoolType } from 'db://assets/Init/script/data/Enum';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'ItemList' )

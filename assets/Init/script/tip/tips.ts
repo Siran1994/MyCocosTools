@@ -1,4 +1,4 @@
-import { _decorator, Component, LabelComponent, Vec3, tween, UIOpacityComponent, isValid, SpriteFrame, SpriteComponent, UITransformComponent, Color } from 'cc';
+import { _decorator, Component, Vec3, tween, UIOpacityComponent, isValid, SpriteFrame, SpriteComponent, UITransformComponent, Color } from 'cc';
 import { PoolManager } from '../manager/PoolManager';
 import { RichText } from 'cc';
 const { ccclass, property } = _decorator;

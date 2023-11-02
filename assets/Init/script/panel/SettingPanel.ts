@@ -1,4 +1,4 @@
-import { _decorator, Button, Component, Toggle } from 'cc';
+import { _decorator, Button, Toggle } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
 import { UiManager } from '../manager/UiManager';
 import { GameData } from '../data/GameData';

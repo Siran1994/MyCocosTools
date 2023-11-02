@@ -34,6 +34,34 @@ export class PlayerPrefs
     }
     //#endregion
 
+    //#region  Float类型
+    public static GetFloat ( key: string, default_Number: number ): number
+    {
+        return PlayerPrefs.GetFloatValueNum( key, default_Number );
+    }
+
+    public static SetFloat ( key: string, default_Number: number )
+    {
+        PlayerPrefs.SetFloatValueNum( key, default_Number );
+    }
+
+    private static GetFloatValueNum ( value_name: string, default_Number: number ): number
+    {
+        let t = localStorage.getItem( value_name );
+
+        if ( t != null )
+        {
+            return Number.parseFloat( t );
+        }
+        return default_Number;
+    }
+
+    private static SetFloatValueNum ( key: string, num: number )
+    {
+        localStorage.setItem( key, num.toString() );
+    }
+    //#endregion
+
     //#region Bool类型
     public static GetBool ( key: string, default_Bool: boolean ): boolean
     {

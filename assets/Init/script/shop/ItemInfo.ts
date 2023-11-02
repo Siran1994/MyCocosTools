@@ -1,5 +1,5 @@
 import { SpriteFrame, _decorator } from 'cc';
-import { ItemType } from '../script/data/Enum';
+import { ItemType } from 'db://assets/Init/script/data/Enum';
 
 const { ccclass, property } = _decorator;
 

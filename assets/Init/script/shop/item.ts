@@ -1,10 +1,11 @@
 import { _decorator, Component, Sprite, Toggle, Node } from 'cc';
 import { ItemInfo } from './ItemInfo';
-import { ItemPoolType, ItemType } from '../script/data/Enum';
-import { GameData } from '../script/data/GameData';
-import { PlayerPrefs } from '../script/data/PlayerPrefs';
-import { AudioMgr } from '../script/manager/AudioMgr';
-import { UiManager } from '../script/manager/UiManager';
+import { ItemPoolType, ItemType } from 'db://assets/Init/script/data/Enum';
+import { GameData } from 'db://assets/Init/script/data/GameData';
+import { PlayerPrefs } from 'db://assets/Init/script/data/PlayerPrefs';
+import { AudioMgr } from 'db://assets/Init/script/manager/AudioMgr';
+import { UiManager } from 'db://assets/Init/script/manager/UiManager';
+import { Messager } from 'db://assets/Init/script/manager/Messager';
 
 const { ccclass, property } = _decorator;
 
@@ -56,7 +57,20 @@ export class item extends Component
 
     onEnable ()
     {
-        this.BtnClick();
+        Messager.AddListener( 'UpdateState', this, this.UpdateState );
+    }
+
+    onDisable ()
+    {
+        Messager.RemoveListener( 'UpdateState', this, this.UpdateState );
+    }
+
+    UpdateState ( index: number )
+    {
+        if ( this.itemInfo.index == index )
+        {
+            this.BtnClick();
+        }
     }
 
     BtnClick ()

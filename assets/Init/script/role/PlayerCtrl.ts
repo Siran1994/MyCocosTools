@@ -1,4 +1,4 @@
-import { _decorator, Component, SkeletalAnimation, Node, ParticleSystem, Vec3 } from 'cc';
+import { _decorator, Component, SkeletalAnimation, Node, ParticleSystem } from 'cc';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { AniState, HeroType, PropType } from '../data/Enum';
 import { AudioMgr } from '../manager/AudioMgr';

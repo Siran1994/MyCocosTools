@@ -1,6 +1,6 @@
-import { _decorator, Component, Label, Button, Toggle, Sprite, tween, Vec3, Node } from "cc";
-import { ItemInfo } from "../../shop/ItemInfo";
-import { ItemList } from "../../shop/ItemList";
+import { _decorator, Label, Button, Toggle, Sprite, tween, Vec3, Node } from "cc";
+import { ItemInfo } from "../shop/ItemInfo";
+import { ItemList } from "../shop/ItemList";
 import { AudioMgr } from "../manager/AudioMgr";
 import { SpriteManager } from "../manager/SpriteManager";
 import { TipManager } from "../manager/TipManager";
@@ -163,11 +163,13 @@ export class ShopPanel extends BasePanel
         {
             GameData.KnifeType = this.tmpInfo.index;
             Messager.Broadcast( 'ChangeKnife', GameData.KnifeType );
+            Messager.Broadcast( 'UpdateState', this.tmpInfo.index );
         }
         else
         {
             GameData.HandType = this.tmpInfo.index;
             Messager.Broadcast( 'ChangeHand', GameData.HandType );
+            Messager.Broadcast( 'UpdateState', this.tmpInfo.index );
         }
         this.HidePanel();
         UiManager.Instance.mainPanel.node.active = true;
