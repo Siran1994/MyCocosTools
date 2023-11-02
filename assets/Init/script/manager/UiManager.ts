@@ -63,6 +63,25 @@ export class UiManager extends Component
     @property( CoinFly )
     coinfly: CoinFly = null;
 
+    init ()
+    {
+        if ( GameData.Lv == 2 && this.signPanel.isCanSign() )
+        {
+            this.signPanel.ShowPanel();
+        }
+
+        if ( GameData.Lv == 3 && GameData.PackPlan == 0 )
+        {
+            this.drawPanel.ShowPanel();
+            GameData.PackPlan = 1;
+        }
+    }
+
+    start ()
+    {
+        this.init();
+    }
+
     UpdateCoin ( num: number, txt: Label, startPos: Node = null )
     {
         this.coinfly.playAnim( () =>
