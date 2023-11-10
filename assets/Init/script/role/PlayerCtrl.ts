@@ -5,6 +5,7 @@ import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
 import { Utils } from '../tool/Utils';
+import { AnimationComponent } from 'cc';
 
 const { ccclass, property } = _decorator;
 @ccclass( 'PlayerCtrl' )
@@ -19,8 +20,8 @@ export class PlayerCtrl extends Component
     @property( { type: AniState } )
     state: AniState = AniState.待机;
 
-    @property( { type: SkeletalAnimation } )
-    anmator: SkeletalAnimation;
+    @property( { type: AnimationComponent } )
+    anmator: AnimationComponent = null;
 
     @property( Node )
     Effects: Node[] = [];

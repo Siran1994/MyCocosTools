@@ -134,8 +134,7 @@
         "_techIdx": 0,
         "_defines": [
           {
-            "USE_INSTANCING": true,
-            "USE_TEXTURE": true
+            "USE_INSTANCING": true
           }
         ],
         "_states": [
@@ -151,10 +150,6 @@
         ],
         "_props": [
           {
-            "mainTexture": {
-              "__uuid__": "3a10bc98-86b0-4f22-8f45-1a63df6eb1ff@6c48a",
-              "__expectedType__": "cc.Texture2D"
-            },
             "mainColor": {
               "__type__": "cc.Color",
               "r": 231,

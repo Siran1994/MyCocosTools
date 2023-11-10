@@ -1,0 +1,125 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a",
+  "files": [],
+  "subMetas": {
+    "49758": {
+      "importer": "gltf-material",
+      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@49758",
+      "displayName": "",
+      "id": "49758",
+      "name": "lambert16.material",
+      "userData": {
+        "gltfIndex": 1
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "91503": {
+      "importer": "gltf-mesh",
+      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@91503",
+      "displayName": "",
+      "id": "91503",
+      "name": "polySurface179_Material0.mesh",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.1.0",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "e873a": {
+      "importer": "texture",
+      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@e873a",
+      "displayName": "",
+      "id": "e873a",
+      "name": "file2.texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": false,
+        "imageUuidOrDatabaseUri": "db://assets/bundle/model/场景/地面贴图2.png"
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "b904f": {
+      "importer": "gltf-material",
+      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@b904f",
+      "displayName": "",
+      "id": "b904f",
+      "name": "lambert14.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "9a9f8": {
+      "importer": "gltf-scene",
+      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@9a9f8",
+      "displayName": "",
+      "id": "9a9f8",
+      "name": "赛道.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [
+      {
+        "name": "file2",
+        "uri": "db://assets/bundle/model/场景/地面贴图2.png"
+      }
+    ],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@9a9f8",
+    "assetFinder": {
+      "meshes": [
+        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@91503"
+      ],
+      "skeletons": [],
+      "textures": [
+        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@e873a"
+      ],
+      "materials": [
+        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@b904f",
+        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@49758"
+      ],
+      "scenes": [
+        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@9a9f8"
+      ]
+    }
+  }
+}

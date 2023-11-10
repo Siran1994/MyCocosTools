@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "bd978524-adb7-4763-9b5f-6f77043191fa",
+  "uuid": "59d05215-b8f8-46a0-b0b0-c0306fe7b664",
   "files": [
     ".json",
     ".png"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "bd978524-adb7-4763-9b5f-6f77043191fa@6c48a",
-      "displayName": "地面贴图2",
+      "uuid": "59d05215-b8f8-46a0-b0b0-c0306fe7b664@6c48a",
+      "displayName": "tian",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "bd978524-adb7-4763-9b5f-6f77043191fa",
+        "imageUuidOrDatabaseUri": "59d05215-b8f8-46a0-b0b0-c0306fe7b664",
         "visible": true
       },
       "ver": "1.0.22",
@@ -35,9 +35,9 @@
   },
   "userData": {
     "fixAlphaTransparencyArtifacts": true,
-    "hasAlpha": true,
+    "hasAlpha": false,
     "type": "texture",
-    "redirect": "bd978524-adb7-4763-9b5f-6f77043191fa@6c48a",
+    "redirect": "59d05215-b8f8-46a0-b0b0-c0306fe7b664@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

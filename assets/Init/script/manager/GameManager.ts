@@ -18,7 +18,7 @@ const { ccclass, property } = _decorator;
 export class GameManager extends Component
 {
     public static Instance: GameManager = null;
-    protected onLoad (): void 
+    onLoad () 
     {
         GameManager.Instance = this;
     }
@@ -154,5 +154,10 @@ export class GameManager extends Component
     onDestroy ()
     {
         PoolManager.clear();
+    }
+
+    GameVibrate ()
+    {
+        console.log( '游戏震动' );
     }
 }

@@ -4,13 +4,14 @@
   "_objFlags": 0,
   "_native": "",
   "_effectAsset": {
-    "__uuid__": "3fda1b09-d3e8-4e1f-9546-dd3101bcb83b",
+    "__uuid__": "fec8f38e-5d68-4061-a1b1-fd1ea682b2a2",
     "__expectedType__": "cc.EffectAsset"
   },
   "_techIdx": 1,
   "_defines": [
     {
-      "USE_INSTANCING": true
+      "USE_INSTANCING": true,
+      "USE_CAUSTIC": true
     }
   ],
   "_states": [
@@ -26,29 +27,25 @@
   ],
   "_props": [
     {
-      "mainColor": {
+      "shallowColor": {
         "__type__": "cc.Color",
-        "r": 255,
-        "g": 255,
-        "b": 255,
-        "a": 153
-      },
-      "rimColor": {
-        "__type__": "cc.Color",
-        "r": 0,
-        "g": 133,
+        "r": 20,
+        "g": 170,
         "b": 255,
         "a": 255
       },
-      "rimPow": 2,
-      "rimIntensity": 2,
-      "noiseTexture": {
-        "__uuid__": "2ce64acf-476c-4771-8d49-8c261729c929@6c48a",
-        "__expectedType__": "cc.Texture2D"
+      "causticStrength": 0.2,
+      "causticScale": 20,
+      "causticColor": {
+        "__type__": "cc.Color",
+        "r": 3,
+        "g": 102,
+        "b": 121,
+        "a": 255
       },
-      "sceneTexture": {
-        "__uuid__": "390022e9-bf08-4d0e-89e3-331b093ebf6c",
-        "__expectedType__": "cc.RenderTexture"
+      "causticTexture": {
+        "__uuid__": "51169390-3c9d-4a57-a2a0-2712ad5ba36a@6c48a",
+        "__expectedType__": "cc.Texture2D"
       }
     }
   ]

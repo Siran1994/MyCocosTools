@@ -81,3 +81,29 @@ export enum ItemPoolType//商店道具
     手套
 }
 Enum( ItemPoolType );
+
+export enum AiState
+{
+    待机 = 'idle',
+    奔跑 = 'run',
+    攻击 = 'atk',
+    受击 = 'hit',
+    死亡 = 'die',
+    胜利 = 'win',
+}
+Enum( AiState )
+
+export enum FighterType
+{
+    近战 = 0,
+    远程 = 1
+}
+Enum( FighterType )
+
+export enum ActionType
+{
+    追击 = "chase",
+    攻击 = "atk",
+    待机 = "idle",
+}
+Enum( ActionType )

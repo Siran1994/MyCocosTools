@@ -14,6 +14,7 @@ import { ShopPanel } from "../panel/ShopPanel";
 import { SignPanel } from "../panel/SignPanel";
 import { ShopList } from "../shopList/ShopList";
 import { SpriteManager } from "./SpriteManager";
+import { Prefab } from "cc";
 const { ccclass, property } = _decorator;
 
 @ccclass( 'UiManager' )
@@ -62,6 +63,9 @@ export class UiManager extends Component
 
     @property( CoinFly )
     coinfly: CoinFly = null;
+
+    @property( Prefab )
+    HpBar: Prefab = null;
 
     init ()
     {

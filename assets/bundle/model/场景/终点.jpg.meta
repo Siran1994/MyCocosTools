@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "3a10bc98-86b0-4f22-8f45-1a63df6eb1ff",
+  "uuid": "3f4e5514-0365-46e6-8b43-95442903b9da",
   "files": [
     ".jpg",
     ".json"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "3a10bc98-86b0-4f22-8f45-1a63df6eb1ff@6c48a",
-      "displayName": "sky",
+      "uuid": "3f4e5514-0365-46e6-8b43-95442903b9da@6c48a",
+      "displayName": "终点",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "3a10bc98-86b0-4f22-8f45-1a63df6eb1ff",
+        "imageUuidOrDatabaseUri": "3f4e5514-0365-46e6-8b43-95442903b9da",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
     "type": "texture",
-    "redirect": "3a10bc98-86b0-4f22-8f45-1a63df6eb1ff@6c48a",
+    "redirect": "3f4e5514-0365-46e6-8b43-95442903b9da@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

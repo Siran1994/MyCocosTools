@@ -11,8 +11,7 @@
   "_defines": [
     {
       "USE_INSTANCING": true,
-      "USE_ALBEDO_MAP": true,
-      "USE_EMISSIVE_MAP": true
+      "USE_ALBEDO_MAP": true
     },
     {},
     {},
@@ -58,16 +57,8 @@
   ],
   "_props": [
     {
-      "tilingOffset": {
-        "__type__": "cc.Vec4",
-        "x": 1,
-        "y": 4.2,
-        "z": 0,
-        "w": 0
-      },
-      "roughness": 1,
       "mainTexture": {
-        "__uuid__": "bd978524-adb7-4763-9b5f-6f77043191fa@6c48a",
+        "__uuid__": "59d05215-b8f8-46a0-b0b0-c0306fe7b664@6c48a",
         "__expectedType__": "cc.Texture2D"
       }
     },
