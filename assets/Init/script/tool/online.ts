@@ -19,9 +19,6 @@ export class online extends Component
     @property( Label )
     lbGold: Label = null;
 
-    @property( CoinFly )
-    coinfly: CoinFly = null;
-
     @property
     public timeToRecover = 0;
     @property
