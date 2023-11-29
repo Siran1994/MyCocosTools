@@ -1,0 +1,137 @@
+{
+  "ver": "1.0.25",
+  "importer": "image",
+  "imported": true,
+  "uuid": "f081f474-1c26-480a-94fb-2922777ac16d",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "f081f474-1c26-480a-94fb-2922777ac16d@6c48a",
+      "displayName": "奶茶",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "f081f474-1c26-480a-94fb-2922777ac16d",
+        "visible": false
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "f081f474-1c26-480a-94fb-2922777ac16d@f9941",
+      "displayName": "奶茶",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": -2.5,
+        "offsetY": 8,
+        "trimX": 29,
+        "trimY": 78,
+        "width": 229,
+        "height": 254,
+        "rawWidth": 292,
+        "rawHeight": 426,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [
+            -114.5,
+            -127,
+            0,
+            114.5,
+            -127,
+            0,
+            -114.5,
+            127,
+            0,
+            114.5,
+            127,
+            0
+          ],
+          "indexes": [
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+          ],
+          "uv": [
+            29,
+            348,
+            258,
+            348,
+            29,
+            94,
+            258,
+            94
+          ],
+          "nuv": [
+            0.09931506849315068,
+            0.22065727699530516,
+            0.8835616438356164,
+            0.22065727699530516,
+            0.09931506849315068,
+            0.8169014084507042,
+            0.8835616438356164,
+            0.8169014084507042
+          ],
+          "minPos": [
+            -114.5,
+            -127,
+            0
+          ],
+          "maxPos": [
+            114.5,
+            127,
+            0
+          ]
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "f081f474-1c26-480a-94fb-2922777ac16d@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.11",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "fixAlphaTransparencyArtifacts": true,
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "f081f474-1c26-480a-94fb-2922777ac16d@f9941",
+    "compressSettings": {
+      "useCompressTexture": true
+    }
+  }
+}

@@ -13,8 +13,13 @@ import { SettingPanel } from "../panel/SettingPanel";
 import { ShopPanel } from "../panel/ShopPanel";
 import { SignPanel } from "../panel/SignPanel";
 import { ShopList } from "../shopList/ShopList";
-import { SpriteManager } from "./SpriteManager";
 import { Prefab } from "cc";
+import { ClipPanel } from "../panel/ClipPanel";
+import { AudioMgr } from "./AudioMgr";
+import { SpriteFrame } from "cc";
+import { FightPanel } from "../panel/FightPanel";
+import { Camera } from "cc";
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'UiManager' )
@@ -24,8 +29,6 @@ export class UiManager extends Component
     onLoad ()
     {
         UiManager.Instance = this;
-
-        SpriteManager.loadTexture( SpriteManager.Path );
     }
 
     @property( MainPanel )
@@ -49,8 +52,14 @@ export class UiManager extends Component
     @property( ShopPanel )
     shopPanel: ShopPanel = null;//抽奖
 
+    @property( FightPanel )
+    fightPanel: FightPanel = null;//失败
+
+    @property( ClipPanel )
+    clipPanel: ClipPanel = null;//开宝箱  
+
     @property( FinishPanel )
-    finishPanel: FinishPanel = null;//胜利
+    finishPanel: FinishPanel = null;//成功
 
     @property( FailedPanel )
     faildPanel: FailedPanel = null;//失败
@@ -64,8 +73,15 @@ export class UiManager extends Component
     @property( CoinFly )
     coinfly: CoinFly = null;
 
+    @property( SpriteFrame )
+    Bars: SpriteFrame[] = [];
+
     @property( Prefab )
     HpBar: Prefab = null;
+
+    @property( Camera )
+    uiCamera: Camera = null;
+
 
     init ()
     {
@@ -105,5 +121,18 @@ export class UiManager extends Component
                 GameData.Coin + num;
 
         }, startPos );
+    }
+
+    AdGetCoin ( CoinTxt: Label )
+    {
+        AudioMgr.Instance.点击广告按钮.Play();
+        var tmpNum = GameData.Coin;
+        var targetNum = tmpNum + 100;
+        var ani = DOTweenAnimation.stepNum( CoinTxt, tmpNum, 25, targetNum, 0, '', () =>
+        {
+            ani.stop();
+            GameData.Coin = targetNum;
+            CoinTxt.string = GameData.Coin.toString();
+        } );
     }
 }

@@ -7,6 +7,7 @@ import { AudioMgr } from '../manager/AudioMgr';
 import { AniState } from '../data/Enum';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { Config } from '../data/Config';
+import { TipManager } from '../manager/TipManager';
 
 const { ccclass, property } = _decorator;
 
@@ -19,6 +20,9 @@ export class MainPanel extends Component
 
     @property( Button )
     AddCoinBtn: Button;//获取金币
+
+    @property( Button )
+    moreGame: Button;//抽奖  
 
     @property( Button )
     signBtn: Button;//签到
@@ -53,17 +57,10 @@ export class MainPanel extends Component
             this.node.active = false;
         }, this );
 
+
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
-            var tmpNum = GameData.Coin;
-            var targetNum = tmpNum + Config.BoxReward.AdGet;
-            var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 10, targetNum, 0.001, '', () =>
-            {
-                ani.stop();
-                GameData.Coin = targetNum;
-                this.CoinTxt.string = GameData.Coin.toString();
-            } );
+            UiManager.Instance.AdGetCoin( this.CoinTxt );
         }, this );
 
         this.signBtn.node.on( Button.EventType.CLICK, () =>
@@ -94,6 +91,12 @@ export class MainPanel extends Component
             UiManager.Instance.shopPanel.ShowPanel();
             this.node.active = false;
         }, this );
+
+        this.moreGame.node.on( Button.EventType.CLICK, () =>
+        {
+            AudioMgr.Instance.通用按钮.Play();
+            TipManager.Instance.showTips( '请接入SDK的相关功能' );
+        }, this );
     }
 
     onEnable ()
@@ -113,6 +116,5 @@ export class MainPanel extends Component
         this.node.active = false;
         UiManager.Instance.gamePanel.node.active = true;
         GameManager.Instance.Play( PlayerCtrl.Instance.anmator, AniState.行走 );
-        AudioMgr.Instance.游戏背景乐.playMusic();
     }
 }

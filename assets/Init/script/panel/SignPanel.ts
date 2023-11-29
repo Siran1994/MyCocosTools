@@ -54,17 +54,10 @@ export class SignPanel extends BasePanel
             this.DoSign( true );
         }, this );
 
+
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
-            var tmpNum = GameData.Coin;
-            var targetNum = tmpNum + Config.BoxReward.AdGet;
-            var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 10, targetNum, 0.001, '', () =>
-            {
-                ani.stop();
-                GameData.Coin = targetNum;
-                this.CoinTxt.string = GameData.Coin.toString();
-            } );
+            UiManager.Instance.AdGetCoin( this.CoinTxt );
         }, this );
 
         DOTweenAnimation.ScaleLoop( this.Get2XBtn.node, 1.1, 1, 0.5, 0.5 );
@@ -115,7 +108,7 @@ export class SignPanel extends BasePanel
                     coin *= 2;
                 break;
             case '美女电视人':
-                PlayerPrefs.SetBool( "美女电视人" + 'UnLocked', true );
+                PlayerPrefs.SetBool( "美女电视人", true );
                 TipManager.Instance.showTips( '恭喜您获得美女电视人!' );
                 break;
             case '500':
@@ -139,7 +132,7 @@ export class SignPanel extends BasePanel
                     coin *= 2;
                 break;
             case '黄电视人':
-                PlayerPrefs.SetBool( "黄电视人" + 'UnLocked', true );
+                PlayerPrefs.SetBool( "黄电视人", true );
                 TipManager.Instance.showTips( '恭喜您获得黄电视人!' );
                 break;
         }

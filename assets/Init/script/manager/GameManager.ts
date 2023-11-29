@@ -7,7 +7,7 @@ import { PrefabManager } from './PrefabManager';
 import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
 import { Config } from '../data/Config';
-import { AniState } from '../data/Enum';
+import { AniState, ItemType } from '../data/Enum';
 import { PlayerCtrl } from '../role/PlayerCtrl';
 import { AudioMgr } from './AudioMgr';
 import { Messager } from './Messager';
@@ -159,5 +159,10 @@ export class GameManager extends Component
     GameVibrate ()
     {
         console.log( '游戏震动' );
+    }
+
+    GetItemName ( itemType: ItemType )
+    {
+        return ItemType[ itemType ].toString();
     }
 }

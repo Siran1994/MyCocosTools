@@ -70,15 +70,7 @@ export class DrawPanel extends BasePanel
 
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
-            var tmpNum = GameData.Coin;
-            var targetNum = tmpNum + Config.BoxReward.AdGet;
-            var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 10, targetNum, 0.001, '', () =>
-            {
-                ani.stop();
-                GameData.Coin = targetNum;
-                this.CoinTxt.string = GameData.Coin.toString();
-            } );
+            UiManager.Instance.AdGetCoin( this.CoinTxt );
         }, this );
 
         DOTweenAnimation.ScaleLoop( this.FreeGetBtn.node, 1.1, 1, 0.5, 0.5 );
@@ -187,7 +179,7 @@ export class DrawPanel extends BasePanel
                 coin = 5000;
                 break;
             case 7:
-                PlayerPrefs.SetBool( "蓝电视人" + 'UnLocked', true );
+                PlayerPrefs.SetBool( "蓝电视人", true );
                 TipManager.Instance.showTips( '恭喜您获得蓝电视人!' );
                 break;
         }

@@ -2,9 +2,9 @@ import { _decorator, Component, game, macro, math, Node, v3, Vec3 } from 'cc';
 import { AiBase } from './AiBase';
 import { ActionType, AiState, FighterType } from '../data/Enum';
 import { BulletShoot } from './BulletShoot';
-import { BattleStage } from '../game/BattleStage';
 import { Messager } from '../manager/Messager';
 import { Utils } from '../tool/Utils';
+import { BattleStage } from './BattleStage';
 const { ccclass, property, requireComponent } = _decorator;
 let temp = v3();
 @ccclass( 'Player' )
@@ -43,13 +43,12 @@ export class Player extends Component
 
     lastAtkTime: number = 0;
 
-    target: AiBase | null = null;
+    @property( { type: AiBase } )
+    target: AiBase = null;
 
     init ()
     {
         this.aiBase.init();
-        if ( this.fighterType == FighterType.远程 )
-            this.bulletShoot = this.node.getComponent( BulletShoot );
         // //需要设置目标
         if ( this.aiBase.isEnemy )
         {
@@ -80,9 +79,12 @@ export class Player extends Component
         this.unschedule( this.AiAction );
     }
 
-    ChangeTarget ( isEnemy: boolean )
+    ChangeTarget ()
     {
-        this.target = this.getRandomTarget( isEnemy );
+        if ( this.aiBase.isEnemy )
+            this.target = this.getRandomTarget( false );
+        else
+            this.target = this.getRandomTarget( true );
     }
 
     AiAction ()//Ai行为
@@ -166,27 +168,24 @@ export class Player extends Component
 
     getRandomTarget ( isEnemy: boolean )
     {
-        let targets = BattleStage.Instance.getTarget( isEnemy );
+        let targets = null;
+        if ( isEnemy )
+            targets = BattleStage.Instance.getEnemyTarget();
+        else
+            targets = BattleStage.Instance.getPlayerTarget();
         if ( !targets || targets?.length == 0 )
-        {
-            if ( isEnemy )
-            {
-                Messager.Broadcast( 'gameOver', false );
-                return;
-            }
-            else
-            {
-                Messager.Broadcast( 'gameOver', true );
-                return;
-            }
-        }
+            return;
         let actor = targets[ Utils.randomNum( 0, targets.length - 1 ) ].getComponent( AiBase );
         return actor;
     }
 
     getNeareastEnemy ( isEnemy = false )
     {
-        let enemies = BattleStage.Instance.getTarget( isEnemy );
+        let enemies = null;
+        if ( isEnemy )
+            enemies = BattleStage.Instance.getPlayerTarget();
+        else
+            enemies = BattleStage.Instance.getEnemyTarget();
         if ( !enemies || enemies?.length == 0 )
         {
             return null;

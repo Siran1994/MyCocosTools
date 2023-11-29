@@ -5,48 +5,68 @@ const { ccclass } = _decorator;
 @ccclass( 'SpriteManager' )
 export class SpriteManager
 {
-    private static spriteFrameMap: Map<string, SpriteFrame> = new Map();
+    static shopIconMap: Map<string, SpriteFrame> = new Map();//商店图标   
+    static showMap: Map<string, SpriteFrame> = new Map();//卡面图标
 
-    static Path = 'prefab/icon';
+    static Path =
+        {
+            shopIcon: 'prefab/shopicon',
+            showPath: 'prefab/showicon'
+        }
 
-    public static loadTexture ( path: string = SpriteManager.Path )
+    public static loadSprite ( name: string, path: string, cb?: Function )
     {
         ResMgr.loadDir( path, SpriteFrame, ( completedCount, totalCount ) =>
         {
-            //console.log( '完成个数:' + completedCount + '总数:' + totalCount );
+            if ( completedCount == totalCount )
+                cb && cb();
         }, ( assets: SpriteFrame[] ) =>
         {
             assets.forEach( asset =>
             {
-                this.set( asset.name, asset );
+                switch ( name )
+                {
+                    case 'Shop':
+                        this.set( asset.name, asset, this.shopIconMap );
+                        break;
+                    case 'Show':
+                        this.set( asset.name, asset, this.showMap );
+                        break;
+                }
             } );
         } );
     }
     //添加纹理资源
-    public static set ( key: string, value: SpriteFrame ): void
+    public static set ( key: string, value: SpriteFrame, targetMap: Map<string, SpriteFrame> ): void
     {
-        if ( this.spriteFrameMap.has( key ) )
+        if ( targetMap.has( key ) )
+        {
             console.warn( `set fail: ${ key } already exsit in the textureMap` );
-        else
-            this.spriteFrameMap.set( key, value );
+        } else
+        {
+            targetMap.set( key, value );
+        }
     }
 
     //获取纹理资源
-    public static get ( key: string ): SpriteFrame
+    public static get ( key: string, targetMap: Map<string, SpriteFrame> ): SpriteFrame
     {
-        if ( this.spriteFrameMap.has( key ) )
-            return this.spriteFrameMap.get( key );
-        else
+        if ( targetMap.has( key ) )
+        {
+            return targetMap.get( key );
+        } else
+        {
             console.warn( `get fail: ${ key } not exsit in the textureMap` );
+        }
     };
 
     //释放单个纹理资源
-    public static releaseAsset ( key ): void
+    public static releaseAsset ( key, targetMap: Map<string, SpriteFrame> ): void
     {
-        if ( this.spriteFrameMap.has( key ) )
+        if ( targetMap.has( key ) )
         {
-            var asset: SpriteFrame = this.spriteFrameMap.get( key );
-            this.spriteFrameMap.delete( key );
+            var asset: SpriteFrame = targetMap.get( key );
+            targetMap.delete( key );
             assetManager.releaseAsset( asset );
             console.log( "release asset with " + key );
         }
@@ -55,7 +75,8 @@ export class SpriteManager
     //释放所有纹理资源
     public static releaseAllAsset (): void
     {
-        this.spriteFrameMap.clear();
-        console.log( "prefabMap release all" );
+
+        this.shopIconMap.clear();
+        this.showMap.clear();
     };
 }

@@ -7,11 +7,6 @@ export class BasePanel extends Component
     @property( { type: Node } )
     target: Node = null;
 
-    init ()
-    {
-
-    }
-
     ShowPanel ( duration: number = 0.2, fun?: Function )
     {
         this.target.scale = Vec3.ZERO;

@@ -1,6 +1,5 @@
-import { SpriteFrame, _decorator } from 'cc';
-import { ItemType } from 'db://assets/Init/script/data/Enum';
-
+import { _decorator } from 'cc';
+import { ItemType } from '../data/Enum';
 const { ccclass, property } = _decorator;
 
 @ccclass( "ItemInfo" )
@@ -11,14 +10,6 @@ export class ItemInfo
 
     @property( { displayName: '是否空', type: Boolean } )
     isNull: boolean = false;
-
-    @property( {
-        displayName: '物品图标', type: SpriteFrame, visible: function ( this: ItemInfo )
-        {
-            return this.isNull === false;
-        }
-    } )
-    itemIcon: SpriteFrame;
 
     @property( {
         displayName: '解锁状态', type: Boolean, visible: function ( this: ItemInfo )
@@ -35,20 +26,4 @@ export class ItemInfo
         }
     } )
     price: number;
-
-    @property( {
-        displayName: '广告次数', type: Number, visible: function ( this: ItemInfo )
-        {
-            return this.isUnlocked === false && this.isNull === false;
-        }
-    } )
-    count: number = 0;
-
-    @property( {
-        displayName: '当前下标', type: Number, visible: function ( this: ItemInfo )
-        {
-            return this.isUnlocked === false && this.isNull === false;
-        }
-    } )
-    index: number;
 }

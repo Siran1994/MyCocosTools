@@ -73,16 +73,16 @@ export class AiBase extends Component
     init ()//战前准备
     {
 
-        // let go = PoolManager.getNode( UiManager.Instance.HpBar, UiManager.Instance.fightPanel.target );
-        // this.hpBar = go.getComponent( HpBar );
-        // this.hpBar.init( this.isEnemy );
-        // this.hpBar.showHpBar( 1 );
-        // this.syncUiHpBar();
+        let go = PoolManager.getNode( UiManager.Instance.HpBar, UiManager.Instance.fightPanel.target );
+        this.hpBar = go.getComponent( HpBar );
+        this.hpBar.init( this.isEnemy );
+        this.hpBar.showHpBar( 1 );
+        this.syncUiHpBar();
 
-        // if ( this.isEnemy )
-        //     this.rigidbody.group = PhysicsGroup.Enemy;
-        // else
-        //     this.rigidbody.group = PhysicsGroup.Player;
+        if ( this.isEnemy )
+            this.rigidbody.group = PhysicsGroup.Enemy;
+        else
+            this.rigidbody.group = PhysicsGroup.Player;
     }
 
     start ()

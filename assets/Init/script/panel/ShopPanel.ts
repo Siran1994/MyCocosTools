@@ -115,15 +115,8 @@ export class ShopPanel extends BasePanel
 
         this.AdGetBtn.node.on( Button.EventType.CLICK, () => //广告购买
         {
-            let itemKey = ItemType[ this.tmpInfo.itemtype ].toString() + 'AdCount';
-            PlayerPrefs.SetInt( itemKey, ( PlayerPrefs.GetInt( itemKey, 0 ) + 1 ) );
-            this.AdCount.string = '获得:(' + PlayerPrefs.GetInt( itemKey, 0 ) + '/' + this.tmpInfo.count + ')';
-            if ( PlayerPrefs.GetInt( itemKey, 0 ) == this.tmpInfo.count )//解锁
-            {
-                PlayerPrefs.SetBool( ItemType[ this.tmpInfo.itemtype ].toString(), true );
-
-                this.EquipItem();
-            }
+            PlayerPrefs.SetBool( ItemType[ this.tmpInfo.itemtype ].toString(), true );
+            this.EquipItem();
         }, this );
 
         this.BuyBtn.node.on( Button.EventType.CLICK, () =>  //购买
@@ -149,6 +142,8 @@ export class ShopPanel extends BasePanel
         {
             this.EquipItem();
         }, this );
+
+        DOTweenAnimation.ScaleLoop( this.AdGetBtn.node, 1.1, 1, 0.5, 0.5 );
     }
 
     onEnable ()
@@ -158,18 +153,20 @@ export class ShopPanel extends BasePanel
 
     EquipItem ()
     {
-        this.BtnState( '已装备' );
-        if ( this.tmppooltype == ItemPoolType.武器 )
+        this.BtnState( '解锁' );
+
+        switch ( this.tmppooltype )
         {
-            GameData.KnifeType = this.tmpInfo.index;
-            Messager.Broadcast( 'ChangeKnife', GameData.KnifeType );
-            Messager.Broadcast( 'UpdateState', this.tmpInfo.index );
-        }
-        else
-        {
-            GameData.HandType = this.tmpInfo.index;
-            Messager.Broadcast( 'ChangeHand', GameData.HandType );
-            Messager.Broadcast( 'UpdateState', this.tmpInfo.index );
+            case ItemPoolType.武器:
+                GameData.KnifeType = this.tmpInfo.itemtype;
+                Messager.Broadcast( 'ChangeBody', GameData.KnifeType );
+                Messager.Broadcast( 'UpdateState', this.tmpInfo.itemtype );
+                break;
+            case ItemPoolType.手套:
+                GameData.HandType = this.tmpInfo.itemtype;
+                Messager.Broadcast( 'ChangeBody', GameData.HandType );
+                Messager.Broadcast( 'UpdateState', this.tmpInfo.itemtype );
+                break;
         }
         this.HidePanel();
         UiManager.Instance.mainPanel.node.active = true;
@@ -203,40 +200,6 @@ export class ShopPanel extends BasePanel
 
     ShowModel ( name: string )//展示模型
     {
-        let targetName = '';
-        switch ( name )
-        {
-            case '短小刀':
-                targetName = Config.Icon.短小刀;
-                break;
-            case '太刀':
-                targetName = Config.Icon.太刀;
-                break;
-            case '爪子刀':
-                targetName = Config.Icon.爪子刀;
-                break;
-            case '蝴蝶刀':
-                targetName = Config.Icon.蝴蝶刀;
-                break;
-            case '长小刀':
-                targetName = Config.Icon.长小刀;
-                break;
-            case '蓝手套':
-                targetName = Config.Icon.蓝手套;
-                break;
-            case '橙手套':
-                targetName = Config.Icon.橙手套;
-                break;
-            case '粉手套':
-                targetName = Config.Icon.粉手套;
-                break;
-            case '绿手套':
-                targetName = Config.Icon.绿手套;
-                break;
-            case '黄手套':
-                targetName = Config.Icon.黄手套;
-                break;
-        }
-        this.Tower.spriteFrame = SpriteManager.get( targetName );
+        this.Tower.spriteFrame = SpriteManager.get( name, SpriteManager.showMap );
     }
 }

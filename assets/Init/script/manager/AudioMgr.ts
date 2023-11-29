@@ -18,6 +18,8 @@ export class AudioMgr extends Component
     }
 
     @property( { type: AudioClipExit } )
+    开箱: AudioClipExit = null;//收集音效 
+    @property( { type: AudioClipExit } )
     受击: AudioClipExit = null;//收集音效
     @property( { type: AudioClipExit } )
     撞墙: AudioClipExit = null;//收集音效

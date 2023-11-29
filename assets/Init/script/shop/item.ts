@@ -1,12 +1,13 @@
 import { _decorator, Component, Sprite, Toggle, Node } from 'cc';
-import { ItemInfo } from './ItemInfo';
-import { ItemPoolType, ItemType } from 'db://assets/Init/script/data/Enum';
-import { GameData } from 'db://assets/Init/script/data/GameData';
-import { PlayerPrefs } from 'db://assets/Init/script/data/PlayerPrefs';
-import { AudioMgr } from 'db://assets/Init/script/manager/AudioMgr';
-import { UiManager } from 'db://assets/Init/script/manager/UiManager';
-import { Messager } from 'db://assets/Init/script/manager/Messager';
 
+import { Messager } from '../manager/Messager';
+import { ItemPoolType, ItemType } from '../data/Enum';
+import { GameData } from '../data/GameData';
+import { PlayerPrefs } from '../data/PlayerPrefs';
+import { AudioMgr } from '../manager/AudioMgr';
+import { UiManager } from '../manager/UiManager';
+import { ItemInfo } from './ItemInfo';
+import { SpriteManager } from '../manager/SpriteManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'item' )
@@ -32,9 +33,8 @@ export class item extends Component
         {
             this.node.active = true;
             this.itemInfo = itemInfo;
-            this.itemInfo.index = index;
             this.node.name = ItemType[ itemInfo.itemtype ].toString();
-            this.itemIcon.spriteFrame = itemInfo.itemIcon;
+            this.itemIcon.spriteFrame = SpriteManager.get( this.node.name, SpriteManager.shopIconMap );
             this.itemPooltype = pooltype;
             this.CheckState();
 
@@ -67,7 +67,7 @@ export class item extends Component
 
     UpdateState ( index: number )
     {
-        if ( this.itemInfo.index == index )
+        if ( this.itemInfo.itemtype == index )
         {
             this.BtnClick();
         }
@@ -82,22 +82,21 @@ export class item extends Component
 
     CheckState ()
     {
-        if ( PlayerPrefs.GetBool( this.node.name, this.itemInfo.isUnlocked ) )//解锁
+        if ( PlayerPrefs.GetBool( this.node.name, this.itemInfo.isUnlocked ) || this.itemInfo.price == 0 )//解锁
         {
             UiManager.Instance.shopPanel.BtnState( '解锁' );
             if ( this.itemBtn.isChecked )
             {
                 UiManager.Instance.shopPanel.BtnState( '装备' );
 
-                console.log( this.itemInfo.index );
                 switch ( this.itemPooltype )
                 {
                     case ItemPoolType.武器:
-                        if ( this.itemInfo.index == GameData.KnifeType )
+                        if ( this.itemInfo.itemtype == GameData.KnifeType )
                             UiManager.Instance.shopPanel.BtnState( '已装备' );
                         break;
                     case ItemPoolType.手套:
-                        if ( this.itemInfo.index == GameData.HandType )
+                        if ( this.itemInfo.itemtype == GameData.HandType )
                             UiManager.Instance.shopPanel.BtnState( '已装备' );
                         break;
                 }
@@ -108,7 +107,6 @@ export class item extends Component
         {
             UiManager.Instance.shopPanel.BtnState( '未解锁' );
             UiManager.Instance.shopPanel.Price.string = this.itemInfo.price.toString();
-            UiManager.Instance.shopPanel.AdCount.string = '获得:(' + PlayerPrefs.GetInt( this.node.name + 'AdCount', 0 ) + '/' + this.itemInfo.count + ')';
             this.Locked.active = true;
         }
     }

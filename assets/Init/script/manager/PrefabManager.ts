@@ -5,12 +5,14 @@ const { ccclass } = _decorator;
 @ccclass( 'PrefabManager' )
 export class PrefabManager 
 {
+    static PlayerMap: Map<string, Prefab> = new Map();
     static EnemyMap: Map<string, Prefab> = new Map();
     static BulletMap: Map<string, Prefab> = new Map();
     static LvMap: Map<string, Prefab> = new Map();
 
     static Path =
         {
+            Player: 'prefab/player',
             Enemy: 'prefab/enemy',
             Bullet: 'prefab/bullet',
             Lv: 'prefab/lv',
@@ -29,6 +31,9 @@ export class PrefabManager
             {
                 switch ( name )
                 {
+                    case 'Player':
+                        this.set( asset.name, asset, this.PlayerMap );
+                        break;
                     case 'Enemy':
                         this.set( asset.name, asset, this.EnemyMap );
                         break;

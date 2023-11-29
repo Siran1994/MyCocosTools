@@ -1,5 +1,6 @@
-import { _decorator, Camera, Component, Node, ProgressBar, Sprite, UITransform, Vec3 } from 'cc';
+import { _decorator, Component, Node, ProgressBar, Sprite, UITransform, Vec3 } from 'cc';
 import { UiManager } from '../manager/UiManager';
+import { Camera } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'HpBar' )
