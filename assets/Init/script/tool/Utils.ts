@@ -1,4 +1,4 @@
-import { v3 } from "cc";
+import { macro, v3 } from "cc";
 import { Vec3, bezier, director, tween, Node } from "cc";
 let tempVec: Vec3 = v3()
 let tempVec2: Vec3 = v3()
@@ -1479,21 +1479,56 @@ export class Utils
         return objRet;
     }
 
-    //#endregion
+    //#endregion   
+
+    public static formatNumber ( num: number, format: string = '' ): string
+    {
+        const units = [ '', '万', '亿', '兆', '京', '垓', '秭', '穰', '沟', '涧', '正', '载' ];
+        let unitIndex = 0;
+        let result = '';
+
+        while ( num >= 10000 )
+        {
+            const remainder = num % 10000;
+            if ( remainder !== 0 )
+            {
+                result = remainder.toString() + units[ unitIndex ] + result;
+            }
+            num = Math.floor( num / 10000 );
+            unitIndex++;
+        }
+
+        if ( num > 0 )
+        {
+            result = num.toString() + units[ unitIndex ] + result;
+        }
+
+        const formatIndex = units.indexOf( format );
+        if ( formatIndex !== -1 )
+        {
+            const truncateIndex = result.lastIndexOf( units[ formatIndex ] ) + units[ formatIndex ].length;
+            if ( truncateIndex > 0 )
+            {
+                result = result.slice( 0, truncateIndex );
+            }
+        }
+        return result;
+    }
 
     //#region 数字操作,单位换算,格式化
     //格式化钱数，超过10000 转换位 10K   10000K 转换为 10M
     public static formatMoney ( money: number )
     {
-        const arrUnit = [ '', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y', 'B', 'N', 'D' ];
+        const arrUnit = [ '', '万', '亿', '兆', '京', '垓', '秭', '穰', '沟', '涧', '正', '载' ];
 
         let strValue = '';
         for ( let idx = 0; idx < arrUnit.length; idx++ )
         {
             if ( money >= 10000 )
             {
-                money /= 1000;
-            } else
+                money /= 10000;
+            }
+            else
             {
                 strValue = Math.floor( money ) + arrUnit[ idx ];
                 break;
@@ -1775,20 +1810,6 @@ export class Utils
         {
             func && func();//回调
         }, time * 1000 );
-    }
-    //计时器
-    public static Timer ( interval: number, count: number = 1, delay: number = 0, isPause: boolean = false, func: Function = null )
-    {
-        return director.getScheduler().schedule( () =>
-        {
-            func && func();//回调
-        },
-            null,
-            interval,//每秒执行一次
-            count,//macro.REPEAT_FOREVER(最大值) 无限重复
-            delay,// 延迟时间
-            isPause// 是否暂停
-        );
     }
     //#endregion
 }
