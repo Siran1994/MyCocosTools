@@ -1,7 +1,7 @@
 import { _decorator, Component, Label, Node, sys } from 'cc';
 import { Messager } from '../manager/Messager';
-import DateUtils from '../tool/DateUtils';
 import { PlayerPrefs } from '../data/PlayerPrefs';
+import { GameData } from '../data/GameData';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SignItem' )
@@ -10,8 +10,8 @@ export class SignItem extends Component
     @property( Node )
     Signed: Node = null;//签到
 
-    @property( Node )
-    Selected: Node = null;//签到
+    // @property( Node )
+    // Selected: Node = null;//签到
 
     @property( { type: Label } )
     rewardtxt: Label = null;
@@ -26,12 +26,12 @@ export class SignItem extends Component
 
     init ()
     {
-        if ( this.index == PlayerPrefs.GetInt( 'signDay', 1 ) && PlayerPrefs.GetInt( 'signDate', 0 ) != DateUtils.getDate().day )
-            this.Selected.active = true;
-        else
-            this.Selected.active = false;
+        // if ( this.index == GameData.SignDay ) && PlayerPrefs.GetInt( 'signDate', 0 ) != DateUtils.getDate().day )
+        //     this.Selected.active = true;
+        // else
+        //     this.Selected.active = false;
 
-        if ( this.index < PlayerPrefs.GetInt( 'signDay', 1 ) )
+        if ( this.index < GameData.SignDay )
             this.Signed.active = true;
         else
             this.Signed.active = false;
@@ -61,4 +61,3 @@ export class SignItem extends Component
         }
     }
 }
-

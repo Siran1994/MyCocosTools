@@ -1,43 +1,37 @@
-import { _decorator, Component, Prefab, Vec2, v3, Node, Vec3, tween } from "cc";
+import { _decorator, Component, Prefab, Vec3, tween, Vec2, v3 } from "cc";
 import { PoolManager } from "../manager/PoolManager";
-
+import { PrefabManager } from "../manager/PrefabManager";
+import { child } from "../tool/Decorator";
 const { ccclass, property } = _decorator;
 
 @ccclass
 export default class CoinFly extends Component
 {
-    @property( Node )
-    startPoint: Node = null;
-    @property( Node )
-    endPoint: Node = null;
-    @property( Prefab )
+    @property( Number )
+    r: number = 150;
+
+    @child()
+    StartPos: Node = null;
+    @child()
+    EndPos: Node = null;
+
     coinPrefab: Prefab = null;
 
     onLoad ()
     {
-        PoolManager.prePool( this.coinPrefab, 10 )
+        this.coinPrefab = PrefabManager.get( 'Coin', PrefabManager.UiMap )
+        PoolManager.prePool( this.coinPrefab, 20 );
     }
 
-    playAnim ( callback: Function, startPos: Node = null )
-    {
-        let randomCount = 10;
-        if ( startPos == null )
-        {
-            let stPos = this.startPoint.getPosition();
-            this.playCoinFlyAnim( randomCount, stPos, this.endPoint.getPosition(), 150, callback );
-        }
-        else
-            this.playCoinFlyAnim( randomCount, startPos.getPosition(), this.endPoint.getPosition(), 150, callback );
-    }
-
-    playCoinFlyAnim ( count: number, stPos: Vec3, edPos: Vec3, r: number = 150, callback: Function )
+    playAnim ( stPos: Vec3 = Vec3.ZERO, edPos: Vec3 = Vec3.ZERO, cb?: Function, count: number = 15 )
     {
         // 生成圆，并且对圆上的点进行排序
-        let points = this.getCirclePoints( r, stPos, count );
+        let points = this.getCirclePoints( this.r, stPos, count );
         let coinNodeList = points.map( pos =>
         {
             let coin = PoolManager.getNode( this.coinPrefab, this.node );
             coin.setPosition( stPos );
+            this.node.addChild( coin );
             return {
                 node: coin,
                 stPos: stPos,
@@ -65,7 +59,7 @@ export default class CoinFly extends Component
                     {
                         PoolManager.putNode( item.node );
                         if ( idx == count - 1 )
-                            callback();
+                            cb && cb();
                     } )
                 )
                 .start();
@@ -89,7 +83,7 @@ export default class CoinFly extends Component
         {
             let x = pos.x + r * Math.sin( radians * i );
             let y = pos.y + r * Math.cos( radians * i );
-            points.unshift( v3( x + randomScope, y + randomScope, 0 ) );
+            points.unshift( v3( x + Math.random() * randomScope, y + Math.random() * randomScope, 0 ) );
         }
         return points;
     }

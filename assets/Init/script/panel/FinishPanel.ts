@@ -8,6 +8,7 @@ import { Utils } from '../tool/Utils';
 import { PlayerPrefs } from '../data/PlayerPrefs';
 import { ItemType } from '../data/Enum';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
+import { Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass( "ClipItem" )
@@ -68,7 +69,7 @@ export class FinishPanel extends BasePanel
         {
             AudioMgr.Instance.通用按钮.Play();
             this.RestartBtn.interactable = false;
-            UiManager.Instance.UpdateCoin( GameManager.Instance.Coin, this.MyCoinTxt );
+            UiManager.Instance.UpdateCoin( GameManager.Instance.Coin, this.MyCoinTxt, Vec3.ZERO, this.CoinTxt.node.worldPosition );
             Utils.DelayCallBack( 2, () =>
             {
                 GameManager.Instance.NextLevel( true, true, () =>
@@ -82,7 +83,7 @@ export class FinishPanel extends BasePanel
         {
             AudioMgr.Instance.点击广告按钮.Play();
             this.Reward3x.interactable = false;
-            UiManager.Instance.UpdateCoin( GameManager.Instance.Coin * 2, this.MyCoinTxt );
+            UiManager.Instance.UpdateCoin( GameManager.Instance.Coin * 2, this.MyCoinTxt, Vec3.ZERO, this.CoinTxt.node.worldPosition );
             Utils.DelayCallBack( 2, () =>
             {
                 GameManager.Instance.NextLevel( true, true, () =>

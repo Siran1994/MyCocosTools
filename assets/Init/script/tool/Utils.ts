@@ -1479,14 +1479,54 @@ export class Utils
         return objRet;
     }
 
-    //#endregion   
+    //#endregion
 
-    public static formatNumber ( num: number, format: string = '' ): string
+    //#region 数字操作,单位换算,格式化
+    public static GetSize ( num: number )
     {
+        let unitIndex = 0;
+        let result = 0;
+        if ( num <= 0 )
+            num = 0
+        num = Math.round( num );
+        while ( num >= 10000 )
+        {
+            num = Math.floor( num / 10000 );
+            unitIndex++;
+        }
+        switch ( unitIndex )
+        {
+            case 0:
+                result = 1;
+                break;
+            case 1:
+                result = 3;
+                break;
+            case 2:
+                result = 5;
+                break;
+            case 3:
+                result = 7;
+                break;
+            case 4:
+                result = 9;
+                break;
+            default:
+                result = 10;
+                break;
+        }
+        return result;
+    }
+
+    public static formatNumber ( num: number, isMain = false ): string
+    {
+        let format = '';
         const units = [ '', '万', '亿', '兆', '京', '垓', '秭', '穰', '沟', '涧', '正', '载' ];
         let unitIndex = 0;
         let result = '';
-
+        if ( num <= 0 )
+            num = 0
+        num = Math.round( num );
         while ( num >= 10000 )
         {
             const remainder = num % 10000;
@@ -1503,6 +1543,84 @@ export class Utils
             result = num.toString() + units[ unitIndex ] + result;
         }
 
+        if ( isMain )
+        {
+            switch ( unitIndex )
+            {
+                case 0://万以内
+                case 1://万                   
+                case 2://亿
+                    format = '';
+                    break;
+                case 3://兆
+                    format = '万';
+                    break;
+                case 4://京
+                    format = '亿';
+                    break;
+                case 5://垓
+                    format = '兆';
+                    break;
+                case 6://秭
+                    format = '京';
+                    break;
+                case 7://穰
+                    format = '垓';
+                    break;
+                case 8://沟
+                    format = '秭';
+                    break;
+                case 9://涧
+                    format = '穰';
+                    break;
+                case 10://正
+                    format = '沟';
+                    break;
+                case 11://载
+                    format = '涧';
+                    break;
+            }
+        }
+        else
+        {
+            switch ( unitIndex )
+            {
+                case 0://万以内
+                case 1://万
+                    format = '';
+                    break;
+                case 2://亿
+                    format = '万';
+                    break;
+                case 3://兆
+                    format = '亿';
+                    break;
+                case 4://京
+                    format = '兆';
+                    break;
+                case 5://垓
+                    format = '京';
+                    break;
+                case 6://秭
+                    format = '垓';
+                    break;
+                case 7://穰
+                    format = '秭';
+                    break;
+                case 8://沟
+                    format = '穰';
+                    break;
+                case 9://涧
+                    format = '沟';
+                    break;
+                case 10://正
+                    format = '涧';
+                    break;
+                case 11://载
+                    format = '正';
+                    break;
+            }
+        }
         const formatIndex = units.indexOf( format );
         if ( formatIndex !== -1 )
         {
@@ -1515,7 +1633,6 @@ export class Utils
         return result;
     }
 
-    //#region 数字操作,单位换算,格式化
     //格式化钱数，超过10000 转换位 10K   10000K 转换为 10M
     public static formatMoney ( money: number )
     {

@@ -9,6 +9,7 @@ export class PrefabManager
     static EnemyMap: Map<string, Prefab> = new Map();
     static BulletMap: Map<string, Prefab> = new Map();
     static LvMap: Map<string, Prefab> = new Map();
+    static UiMap: Map<string, Prefab> = new Map();
 
     static Path =
         {
@@ -16,6 +17,7 @@ export class PrefabManager
             Enemy: 'prefab/enemy',
             Bullet: 'prefab/bullet',
             Lv: 'prefab/lv',
+            Ui: 'prefab/ui',
         }
 
     public static loadPrefab ( name: string, path: string, cb?: Function )
@@ -42,6 +44,9 @@ export class PrefabManager
                         break;
                     case 'Lv':
                         this.set( asset.name, asset, this.LvMap );
+                        break;
+                    case 'Ui':
+                        this.set( asset.name, asset, this.UiMap );
                         break;
                 }
             } );

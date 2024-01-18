@@ -84,27 +84,14 @@ export class ResMgr
 
     public static async loadPrefab ( path: string, onComplete: IcallBack, isDontDes: boolean = false )
     {
-        let bundle: AssetManager.Bundle = this.m_bundle;
-        if ( bundle )
+        ResMgr.loadBundle( this, ( bundle: AssetManager.Bundle ) =>
         {
             //加载预制体                
             bundle.load( path, Prefab, function ( err, prefab )
             {
                 onComplete( prefab );
             } );
-        }
-        else
-        {
-            assetManager.loadBundle( 'bundle', ( err, bundle: AssetManager.Bundle ) =>
-            {
-                ResMgr.m_bundle = bundle;
-                //加载预制体                
-                bundle.load( path, Prefab, function ( err, prefab )
-                {
-                    onComplete( prefab );
-                } );
-            } );
-        }
+        } );
     }
 
     public static async loadResource ( path: string, onComplete: IcallBack )

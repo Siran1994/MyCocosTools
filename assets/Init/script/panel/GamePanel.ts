@@ -1,14 +1,14 @@
-import { _decorator, Component, Label, Node, tween, Quat, Vec3, Prefab } from 'cc';
+import { _decorator, Component, Label, Node, tween, Quat, Vec3 } from 'cc';
 import { Messager } from '../manager/Messager';
 import { GameData } from '../data/GameData';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { Utils } from '../tool/Utils';
 import { GameManager } from '../manager/GameManager';
 import { PoolManager } from '../manager/PoolManager';
-import { ResMgr } from '../manager/ResMgr';
-import { Config } from '../data/Config';
 import { Button } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
+import { PrefabManager } from '../manager/PrefabManager';
+import { Vec2 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'GamePanel' )
@@ -66,38 +66,36 @@ export class GamePanel extends Component
         this.showCoin( num );
     }
 
-    CoinDoFly ( addnum: number )
+    CoinDoFly ( num: number, pos: Vec2 )
     {
-        ResMgr.loadPrefab( Config.Path.Coin, ( obj: Prefab ) =>
-        {
-            let go = PoolManager.getNode( obj, this.target.parent ) as Node;
-            go.scale = Vec3.ONE;
-            go.setPosition( new Vec3( -286, -750, 0 ) );
-            tween( go )
-                .sequence
-                (
-                    tween().to( 0.3,
-                        {
-                            position: new Vec3( go.position.x - 50, go.position.y - 80, go.position.z ),               // 位置缓动
-                        },
-                        { easing: "linear" } ),
-                    tween().delay( 0.2 ),
-                    tween().to( 0.5,
-                        {
-                            position: this.target.position,               // 位置缓动
-                            scale: new Vec3( 0.5, 0.5, 0.5 ),                     // 缩放缓动
-                            eulerAngles: Quat.IDENTITY                       // 旋转缓动
-                        },
-                        { easing: "sineIn" } ),
-
-                    tween().call( () =>
+        let coinPrefab = PrefabManager.get( 'Coin', PrefabManager.UiMap )
+        let go = PoolManager.getNode( coinPrefab, this.target.parent );
+        go.scale = Vec3.ONE;
+        go.worldPosition = new Vec3( pos.x, pos.y, 0 );
+        tween( go )
+            .sequence
+            (
+                tween().to( 0.3,
                     {
-                        this.UpdateCoin( addnum );
-                        PoolManager.putNode( go );
-                    } ),
-                )
-                .start();
-        } );
+                        position: new Vec3( go.position.x - 50, go.position.y - 80, go.position.z ),               // 位置缓动
+                    },
+                    { easing: "linear" } ),
+                tween().delay( 0.2 ),
+                tween().to( 0.5,
+                    {
+                        position: this.target.position,               // 位置缓动
+                        scale: new Vec3( 0.5, 0.5, 0.5 ),                     // 缩放缓动
+                        eulerAngles: Quat.IDENTITY                       // 旋转缓动
+                    },
+                    { easing: "sineIn" } ),
+
+                tween().call( () =>
+                {
+                    this.UpdateCoin( num );
+                    PoolManager.putNode( go );
+                } ),
+            )
+            .start();
     }
 
     showCoin ( addnum: number )

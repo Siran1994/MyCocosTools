@@ -1,8 +1,7 @@
-import { _decorator, AudioSource, Component, director, instantiate, Node, Prefab } from 'cc';
-import { ResMgr } from './ResMgr';
+import { _decorator, AudioSource, Component, director, instantiate, Node } from 'cc';
 import { GameData } from '../data/GameData';
 import { AudioClipExit } from '../tool/AudioClipExit';
-import { Config } from '../data/Config';
+import { PrefabManager } from './PrefabManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'AudioMgr' )
@@ -17,6 +16,8 @@ export class AudioMgr extends Component
         this.misOn = GameData.MusicOn == 1;
     }
 
+    @property( { type: AudioClipExit } )
+    金币收集: AudioClipExit = null;//收集音效 
     @property( { type: AudioClipExit } )
     开箱: AudioClipExit = null;//收集音效 
     @property( { type: AudioClipExit } )
@@ -83,19 +84,18 @@ export class AudioMgr extends Component
             AudioMgr.Instance.musicPlayer.stop();
     }
 
-    public static init ( node: Node, callback: Function, caller: any )
+    public static init ( node: Node, cb: Function )
     {
         if ( AudioMgr.Instance == null )
         {
-            ResMgr.loadPrefab( Config.Path.AudioMgr, ( obj: Prefab ) =>
-            {
-                let go = instantiate( obj );
-                go.parent = node;
-                director.addPersistRootNode( go );
-                callback.call( caller );
-            } );
+            let Prefab = PrefabManager.get( 'AudioMgr', PrefabManager.UiMap )
+            let go = instantiate( Prefab );
+            go.parent = node;
+            director.addPersistRootNode( go );
+            setTimeout( () => { cb && cb(); }, 100 );
+
         }
         else
-            callback.call( caller );
+            cb && cb();
     }
 }

@@ -80,4 +80,31 @@ export default class DateUtils
 
         return hour_string + ":" + minute_string + ":" + second_string
     }
+
+    /**
+     * 根据秒数换算时钟单位
+     * @param time 
+     */
+    public static clockHMS ( time: number ): string
+    {
+        time = Math.floor( time );
+
+        let hour: number = 0;
+        let minute: number = 0;
+        let second: number = 0;
+
+        hour = Math.floor( time / 3600 );
+        time -= hour * 3600;
+
+        minute = Math.floor( time / 60 );
+        time -= minute * 60;
+
+        second = Math.floor( time );
+
+        let hour_string: string = hour < 10 ? `0${ hour }` : `${ hour }`;
+        let minute_string: string = minute < 10 ? `0${ minute }` : `${ minute }`;
+        let second_string: string = second < 10 ? `0${ second }` : `${ second }`;
+
+        return hour_string + "小时" + minute_string + "分" + second_string + '秒';
+    }
 }

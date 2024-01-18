@@ -5,6 +5,7 @@ import { PoolManager } from './PoolManager';
 import { ResMgr } from './ResMgr';
 import { Config } from '../data/Config';
 import { tipPanel } from '../tip/tipPanel';
+import { PrefabManager } from './PrefabManager';
 
 const { ccclass } = _decorator;
 
@@ -58,21 +59,18 @@ export class TipManager
     //弹窗展示
     showTipPanel ( title: string, content: string, callback: Function, isAd = false )
     {
-        ResMgr.loadResource( Config.Path.tipPanel, ( obj: Prefab ) =>
-        {
-            let parentNode = null
-            if ( find( "Canvas" ) )
-                parentNode = find( "Canvas" );
-            else
-                parentNode = find( "Init" );
+        let Prefab = PrefabManager.get( 'tipPanel', PrefabManager.UiMap )
+        let parentNode = null
+        if ( find( "Canvas" ) )
+            parentNode = find( "Canvas" );
+        else
+            parentNode = find( "Init" );
 
-            let tipsNode = PoolManager.getNode( obj, parentNode as Node );
+        let tipsNode = PoolManager.getNode( Prefab, parentNode as Node );
+        tipsNode.getComponent( UITransformComponent ).priority = 900;
 
-            tipsNode.getComponent( UITransformComponent ).priority = 900;
-
-            let tipScript = tipsNode.getComponent( tipPanel ) as tipPanel;
-            tipScript.show( title, content, callback, isAd );
-        } );
+        let tipScript = tipsNode.getComponent( tipPanel ) as tipPanel;
+        tipScript.show( title, content, callback, isAd );
     }
 
     /**
@@ -82,45 +80,39 @@ export class TipManager
         */
     _showTipsAni ( content: string, targetPos: Vec3, scale: number, callback?: Function )
     {
-        ResMgr.loadPrefab( Config.Path.tips, ( obj: Prefab ) =>
-        {
-            let parentNode = null
-            if ( find( "Canvas" ) )
-                parentNode = find( "Canvas" );
-            else
-                parentNode = find( "Init" );
+        let Prefab = PrefabManager.get( 'tips', PrefabManager.UiMap )
+        let parentNode = null
+        if ( find( "Canvas" ) )
+            parentNode = find( "Canvas" );
+        else
+            parentNode = find( "Init" );
+        let tipsNode = PoolManager.getNode( Prefab, parentNode as Node );
 
-            let tipsNode = PoolManager.getNode( obj, parentNode as Node );
+        tipsNode.getComponent( UITransformComponent ).priority = 900;
 
-            tipsNode.getComponent( UITransformComponent ).priority = 900;
-
-            let tipScript = tipsNode.getComponent( tips ) as tips;
-            tipScript.show( content, targetPos, scale, callback );
-        } );
+        let tipScript = tipsNode.getComponent( tips ) as tips;
+        tipScript.show( content, targetPos, scale, callback );
     }
 
     showFightTips ( type: number, txt: string, pos: Vec3, callback?: Function )
     {
-        ResMgr.loadPrefab( Config.Path.fightTip, ( obj: Prefab ) =>
-        {
-            let parentNode = null
-            if ( find( "Canvas" ) )
-                parentNode = find( "Canvas" );
-            else
-                parentNode = find( "Init" );
+        let Prefab = PrefabManager.get( 'fightTip', PrefabManager.UiMap )
+        let parentNode = null
+        if ( find( "Canvas" ) )
+            parentNode = find( "Canvas" );
+        else
+            parentNode = find( "Init" );
+        let ndTip = PoolManager.getNode( Prefab, parentNode as Node );
+        ndTip.setPosition( pos );
 
-            let ndTip = <Node> PoolManager.getNode( obj, <Node> parentNode );
-            ndTip.setPosition( pos );
+        let UICom = ndTip.getComponent( UITransformComponent ) as UITransformComponent;
 
-            let UICom = ndTip.getComponent( UITransformComponent ) as UITransformComponent;
-
-            if ( type === 0 )
-                UICom.priority = 999;
-            else if ( type === 1 )
-                UICom.priority = 1000;
-            let scriptTip = <FightTip> ndTip.getComponent( FightTip );
-            scriptTip.show( type, txt, callback );
-        } );
+        if ( type === 0 )
+            UICom.priority = 999;
+        else if ( type === 1 )
+            UICom.priority = 1000;
+        let scriptTip = <FightTip> ndTip.getComponent( FightTip );
+        scriptTip.show( type, txt, callback );
     }
 }
 

@@ -6,6 +6,11 @@ export class PlayerPrefs
         localStorage.clear();
     }
 
+    public static DeleteOne ( key: string )
+    {
+        localStorage.removeItem( key );
+    }
+
     //#region  Int类型
     public static GetInt ( key: string, default_Number: number ): number
     {

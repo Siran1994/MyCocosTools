@@ -2,6 +2,8 @@ import { Prefab } from "cc";
 import { Constructor, _decorator } from "cc";
 import { ResMgr } from "../manager/ResMgr";
 import { error } from "cc";
+import { resources } from "cc";
+import { TextAsset } from "cc";
 const { ccclass } = _decorator;
 
 interface ITextAsset
@@ -10,7 +12,6 @@ interface ITextAsset
     _file?: string;
     json?: string
 }
-
 
 const CELL_DELIMITERS = [ ",", ";", "\t", "|", "^" ];
 const LINE_DELIMITERS = [ "\r\n", "\r", "\n" ];
@@ -508,14 +509,45 @@ export class CsvManager
 
     public getData ( fileName: string, cb?: ( asset: any ) => void )
     {
-        // ResMgr.loadData( "prefab/data/" + fileName, () =>
-        // {
+        resources.load( fileName, ( err: any, res: TextAsset ) =>
+        {
+            if ( err )
+            {
+                error( err.message || err );
+                return;
+            }
+            // // 获取到文本数据
+            // const textData = res.text;
+            this.addTable( fileName, res.text, true );//添加表格
 
-
-
-        //     cb(  text );
-        // } );
+            // console.error( this.getTable( 'talk' ) );
+            //console.error( this.queryByID( 'talk', '1' )[ 'content' ] );
+            //console.error( this.getTableArr( 'talk' ) );
+            console.error( this.showTalk( '1', 16 ) );
+        } )
     }
+
+
+    //示例
+    showTalk ( customerId: string, type: number )
+    {
+        let arrTalk = this.getTableArr( 'talk' );
+        // Note:
+        let arrFilter: any[] = [];
+        arrTalk.forEach( ( element: any ) =>
+        {
+            if ( element.type === type )
+            {
+                arrFilter.push( element );
+            }
+        } );
+
+        let rand = Math.floor( Math.random() * arrFilter.length );
+        let objRand = arrFilter[ rand ];
+
+        return `${ objRand.content }`;
+    }
+
 
     csvTables: any = {};
     csvTableForArr: any = {};

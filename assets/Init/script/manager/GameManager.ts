@@ -12,6 +12,7 @@ import { PlayerCtrl } from '../role/PlayerCtrl';
 import { AudioMgr } from './AudioMgr';
 import { Messager } from './Messager';
 import { SkeletalAnimation, AnimationComponent } from 'cc';
+import { CsvManager } from '../other/CsvManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'GameManager' )
@@ -48,6 +49,13 @@ export class GameManager extends Component
             this.targetLv = GameData.Lv;
         this.currentlv = instantiate( PrefabManager.get( this.targetLv.toString(), PrefabManager.LvMap ) );
         this.currentlv.parent = this.node;
+        AudioMgr.init( this.node.parent, () =>
+        {
+            AudioMgr.Instance.游戏背景乐.playMusic();
+        } );
+
+        CsvManager.Instance.getData( 'talk' );
+
     }
 
     start ()
@@ -89,15 +97,13 @@ export class GameManager extends Component
             GameData.Lv += 1;
         if ( isShowProgress )
         {
-            ResMgr.loadPrefab( Config.Path.Loading, ( obj: Prefab ) =>
+            let Prefab = PrefabManager.get( 'Loading', PrefabManager.UiMap );
+            let go = PoolManager.getNode( Prefab, find( 'Canvas' ) ) as Node;
+            var loader = go.getComponent( Loading );
+            loader.showProgress( 'game', () =>
             {
-                let go = PoolManager.getNode( obj, find( 'Canvas' ) ) as Node;
-                var loader = go.getComponent( Loading );
-                loader.showProgress( 'game', () =>
-                {
-                    cb && cb();
-                    PoolManager.putNode( go );
-                } );
+                cb && cb();
+                PoolManager.putNode( go );
             } );
         }
         else

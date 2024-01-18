@@ -1,0 +1,54 @@
+{
+  "name": "u3d-particle-ado",
+  "package_version": 2,
+  "version": "0.0.3",
+  "description": "u3d particle adopter for creator 3.0.1",
+  "author": "demo",
+  "main": "./dist/browser.js",
+  "panels": {
+    "particle3d": {
+      "title": "particle3d",
+      "main": "./dist/panel/particle3d/index.js",
+      "type": "dockable",
+      "flags": {
+        "save": true
+      },
+      "size": {
+        "width": 520,
+        "height": 650
+      }
+    }
+  },
+  "contributions": {
+    "menu": [
+      {
+        "path": "i18n:menu.extension",
+        "label": "u3d粒子转换器",
+        "message": "particle3d"
+      }
+    ],
+    "messages": {
+      "particle3d": {
+        "methods": [
+          "particle3d"
+        ]
+      },
+      "p2m-particle3d-build": {
+        "desc": "panel msg to main",
+        "methods": [
+          "p2m-particle3d-build"
+        ]
+      },
+      "m2p-particle3d-log": {
+        "desc": "main route to panel",
+        "methods": [
+          "particle3d.m2p-particle3d-log"
+        ]
+      }
+    }
+  },
+  "dependencies": {
+    "yaml": "^2.0.0-7"
+  },
+  "_storeId": "0451a888b949e5432ee19414bb7b8c63"
+}

@@ -24,16 +24,6 @@ export class Config
             FreeTryPanel: "FreeTryPanel",//试用
         }
 
-    public static Path = //本地化存储
-        {
-            Coin: 'prefab/ui/Coin',//金币
-            Loading: 'prefab/ui/Loading',//加载
-            AudioMgr: 'prefab/audiomgr/AudioMgr',//音效
-            tips: 'prefab/ui/tips',//提示
-            fightTip: 'prefab/ui/fightTip',//战斗提示
-            tipPanel: 'prefab/ui/tipPanel',//弹窗提示
-        }
-
     public static PowerType =
         {
             射速: '<color=#534B73>增加</color><color=#ff860f>10%</color><color=#534B73>的射速</color>',
@@ -65,7 +55,7 @@ export class Config
     public static Volume =
         {
             Music: 0.5,
-            Audio: 1
+            Audio: 0.7
         }
 
     //宝箱抽奖数值

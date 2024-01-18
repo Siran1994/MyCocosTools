@@ -5,6 +5,7 @@ import { UiManager } from "../manager/UiManager";
 import CoinFly from "../animation/CoinFly";
 import DOTweenAnimation from "../animation/DOTweenAnimation";
 import { TipManager } from "../manager/TipManager";
+import { Vec3 } from "cc";
 const { ccclass, property } = _decorator;
 
 @ccclass( "online" )
@@ -42,7 +43,7 @@ export class online extends Component
             return;
         }
         else
-            UiManager.Instance.UpdateCoin( this.currentCount, UiManager.Instance.mainPanel.CoinTxt );
+            UiManager.Instance.UpdateCoin( this.currentCount, UiManager.Instance.mainPanel.CoinTxt, Vec3.ZERO, UiManager.Instance.mainPanel.CoinTxt.node.worldPosition );
     }
 
     update ( dt: number )

@@ -1,6 +1,5 @@
 import { _decorator, Component, macro } from 'cc';
 
-
 export class SocketConnect extends Component
 {
     public constructor ( url: string )

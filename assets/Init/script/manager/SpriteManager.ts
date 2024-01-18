@@ -10,8 +10,8 @@ export class SpriteManager
 
     static Path =
         {
-            shopIcon: 'prefab/shopicon',
-            showPath: 'prefab/showicon'
+            shopIcon: 'prefab/icon',
+            showPath: 'prefab/icon'
         }
 
     public static loadSprite ( name: string, path: string, cb?: Function )

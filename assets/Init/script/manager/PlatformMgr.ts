@@ -2,7 +2,6 @@ import { _decorator } from 'cc';
 import { sys } from 'cc';
 import { TipManager } from './TipManager';
 import { PlayerPrefs } from '../data/PlayerPrefs';
-
 const { ccclass } = _decorator;
 
 @ccclass( 'PlatformMgr' )

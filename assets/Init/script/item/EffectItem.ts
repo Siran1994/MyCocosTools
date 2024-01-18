@@ -1,6 +1,6 @@
 import { _decorator, Component } from 'cc';
-import { Utils } from 'db://assets/Init/script/tool/Utils';
 import { PoolManager } from '../manager/PoolManager';
+import { Utils } from '../tool/Utils';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'EffectItem' )

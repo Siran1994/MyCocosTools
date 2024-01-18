@@ -36,7 +36,7 @@ export class AudioClipExit
         AudioMgr.Instance.musicPlayer.stop();
     }
 
-    public Play ()
+    public Play ( volume: number = Config.Volume.Audio )
     {
         if ( !AudioMgr.Instance.aisOn ) return;
 
@@ -44,6 +44,6 @@ export class AudioClipExit
 
         this.preTime = Time.time;
 
-        AudioMgr.Instance.audioPlayer.playOneShot( this.audioClip, Config.Volume.Audio );
+        AudioMgr.Instance.audioPlayer.playOneShot( this.audioClip, volume );
     }
 }

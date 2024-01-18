@@ -1,13 +1,10 @@
-import { _decorator, Camera, Component, find, Node, Prefab, tween, UI, Vec3 } from 'cc';
+import { _decorator, Component, Node } from 'cc';
 import { CameraMgr } from '../camera/CameraMgr';
-import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
 import { UiManager } from '../manager/UiManager';
 import { PlayerCtrl } from '../role/PlayerCtrl';
 import { Utils } from '../tool/Utils';
-import { Boss } from './Boss';
-import { AniType } from '../data/Enum';
 
 const { ccclass, property } = _decorator;
 

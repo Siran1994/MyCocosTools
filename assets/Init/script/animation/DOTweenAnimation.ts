@@ -269,4 +269,33 @@ export default class DOTweenAnimation
             .repeatForever()
             .start();
     }
+
+    //放大缩小
+    public static ScaleLoopOnce ( target: Node, toScale: number, bcakScale: number, toTime: number = 0.12, backTime: number = 0.1 )
+    {
+        tween( target )
+            .sequence
+            (
+                tween().to( toTime, { scale: new Vec3( toScale, toScale, toScale ) }, { easing: "linear" } ),
+                tween().to( backTime, { scale: new Vec3( bcakScale, bcakScale, bcakScale ) }, { easing: "linear" } ),
+            )
+            .start();
+    }
+
+    //放大缩小
+    public static ScaleAndColorChangeOnce ( target: Node, cb1?: Function, cb2?: Function )
+    {
+        cb1 && cb1();
+        tween( target )
+            .sequence
+            (
+                tween().to( 0.1, { scale: new Vec3( 1.1, 1.1, 1.1 ) }, { easing: "linear" } ),
+                tween().to( 0.1, { scale: Vec3.ONE }, { easing: "linear" } ).call( () =>
+                {
+
+                } ),
+            )
+            .call( () => { cb2 && cb2(); } )
+            .start();
+    }
 }

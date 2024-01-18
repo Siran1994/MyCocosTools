@@ -11,6 +11,8 @@ import { BasePanel } from './BasePanel';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { Label } from 'cc';
 import { Config } from '../data/Config';
+import { Vec3 } from 'cc';
+import { Utils } from '../tool/Utils';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SignPanel' )
@@ -54,7 +56,6 @@ export class SignPanel extends BasePanel
             this.DoSign( true );
         }, this );
 
-
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
         {
             UiManager.Instance.AdGetCoin( this.CoinTxt );
@@ -72,11 +73,13 @@ export class SignPanel extends BasePanel
     {
         if ( this.isCanSign() )
         {
-            Messager.Broadcast( 'SignItem', PlayerPrefs.GetInt( 'signDay', 1 ) );
-            PlayerPrefs.SetInt( 'signDay', PlayerPrefs.GetInt( 'signDay', 1 ) + 1 );
+
+            GameData.SignDay += 1;
+            if ( GameData.SignDay > 7 )
+                GameData.SignDay = 1;
+
+            Messager.Broadcast( 'SignItem', GameData.SignDay );
             PlayerPrefs.SetInt( 'signDate', DateUtils.getDate().day );
-            if ( PlayerPrefs.GetInt( 'signDay', 1 ) > 7 )
-                PlayerPrefs.SetInt( 'signDay', 1 );
             this.GetReward( isGet2x );
         }
         else
@@ -94,50 +97,51 @@ export class SignPanel extends BasePanel
 
     GetReward ( isGet2x = false )
     {
-        let str = '';
-        if ( sys.platform == sys.Platform.VIVO_MINI_GAME )
-            str = this.signItems[ PlayerPrefs.GetInt( 'signDay', 1 ) - 1 ].rewardtxt.string;
-        else
-            str = this.signItems[ PlayerPrefs.GetInt( 'signDay', 1 ) - 2 ].rewardtxt.string;
+
         let coin = 0;
-        switch ( str )
+        switch ( GameData.SignDay )
         {
-            case '200':
+            case 1:
                 coin = 200;
                 if ( isGet2x )
                     coin *= 2;
                 break;
-            case '美女电视人':
+            case 2:
                 PlayerPrefs.SetBool( "美女电视人", true );
                 TipManager.Instance.showTips( '恭喜您获得美女电视人!' );
                 break;
-            case '500':
+            case 3:
                 coin = 500;
                 if ( isGet2x )
                     coin *= 2;
                 break;
-            case '1000':
+            case 4:
                 coin = 1000;
                 if ( isGet2x )
                     coin *= 2;
                 break;
-            case '1500':
+            case 5:
                 coin = 1500;
                 if ( isGet2x )
                     coin *= 2;
                 break;
-            case '2000':
+            case 6:
                 coin = 2000;
                 if ( isGet2x )
                     coin *= 2;
                 break;
-            case '黄电视人':
+            case 7:
                 PlayerPrefs.SetBool( "黄电视人", true );
                 TipManager.Instance.showTips( '恭喜您获得黄电视人!' );
                 break;
         }
-        if ( str != '美女电视人' && str != '黄电视人' )
-            UiManager.Instance.UpdateCoin( coin, this.CoinTxt );
+        if ( GameData.SignDay != 2 && GameData.SignDay != 7 )
+            UiManager.Instance.UpdateCoin( coin, this.CoinTxt, Vec3.ZERO, this.CoinTxt.node.worldPosition );
+        Utils.DelayCallBack( 1.5, () =>
+        {
+            UiManager.Instance.mainPanel.node.active = true;
+            this.HidePanel();
+        } )
     }
 }
 

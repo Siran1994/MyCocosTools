@@ -19,6 +19,7 @@ import { AudioMgr } from "./AudioMgr";
 import { SpriteFrame } from "cc";
 import { FightPanel } from "../panel/FightPanel";
 import { Camera } from "cc";
+import { Vec3 } from "cc";
 
 const { ccclass, property } = _decorator;
 
@@ -102,15 +103,16 @@ export class UiManager extends Component
         this.init();
     }
 
-    UpdateCoin ( num: number, txt: Label, startPos: Node = null )
+    UpdateCoin ( num: number, txt: Label, stPos: Vec3, edPos: Vec3, count = 15 )//金币飞行动画
     {
-        this.coinfly.playAnim( () =>
+        this.coinfly.playAnim( stPos, edPos, () =>
         {
+            AudioMgr.Instance.金币收集.Play();
             if ( txt != null )
             {
                 var tmpNum = GameData.Coin;
                 var targetNum = tmpNum + num;
-                var ani = DOTweenAnimation.stepNum( txt, tmpNum, 10, targetNum, 0.001, '', () =>
+                var ani = DOTweenAnimation.stepNum( txt, tmpNum, 25, targetNum, 0, '', () =>
                 {
                     ani.stop();
                     GameData.Coin = targetNum;
@@ -120,7 +122,7 @@ export class UiManager extends Component
             else
                 GameData.Coin + num;
 
-        }, startPos );
+        }, count );
     }
 
     AdGetCoin ( CoinTxt: Label )

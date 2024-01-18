@@ -4,6 +4,7 @@ import { AudioMgr } from '../manager/AudioMgr';
 import { Messager } from '../manager/Messager';
 import { UiManager } from '../manager/UiManager';
 import { Config } from '../data/Config';
+import { Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'BoxItem' )
@@ -40,7 +41,7 @@ export class BoxItem extends Component
             this.ani.play();
             this.isOpened = true;
             Messager.Broadcast( 'addCount' );
-            UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt );
+            UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt, Vec3.ZERO, UiManager.Instance.rewardPanel.CoinTxt.node.worldPosition );
         }, this );
 
         this.AdGetBtn.node.on( Button.EventType.CLICK, () =>
@@ -54,7 +55,7 @@ export class BoxItem extends Component
             AudioMgr.Instance.点击广告按钮.Play();
             this.ani.playOnLoad = true;
             this.ani.play();
-            UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt );
+            UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt, Vec3.ZERO, UiManager.Instance.rewardPanel.CoinTxt.node.worldPosition );
         }, this );
     }
 
@@ -91,7 +92,7 @@ export class BoxItem extends Component
             AudioMgr.Instance.点击广告按钮.Play();
             this.ani.playOnLoad = true;
             this.ani.play();
-            UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt );
+            UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt, Vec3.ZERO, UiManager.Instance.rewardPanel.CoinTxt.node.worldPosition );
         }
     }
 }

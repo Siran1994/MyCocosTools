@@ -1,0 +1,53 @@
+{
+  "package_version": 2,
+  "version": "1.0.0",
+  "name": "mini-font",
+  "description": "i18n:mini-font.description",
+  "author": "magician-f",
+  "address": "https://store.cocos.com/app/detail/3657",
+  "main": "./dist/3x/main.js",
+  "contributions": {
+    "builder": "./dist/3x/builder.js",
+    "menu": [
+      {
+        "path": "i18n:menu.extension",
+        "label": "i18n:mini-font.name",
+        "message": "open-panel"
+      }
+    ],
+    "messages": {
+      "open-panel": {
+        "methods": [
+          "open_panel"
+        ]
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^16.9.0",
+    "typescript": "^4.3.4"
+  },
+  "dependencies": {
+    "vue": "^3.1.4",
+    "fontmin": "^0.9.9"
+  },
+  "panels": {
+    "default": {
+      "title": "mini-font",
+      "type": "dockable",
+      "main": "dist/3x/panel",
+      "size": {
+        "min-width": 400,
+        "min-height": 300,
+        "width": 600,
+        "height": 400
+      }
+    }
+  },
+  "editor": ">=3.3.0",
+  "scripts": {
+    "build": "tsc -b",
+    "watch": "tsc -w"
+  },
+  "_storeId": "3ad6043e969eb02bd61fef03e85932bd"
+}

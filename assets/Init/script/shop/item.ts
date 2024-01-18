@@ -1,5 +1,4 @@
 import { _decorator, Component, Sprite, Toggle, Node } from 'cc';
-
 import { Messager } from '../manager/Messager';
 import { ItemPoolType, ItemType } from '../data/Enum';
 import { GameData } from '../data/GameData';
@@ -37,7 +36,6 @@ export class item extends Component
             this.itemIcon.spriteFrame = SpriteManager.get( this.node.name, SpriteManager.shopIconMap );
             this.itemPooltype = pooltype;
             this.CheckState();
-
         }
         else//空节点
             this.node.active = false;

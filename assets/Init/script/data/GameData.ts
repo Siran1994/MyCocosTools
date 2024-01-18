@@ -26,6 +26,8 @@ export class GameData
             GameData.KnifeType = 0;
         if ( GameData.HandType == 0 || GameData.HandType == null )
             GameData.HandType = 0;
+        if ( GameData.SignDay == 0 || GameData.SignDay == null )
+            GameData.SignDay = 0;
     }
 
     static get Star ()
@@ -126,6 +128,15 @@ export class GameData
     static set HandType ( value: number )
     {
         PlayerPrefs.SetInt( 'HandType', value );
+    }
+
+    static get SignDay ()//签到日期
+    {
+        return PlayerPrefs.GetInt( 'SignDay', 0 );
+    }
+    static set SignDay ( value: number )
+    {
+        PlayerPrefs.SetInt( 'SignDay', value );
     }
 
 }

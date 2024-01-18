@@ -185,7 +185,7 @@ export class DrawPanel extends BasePanel
         }
         if ( index != 7 )
         {
-            UiManager.Instance.UpdateCoin( coin, this.CoinTxt );
+            UiManager.Instance.UpdateCoin( coin, this.CoinTxt, Vec3.ZERO, this.CoinTxt.node.worldPosition );
         }
     }
 }

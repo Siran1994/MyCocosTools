@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, UIOpacity, UITransform } from 'cc';
+import { _decorator, Component, Label, Node, UIOpacity, UITransform } from 'cc';
 
 const { ccclass, property } = _decorator;
 
@@ -21,12 +21,19 @@ export class GuideManager extends Component
     @property( { type: Node } )
     Hand: Node = null;
 
-    showGuide ( target: Node, isShowMask = true )
+    @property( { type: Label } )
+    tipTxt: Label = null;
+
+    showGuide ( target: Node, tip: string = '', isShowMask = true )
     {
         this.node.active = true;
         this.Mask.position = target.position;
         this.MaskRect.contentSize = target.getComponent( UITransform ).contentSize;
         this.Hand.position = target.position;
+        if ( tip != '' )
+            this.tipTxt.string = tip;
+        else
+            this.tipTxt.node.active = false;
         if ( isShowMask == false )
             this.Mask.children[ 0 ].getComponent( UIOpacity ).opacity = 0;
     }
