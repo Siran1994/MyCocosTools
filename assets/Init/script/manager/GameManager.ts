@@ -1,11 +1,10 @@
-import { _decorator, Component, director, find, instantiate, Node, Prefab } from 'cc';
+import { _decorator, Component, director, find, instantiate, Node } from 'cc';
 import { GameData } from '../data/GameData';
 import { Loading } from '../init/Loading';
 import { Utils } from '../tool/Utils';
 import { UiManager } from './UiManager';
 import { PrefabManager } from './PrefabManager';
 import { PoolManager } from './PoolManager';
-import { ResMgr } from './ResMgr';
 import { Config } from '../data/Config';
 import { AniState, ItemType } from '../data/Enum';
 import { PlayerCtrl } from '../role/PlayerCtrl';
@@ -13,6 +12,7 @@ import { AudioMgr } from './AudioMgr';
 import { Messager } from './Messager';
 import { SkeletalAnimation, AnimationComponent } from 'cc';
 import { CsvManager } from '../other/CsvManager';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'GameManager' )

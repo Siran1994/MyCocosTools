@@ -25061,7 +25061,7 @@
     "delayTime": 0,
     "repeat": 999,
     "ease": 1,
-    "toOrby": true,
+    "isTo": true,
     "isLoop": false,
     "position": {
       "__type__": "cc.Vec3",
