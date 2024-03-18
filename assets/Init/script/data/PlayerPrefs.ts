@@ -1,4 +1,5 @@
 import { _decorator } from 'cc';
+import BigNumber from '../libs/bignumber.js';
 export class PlayerPrefs 
 {
     public static DeleteAll ()
@@ -11,46 +12,41 @@ export class PlayerPrefs
         localStorage.removeItem( key );
     }
 
-    //#region  Int类型
-    public static GetInt ( key: string, default_Number: number ): number
-    {
-        return PlayerPrefs.GetValueNum( key, default_Number );
-    }
-
-    public static SetInt ( key: string, default_Number: number )
-    {
-        PlayerPrefs.SetValueNum( key, default_Number );
-    }
-
-    private static GetValueNum ( value_name: string, default_Number: number ): number
+    //#region  BigNum类型
+    public static GetBigNum ( value_name: string, default_Number: BigNumber = BigNumber( 0 ) ): BigNumber
     {
         let t = localStorage.getItem( value_name );
 
         if ( t != null )
         {
-            return Number( t );
+            return BigNumber( t );
         }
         return default_Number;
     }
 
-    private static SetValueNum ( key: string, num: number )
+    public static SetBigNum ( key: string, num: BigNumber )
+    {
+        localStorage.setItem( key, num.toFixed( 0 ) );
+    }
+    //#endregion
+
+    //#region  Int类型
+    public static GetInt ( value_name: string, default_Number: number = 0 ): number
+    {
+        let t = localStorage.getItem( value_name );
+        if ( t != null )
+            return Number( t );
+        return default_Number;
+    }
+
+    public static SetInt ( key: string, num: number )
     {
         localStorage.setItem( key, num.toString() );
     }
     //#endregion
 
     //#region  Float类型
-    public static GetFloat ( key: string, default_Number: number ): number
-    {
-        return PlayerPrefs.GetFloatValueNum( key, default_Number );
-    }
-
-    public static SetFloat ( key: string, default_Number: number )
-    {
-        PlayerPrefs.SetFloatValueNum( key, default_Number );
-    }
-
-    private static GetFloatValueNum ( value_name: string, default_Number: number ): number
+    public static GetFloat ( value_name: string, default_Number: number = 0 ): number
     {
         let t = localStorage.getItem( value_name );
 
@@ -61,24 +57,15 @@ export class PlayerPrefs
         return default_Number;
     }
 
-    private static SetFloatValueNum ( key: string, num: number )
+    public static SetFloat ( key: string, num: number )
     {
         localStorage.setItem( key, num.toString() );
     }
     //#endregion
 
-    //#region Bool类型
-    public static GetBool ( key: string, default_Bool: boolean ): boolean
-    {
-        return PlayerPrefs.GetValueBool( key, default_Bool );
-    }
+    //#region Bool类型    
 
-    public static SetBool ( key: string, default_Bool: boolean )
-    {
-        PlayerPrefs.SetValueBool( key, default_Bool );
-    }
-
-    private static GetValueBool ( value_name: string, default_Bool: boolean ): boolean
+    public static GetBool ( value_name: string, default_Bool: boolean ): boolean
     {
         let t = localStorage.getItem( value_name );
         if ( t != null )
@@ -88,24 +75,15 @@ export class PlayerPrefs
         return default_Bool;
     }
 
-    private static SetValueBool ( key: string, value: boolean )
+    public static SetBool ( key: string, value: boolean )
     {
-        localStorage.setItem( key, Number( value ).toString() );
+        localStorage.setItem( key, Boolean( value ).toString() );
     }
     //#endregion
 
-    //#region String类型
-    public static GetString ( key: string, default_string: string ): string
-    {
-        return PlayerPrefs.GetValueString( key, default_string );
-    }
+    //#region String类型   
 
-    public static SetString ( key: string, default_string: string )
-    {
-        PlayerPrefs.SetValueString( key, default_string );
-    }
-
-    private static GetValueString ( value_name: string, default_string: string ): string
+    public static GetString ( value_name: string, default_string: string ): string
     {
         let t = localStorage.getItem( value_name );
         if ( t != null )
@@ -115,7 +93,7 @@ export class PlayerPrefs
         return default_string;
     }
 
-    private static SetValueString ( key: string, str: string )
+    public static SetString ( key: string, str: string )
     {
         localStorage.setItem( key, str );
     }

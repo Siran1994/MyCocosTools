@@ -1,5 +1,7 @@
 export class Config
 {
+    public static GameId = 'ToBeRich';//游戏Id
+
     public static GameFrame = 60;//游戏帧率
 
     public static Gravity = -10;//游戏重力
@@ -49,6 +51,20 @@ export class Config
             粉手套: '粉手',
             绿手套: '绿手',
             黄手套: '黄手',
+        }
+
+    public static ColorValue =
+        {
+            绿色: '#539521',
+            红色: '#ee2324',
+            灰色: '#616161',
+            褐色: '#745438',
+            白色: '#FFFFFF',
+            黑色: '#000000',
+            描边绿: '#4f9437',
+            描边黄: '#b27d21',
+            主体绿: '#6cca19',
+            主体红: '#ff4040',
         }
 
     //声音音量设置

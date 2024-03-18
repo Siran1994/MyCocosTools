@@ -54,7 +54,6 @@ export class GameData
     }
     static set Lv ( value: number )
     {
-
         PlayerPrefs.SetInt( 'level', value );
     }
 
@@ -138,6 +137,4 @@ export class GameData
     {
         PlayerPrefs.SetInt( 'SignDay', value );
     }
-
 }
-

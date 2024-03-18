@@ -1,5 +1,6 @@
-import { macro, v3 } from "cc";
-import { Vec3, bezier, director, tween, Node } from "cc";
+import { Texture2D, UIOpacity, UITransform, gfx, sys, v2, v3 } from "cc";
+import { Vec3, bezier, tween, Node } from "cc";
+import BigNumber from '../libs/bignumber.js';
 let tempVec: Vec3 = v3()
 let tempVec2: Vec3 = v3()
 let tempVec3: Vec3 = v3()
@@ -36,6 +37,29 @@ export class Utils
             console.error( "日期格式不正确" );
             return -1;
         }
+    }
+
+    /**
+     * 根据秒数换算时钟单位分：秒)
+     * @param time 
+     */
+    public static ToMS ( time: number ): string
+    {
+        time = Math.floor( time );
+
+
+        let minute: number = 0;
+        let second: number = 0;
+
+        minute = Math.floor( time / 60 );
+        time -= minute * 60;
+
+        second = Math.floor( time );
+
+        let minute_string: string = minute < 10 ? `0${ minute }` : `${ minute }`;
+        let second_string: string = second < 10 ? `0${ second }` : `${ second }`;
+
+        return minute_string + ":" + second_string
     }
 
     /**
@@ -1481,7 +1505,6 @@ export class Utils
 
     //#endregion
 
-    //#region 数字操作,单位换算,格式化
     public static GetSize ( num: number )
     {
         let unitIndex = 0;
@@ -1516,6 +1539,61 @@ export class Utils
                 break;
         }
         return result;
+    }
+
+    public static formatNumberStr ( numStr: string, level: number = 2 ): string
+    {
+        const unitChars = [ '', '万', '亿', '兆', '京', '垓', '秭', '穰', '钩', '涧', '正', '载' ];
+        const unitLength = 4;
+        const numLength = numStr.length;
+        // 计算数字字符串的位数
+        const numUnits = Math.ceil( numLength / unitLength );
+        // 确定第一个单位字符的索引
+        let currentUnitIndex = numUnits - 1;
+        let formattedStr = '';
+        // 处理首个数字的情况
+        const firstUnitLength = numLength % unitLength;
+        if ( firstUnitLength !== 0 )
+        {
+            formattedStr += numStr.slice( 0, firstUnitLength );
+            if ( numUnits > 1 && currentUnitIndex > numUnits - level - 1 )
+            {
+                formattedStr += unitChars[ currentUnitIndex ];
+            }
+            currentUnitIndex--;
+        }
+        // 遍历剩余数字字符串，逐个处理单位
+        let zerosFound = 0; // 记录连续的零的数量
+        for ( let i = firstUnitLength; i < numLength && currentUnitIndex >= numUnits - level; i += unitLength )
+        {
+            const digits = numStr.slice( i, i + unitLength ); // 取出当前单位的数字
+
+            // 如果当前单位全为零，则不输出
+            if ( parseInt( digits ) === 0 )
+            {
+                zerosFound++;
+                currentUnitIndex--;
+                continue;
+            }
+            // 添加当前单位的数字和单位字符
+            if ( zerosFound > 0 )
+            {
+                if ( formattedStr !== '' )
+                {
+                    formattedStr += '0'.repeat( zerosFound );
+                }
+                zerosFound = 0; // 重置连续零的计数
+            }
+            formattedStr += digits;
+            formattedStr += unitChars[ currentUnitIndex ];
+            currentUnitIndex--;
+        }
+        // 如果结果为空，说明输入的数字字符串全为零
+        if ( formattedStr === '' )
+        {
+            return '0';
+        }
+        return formattedStr;
     }
 
     public static formatNumber ( num: number, isMain = false ): string
@@ -1633,31 +1711,64 @@ export class Utils
         return result;
     }
 
-    //格式化钱数，超过10000 转换位 10K   10000K 转换为 10M
-    public static formatMoney ( money: number )
+    static bigNumAdd ( a: number | string | BigNumber, b: number | string | BigNumber ) //+
     {
-        const arrUnit = [ '', '万', '亿', '兆', '京', '垓', '秭', '穰', '沟', '涧', '正', '载' ];
-
-        let strValue = '';
-        for ( let idx = 0; idx < arrUnit.length; idx++ )
+        if ( typeof a === 'number' || typeof a === 'string' )
         {
-            if ( money >= 10000 )
-            {
-                money /= 10000;
-            }
-            else
-            {
-                strValue = Math.floor( money ) + arrUnit[ idx ];
-                break;
-            }
+            let x = BigNumber( a );
+            let y = BigNumber( b );
+            return x.plus( y );
         }
+        else
+            return a.plus( b );
+    }
 
-        if ( strValue === '' )
+    static bigNumReduce ( a: number | string | BigNumber, b: number | string | BigNumber )//-
+    {
+        if ( typeof a === 'number' || typeof a === 'string' )
         {
-            strValue = Math.floor( money ) + 'U'; //超过最大值就加个U
+            let x = BigNumber( a );
+            let y = BigNumber( b );
+            return x.minus( y );
         }
+        else
+            return a.minus( b );
+    }
 
-        return strValue;
+    static bigNumMultiply ( a: number | string | BigNumber, b: number | string | BigNumber )//*
+    {
+        if ( typeof a === 'number' || typeof a === 'string' )
+        {
+            let x = BigNumber( a );
+            let y = BigNumber( b );
+            return x.multipliedBy( y );
+        }
+        else
+            return a.multipliedBy( b );
+    }
+
+    static bigNumDivide ( a: number | string | BigNumber, b: number | string | BigNumber )//除
+    {
+        if ( typeof a === 'number' || typeof a === 'string' )
+        {
+            let x = BigNumber( a );
+            let y = BigNumber( b );
+            return x.dividedBy( y );
+        }
+        else
+            return a.dividedBy( b );
+    }
+
+    static bigNumSurplus ( a: number | string | BigNumber, b: number | string | BigNumber )//模
+    {
+        if ( typeof a === 'number' || typeof a === 'string' )
+        {
+            let x = BigNumber( a );
+            let y = BigNumber( b );
+            return x.mod( y );
+        }
+        else
+            return a.mod( b );
     }
 
     //将输入的数值转化为对应的单位字符串
@@ -1681,8 +1792,21 @@ export class Utils
                 break;
             }
         }
-
         return strValue;
+    }
+
+
+    public static getRandomNumbers (): number[]
+    {
+        const numbers: number[] = [ 0, 1, 2, 3 ];
+        const result: number[] = [];
+        while ( result.length < 4 )
+        {
+            const randomIndex = Math.floor( Math.random() * numbers.length );
+            const selectedNumber = numbers.splice( randomIndex, 1 )[ 0 ];
+            result.push( selectedNumber );
+        }
+        return result;
     }
 
     //将输入的数字格式化为两位数 5-->05
@@ -1758,22 +1882,7 @@ export class Utils
                 }
             }
         }
-
         return result;
-    }
-
-    public static formatNum ( num: number )
-    {
-        // 0 和负数均返回 NaN。特殊处理。
-        if ( num <= 0 )
-        {
-            return '0';
-        }
-
-        const k = 1000;
-        const sizes = [ '', '', 'K', 'M', 'B' ];
-        const i = Math.round( Math.log( num ) / Math.log( k ) );
-        return parseInt( ( num / ( Math.pow( k, i - 1 < 0 ? 0 : i - 1 ) ) ).toString(), 10 ) + sizes[ i ];
     }
 
     /**
@@ -1928,5 +2037,199 @@ export class Utils
             func && func();//回调
         }, time * 1000 );
     }
+
+    public static ChangColor ( isToGray = false, Opa: UIOpacity, time: number, cb?: Function )
+    {
+        if ( isToGray )
+            tween( Opa ).to( time, { opacity: 0 } ).call( () => { cb && cb() } ).start();//变暗
+        else
+            tween( Opa ).to( time, { opacity: 255 } ).call( () => { cb && cb() } ).start();//变明 
+    }
+
     //#endregion
+
+    public static save ()
+    {
+        if ( sys.platform === sys.Platform.MOBILE_BROWSER ||
+            sys.platform === sys.Platform.DESKTOP_BROWSER )
+        {
+            const data = {};
+            Object
+                .keys( localStorage )
+                .filter( v => v.substr( 0, 4 ) != 'goog' )
+                .forEach( key => data[ key ] = localStorage[ key ] );
+
+            let blob = new Blob( [ JSON.stringify( data ) ], { type: 'application/json' } );
+            // @ts-ignore
+            const slice = blob.slice || blob.webkitSlice || blob.mozSlice;
+            blob = slice.call( blob, 0, blob.size, 'application/octet-stream' );
+            const a = document.createElementNS( 'http://www.w3.org/1999/xhtml', 'a' ) as HTMLAnchorElement;
+
+            a.href = URL.createObjectURL( blob );
+            a.download = `Remake_save_${ new Date().toISOString().replace( ':', '.' ) }.json`;
+
+            document.body.appendChild( a );
+            a.click();
+            document.body.removeChild( a );
+            URL.revokeObjectURL( a.href );
+        }
+    }
+
+    public static load ()
+    {
+        if ( sys.platform === sys.Platform.MOBILE_BROWSER ||
+            sys.platform === sys.Platform.DESKTOP_BROWSER )
+        {
+            const file = document.createElement( 'input' );
+            file.type = 'file';
+            file.name = 'file';
+            file.accept = "application/json";
+            // @ts-ignore
+            file.style = "display: none;";
+            file.append( 'body' );
+            file.click();
+            file.addEventListener( 'change', ( e ) =>
+            {
+                // @ts-ignore
+                const file = e.target.files[ 0 ];
+                if ( !file ) return;
+                const reader = new FileReader();
+                reader.onload = () =>
+                {
+                    const data = JSON.parse( reader.result as string );
+                    for ( const key in data )
+                    {
+                        localStorage[ key ] = data[ key ];
+                    }
+                    console.log( '加载存档成功' );
+                }
+                reader.readAsText( file );
+            } );
+        }
+    }
+
+    public static cheakCollierPoint ( currentNode: Node, targetNode: Node ): boolean
+    {
+        let curNodePosition = currentNode.parent.getComponent( UITransform ).convertToWorldSpaceAR( currentNode.position );
+        let tarBoundingBox = targetNode.getComponent( UITransform ).getBoundingBoxToWorld();
+        if ( tarBoundingBox.contains( v2( curNodePosition.x, curNodePosition.y ) ) )
+            return true
+        else
+            return false
+    };
+
+    //通过data创建texture
+    public static createTexture ( imgData: any, width: number, height: number ): Texture2D
+    {
+
+        //默认一张白色纹理
+
+        let tex = new Texture2D();
+
+        // /包含 RGBA 四通道的 32 位整形像素格式：RGBA8888。 一字节8位
+
+        tex.reset( { width: width, height: height, format: Texture2D.PixelFormat.RGBA8888, mipmapLevel: 0 } );
+
+        tex.uploadData( imgData, 0, 0 );
+
+        // 更新 0 级 Mipmap。
+
+        tex.updateImage();
+
+        return tex;
+    }
+
+    //扩展图片
+    public static expandImage ( imgData: Uint8Array, width: number, height: number, expand: number = 0 ): Uint8Array
+    {
+        let buffer = new Uint8Array( imgData.length + 4 * ( expand * width * 2 + expand * height * 2 + height * width * 4 ) );
+        let row = 0;
+        let col = 0;
+        let img_index = 0;
+        let new_width = width + expand * 2;
+        let new_height = height + expand * 2;
+        let color_value = 0;
+
+        for ( let index = 0; index < buffer.length; index = index + 4 )
+        {
+            if ( row < expand )
+            {
+                buffer[ index ] = color_value;
+                buffer[ index + 1 ] = color_value;
+                buffer[ index + 2 ] = color_value;
+                buffer[ index + 3 ] = color_value;
+            }
+            else if ( row >= height + expand )
+            {
+                buffer[ index ] = color_value;
+                buffer[ index + 1 ] = color_value;
+                buffer[ index + 2 ] = color_value;
+                buffer[ index + 3 ] = color_value;
+            }
+            else
+            {
+                if ( col < expand )
+                {
+                    buffer[ index ] = color_value;
+                    buffer[ index + 1 ] = color_value;
+                    buffer[ index + 2 ] = color_value;
+                    buffer[ index + 3 ] = color_value;
+                }
+                else if ( col >= width + expand )
+                {
+                    buffer[ index ] = color_value;
+                    buffer[ index + 1 ] = color_value;
+                    buffer[ index + 2 ] = color_value;
+                    buffer[ index + 3 ] = color_value;
+                }
+                else
+                {
+                    buffer[ index ] = imgData[ img_index ];
+                    buffer[ index + 1 ] = imgData[ img_index + 1 ];
+                    buffer[ index + 2 ] = imgData[ img_index + 2 ];
+                    buffer[ index + 3 ] = imgData[ img_index + 3 ];
+                    img_index = img_index + 4;
+                }
+            }
+            col++;
+            if ( col >= new_width )
+            {
+                col = 0;
+                row++;
+            }
+        }
+        return buffer;
+
+    }
+
+
+    //读取数组
+    public static readPixels ( tex: any ): Uint8Array
+    {
+        const gfxTexture = tex.getGFXTexture();
+        if ( !gfxTexture )
+        {
+            return null;
+        }
+
+        //数组长度
+        const needSize = 4 * tex.width * tex.height;
+        let buffer = new Uint8Array( needSize );
+        const gfxDevice = tex._getGFXDevice();
+        const bufferViews: ArrayBufferView[] = [];
+        const regions: gfx.BufferTextureCopy[] = [];
+        const region0 = new gfx.BufferTextureCopy();
+
+        //数组设置起始和宽高
+        region0.texOffset.x = 0;
+        region0.texOffset.y = 0;
+        region0.texExtent.width = tex.width;
+        region0.texExtent.height = tex.height;
+
+        //copy数据
+        regions.push( region0 );
+        bufferViews.push( buffer );
+        gfxDevice?.copyTextureToBuffers( gfxTexture, bufferViews, regions );
+        return buffer;
+    }
 }

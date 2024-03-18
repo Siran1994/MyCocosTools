@@ -1,7 +1,7 @@
-import { CardData } from './CardData'
-import { CardItem } from './CardItem'
-import { TF } from './TF'
+
 import { _decorator, Vec3, instantiate, Component, Node, Vec2, Input, EventTouch, CurveRange, CCInteger, CCBoolean } from 'cc'
+import { CardItem } from './CardItem'
+import { CardData, TF } from './CardPool'
 const { ccclass, property } = _decorator
 
 /**
@@ -171,9 +171,12 @@ export class ScrollCardList extends Component
         {
             if ( offsetIdx === -1 && Vec3.equals( allCardTFArr[ j ].pos, this._m_centerPos ) )
                 offsetIdx = i;
+            if ( allCardTFArr[ j ].pos.x == 0 )
+                allCardTFArr[ j ].scale = Vec3.ONE;
+            else
+                allCardTFArr[ j ].scale = new Vec3( 0.7, 0.7, 0.7 );
             this._m_cardTF_arr.push( allCardTFArr[ j ] );
         }
-
         return offsetIdx;
     }
 
@@ -181,7 +184,7 @@ export class ScrollCardList extends Component
     {
         let x = -( idx * this.m_gap );
         let y = 0.5 - idx * ratio;
-        let scale = this.m_scale_curve.spline.evaluate( y );      
+        let scale = this.m_scale_curve.spline.evaluate( y );
         y = 0;
         return this.m_isHorizontalDisplay ? new TF( x, y, scale ) : new TF( y, x, scale );
     }

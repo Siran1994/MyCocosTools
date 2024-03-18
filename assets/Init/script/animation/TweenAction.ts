@@ -1,8 +1,5 @@
 import { Enum } from 'cc';
 import { EventHandler } from 'cc';
-import { CCInteger } from 'cc';
-import { CCBoolean } from 'cc';
-import { CCFloat } from 'cc';
 import { tween } from 'cc';
 import { Vec3 } from 'cc';
 import { _decorator, Component, Node } from 'cc';
@@ -61,55 +58,61 @@ Enum( Ease );
 @ccclass( 'TweenAction' )
 export class TweenAction extends Component
 {
-    @property( { displayName: '目标对象', displayOrder: -1, type: Node, tooltip: "目标对象" } )
+    @property( { displayName: '目标对象', displayOrder: -1, type: Node } )
     public target: Node;
 
-    @property( { displayName: '动作时长', displayOrder: 0, type: CCFloat, tooltip: "动作时长" } )
+    @property( { displayName: '动作时长', displayOrder: 0, type: Number } )
     public duration: number = 0;
 
-    @property( { displayName: '延迟时间', displayOrder: 1, type: CCFloat, tooltip: "延迟时间" } )
+    @property( { displayName: '延迟时间', displayOrder: 1, type: Number } )
     public delayTime: number = 0;
 
-    @property( { displayName: '执行次数', displayOrder: 2, type: CCInteger, tooltip: "执行次数" } )
+    @property( { displayName: '执行次数', displayOrder: 2, type: Number } )
     public repeat: number = 0;
 
-    @property( { displayName: '缓动函数', displayOrder: 3, type: Ease, tooltip: "缓动函数" } )
+    @property( { displayName: '缓动函数', displayOrder: 3, type: Ease } )
     public ease: Ease = Ease.linear;
 
-    @property( { displayName: '是否增量', displayOrder: 4, type: CCBoolean, tooltip: "是否增量" } )
-    public toOrby: boolean = true;
+    @property( { displayName: '是否增量', displayOrder: 4, type: Boolean } )
+    public isTo: boolean = true;
 
-    @property( { displayName: '是否循环', displayOrder: 10, type: CCBoolean, tooltip: "是否增量" } )
+    @property( {
+        displayName: '是否循环', displayOrder: 10, type: Boolean, visible: function ( this: TweenAction )
+        {
+            return this.repeat != -1;
+        }
+    } )
     public isLoop: boolean = false;
 
-    @property( { displayName: '位置', displayOrder: 5, tooltip: '位置' } )
+    @property( { displayName: '位置', displayOrder: 5, type: Vec3 } )
     public position: Vec3 = new Vec3( 0, 0, 0 );
 
-    @property( { displayName: '旋转', displayOrder: 6, tooltip: "旋转" } )
+    @property( { displayName: '旋转', displayOrder: 6, type: Vec3 } )
     public rotation: Vec3 = new Vec3( 0, 0, 0 );
 
-    @property( { displayName: '缩放', displayOrder: 7, tooltip: "缩放" } )
+    @property( { displayName: '缩放', displayOrder: 7, type: Vec3 } )
     public scale: Vec3 = new Vec3( 1, 1, 1 );
 
-    @property( { displayName: '回调方法', displayOrder: 8, type: EventHandler, tooltip: "回调方法" } )
+    @property( { displayName: '回调方法', displayOrder: 8, type: EventHandler } )
     public callback: EventHandler = new EventHandler();
 
-    @property( { displayName: '参数', displayOrder: 9, tooltip: "回调方法" } )
+    @property( { displayName: '参数', displayOrder: 9 } )
     public customEventData: string = '';
 
     start ()
     {
         if ( this.target == null )
-        {
             this.target = this.node;
-        }
-
         let opts = {};
         opts[ "easing" ] = Ease[ this.ease ].toString();
 
+
+        if ( this.repeat == -1 )
+            this.isLoop = true;
+
         if ( this.isLoop ) 
         {
-            if ( this.toOrby )
+            if ( this.isTo )
             {
                 tween( this.target )
                     .sequence
@@ -151,16 +154,15 @@ export class TweenAction extends Component
                     .repeatForever()
                     .start();
             }
-
         }
         else
         {
-            if ( this.toOrby ) 
+            if ( this.isTo ) 
             {
                 tween( this.target )
                     .sequence
                     (
-                        tween().by( this.duration,
+                        tween().to( this.duration,
                             {
                                 position: this.position,               // 位置缓动
                                 scale: this.scale,                     // 缩放缓动
@@ -182,7 +184,7 @@ export class TweenAction extends Component
                 tween( this.target )
                     .sequence
                     (
-                        tween().to( this.duration,
+                        tween().by( this.duration,
                             {
                                 position: this.position,               // 位置缓动
                                 scale: this.scale,                     // 缩放缓动

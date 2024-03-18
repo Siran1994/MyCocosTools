@@ -1,5 +1,6 @@
-import { _decorator, Component, EventTouch, Graphics, input, Input, Mask, Node, UITransform, Vec3 } from 'cc';
-import { Messager } from '../../Init/script/manager/Messager';
+import { _decorator, Component, EventTouch, Graphics, Mask, Node, UITransform, Vec3 } from 'cc';
+import { Messager } from '../manager/Messager';
+import { input, Input } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'EraserTool' )
@@ -22,8 +23,8 @@ export class EraserTool extends Component
     @property( Number )//橡皮擦大小(像素)
     r = 20;
 
-    @property()
-    isNeedTool = true;
+    // @property()
+    // isNeedTool = true;
 
     start ()
     {
@@ -47,7 +48,7 @@ export class EraserTool extends Component
 
     _onTouchBegin ( touch: EventTouch )
     {
-        if ( this.isNeedTool == false )
+        //if ( this.isNeedTool == false )
         {
             console.log( "开始画线" );
             let point1 = touch.getUILocation();
@@ -58,7 +59,7 @@ export class EraserTool extends Component
 
     _onTouchMove ( touch: EventTouch )
     {
-        if ( this.isNeedTool == false )
+        //if ( this.isNeedTool == false )
         {
             let point1 = touch.getUILocation();
             let point2 = this.traget.getComponent( UITransform ).convertToNodeSpaceAR( new Vec3( point1.x, point1.y ) );
@@ -68,7 +69,7 @@ export class EraserTool extends Component
 
     _onTouchEnd ( touch: EventTouch )
     {
-        if ( this.isNeedTool == false )
+        // if ( this.isNeedTool == false )
         {
             let point1 = touch.getUILocation();
             let point2 = this.traget.getComponent( UITransform ).convertToNodeSpaceAR( new Vec3( point1.x, point1.y ) );

@@ -1,18 +1,14 @@
-import { CardData } from './CardData';
 import { _decorator, Button, Component, Label, Sprite, SpriteFrame, Vec3, Node } from 'cc'
-import { TF } from './TF';
 import { AudioMgr } from '../manager/AudioMgr';
 import { HeroType } from '../data/Enum';
 import { GameData } from '../data/GameData';
 import { TipManager } from '../manager/TipManager';
 import { PlayerPrefs } from '../data/PlayerPrefs';
 import { Messager } from '../manager/Messager';
+import { CardData, TF } from './CardPool';
 const { ccclass, property } = _decorator
-/**
- * 卡片物品类，目前之提供了一张图片和标签，若想更多功能，继承该类，继续扩展此方法
- */
 @ccclass( 'CardItem' )
-export class CardItem extends Component
+export class CardItem extends Component //卡片物品类，目前之提供了一张图片和标签，若想更多功能，继承该类，继续扩展此方法
 {
     @property( { type: Label, displayName: "战力" } )
     m_title_lb: Label = null!
@@ -238,8 +234,6 @@ export class CardItem extends Component
     private _m_nextScale = new Vec3()
     update ( deltaTime: number )
     {
-        this.updateState();
-
         if ( !this._m_canMove ) return
         this._m_tempDis = Vec3.distance( this._m_tf_arr[ this._m_curIdx ].pos, this.getPos )
         if ( this._m_tempDis > 1 )

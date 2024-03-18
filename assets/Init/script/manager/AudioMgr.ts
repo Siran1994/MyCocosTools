@@ -1,8 +1,60 @@
 import { _decorator, AudioSource, Component, director, instantiate, Node } from 'cc';
 import { GameData } from '../data/GameData';
-import { AudioClipExit } from '../tool/AudioClipExit';
 import { PrefabManager } from './PrefabManager';
+import { AudioClip } from 'cc';
+import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
+
+@ccclass( 'Time' )
+export class Time 
+{
+    static first: number | null = null;//单位秒
+    public static get time (): number
+    {
+        if ( Time.first == null )
+            Time.first = performance.now();
+        return ( performance.now() - Time.first ) * 0.001;
+    }
+}
+
+@ccclass( 'AudioClipExit' )
+export class AudioClipExit 
+{
+    @property( { type: AudioClip } )
+    audioClip: AudioClip;
+
+    minRate = 0.2;//最小播放间隔,限制高频率,优化性能
+    preTime = 0;
+
+    public playMusic ( volume: number = Config.Volume.Music )
+    {
+        if ( !AudioMgr.Instance.misOn ) return;
+        if ( AudioMgr.Instance.musicPlayer.clip != null )
+        {
+            AudioMgr.Instance.musicPlayer.loop = false;
+            AudioMgr.Instance.musicPlayer.stop();
+        }
+
+        AudioMgr.Instance.musicPlayer.volume = volume;
+        AudioMgr.Instance.musicPlayer.clip = this.audioClip;
+        AudioMgr.Instance.musicPlayer.loop = true;
+        AudioMgr.Instance.musicPlayer.play();
+    }
+
+    public StopMusic ()
+    {
+        if ( !AudioMgr.Instance.misOn ) return;
+        AudioMgr.Instance.musicPlayer.stop();
+    }
+
+    public Play ( volume: number = Config.Volume.Audio )
+    {
+        if ( !AudioMgr.Instance.aisOn ) return;
+        if ( Time.time - this.preTime < this.minRate ) return;
+        this.preTime = Time.time;
+        AudioMgr.Instance.audioPlayer.playOneShot( this.audioClip, volume );
+    }
+}
 
 @ccclass( 'AudioMgr' )
 export class AudioMgr extends Component 

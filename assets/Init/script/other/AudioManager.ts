@@ -126,8 +126,6 @@ export default class AudioManager
         console.log( "set music volume of " + volume );
     };
 
-
-
     /**播放音效 */
     public static playEffect ( key: string, audioPlayer: AudioSource ): void
     {
@@ -151,7 +149,6 @@ export default class AudioManager
             } )
         }
     };
-
 
     /**释放单个音频资源 */
     public static releaseAsset ( key: string ): void

@@ -1,6 +1,4 @@
-import { Prefab } from "cc";
-import { Constructor, _decorator } from "cc";
-import { ResMgr } from "../manager/ResMgr";
+import { _decorator } from "cc";
 import { error } from "cc";
 import { resources } from "cc";
 import { TextAsset } from "cc";
