@@ -3,6 +3,7 @@ import { GameData } from '../data/GameData';
 import { PrefabManager } from './PrefabManager';
 import { AudioClip } from 'cc';
 import { Config } from '../data/Config';
+import { ResMgr } from './ResMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'Time' )
@@ -61,11 +62,20 @@ export class AudioMgr extends Component
 {
     static Instance: AudioMgr = null!;
 
+    static AuidoMap: Map<string, AudioClip> = new Map();//基础音效库
+
     onLoad ()
     {
         AudioMgr.Instance = this;
         this.aisOn = GameData.SoundOn == 1;
         this.misOn = GameData.MusicOn == 1;
+
+        // AudioMgr.loadAudios( Config.BundleName.Base, 'audios', () =>
+        // {
+        //     console.error( AudioMgr.AuidoMap.size );
+        //     console.error( '基础音效加载完成!' );
+        //     this.playMusic( 'bgm' );
+        // } );
     }
 
     @property( { type: AudioClipExit } )
@@ -150,4 +160,19 @@ export class AudioMgr extends Component
         else
             cb && cb();
     }
+
+    // public static loadAudios ( bundleName: string, path: string, cb?: Function )
+    // {
+    //     ResMgr.loadDir( bundleName, path, AudioClip, ( completedCount, totalCount ) =>
+    //     {
+    //     }, ( assets: AudioClip[] ) =>
+    //     {
+    //         assets.forEach( asset =>
+    //         {
+    //             console.error( asset.name );
+    //             this.set( asset.name, asset, this.AuidoMap );
+    //         } );
+    //         cb && cb();
+    //     } );
+    // }
 }

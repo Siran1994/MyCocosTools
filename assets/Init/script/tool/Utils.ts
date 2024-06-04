@@ -1505,6 +1505,7 @@ export class Utils
 
     //#endregion
 
+    //#region 大数值处理
     public static GetSize ( num: number )
     {
         let unitIndex = 0;
@@ -1769,6 +1770,34 @@ export class Utils
         }
         else
             return a.mod( b );
+    }
+    //#endregion
+
+    //#region 数值处理
+    //格式化钱数，超过10000 转换位 10K   10000K 转换为 10M
+    public static formatMoney ( money: number )
+    {
+        const arrUnit = [ '', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y', 'B', 'N', 'D' ];
+
+        let strValue = '';
+        for ( let idx = 0; idx < arrUnit.length; idx++ )
+        {
+            if ( money >= 10000 )
+            {
+                money /= 1000;
+            } else
+            {
+                strValue = Math.floor( money ) + arrUnit[ idx ];
+                break;
+            }
+        }
+
+        if ( strValue === '' )
+        {
+            strValue = Math.floor( money ) + 'U'; //超过最大值就加个U
+        }
+
+        return strValue;
     }
 
     //将输入的数值转化为对应的单位字符串
@@ -2048,6 +2077,76 @@ export class Utils
 
     //#endregion
 
+    //#region 其他函数库
+    //求中点
+    public static getMidPos ( pos1: Vec3, pos2: Vec3 )
+    {
+        return new Vec3( ( pos1.x + pos2.x ) / 2, ( pos1.y + pos2.y ) / 2 + 1, ( pos1.z + pos2.z ) / 2 )
+    }
+
+    //检测一个节点是否在另一个节点内
+    public static cheakCollierPoint ( currentNode: Node, targetNode: Node ): boolean
+    {
+        let curNodePosition = currentNode.parent.getComponent( UITransform ).convertToWorldSpaceAR( currentNode.position );
+        let tarBoundingBox = targetNode.getComponent( UITransform ).getBoundingBoxToWorld();
+        if ( tarBoundingBox.contains( v2( curNodePosition.x, curNodePosition.y ) ) )
+            return true
+        else
+            return false
+    };
+
+    /**
+    * 包围盒与包围盒碰撞检测
+    * @param {*} currentNode   当前节点
+    * @param {*} targetNode    目标节点
+    */
+    public static cheakCollierBox ( currentNode: Node, targetNode: Node ): boolean
+    {
+        let curBoundingBox = currentNode.getComponent( UITransform ).getBoundingBoxToWorld();
+        let tarBoundingBox = targetNode.getComponent( UITransform ).getBoundingBoxToWorld();
+        if ( curBoundingBox.intersects( tarBoundingBox ) )
+            return true
+        else
+            return false
+    };
+
+    /** 提取出第一个下划线之前的子字符串 （下划线前边）*/
+    public static getTouchName ( _str: string ): string
+    {
+        let outStr: string = "";
+        for ( let i = 0; i < _str.length; i++ )
+        {
+            if ( _str[ i ] == '_' )
+            {
+                // 分隔符
+                outStr = _str.substring( 0, i );
+                break;
+            } else
+            {
+                outStr = _str;
+            }
+        }
+        return outStr;
+    }
+
+    /** 查找第一个下划线后面的数字部分，然后将数字部分转换为数字类型并返回 */
+    public static getTouchNum ( _str: string ): number
+    {
+        let outStr: string = "";
+        for ( let i = 0; i < _str.length; i++ )
+        {
+            if ( _str[ i ] == '_' )
+            {
+                // 分隔符
+                outStr = _str.substring( i + 1, _str.length );
+                break;
+            }
+        }
+        return parseInt( outStr );
+    }
+    //#endregion
+
+    //#region   浏览器数据加载与保存
     public static save ()
     {
         if ( sys.platform === sys.Platform.MOBILE_BROWSER ||
@@ -2107,16 +2206,6 @@ export class Utils
             } );
         }
     }
-
-    public static cheakCollierPoint ( currentNode: Node, targetNode: Node ): boolean
-    {
-        let curNodePosition = currentNode.parent.getComponent( UITransform ).convertToWorldSpaceAR( currentNode.position );
-        let tarBoundingBox = targetNode.getComponent( UITransform ).getBoundingBoxToWorld();
-        if ( tarBoundingBox.contains( v2( curNodePosition.x, curNodePosition.y ) ) )
-            return true
-        else
-            return false
-    };
 
     //通过data创建texture
     public static createTexture ( imgData: any, width: number, height: number ): Texture2D
@@ -2202,7 +2291,6 @@ export class Utils
 
     }
 
-
     //读取数组
     public static readPixels ( tex: any ): Uint8Array
     {
@@ -2232,4 +2320,5 @@ export class Utils
         gfxDevice?.copyTextureToBuffers( gfxTexture, bufferViews, regions );
         return buffer;
     }
+    //#endregion
 }

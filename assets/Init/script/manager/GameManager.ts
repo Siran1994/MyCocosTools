@@ -54,7 +54,7 @@ export class GameManager extends Component
             AudioMgr.Instance.游戏背景乐.playMusic();
         } );
 
-        CsvManager.Instance.getData( 'talk' );
+        CsvManager.Instance.getData( 'talk' );//Excel表格使用示例
 
     }
 

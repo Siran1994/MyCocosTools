@@ -517,17 +517,15 @@ export class CsvManager
             // // 获取到文本数据
             // const textData = res.text;
             this.addTable( fileName, res.text, true );//添加表格
-
             // console.error( this.getTable( 'talk' ) );
             //console.error( this.queryByID( 'talk', '1' )[ 'content' ] );
             //console.error( this.getTableArr( 'talk' ) );
-            console.error( this.showTalk( '1', 16 ) );
+            console.error( this.showTalk( 1 ) );
         } )
     }
 
-
     //示例
-    showTalk ( customerId: string, type: number )
+    showTalk ( type: number )
     {
         let arrTalk = this.getTableArr( 'talk' );
         // Note:
@@ -594,7 +592,6 @@ export class CsvManager
         {
             return null;
         }
-
         if ( key )
         {
             for ( const tbItem in table )
