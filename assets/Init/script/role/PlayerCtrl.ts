@@ -6,6 +6,7 @@ import { GameManager } from '../manager/GameManager';
 import { Messager } from '../manager/Messager';
 import { Utils } from '../tool/Utils';
 import { AnimationComponent } from 'cc';
+import { Vec3 } from 'cc';
 
 const { ccclass, property } = _decorator;
 @ccclass( 'PlayerCtrl' )
@@ -65,18 +66,6 @@ export class PlayerCtrl extends Component
         }
     }
 
-    PlayNextAni ( delay: number )
-    {
-        GameManager.Instance.Speed -= 2;
-        Utils.DelayCallBack( delay, () =>
-        {
-            GameManager.Instance.Speed += 2;
-            if ( GameManager.Instance.IsStart )
-                GameManager.Instance.Play( this.anmator, AniState.奔跑 );
-            else
-                GameManager.Instance.Play( this.anmator, AniState.待机 );
-        } );
-    }
 
     ShowEffect ( index: number, isHasPar = false )//特效展示
     {
@@ -92,5 +81,17 @@ export class PlayerCtrl extends Component
             this.Effects[ index ].active = true;
             this.Effects[ index ].getComponent( ParticleSystem ).play();
         }
+    }
+
+    Jump2 ( target: Node )
+    {
+        GameManager.Instance.Speed = 7;
+        Utils.bezierCurve2( 0.8, target.worldPosition,
+            new Vec3( target.worldPosition.x, target.worldPosition.y + 3, target.worldPosition.z - 3 ),
+            new Vec3( target.worldPosition.x, target.worldPosition.y, target.worldPosition.z - 3 ),
+            target, () =>
+        {
+            GameManager.Instance.Speed = 6;
+        } );
     }
 }

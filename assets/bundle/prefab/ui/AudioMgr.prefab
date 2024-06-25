@@ -23,14 +23,14 @@
         "__id__": 2
       },
       {
-        "__id__": 22
+        "__id__": 25
       },
       {
-        "__id__": 24
+        "__id__": 27
       }
     ],
     "_prefab": {
-      "__id__": 26
+      "__id__": 29
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -72,65 +72,74 @@
     "__prefab": {
       "__id__": 3
     },
-    "撞墙": {
+    "金币收集": {
       "__id__": 4
     },
-    "玩家打击": {
+    "开箱": {
       "__id__": 5
     },
-    "Boss打击": {
+    "受击": {
       "__id__": 6
     },
-    "完美收集": {
+    "撞墙": {
       "__id__": 7
     },
-    "吃到钻石": {
+    "玩家打击": {
       "__id__": 8
     },
-    "吃到服装": {
+    "Boss打击": {
       "__id__": 9
     },
-    "到达终点": {
+    "完美收集": {
       "__id__": 10
     },
-    "失败结算": {
+    "吃到钻石": {
       "__id__": 11
     },
-    "奖励弹窗": {
+    "吃到服装": {
       "__id__": 12
     },
-    "奖励解锁进度": {
+    "到达终点": {
       "__id__": 13
     },
-    "武器打人": {
+    "失败结算": {
       "__id__": 14
     },
-    "玩家受击": {
+    "奖励弹窗": {
       "__id__": 15
     },
-    "衣服消失": {
+    "奖励解锁进度": {
       "__id__": 16
     },
-    "胜利结算": {
+    "武器打人": {
       "__id__": 17
     },
-    "点击广告按钮": {
+    "玩家受击": {
       "__id__": 18
     },
-    "通用按钮": {
+    "衣服消失": {
       "__id__": 19
     },
-    "游戏背景乐": {
+    "胜利结算": {
       "__id__": 20
     },
-    "首页背景乐": {
+    "点击广告按钮": {
       "__id__": 21
     },
-    "audioPlayer": {
+    "通用按钮": {
       "__id__": 22
     },
-    "musicPlayer": {
+    "游戏背景乐": {
+      "__id__": 23
+    },
+    "首页背景乐": {
       "__id__": 24
+    },
+    "audioPlayer": {
+      "__id__": 25
+    },
+    "musicPlayer": {
+      "__id__": 27
     },
     "_id": ""
   },
@@ -139,148 +148,139 @@
     "fileId": "51tD6TX7tNSabuqvGofWtM"
   },
   {
+    "__type__": "AudioClipExit"
+  },
+  {
+    "__type__": "AudioClipExit"
+  },
+  {
+    "__type__": "AudioClipExit"
+  },
+  {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "6423016d-7be7-4ffa-9e22-7fea3c3f66f3",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0.3
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "2239594b-5b8f-496c-8e68-4d501bd104c9",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0.3
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "c4497da2-67f0-4619-9d58-f94ce78e0bc9",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0.3
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "9dc7d0b2-494b-43ca-a307-118fd45bb708",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0.3
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "1b77e6dc-c5c9-46fc-ac79-e825fb7321b2",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0.3
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "3002d790-0081-425c-86b3-36d47711cd7b",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "5740ff26-ccc4-4a3a-bbbe-7d7065092245",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "37da8d53-9fd6-4004-8585-b95977bd0e62",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "1f535560-f745-46ef-a023-eba328bf37f4",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "c9b1ee14-e840-4a0d-9aaf-0e5cd88aa150",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "73cfdc7a-a360-4789-adee-2cc6551590e9",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "ff2e68dd-00b7-4874-8f77-236a7f8df6d9",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "6d5b05c2-dc0b-4bd0-a5e8-f3e89841b6ae",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "f64379d5-f1af-4585-82ed-c96c622e79fd",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "91563136-aa47-4f33-92e0-828f8e99d0d9",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "58ab0c0f-fd6d-4f1e-97e0-a79d77b1e831",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "38383461-adb2-4f11-b0a3-b4ed47c1b49f",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "AudioClipExit",
     "audioClip": {
       "__uuid__": "72156b6c-8091-418b-9142-11eb25e097b3",
       "__expectedType__": "cc.AudioClip"
-    },
-    "minRate": 0
+    }
   },
   {
     "__type__": "cc.AudioSource",
@@ -291,7 +291,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 23
+      "__id__": 26
     },
     "_clip": null,
     "_loop": false,
@@ -312,7 +312,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 25
+      "__id__": 28
     },
     "_clip": null,
     "_loop": false,

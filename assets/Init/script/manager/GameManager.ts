@@ -126,7 +126,7 @@ export class GameManager extends Component
         }
     }
 
-    Play ( anmator: SkeletalAnimation | AnimationComponent, state: AniState )
+    Play ( anmator: SkeletalAnimation | AnimationComponent, state: AniState, cb?: Function )
     {
         switch ( state )
         {
@@ -135,24 +135,38 @@ export class GameManager extends Component
                 break;
             case AniState.行走:
                 anmator.crossFade( 'walk', 0.3 );
+                if ( cb )
+                    Utils.DelayCallBack( anmator.getState( 'walk' ).length, () => { cb && cb(); } );
                 break;
             case AniState.奔跑:
                 anmator.crossFade( 'run', 0.3 );
+                if ( cb )
+                    Utils.DelayCallBack( anmator.getState( 'run' ).length, () => { cb && cb(); } );
                 break;
             case AniState.起跳:
                 anmator.crossFade( 'jump', 0.3 );
+                if ( cb )
+                    Utils.DelayCallBack( anmator.getState( 'jump' ).length, () => { cb && cb(); } );
                 break;
             case AniState.攻击:
                 anmator.crossFade( 'fly', 0.3 );
+                if ( cb )
+                    Utils.DelayCallBack( anmator.getState( 'fly' ).length, () => { cb && cb(); } );
                 break;
             case AniState.受击:
                 anmator.crossFade( 'flying', 0.3 );
+                if ( cb )
+                    Utils.DelayCallBack( anmator.getState( 'flying' ).length, () => { cb && cb(); } );
                 break;
             case AniState.死亡:
                 anmator.crossFade( 'die', 0.3 );
+                if ( cb )
+                    Utils.DelayCallBack( anmator.getState( 'die' ).length, () => { cb && cb(); } );
                 break;
             case AniState.胜利:
                 anmator.crossFade( 'win', 0.3 );
+                if ( cb )
+                    Utils.DelayCallBack( anmator.getState( 'win' ).length, () => { cb && cb(); } );
                 break;
         }
     }

@@ -1,6 +1,5 @@
-import { LabelComponent, tween, Vec3, UITransformComponent, view, _decorator, Component, Node } from 'cc';
-import { PoolManager } from '../manager/PoolManager';
-
+import { Vec3, _decorator, Component, Label, UITransformComponent, view, tween, Node } from "cc";
+import { PoolManager } from "../manager/PoolManager";
 let v3_zero = new Vec3();
 let v3_scale = new Vec3( 0.7, 0.7, 0.7 );
 let v3_scale_0 = new Vec3();
@@ -11,6 +10,12 @@ const { ccclass, property } = _decorator;
 @ccclass( 'FightTip' )
 export class FightTip extends Component
 {
+
+    @property( Label )
+    addnum: Label = null;
+
+    @property( Label )
+    reducenum: Label = null;
 
     tweenTip = null;
 
@@ -25,24 +30,20 @@ export class FightTip extends Component
         arrChildren.forEach( ( item ) =>
         {
             item.active = false;
-        } )
-
-        let lbHitNum;
+        } );
 
         let ndSub: Node = null!;
         if ( tipType === 0 )
         {
             ndSub = this.node.getChildByName( "add" ) as Node;
-        } else if ( tipType === 1 )
+            this.addnum.string = txt;
+        }
+        else if ( tipType === 1 )
         {
             ndSub = this.node.getChildByName( "minus" ) as Node;
+            this.reducenum.string = txt;
         }
-
         ndSub.active = true;
-
-        lbHitNum = ndSub.getChildByName( 'num' )?.getComponent( LabelComponent );
-        lbHitNum && ( lbHitNum.string = txt );
-
         let pos = this.node.getPosition();
         let width: number = ndSub.getComponent( UITransformComponent )?.width;
         let height: number = ndSub.getComponent( UITransformComponent )?.height;
@@ -61,6 +62,7 @@ export class FightTip extends Component
 
         this.tweenTip = tween( this.node )
             .to( this.costTime * 0.4, { scale: v3_scale_1 }, { easing: 'backOutIn' } )
+            .to( this.costTime * 0.2, { position: new Vec3( 25, 50, 0 ) } )
             .to( this.costTime * 0.2, { scale: v3_scale_0 } )
             .call( () =>
             {

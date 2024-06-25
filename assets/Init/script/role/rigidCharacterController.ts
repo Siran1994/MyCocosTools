@@ -1,6 +1,8 @@
 
 import { _decorator, Component, Vec3, input, Input, EventTouch, RigidBodyComponent, Node } from 'cc';
 import { GameManager } from '../manager/GameManager';
+import { Messager } from '../manager/Messager';
+import { Utils } from '../tool/Utils';
 const { ccclass, property } = _decorator;
 const v3_0 = new Vec3( 0, 0, 0 );
 @ccclass( 'RigidCharacterController' )
@@ -14,6 +16,7 @@ export class RigidCharactorController extends Component
     MaxAngle = 60;
     _stateX: number = 0;
     deltaSpeed = 0.2;
+    isMove = true;
 
     update ( deltaTime: number )
     {
@@ -28,7 +31,7 @@ export class RigidCharactorController extends Component
         input.on( Input.EventType.TOUCH_MOVE, this.touchMove, this );
         input.on( Input.EventType.TOUCH_END, this.touchEnd, this );
         input.on( Input.EventType.TOUCH_CANCEL, this.touchCancel, this );
-
+        Messager.AddListener( 'StartWoodWalk', this, this.StartWoodWalk );
     }
 
     onDisable ()
@@ -37,6 +40,7 @@ export class RigidCharactorController extends Component
         input.off( Input.EventType.TOUCH_MOVE, this.touchMove, this );
         input.off( Input.EventType.TOUCH_END, this.touchEnd, this );
         input.off( Input.EventType.TOUCH_CANCEL, this.touchCancel, this );
+        Messager.AddListener( 'StartWoodWalk', this, this.StartWoodWalk );
     }
 
     touchStart ( touch: EventTouch )
@@ -47,7 +51,12 @@ export class RigidCharactorController extends Component
     touchMove ( touch: EventTouch )
     {
         if ( GameManager.Instance.IsStart )
-            this.silkMove( touch );
+        {
+            if ( this.isMove )
+                this.silkMove( touch );
+            else
+                this.silkRotate( touch );
+        }
     }
 
     touchEnd ( touch: EventTouch )
@@ -58,6 +67,11 @@ export class RigidCharactorController extends Component
     touchCancel ( touch: EventTouch )
     {
         this._stateX = 0;
+    }
+
+    StartWoodWalk ( isStart: boolean )
+    {
+        this.isMove = !isStart;
     }
 
     Move ( deltaTime: number )
@@ -94,5 +108,23 @@ export class RigidCharactorController extends Component
         if ( z <= -this.MaxAngle )
             z = -this.MaxAngle;
         this.node.eulerAngles = this.node.eulerAngles.lerp( new Vec3( 0, 0, z ), 0.1 );
+    }
+
+    //跳跃
+    Jump ()
+    {
+        this.rigidBody.isKinematic = false;
+        this.rigidBody.useGravity = true;
+        this.rigidBody.applyImpulse( this.getDir() );
+        Utils.DelayCallBack( 1.5, () =>
+        {
+            this.rigidBody.isKinematic = true;
+            this.rigidBody.useGravity = false;
+        } );
+    }
+
+    getDir ()
+    {
+        return new Vec3( 0, 6, 7 );
     }
 }

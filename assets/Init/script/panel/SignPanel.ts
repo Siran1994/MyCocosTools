@@ -1,4 +1,4 @@
-import { _decorator, Button, sys } from 'cc';
+import { _decorator, Button } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
 import { UiManager } from '../manager/UiManager';
 import { SignItem } from '../item/SignItem';
@@ -10,9 +10,7 @@ import { Messager } from '../manager/Messager';
 import { BasePanel } from './BasePanel';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { Label } from 'cc';
-import { Config } from '../data/Config';
 import { Vec3 } from 'cc';
-import { Utils } from '../tool/Utils';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SignPanel' )
@@ -97,7 +95,6 @@ export class SignPanel extends BasePanel
 
     GetReward ( isGet2x = false )
     {
-
         let coin = 0;
         switch ( GameData.SignDay )
         {
@@ -137,11 +134,5 @@ export class SignPanel extends BasePanel
         }
         if ( GameData.SignDay != 2 && GameData.SignDay != 7 )
             UiManager.Instance.UpdateCoin( coin, this.CoinTxt, Vec3.ZERO, this.CoinTxt.node.worldPosition );
-        Utils.DelayCallBack( 1.5, () =>
-        {
-            UiManager.Instance.mainPanel.node.active = true;
-            this.HidePanel();
-        } )
     }
 }
-

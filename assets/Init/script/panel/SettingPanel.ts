@@ -1,4 +1,4 @@
-import { _decorator, Button, Toggle } from 'cc';
+import { _decorator, Button, Toggle, Node } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
 import { UiManager } from '../manager/UiManager';
 import { GameData } from '../data/GameData';
@@ -16,6 +16,13 @@ export class SettingPanel extends BasePanel
 
     @property( Toggle )
     MusicBtn: Toggle;//音乐
+
+    @property( Button )
+    setBtn: Button;//关闭按钮
+
+    @property( Node )
+    logo: Node;//关闭按钮
+    count = 0;
 
     start () 
     {
@@ -44,6 +51,16 @@ export class SettingPanel extends BasePanel
                 GameData.MusicOn = 0;
             AudioMgr.Instance.UpdateState();
             AudioMgr.Instance.通用按钮.Play();
+        }, this );
+
+        this.setBtn.node.on( Button.EventType.CLICK, () =>
+        {
+            this.count++;
+            if ( this.count >= 5 )
+            {
+                this.logo.active = true;
+                this.count = 0;
+            }
         }, this );
     }
 
