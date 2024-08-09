@@ -1,0 +1,146 @@
+// Copyright (c) 2017-2020 Xiamen Yaji Software Co., Ltd.
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: kuang-vs:vert
+      frag: kuang-fs:frag
+      depthStencilState:
+        depthTest: false
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendDstAlpha: one_minus_src_alpha
+      rasterizerState:
+        cullMode: none
+      properties: 
+        # kuangColorStrength  : { value : 1.0}   #//流光叠加颜色的强度  
+        # powerStrength  : { value : 5.0}   #//power强度  
+        UVoffset  : { value : [1.0,1.0,1.0,1.0] }   #//power强度  
+        shineSpeed  : { value : 1.0}   #//power强度  
+        rotated  : { value : 1.0}   #//power强度  
+    
+  
+         
+}%
+
+CCProgram kuang-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #if USE_LOCAL
+    #include <builtin/uniforms/cc-local>
+  #endif  
+  #if SAMPLE_FROM_RT
+    #include <common/common-define>
+  #endif
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+
+  out vec4 v_color;
+  out vec2 uv0;
+
+  vec4 vert () {
+    vec4 pos = vec4(a_position, 1);
+
+    #if USE_LOCAL
+      pos = cc_matWorld * pos;
+    #endif
+
+    #if USE_PIXEL_ALIGNMENT
+      pos = cc_matView * pos;
+      pos.xyz = floor(pos.xyz);
+      pos = cc_matProj * pos;
+    #else
+      pos = cc_matViewProj * pos;
+    #endif
+
+    uv0 = a_texCoord;
+    #if SAMPLE_FROM_RT
+      CC_HANDLE_RT_SAMPLE_FLIP(uv0);
+    #endif
+    v_color = a_color;
+
+    return pos;
+  }
+}%
+
+
+
+CCProgram kuang-fs %{
+    // #define TAU 6.12
+    #define MAX_ITER 5  //最大迭代次数
+
+     precision highp float; 
+     #include <builtin/internal/sprite-texture>
+     #include <builtin/uniforms/cc-global>
+      #if USE_LOCAL
+      #include <builtin/uniforms/cc-local>
+      #endif  
+     #include <alpha-test>
+     
+
+     in vec4 v_color;
+     in vec2 uv0; 
+ 
+    // uniform sampler2D texture;
+    uniform ARGS {
+      vec4 UVoffset;
+      float shineSpeed;
+      float rotated;
+    };
+
+    vec4 frag() {
+      
+      float  TAU =6.12;
+      // const  MAX_ITER= 5; //最大迭代次数
+
+      float u_time = cc_time.x *shineSpeed;
+      vec2 UVnormalize;
+      UVnormalize.x = (uv0.x-UVoffset.x)/(UVoffset.z-UVoffset.x);
+      UVnormalize.y = (uv0.y-UVoffset.y)/(UVoffset.w-UVoffset.y);
+      if(rotated > 0.5)
+      {
+        float temp = UVnormalize.x;
+        UVnormalize.x = UVnormalize.y;
+        UVnormalize.y = 1.0 - temp;
+      }
+
+      vec2 uv = uv0.xy;//fragCoord.xy / iResolution.xy;
+
+      vec2 p = mod(uv*TAU, TAU)-250.0;
+
+      vec2 i = vec2(p);
+      float c = 1.0;
+      float inten = .0065;
+
+      for (int n = 0; n < MAX_ITER; n++) 
+      {
+        float t =  u_time * (1.0 - (3.5 / float(n+1)));
+        i = p + vec2(cos(t - i.x) + sin(t + i.y), sin(t - i.y) + cos(1.5*t + i.x));
+        c += 1.0/length(vec2(p.x / (cos(i.x+t)/inten),p.y / (cos(i.y+t)/inten)));
+      }
+      c /= float(MAX_ITER);
+      c = 1.17-pow(c, 1.4);
+      vec4 tex = texture(cc_spriteTexture, uv0);
+
+      vec3 colour = vec3(pow(abs(c), 20.0));
+      colour = clamp(colour + vec3(0.0, 0.0, .0), 0.0, tex.a);
+
+      // 混合波光
+      float alpha = c*tex[3];  
+      tex[0] = tex[0] + colour[0]*alpha; 
+      tex[1] = tex[1] + colour[1]*alpha; 
+      tex[2] = tex[2] + colour[2]*alpha; 
+      return   vec4(1,1,1,1)*tex; 
+      // return   vec4(1.,1.,1.,1.); 
+
+    // gl_FragColor = vec4(1,1,1,1) * tex;
+
+
+    }
+}%
+  
+    

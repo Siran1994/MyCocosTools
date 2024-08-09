@@ -27,7 +27,6 @@ export class FreeTryPanel extends BasePanel
     start ()
     {
         AudioMgr.Instance.奖励弹窗.Play();
-
         this.adGetBtn.node.on( Button.EventType.CLICK, () =>
         {
             AudioMgr.Instance.点击广告按钮.Play();

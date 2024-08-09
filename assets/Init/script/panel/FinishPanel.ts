@@ -10,7 +10,6 @@ import { ItemType } from '../data/Enum';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
-
 @ccclass( "ClipItem" )
 export class ClipItem 
 {

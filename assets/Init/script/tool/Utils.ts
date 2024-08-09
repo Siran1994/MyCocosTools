@@ -321,7 +321,8 @@ export class Utils
     {
         return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
     }
-
+	
+   //从0到n-1的范围内生成x个不重复的数字
     static getRandomUniqueNumbers ( n: number, x: number ): number[]
     {
         if ( x > n )
@@ -339,6 +340,35 @@ export class Utils
             result.push( randomNumber );
         }
         return result;
+    }
+	
+	 /**  
+ * 在给定范围内生成一个随机数，排除输入参数  
+ * @param min 范围的下限  
+ * @param max 范围的上限  
+ * @param exclude 排除的数  
+ * @returns 随机数  
+ */
+    public static getRandomNumber ( min: number, max: number, exclude: number ): number
+    {
+        if ( min > max )
+        {
+            throw new Error( "min应该小于或等于max" );
+        }
+
+        if ( exclude < min || exclude > max )
+        {
+            throw new Error( "exclude必须在给定范围内" );
+        }
+
+        let randomNumber: number;
+
+        do
+        {
+            randomNumber = Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+        } while ( randomNumber === exclude );
+
+        return randomNumber;
     }
 
 
