@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "ecba9f73-3cce-4557-92fc-bf5c9be7877c",
+  "uuid": "b8bdb5e3-92d9-4328-bd4d-d4cca7260b53",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "00699": {
       "importer": "gltf-animation",
-      "uuid": "ecba9f73-3cce-4557-92fc-bf5c9be7877c@00699",
+      "uuid": "b8bdb5e3-92d9-4328-bd4d-d4cca7260b53@00699",
       "displayName": "",
       "id": "00699",
       "name": "damage.animation",
@@ -32,7 +32,7 @@
     },
     "e5589": {
       "importer": "gltf-scene",
-      "uuid": "ecba9f73-3cce-4557-92fc-bf5c9be7877c@e5589",
+      "uuid": "b8bdb5e3-92d9-4328-bd4d-d4cca7260b53@e5589",
       "displayName": "",
       "id": "e5589",
       "name": "Damage.prefab",
@@ -65,14 +65,14 @@
         ]
       }
     ],
-    "redirect": "ecba9f73-3cce-4557-92fc-bf5c9be7877c@e5589",
+    "redirect": "b8bdb5e3-92d9-4328-bd4d-d4cca7260b53@e5589",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "ecba9f73-3cce-4557-92fc-bf5c9be7877c@e5589"
+        "b8bdb5e3-92d9-4328-bd4d-d4cca7260b53@e5589"
       ]
     },
     "fbx": {

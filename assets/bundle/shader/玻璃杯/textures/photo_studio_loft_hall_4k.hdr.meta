@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "01090fc8-9c52-4123-bc86-08b130ff785d",
+  "uuid": "872781ec-30fa-4636-b739-98c0aa256518",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "b47c0": {
       "importer": "erp-texture-cube",
-      "uuid": "01090fc8-9c52-4123-bc86-08b130ff785d@b47c0",
+      "uuid": "872781ec-30fa-4636-b739-98c0aa256518@b47c0",
       "displayName": "photo_studio_loft_hall_4k",
       "id": "b47c0",
       "name": "textureCube",
@@ -22,7 +22,7 @@
         "mipfilter": "linear",
         "anisotropy": 0,
         "isRGBE": true,
-        "imageDatabaseUri": "01090fc8-9c52-4123-bc86-08b130ff785d"
+        "imageDatabaseUri": "872781ec-30fa-4636-b739-98c0aa256518"
       },
       "ver": "1.0.10",
       "imported": true,
@@ -32,7 +32,7 @@
       "subMetas": {
         "74afd": {
           "importer": "texture-cube-face",
-          "uuid": "01090fc8-9c52-4123-bc86-08b130ff785d@b47c0@74afd",
+          "uuid": "872781ec-30fa-4636-b739-98c0aa256518@b47c0@74afd",
           "displayName": "",
           "id": "74afd",
           "name": "right",
@@ -47,7 +47,7 @@
         },
         "8fd34": {
           "importer": "texture-cube-face",
-          "uuid": "01090fc8-9c52-4123-bc86-08b130ff785d@b47c0@8fd34",
+          "uuid": "872781ec-30fa-4636-b739-98c0aa256518@b47c0@8fd34",
           "displayName": "",
           "id": "8fd34",
           "name": "left",
@@ -62,7 +62,7 @@
         },
         "bb97f": {
           "importer": "texture-cube-face",
-          "uuid": "01090fc8-9c52-4123-bc86-08b130ff785d@b47c0@bb97f",
+          "uuid": "872781ec-30fa-4636-b739-98c0aa256518@b47c0@bb97f",
           "displayName": "",
           "id": "bb97f",
           "name": "top",
@@ -77,7 +77,7 @@
         },
         "7d38f": {
           "importer": "texture-cube-face",
-          "uuid": "01090fc8-9c52-4123-bc86-08b130ff785d@b47c0@7d38f",
+          "uuid": "872781ec-30fa-4636-b739-98c0aa256518@b47c0@7d38f",
           "displayName": "",
           "id": "7d38f",
           "name": "bottom",
@@ -92,7 +92,7 @@
         },
         "e9a6d": {
           "importer": "texture-cube-face",
-          "uuid": "01090fc8-9c52-4123-bc86-08b130ff785d@b47c0@e9a6d",
+          "uuid": "872781ec-30fa-4636-b739-98c0aa256518@b47c0@e9a6d",
           "displayName": "",
           "id": "e9a6d",
           "name": "front",
@@ -107,7 +107,7 @@
         },
         "40c10": {
           "importer": "texture-cube-face",
-          "uuid": "01090fc8-9c52-4123-bc86-08b130ff785d@b47c0@40c10",
+          "uuid": "872781ec-30fa-4636-b739-98c0aa256518@b47c0@40c10",
           "displayName": "",
           "id": "40c10",
           "name": "back",
@@ -128,6 +128,6 @@
     "fixAlphaTransparencyArtifacts": false,
     "isRGBE": true,
     "hasAlpha": true,
-    "redirect": "01090fc8-9c52-4123-bc86-08b130ff785d@b47c0"
+    "redirect": "872781ec-30fa-4636-b739-98c0aa256518@b47c0"
   }
 }

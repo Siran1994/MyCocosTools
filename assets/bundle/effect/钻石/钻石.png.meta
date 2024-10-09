@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "a74b1b36-3faa-45e1-bda6-5c32d0dc3093",
+  "uuid": "a4503b8b-c600-4fd9-b7a8-d066a15bdedb",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "a74b1b36-3faa-45e1-bda6-5c32d0dc3093@6c48a",
+      "uuid": "a4503b8b-c600-4fd9-b7a8-d066a15bdedb@6c48a",
       "displayName": "钻石",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "a74b1b36-3faa-45e1-bda6-5c32d0dc3093",
+        "imageUuidOrDatabaseUri": "a4503b8b-c600-4fd9-b7a8-d066a15bdedb",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "a74b1b36-3faa-45e1-bda6-5c32d0dc3093@6c48a",
+    "redirect": "a4503b8b-c600-4fd9-b7a8-d066a15bdedb@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

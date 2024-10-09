@@ -4,10 +4,10 @@ import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
 import { ItemType } from '../data/Enum';
 import { Utils } from '../tool/Utils';
-import { PlayerCtrl } from '../game/PlayerCtrl';
 import { SpriteManager } from '../manager/SpriteManager';
 import { Messager } from '../manager/Messager';
 import { UiManager } from '../manager/UiManager';
+import { PlayerCtrl } from '../role/PlayerCtrl';
 const { ccclass, property } = _decorator;
 @ccclass( "TryData" )
 export class TryData 
@@ -65,7 +65,7 @@ export class TryPanel extends BasePanel
     {
         this.targetId = Utils.getRandomNumber( 0, 8, PlayerCtrl.Instance.playerId );
         this.ItemName.string = GameManager.Instance.GetBallType( this.targetId );
-        this.ItemIcon.spriteFrame = SpriteManager.get( GameManager.Instance.GetBallType( this.targetId ) );
+        this.ItemIcon.spriteFrame = SpriteManager.get( GameManager.Instance.GetBallType( this.targetId ), SpriteManager.showMap );
         this.ShowPanel();
     }
 }

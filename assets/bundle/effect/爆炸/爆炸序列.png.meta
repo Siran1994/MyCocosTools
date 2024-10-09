@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "ff7898db-05be-45fb-97dc-f97ba2597bc6",
+  "uuid": "80fd7b80-a5f1-4ad8-8347-a90e09f06d76",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "ff7898db-05be-45fb-97dc-f97ba2597bc6@6c48a",
+      "uuid": "80fd7b80-a5f1-4ad8-8347-a90e09f06d76@6c48a",
       "displayName": "爆炸序列",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ff7898db-05be-45fb-97dc-f97ba2597bc6",
+        "imageUuidOrDatabaseUri": "80fd7b80-a5f1-4ad8-8347-a90e09f06d76",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "ff7898db-05be-45fb-97dc-f97ba2597bc6@6c48a",
+    "redirect": "80fd7b80-a5f1-4ad8-8347-a90e09f06d76@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

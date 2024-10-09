@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "488698f5-42e3-405b-87a7-8ef2ab17bdcc",
+  "uuid": "6a8ca1ed-468d-4ef1-9497-79eb38dcb633",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "488698f5-42e3-405b-87a7-8ef2ab17bdcc@6c48a",
+      "uuid": "6a8ca1ed-468d-4ef1-9497-79eb38dcb633@6c48a",
       "displayName": "shibai_bt",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "488698f5-42e3-405b-87a7-8ef2ab17bdcc",
+        "imageUuidOrDatabaseUri": "6a8ca1ed-468d-4ef1-9497-79eb38dcb633",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "488698f5-42e3-405b-87a7-8ef2ab17bdcc@f9941",
+      "uuid": "6a8ca1ed-468d-4ef1-9497-79eb38dcb633@f9941",
       "displayName": "shibai_bt",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "488698f5-42e3-405b-87a7-8ef2ab17bdcc@6c48a",
+        "imageUuidOrDatabaseUri": "6a8ca1ed-468d-4ef1-9497-79eb38dcb633@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "488698f5-42e3-405b-87a7-8ef2ab17bdcc@f9941",
+    "redirect": "6a8ca1ed-468d-4ef1-9497-79eb38dcb633@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

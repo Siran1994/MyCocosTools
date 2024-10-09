@@ -1,4 +1,4 @@
-import { _decorator, Component, SkeletalAnimation, Node, ParticleSystem } from 'cc';
+import { _decorator, Component, Node, ParticleSystem } from 'cc';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { AniState, HeroType, PropType } from '../data/Enum';
 import { AudioMgr } from '../manager/AudioMgr';
@@ -26,6 +26,8 @@ export class PlayerCtrl extends Component
 
     @property( Node )
     Effects: Node[] = [];
+
+    playerId = 0;
 
     start ()
     {

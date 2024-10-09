@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "60ab8f13-c72c-4046-9333-3f6dd91ce8c3",
+  "uuid": "c8385328-295f-4fc1-a29f-f600c05c5c3f",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "a865e": {
       "importer": "gltf-mesh",
-      "uuid": "60ab8f13-c72c-4046-9333-3f6dd91ce8c3@a865e",
+      "uuid": "c8385328-295f-4fc1-a29f-f600c05c5c3f@a865e",
       "displayName": "",
       "id": "a865e",
       "name": "cocosfinish_01.mesh",
@@ -26,7 +26,7 @@
     },
     "1f586": {
       "importer": "gltf-animation",
-      "uuid": "60ab8f13-c72c-4046-9333-3f6dd91ce8c3@1f586",
+      "uuid": "c8385328-295f-4fc1-a29f-f600c05c5c3f@1f586",
       "displayName": "",
       "id": "1f586",
       "name": "idle.animation",
@@ -49,7 +49,7 @@
     },
     "438fe": {
       "importer": "gltf-skeleton",
-      "uuid": "60ab8f13-c72c-4046-9333-3f6dd91ce8c3@438fe",
+      "uuid": "c8385328-295f-4fc1-a29f-f600c05c5c3f@438fe",
       "displayName": "",
       "id": "438fe",
       "name": "UnnamedSkeleton.skeleton",
@@ -66,7 +66,7 @@
     },
     "503de": {
       "importer": "gltf-scene",
-      "uuid": "60ab8f13-c72c-4046-9333-3f6dd91ce8c3@503de",
+      "uuid": "c8385328-295f-4fc1-a29f-f600c05c5c3f@503de",
       "displayName": "",
       "id": "503de",
       "name": "Idle.prefab",
@@ -99,18 +99,18 @@
         ]
       }
     ],
-    "redirect": "60ab8f13-c72c-4046-9333-3f6dd91ce8c3@503de",
+    "redirect": "c8385328-295f-4fc1-a29f-f600c05c5c3f@503de",
     "assetFinder": {
       "meshes": [
-        "60ab8f13-c72c-4046-9333-3f6dd91ce8c3@a865e"
+        "c8385328-295f-4fc1-a29f-f600c05c5c3f@a865e"
       ],
       "skeletons": [
-        "60ab8f13-c72c-4046-9333-3f6dd91ce8c3@438fe"
+        "c8385328-295f-4fc1-a29f-f600c05c5c3f@438fe"
       ],
       "textures": [],
       "materials": [],
       "scenes": [
-        "60ab8f13-c72c-4046-9333-3f6dd91ce8c3@503de"
+        "c8385328-295f-4fc1-a29f-f600c05c5c3f@503de"
       ]
     },
     "fbx": {

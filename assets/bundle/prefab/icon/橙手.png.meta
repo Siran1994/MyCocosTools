@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "c29d7987-b7d5-4095-8135-4f74598da043",
+  "uuid": "561eecb9-2095-4ee6-9d91-d4ea4308143c",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "c29d7987-b7d5-4095-8135-4f74598da043@6c48a",
+      "uuid": "561eecb9-2095-4ee6-9d91-d4ea4308143c@6c48a",
       "displayName": "橙手",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "c29d7987-b7d5-4095-8135-4f74598da043",
+        "imageUuidOrDatabaseUri": "561eecb9-2095-4ee6-9d91-d4ea4308143c",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "c29d7987-b7d5-4095-8135-4f74598da043@f9941",
+      "uuid": "561eecb9-2095-4ee6-9d91-d4ea4308143c@f9941",
       "displayName": "橙手",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "c29d7987-b7d5-4095-8135-4f74598da043@6c48a",
+        "imageUuidOrDatabaseUri": "561eecb9-2095-4ee6-9d91-d4ea4308143c@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "c29d7987-b7d5-4095-8135-4f74598da043@f9941",
+    "redirect": "561eecb9-2095-4ee6-9d91-d4ea4308143c@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

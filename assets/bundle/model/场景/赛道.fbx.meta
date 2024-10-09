@@ -2,12 +2,12 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a",
+  "uuid": "e047f51b-825f-4044-9e1a-63572a509eac",
   "files": [],
   "subMetas": {
     "49758": {
       "importer": "gltf-material",
-      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@49758",
+      "uuid": "e047f51b-825f-4044-9e1a-63572a509eac@49758",
       "displayName": "",
       "id": "49758",
       "name": "lambert16.material",
@@ -23,7 +23,7 @@
     },
     "91503": {
       "importer": "gltf-mesh",
-      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@91503",
+      "uuid": "e047f51b-825f-4044-9e1a-63572a509eac@91503",
       "displayName": "",
       "id": "91503",
       "name": "polySurface179_Material0.mesh",
@@ -38,9 +38,26 @@
       ],
       "subMetas": {}
     },
+    "adacb": {
+      "importer": "gltf-embeded-image",
+      "uuid": "e047f51b-825f-4044-9e1a-63572a509eac@adacb",
+      "displayName": "",
+      "id": "adacb",
+      "name": "file2.image",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.3",
+      "imported": true,
+      "files": [
+        ".json",
+        ".png"
+      ],
+      "subMetas": {}
+    },
     "e873a": {
       "importer": "texture",
-      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@e873a",
+      "uuid": "e047f51b-825f-4044-9e1a-63572a509eac@e873a",
       "displayName": "",
       "id": "e873a",
       "name": "file2.texture",
@@ -51,8 +68,8 @@
         "magfilter": "linear",
         "mipfilter": "none",
         "anisotropy": 0,
-        "isUuid": false,
-        "imageUuidOrDatabaseUri": "db://assets/bundle/model/场景/地面贴图2.png"
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e047f51b-825f-4044-9e1a-63572a509eac@adacb"
       },
       "ver": "1.0.22",
       "imported": true,
@@ -63,7 +80,7 @@
     },
     "b904f": {
       "importer": "gltf-material",
-      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@b904f",
+      "uuid": "e047f51b-825f-4044-9e1a-63572a509eac@b904f",
       "displayName": "",
       "id": "b904f",
       "name": "lambert14.material",
@@ -79,7 +96,7 @@
     },
     "9a9f8": {
       "importer": "gltf-scene",
-      "uuid": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@9a9f8",
+      "uuid": "e047f51b-825f-4044-9e1a-63572a509eac@9a9f8",
       "displayName": "",
       "id": "9a9f8",
       "name": "赛道.prefab",
@@ -98,27 +115,27 @@
     "imageMetas": [
       {
         "name": "file2",
-        "uri": "db://assets/bundle/model/场景/地面贴图2.png"
+        "uri": "e047f51b-825f-4044-9e1a-63572a509eac@adacb"
       }
     ],
     "fbx": {
       "smartMaterialEnabled": true
     },
-    "redirect": "39b74b74-c436-41a6-b3be-ba230d0b7c1a@9a9f8",
+    "redirect": "e047f51b-825f-4044-9e1a-63572a509eac@9a9f8",
     "assetFinder": {
       "meshes": [
-        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@91503"
+        "e047f51b-825f-4044-9e1a-63572a509eac@91503"
       ],
       "skeletons": [],
       "textures": [
-        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@e873a"
+        "e047f51b-825f-4044-9e1a-63572a509eac@e873a"
       ],
       "materials": [
-        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@b904f",
-        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@49758"
+        "e047f51b-825f-4044-9e1a-63572a509eac@b904f",
+        "e047f51b-825f-4044-9e1a-63572a509eac@49758"
       ],
       "scenes": [
-        "39b74b74-c436-41a6-b3be-ba230d0b7c1a@9a9f8"
+        "e047f51b-825f-4044-9e1a-63572a509eac@9a9f8"
       ]
     }
   }

@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "59d05215-b8f8-46a0-b0b0-c0306fe7b664",
+  "uuid": "b5fc58e6-c9a0-400e-9579-5afaeada241a",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "59d05215-b8f8-46a0-b0b0-c0306fe7b664@6c48a",
+      "uuid": "b5fc58e6-c9a0-400e-9579-5afaeada241a@6c48a",
       "displayName": "tian",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "59d05215-b8f8-46a0-b0b0-c0306fe7b664",
+        "imageUuidOrDatabaseUri": "b5fc58e6-c9a0-400e-9579-5afaeada241a",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
     "type": "texture",
-    "redirect": "59d05215-b8f8-46a0-b0b0-c0306fe7b664@6c48a",
+    "redirect": "b5fc58e6-c9a0-400e-9579-5afaeada241a@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

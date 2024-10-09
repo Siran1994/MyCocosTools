@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "f290833a-c044-426c-9a4e-a971bf470e2e",
+  "uuid": "176a015f-de73-4fcd-8799-498d71596e02",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "c1b8f": {
       "importer": "gltf-animation",
-      "uuid": "f290833a-c044-426c-9a4e-a971bf470e2e@c1b8f",
+      "uuid": "176a015f-de73-4fcd-8799-498d71596e02@c1b8f",
       "displayName": "",
       "id": "c1b8f",
       "name": "dance.animation",
@@ -32,7 +32,7 @@
     },
     "7c80c": {
       "importer": "gltf-scene",
-      "uuid": "f290833a-c044-426c-9a4e-a971bf470e2e@7c80c",
+      "uuid": "176a015f-de73-4fcd-8799-498d71596e02@7c80c",
       "displayName": "",
       "id": "7c80c",
       "name": "Dance.prefab",
@@ -65,14 +65,14 @@
         ]
       }
     ],
-    "redirect": "f290833a-c044-426c-9a4e-a971bf470e2e@7c80c",
+    "redirect": "176a015f-de73-4fcd-8799-498d71596e02@7c80c",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "f290833a-c044-426c-9a4e-a971bf470e2e@7c80c"
+        "176a015f-de73-4fcd-8799-498d71596e02@7c80c"
       ]
     },
     "fbx": {

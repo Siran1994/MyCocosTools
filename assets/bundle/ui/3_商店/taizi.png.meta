@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "e21b98a9-7d3d-4c24-9426-490e447285b3",
+  "uuid": "0503ecd2-14bb-4055-abc0-d36df84f2b52",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "e21b98a9-7d3d-4c24-9426-490e447285b3@6c48a",
+      "uuid": "0503ecd2-14bb-4055-abc0-d36df84f2b52@6c48a",
       "displayName": "taizi",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e21b98a9-7d3d-4c24-9426-490e447285b3",
+        "imageUuidOrDatabaseUri": "0503ecd2-14bb-4055-abc0-d36df84f2b52",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "e21b98a9-7d3d-4c24-9426-490e447285b3@f9941",
+      "uuid": "0503ecd2-14bb-4055-abc0-d36df84f2b52@f9941",
       "displayName": "taizi",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e21b98a9-7d3d-4c24-9426-490e447285b3@6c48a",
+        "imageUuidOrDatabaseUri": "0503ecd2-14bb-4055-abc0-d36df84f2b52@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "e21b98a9-7d3d-4c24-9426-490e447285b3@f9941",
+    "redirect": "0503ecd2-14bb-4055-abc0-d36df84f2b52@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

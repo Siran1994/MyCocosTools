@@ -21,16 +21,10 @@
     "_components": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 60
-      },
-      {
-        "__id__": 62
       }
     ],
     "_prefab": {
-      "__id__": 64
+      "__id__": 60
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -47,8 +41,8 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 200,
-      "y": 200,
+      "x": 1,
+      "y": 1,
       "z": 1
     },
     "_mobility": 0,
@@ -74,7 +68,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "88860bf3-d8d7-4b93-aea3-dca1c749c9dc",
+        "__uuid__": "6627e741-e2eb-4e2b-8372-f543c92b4520",
         "__expectedType__": "cc.Material"
       },
       null
@@ -769,62 +763,16 @@
     "_lengthScale": 1,
     "_mesh": null,
     "_cpuMaterial": {
-      "__uuid__": "88860bf3-d8d7-4b93-aea3-dca1c749c9dc",
+      "__uuid__": "6627e741-e2eb-4e2b-8372-f543c92b4520",
       "__expectedType__": "cc.Material"
     },
     "_gpuMaterial": null,
     "_mainTexture": {
-      "__uuid__": "58527dc8-79b4-40b1-8bb2-f25200295cc6@6c48a",
+      "__uuid__": "32d3905a-f675-42ae-9f39-2c5635a54511@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
     "_useGPU": false,
     "_alignSpace": 2
-  },
-  {
-    "__type__": "cc.UIMeshRenderer",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 61
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "e5R3N7VwpHULn7Y2BkgYJ0"
-  },
-  {
-    "__type__": "cc.UITransform",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "__prefab": {
-      "__id__": 63
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 100,
-      "height": 100
-    },
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_id": ""
-  },
-  {
-    "__type__": "cc.CompPrefabInfo",
-    "fileId": "f4IWSxz9VB87Rtezc1Lswu"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -835,6 +783,7 @@
       "__id__": 0
     },
     "fileId": "b6B14BZHBCX5UjVNwz8gT2",
+    "instance": null,
     "targetOverrides": []
   }
 ]

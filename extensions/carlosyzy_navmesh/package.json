@@ -1,0 +1,54 @@
+{
+    "package_version": 2,
+    "version": "1.0.0",
+    "name": "carlosyzy-navmesh",
+    "description": "i18n:carlosyzy-navmesh.description",
+    "main": "./dist/main.js",
+    "dependencies": {
+        "vue": "2.6.14",
+        "fs-extra": "^10.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^16.0.1",
+        "@types/fs-extra": "^9.0.5",
+        "typescript": "^4.3.4"
+    },
+    "contributions": {
+        "menu":[
+            {
+                "path": "i18n:menu.extension/i18n:carlosyzy-navmesh.carlosyzy/i18n:carlosyzy-navmesh.create",
+                "label": "i18n:carlosyzy-navmesh.importExample",
+                "message": "import-nav-mesh-example"
+            }
+        ],
+        "messages": {
+            "import-nav-mesh-example": {
+                "methods": [
+                    "importNavMeshExample"
+                ]
+            }
+        },
+        "hierarchy": {
+            "menu": {
+                "methods": "./dist/main.js",
+                "createMenu": "onCreateMenu"
+            }
+        },
+        "scene": {
+            "script": "./dist/scene.js"
+        },
+        "inspector": {
+            "section": {
+                "node": {
+                    "NavMeshComponent": "./dist/nav-mesh-extend.js"
+                }
+            }
+        }
+    },
+    "author": "杨宗宝",
+    "editor": ">=3.7.0",
+    "scripts": {
+        "build": "tsc -b",
+        "watch": "tsc -w"
+    }
+}

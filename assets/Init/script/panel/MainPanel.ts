@@ -14,6 +14,10 @@ const { ccclass, property } = _decorator;
 @ccclass( 'MainPanel' )
 export class MainPanel extends Component 
 {
+    StartGame ()
+    {
+        throw new Error( 'Method not implemented.' );
+    }
 
     @property( Button )
     setBtn: Button;//设置

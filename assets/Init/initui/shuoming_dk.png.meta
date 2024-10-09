@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "aedcd0a7-410e-492f-bfe0-23552f51814c",
+  "uuid": "6a7000c3-2125-42ab-bdef-9ff217a9a267",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "aedcd0a7-410e-492f-bfe0-23552f51814c@6c48a",
+      "uuid": "6a7000c3-2125-42ab-bdef-9ff217a9a267@6c48a",
       "displayName": "shuoming_dk",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "aedcd0a7-410e-492f-bfe0-23552f51814c",
+        "imageUuidOrDatabaseUri": "6a7000c3-2125-42ab-bdef-9ff217a9a267",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "aedcd0a7-410e-492f-bfe0-23552f51814c@f9941",
+      "uuid": "6a7000c3-2125-42ab-bdef-9ff217a9a267@f9941",
       "displayName": "shuoming_dk",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "aedcd0a7-410e-492f-bfe0-23552f51814c@6c48a",
+        "imageUuidOrDatabaseUri": "6a7000c3-2125-42ab-bdef-9ff217a9a267@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "aedcd0a7-410e-492f-bfe0-23552f51814c@f9941",
+    "redirect": "6a7000c3-2125-42ab-bdef-9ff217a9a267@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

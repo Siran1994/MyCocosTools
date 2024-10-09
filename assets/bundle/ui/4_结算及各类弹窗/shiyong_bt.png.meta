@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "92278062-5f3b-4b77-a532-daedcbeb79b2",
+  "uuid": "d89645b6-89dc-426b-9f32-c3e4add73ad0",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "92278062-5f3b-4b77-a532-daedcbeb79b2@6c48a",
+      "uuid": "d89645b6-89dc-426b-9f32-c3e4add73ad0@6c48a",
       "displayName": "shiyong_bt",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "92278062-5f3b-4b77-a532-daedcbeb79b2",
+        "imageUuidOrDatabaseUri": "d89645b6-89dc-426b-9f32-c3e4add73ad0",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "92278062-5f3b-4b77-a532-daedcbeb79b2@f9941",
+      "uuid": "d89645b6-89dc-426b-9f32-c3e4add73ad0@f9941",
       "displayName": "shiyong_bt",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "92278062-5f3b-4b77-a532-daedcbeb79b2@6c48a",
+        "imageUuidOrDatabaseUri": "d89645b6-89dc-426b-9f32-c3e4add73ad0@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "92278062-5f3b-4b77-a532-daedcbeb79b2@f9941",
+    "redirect": "d89645b6-89dc-426b-9f32-c3e4add73ad0@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "31c7dae1-9297-4870-8e53-e1399a2ad338",
+  "uuid": "32f50dbf-010f-4e10-a904-094a05431c58",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "31c7dae1-9297-4870-8e53-e1399a2ad338@6c48a",
+      "uuid": "32f50dbf-010f-4e10-a904-094a05431c58@6c48a",
       "displayName": "lightUp02",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "linear",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "31c7dae1-9297-4870-8e53-e1399a2ad338",
+        "imageUuidOrDatabaseUri": "32f50dbf-010f-4e10-a904-094a05431c58",
         "visible": true
       },
       "ver": "1.0.22",
@@ -36,7 +36,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "31c7dae1-9297-4870-8e53-e1399a2ad338@6c48a",
+    "redirect": "32f50dbf-010f-4e10-a904-094a05431c58@6c48a",
     "fixAlphaTransparencyArtifacts": false
   }
 }

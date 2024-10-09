@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "87cf0cf6-d9e3-4feb-9b21-acb96d43afff",
+  "uuid": "d273e1f0-5f8d-401b-b91b-94688c137d6f",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "87cf0cf6-d9e3-4feb-9b21-acb96d43afff@6c48a",
+      "uuid": "d273e1f0-5f8d-401b-b91b-94688c137d6f@6c48a",
       "displayName": "光圈旋转_tex",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "87cf0cf6-d9e3-4feb-9b21-acb96d43afff",
+        "imageUuidOrDatabaseUri": "d273e1f0-5f8d-401b-b91b-94688c137d6f",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "87cf0cf6-d9e3-4feb-9b21-acb96d43afff@6c48a",
+    "redirect": "d273e1f0-5f8d-401b-b91b-94688c137d6f@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

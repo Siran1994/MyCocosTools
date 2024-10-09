@@ -1,5 +1,6 @@
 import { _decorator, assetManager, Component, TextAsset } from 'cc';
-import { ResMgr } from '../tool/ResMgr';
+import { ResMgr } from './ResMgr';
+
 const { ccclass, property } = _decorator;
 
 @ccclass( 'TextAssetManager' )

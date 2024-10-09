@@ -2,19 +2,19 @@
   "ver": "1.2.2",
   "importer": "render-texture",
   "imported": true,
-  "uuid": "c8f5dcc2-6d92-4619-8733-1be0d8c83d19",
+  "uuid": "98528282-de61-46ce-8cae-6a3d2b77a520",
   "files": [
     ".json"
   ],
   "subMetas": {
     "f9941": {
       "importer": "rt-sprite-frame",
-      "uuid": "c8f5dcc2-6d92-4619-8733-1be0d8c83d19@f9941",
+      "uuid": "98528282-de61-46ce-8cae-6a3d2b77a520@f9941",
       "displayName": "RT-Scene",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
-        "imageUuidOrDatabaseUri": "c8f5dcc2-6d92-4619-8733-1be0d8c83d19",
+        "imageUuidOrDatabaseUri": "98528282-de61-46ce-8cae-6a3d2b77a520",
         "width": 960,
         "height": 640
       },
@@ -35,6 +35,6 @@
     "mipfilter": "none",
     "wrapModeS": "repeat",
     "wrapModeT": "repeat",
-    "redirect": "c8f5dcc2-6d92-4619-8733-1be0d8c83d19@f9941"
+    "redirect": "98528282-de61-46ce-8cae-6a3d2b77a520@f9941"
   }
 }

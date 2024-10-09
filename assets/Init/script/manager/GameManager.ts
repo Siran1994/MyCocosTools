@@ -18,6 +18,14 @@ const { ccclass, property } = _decorator;
 @ccclass( 'GameManager' )
 export class GameManager extends Component
 {
+    static showAd ( arg0: () => void )
+    {
+        throw new Error( 'Method not implemented.' );
+    }
+    GetBallType ( targetId: number ): string
+    {
+        throw new Error( 'Method not implemented.' );
+    }
     public static Instance: GameManager = null;
     onLoad () 
     {
@@ -54,7 +62,7 @@ export class GameManager extends Component
             AudioMgr.Instance.游戏背景乐.playMusic();
         } );
 
-        CsvManager.Instance.getData( 'talk' );//Excel表格使用示例
+        // CsvManager.Instance.getData( 'talk' );//Excel表格使用示例
 
     }
 
