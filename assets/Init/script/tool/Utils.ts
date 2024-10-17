@@ -193,6 +193,36 @@ export class Utils
     //#endregion
 
     //#region 随机数
+
+
+    //乱序输出一个数组
+    public static shuffleArrayNums ( array: number[] ): number[]
+    {
+        for ( let i = array.length - 1; i > 0; i-- )
+        {
+            const j = Math.floor( Math.random() * ( i + 1 ) ); // 随机索引  
+            [ array[ i ], array[ j ] ] = [ array[ j ], array[ i ] ]; // 交换元素  
+        }
+        return array;
+    }
+
+    //指定范围内随机输出一个数组,不包含指定数
+    public static generateShuffledArray ( rangeStart: number, rangeEnd: number, exclude: number ): number[]
+    {
+        // 生成范围内的数组  
+        const array: number[] = [];
+        for ( let i = rangeStart; i <= rangeEnd; i++ )
+        {
+            if ( i !== exclude )
+            {
+                array.push( i );
+            }
+        }
+        // 打乱数组  
+        const shuffledArray = Utils.shuffleArrayNums( array );
+        return shuffledArray;
+    }
+
     public static random ( min, max )
     {
         var r = Math.random();
@@ -321,8 +351,8 @@ export class Utils
     {
         return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
     }
-	
-   //从0到n-1的范围内生成x个不重复的数字
+
+    //从0到n-1的范围内生成x个不重复的数字
     static getRandomUniqueNumbers ( n: number, x: number ): number[]
     {
         if ( x > n )
@@ -341,14 +371,14 @@ export class Utils
         }
         return result;
     }
-	
-	 /**  
- * 在给定范围内生成一个随机数，排除输入参数  
- * @param min 范围的下限  
- * @param max 范围的上限  
- * @param exclude 排除的数  
- * @returns 随机数  
- */
+
+    /**  
+* 在给定范围内生成一个随机数，排除输入参数  
+* @param min 范围的下限  
+* @param max 范围的上限  
+* @param exclude 排除的数  
+* @returns 随机数  
+*/
     public static getRandomNumber ( min: number, max: number, exclude: number ): number
     {
         if ( min > max )
@@ -857,6 +887,21 @@ export class Utils
     //#endregion
 
     //#region object,数组操作
+
+    //将数组进行乱序输出
+    public static shuffleArray<T> ( array: T[] ): T[]
+    {
+        let shuffledArray = array.slice(); // 创建数组的副本  
+        for ( let i = shuffledArray.length - 1; i > 0; i-- )
+        {
+            // 生成一个随机索引  
+            const j = Math.floor( Math.random() * ( i + 1 ) );
+            // 交换元素  
+            [ shuffledArray[ i ], shuffledArray[ j ] ] = [ shuffledArray[ j ], shuffledArray[ i ] ];
+        }
+        return shuffledArray;
+    }
+
     //返回数组中的最大值
     public static max ( array )
     {
@@ -2111,7 +2156,7 @@ export class Utils
     //求中点
     public static getMidPos ( pos1: Vec3, pos2: Vec3 )
     {
-        return new Vec3( ( pos1.x + pos2.x ) / 2, ( pos1.y + pos2.y ) / 2 + 1, ( pos1.z + pos2.z ) / 2 )
+        return new Vec3( ( pos1.x + pos2.x ) / 2, ( pos1.y + pos2.y ) / 2, ( pos1.z + pos2.z ) / 2 )
     }
 
     //检测一个节点是否在另一个节点内

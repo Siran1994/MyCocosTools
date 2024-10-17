@@ -1,6 +1,5 @@
-import { _decorator, Component, Label, Node, sys } from 'cc';
+import { _decorator, Component, Label, Node } from 'cc';
 import { Messager } from '../manager/Messager';
-import { PlayerPrefs } from '../data/PlayerPrefs';
 import { GameData } from '../data/GameData';
 const { ccclass, property } = _decorator;
 
@@ -21,16 +20,6 @@ export class SignItem extends Component
 
     start ()
     {
-        this.init();
-    }
-
-    init ()
-    {
-        // if ( this.index == GameData.SignDay ) && PlayerPrefs.GetInt( 'signDate', 0 ) != DateUtils.getDate().day )
-        //     this.Selected.active = true;
-        // else
-        //     this.Selected.active = false;
-
         if ( this.index < GameData.SignDay )
             this.Signed.active = true;
         else
@@ -49,15 +38,7 @@ export class SignItem extends Component
 
     SignItem ( i: number )
     {
-        if ( sys.platform == sys.Platform.VIVO_MINI_GAME )
-        {
-            if ( this.index == i + 1 )
-                this.Signed.active = true;
-        }
-        else
-        {
-            if ( this.index == i )
-                this.Signed.active = true;
-        }
+        if ( this.index == i )
+            this.Signed.active = true;
     }
 }
