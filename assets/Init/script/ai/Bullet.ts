@@ -1,5 +1,4 @@
-import { _decorator, Collider, Component, ITriggerEvent, Node, RigidBody, v3, Vec3 } from 'cc';
-import { AudioMgr } from '../manager/AudioMgr';
+import { _decorator, Collider, Component, Node, RigidBody, v3, Vec3 } from 'cc';
 import { PoolManager } from '../manager/PoolManager';
 import { PhysicsGroup } from './PhysicsGroup';
 const { ccclass, property } = _decorator;

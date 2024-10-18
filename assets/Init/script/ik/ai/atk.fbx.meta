@@ -1,0 +1,96 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "37358": {
+      "importer": "gltf-animation",
+      "uuid": "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417@37358",
+      "displayName": "",
+      "id": "37358",
+      "name": "atk.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 0,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.5666666626930237
+        },
+        "events": [
+          {
+            "frame": 0.4666666666666667,
+            "func": "atkEnd",
+            "params": [],
+            "x": 309.05882352941177
+          },
+          {
+            "frame": 0.2,
+            "func": "atkStart",
+            "params": [],
+            "x": 120.11764705882354
+          }
+        ],
+        "speed": 1
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "51577": {
+      "importer": "gltf-scene",
+      "uuid": "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417@51577",
+      "displayName": "",
+      "id": "51577",
+      "name": "atk.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 0.5666666626930237,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "atk",
+            "from": 0,
+            "to": 0.5666666626930237,
+            "wrapMode": 0,
+            "speed": 1
+          }
+        ]
+      }
+    ],
+    "redirect": "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417@51577",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417@51577"
+      ]
+    }
+  }
+}

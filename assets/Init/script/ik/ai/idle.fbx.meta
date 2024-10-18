@@ -1,0 +1,81 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "c7db2dbe-a80f-4186-a5b1-2018095f1f1c",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "1f586": {
+      "importer": "gltf-animation",
+      "uuid": "c7db2dbe-a80f-4186-a5b1-2018095f1f1c@1f586",
+      "displayName": "",
+      "id": "1f586",
+      "name": "idle.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 7.699999809265137
+        },
+        "events": []
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "5f904": {
+      "importer": "gltf-scene",
+      "uuid": "c7db2dbe-a80f-4186-a5b1-2018095f1f1c@5f904",
+      "displayName": "",
+      "id": "5f904",
+      "name": "idle.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 7.699999809265137,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "idle",
+            "from": 0,
+            "to": 7.699999809265137,
+            "wrapMode": 2
+          }
+        ]
+      }
+    ],
+    "redirect": "c7db2dbe-a80f-4186-a5b1-2018095f1f1c@5f904",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "c7db2dbe-a80f-4186-a5b1-2018095f1f1c@5f904"
+      ]
+    }
+  }
+}

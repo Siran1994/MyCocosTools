@@ -21,33 +21,37 @@ export class IkTool extends Component
     @property( Node )
     public Target!: Node;
 
+    @property( Node )
+    public l_target!: Node;
+
     @property( Vec3 )
     l_angle: Vec3 = new Vec3( -90, 90, -10 );
+
+    @property( Node )
+    public r_target!: Node;
 
     @property( Vec3 )
     r_angle: Vec3 = new Vec3( -90, -90, 10 );
 
+
     lateUpdate ( deltaTime: number )
     {
-        if ( this.LeftHand != null && this.RightHand != null && this.Head != null )
-        {
-            this._headFollow( this.Target );
-            this._handFollow( deltaTime, this.LeftHand, this.Target, this.l_angle );
-            this._handFollow( deltaTime, this.RightHand, this.Target, this.r_angle );
-        }
+        this._headFollow( this.Target );
+        this._handFollow( deltaTime, this.LeftHand, new Vec3( this.l_target.worldPosition ), this.l_angle );
+        this._handFollow( deltaTime, this.RightHand, new Vec3( this.r_target.worldPosition ), this.r_angle );
     }
 
-    _handFollow ( deltaTime: number, _hand: Node, target: Node, angle: Vec3 )
+    _handFollow ( deltaTime: number, _hand: Node, targetPos: Vec3, angle: Vec3 )
     {
-        const {
-            _lastGrabbingPosition: lastGrabbingPosition,
-        } = this;
+        if ( _hand == null )
+            return;
+        const { _lastGrabbingPosition: lastGrabbingPosition } = this;
 
         const hand = _hand;
         const lowerArm = hand.parent!;
         const upperArm = lowerArm.parent!;
         const potentialTarget = new Vec3();
-        Vec3.copy( potentialTarget, target.worldPosition );
+        Vec3.copy( potentialTarget, targetPos );
 
         if ( !this._previousGrabbed )
         {
@@ -78,16 +82,15 @@ export class IkTool extends Component
         hand.setWorldRotationFromEuler( angle.x, angle.y, angle.z );
     }
 
-
     private _previousGrabbed = false;
 
     private _lastGrabbingPosition = new Vec3();
 
     _headFollow ( target: Node )
     {
-        const {
-            Head,
-        } = this;
+        if ( this.Head == null )
+            return;
+        const { Head } = this;
         const viewDir = Vec3.subtract( new Vec3(), target.worldPosition, Head.worldPosition );
         viewDir.normalize();
         const currentDir = getForward( Head );

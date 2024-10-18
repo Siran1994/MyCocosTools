@@ -1,0 +1,94 @@
+{
+  "ver": "2.3.4",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "1b057625-158e-4e46-8d54-b74638e46453",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "37358": {
+      "importer": "gltf-animation",
+      "uuid": "1b057625-158e-4e46-8d54-b74638e46453@37358",
+      "displayName": "",
+      "id": "37358",
+      "name": "atk.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 0,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.100000023841858
+        },
+        "events": [
+          {
+            "frame": 0.3333333333333333,
+            "func": "atkStart",
+            "params": [],
+            "x": 100.66666666666667
+          },
+          {
+            "frame": 0.5,
+            "func": "atkEnd",
+            "params": [],
+            "x": 155
+          }
+        ]
+      },
+      "ver": "1.0.16",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "df76f": {
+      "importer": "gltf-scene",
+      "uuid": "1b057625-158e-4e46-8d54-b74638e46453@df76f",
+      "displayName": "",
+      "id": "df76f",
+      "name": "atk.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "animationImportSettings": [
+      {
+        "name": "Take 001",
+        "duration": 1.100000023841858,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "atk",
+            "from": 0,
+            "to": 1.100000023841858,
+            "wrapMode": 0
+          }
+        ]
+      }
+    ],
+    "redirect": "1b057625-158e-4e46-8d54-b74638e46453@df76f",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "1b057625-158e-4e46-8d54-b74638e46453@df76f"
+      ]
+    }
+  }
+}
