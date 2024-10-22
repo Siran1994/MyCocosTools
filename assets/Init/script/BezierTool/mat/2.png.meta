@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "0dd16ef3-f39d-4ec5-ac3c-a76da0ffb8ea",
+  "uuid": "a1dcf3ef-21a6-48f8-89be-1196c296b3c7",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "0dd16ef3-f39d-4ec5-ac3c-a76da0ffb8ea@6c48a",
+      "uuid": "a1dcf3ef-21a6-48f8-89be-1196c296b3c7@6c48a",
       "displayName": "2",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "0dd16ef3-f39d-4ec5-ac3c-a76da0ffb8ea",
+        "imageUuidOrDatabaseUri": "a1dcf3ef-21a6-48f8-89be-1196c296b3c7",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "type": "texture",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
-    "redirect": "0dd16ef3-f39d-4ec5-ac3c-a76da0ffb8ea@6c48a",
+    "redirect": "a1dcf3ef-21a6-48f8-89be-1196c296b3c7@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

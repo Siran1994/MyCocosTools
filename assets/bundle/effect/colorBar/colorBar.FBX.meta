@@ -2,12 +2,12 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "feb9942f-d443-45a5-9cdd-39e2de1f9aac",
+  "uuid": "824c52f1-0656-4ee9-b3ed-fcdffc431cd4",
   "files": [],
   "subMetas": {
     "46540": {
       "importer": "gltf-mesh",
-      "uuid": "feb9942f-d443-45a5-9cdd-39e2de1f9aac@46540",
+      "uuid": "824c52f1-0656-4ee9-b3ed-fcdffc431cd4@46540",
       "displayName": "",
       "id": "46540",
       "name": "Box001.mesh",
@@ -24,7 +24,7 @@
     },
     "2e015": {
       "importer": "gltf-scene",
-      "uuid": "feb9942f-d443-45a5-9cdd-39e2de1f9aac@2e015",
+      "uuid": "824c52f1-0656-4ee9-b3ed-fcdffc431cd4@2e015",
       "displayName": "",
       "id": "2e015",
       "name": "colorBar.prefab",
@@ -45,18 +45,18 @@
     "dumpMaterials": true,
     "disableMeshSplit": true,
     "materialDumpDir": "db://assets/resources/effect/colorBar",
-    "redirect": "feb9942f-d443-45a5-9cdd-39e2de1f9aac@2e015",
+    "redirect": "824c52f1-0656-4ee9-b3ed-fcdffc431cd4@2e015",
     "assetFinder": {
       "meshes": [
-        "feb9942f-d443-45a5-9cdd-39e2de1f9aac@46540"
+        "824c52f1-0656-4ee9-b3ed-fcdffc431cd4@46540"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [
-        "4940c9c9-569c-4c93-b686-0a5134bdc2e2"
+        "d0e8362c-0d5e-424e-afec-8dbf240968a6"
       ],
       "scenes": [
-        "feb9942f-d443-45a5-9cdd-39e2de1f9aac@2e015"
+        "824c52f1-0656-4ee9-b3ed-fcdffc431cd4@2e015"
       ]
     },
     "fbx": {

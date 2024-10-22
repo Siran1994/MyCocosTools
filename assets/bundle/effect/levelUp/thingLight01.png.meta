@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "0993869d-0453-47ae-845e-73e8ef736d4d",
+  "uuid": "b7c5400c-4607-4d9b-9e20-0d219c954b25",
   "files": [
     ".json",
     ".png"
@@ -11,7 +11,7 @@
     "6c48a": {
       "ver": "1.0.22",
       "importer": "texture",
-      "uuid": "0993869d-0453-47ae-845e-73e8ef736d4d@6c48a",
+      "uuid": "b7c5400c-4607-4d9b-9e20-0d219c954b25@6c48a",
       "imported": true,
       "files": [
         ".json"
@@ -26,7 +26,7 @@
         "premultiplyAlpha": false,
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "0993869d-0453-47ae-845e-73e8ef736d4d",
+        "imageUuidOrDatabaseUri": "b7c5400c-4607-4d9b-9e20-0d219c954b25",
         "visible": true
       },
       "displayName": "thingLight01",
@@ -36,7 +36,7 @@
   },
   "userData": {
     "type": "texture",
-    "redirect": "0993869d-0453-47ae-845e-73e8ef736d4d@6c48a",
+    "redirect": "b7c5400c-4607-4d9b-9e20-0d219c954b25@6c48a",
     "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false
   }

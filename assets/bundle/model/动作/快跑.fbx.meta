@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "f30fec5e-c70e-48b1-bd63-97957710fdb7",
+  "uuid": "0a3fd483-0a57-4613-b19f-5b87d733787d",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "cf5ee": {
       "importer": "gltf-animation",
-      "uuid": "f30fec5e-c70e-48b1-bd63-97957710fdb7@cf5ee",
+      "uuid": "0a3fd483-0a57-4613-b19f-5b87d733787d@cf5ee",
       "displayName": "",
       "id": "cf5ee",
       "name": "run.animation",
@@ -32,7 +32,7 @@
     },
     "f24d5": {
       "importer": "gltf-scene",
-      "uuid": "f30fec5e-c70e-48b1-bd63-97957710fdb7@f24d5",
+      "uuid": "0a3fd483-0a57-4613-b19f-5b87d733787d@f24d5",
       "displayName": "",
       "id": "f24d5",
       "name": "快跑.prefab",
@@ -67,14 +67,14 @@
         ]
       }
     ],
-    "redirect": "f30fec5e-c70e-48b1-bd63-97957710fdb7@f24d5",
+    "redirect": "0a3fd483-0a57-4613-b19f-5b87d733787d@f24d5",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "f30fec5e-c70e-48b1-bd63-97957710fdb7@f24d5"
+        "0a3fd483-0a57-4613-b19f-5b87d733787d@f24d5"
       ]
     }
   }

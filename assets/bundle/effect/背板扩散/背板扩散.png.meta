@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "7fc31824-dbf0-4536-be20-da6003b1fde8",
+  "uuid": "17a2f70b-e355-4341-9899-ffea9f23c08b",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "7fc31824-dbf0-4536-be20-da6003b1fde8@6c48a",
+      "uuid": "17a2f70b-e355-4341-9899-ffea9f23c08b@6c48a",
       "displayName": "背板扩散",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "7fc31824-dbf0-4536-be20-da6003b1fde8",
+        "imageUuidOrDatabaseUri": "17a2f70b-e355-4341-9899-ffea9f23c08b",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "7fc31824-dbf0-4536-be20-da6003b1fde8@6c48a",
+    "redirect": "17a2f70b-e355-4341-9899-ffea9f23c08b@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

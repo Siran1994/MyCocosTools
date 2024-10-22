@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "90aa57fa-eb89-4795-a298-7b8ebc6331ca",
+  "uuid": "dc91a516-c890-4c7a-8443-e3bbede54c8b",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "90aa57fa-eb89-4795-a298-7b8ebc6331ca@6c48a",
+      "uuid": "dc91a516-c890-4c7a-8443-e3bbede54c8b@6c48a",
       "displayName": "独角兽",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "90aa57fa-eb89-4795-a298-7b8ebc6331ca",
+        "imageUuidOrDatabaseUri": "dc91a516-c890-4c7a-8443-e3bbede54c8b",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "90aa57fa-eb89-4795-a298-7b8ebc6331ca@f9941",
+      "uuid": "dc91a516-c890-4c7a-8443-e3bbede54c8b@f9941",
       "displayName": "独角兽",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "90aa57fa-eb89-4795-a298-7b8ebc6331ca@6c48a",
+        "imageUuidOrDatabaseUri": "dc91a516-c890-4c7a-8443-e3bbede54c8b@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "90aa57fa-eb89-4795-a298-7b8ebc6331ca@f9941",
+    "redirect": "dc91a516-c890-4c7a-8443-e3bbede54c8b@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

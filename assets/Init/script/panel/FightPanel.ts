@@ -1,10 +1,6 @@
-import { _decorator, Button, Label, SpriteFrame, Sprite, Vec3, instantiate, tween, Node, Camera, Input, PhysicsSystem, geometry, input, BoxCollider } from 'cc';
+import { _decorator, Button, Label, SpriteFrame, Sprite, Vec3, tween, Node, Camera, Input, PhysicsSystem, geometry, input, BoxCollider } from 'cc';
 import { BasePanel } from './BasePanel';
 import { AudioMgr } from '../manager/AudioMgr';
-import { BattleStage } from '../game/BattleStage';
-import { GameManager } from '../manager/GameManager';
-import { ItemType } from '../data/Enum';
-import { PrefabManager } from '../manager/PrefabManager';
 import { Messager } from '../manager/Messager';
 import { Utils } from '../tool/Utils';
 const { ccclass, property } = _decorator;

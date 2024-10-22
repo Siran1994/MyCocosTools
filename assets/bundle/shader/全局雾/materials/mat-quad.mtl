@@ -27,7 +27,7 @@
   "_props": [
     {
       "mainTexture": {
-        "__uuid__": "bceee7b4-6c3c-4517-8322-2100ee06afd9",
+        "__uuid__": "02324bbc-38a6-4f8b-9536-bc4968d7ff41",
         "__expectedType__": "cc.RenderTexture"
       },
       "fogStart": 1,
@@ -44,7 +44,7 @@
       "fogXSpeed": 0.1,
       "fogYSpeed": 0.06,
       "noiseTexture": {
-        "__uuid__": "5bf6eb4b-2f02-4772-87de-5383d71567f8@6c48a",
+        "__uuid__": "f4175905-f609-427b-b7b1-08277d190734@6c48a",
         "__expectedType__": "cc.Texture2D"
       },
       "noiseIntensity": 3

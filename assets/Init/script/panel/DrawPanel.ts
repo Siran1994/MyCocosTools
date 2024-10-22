@@ -8,7 +8,6 @@ import { PlayerPrefs } from '../data/PlayerPrefs';
 import { BasePanel } from './BasePanel';
 import { Label } from 'cc';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
-import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'DrawPanel' )

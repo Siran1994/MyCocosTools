@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "e432818a-5d65-450a-8392-5147d2bc0750",
+  "uuid": "64d38a3c-24ee-492b-86ee-53827eba204e",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "b4251": {
       "importer": "gltf-animation",
-      "uuid": "e432818a-5d65-450a-8392-5147d2bc0750@b4251",
+      "uuid": "64d38a3c-24ee-492b-86ee-53827eba204e@b4251",
       "displayName": "",
       "id": "b4251",
       "name": "die.animation",
@@ -32,7 +32,7 @@
     },
     "1393f": {
       "importer": "gltf-scene",
-      "uuid": "e432818a-5d65-450a-8392-5147d2bc0750@1393f",
+      "uuid": "64d38a3c-24ee-492b-86ee-53827eba204e@1393f",
       "displayName": "",
       "id": "1393f",
       "name": "die.prefab",
@@ -67,14 +67,14 @@
         ]
       }
     ],
-    "redirect": "e432818a-5d65-450a-8392-5147d2bc0750@1393f",
+    "redirect": "64d38a3c-24ee-492b-86ee-53827eba204e@1393f",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "e432818a-5d65-450a-8392-5147d2bc0750@1393f"
+        "64d38a3c-24ee-492b-86ee-53827eba204e@1393f"
       ]
     }
   }

@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "a8476571-4174-476a-aea7-02a1202dac49",
+  "uuid": "f9e9ee42-6974-44d6-a4e6-0e606e01ef20",
   "files": [
     ".json",
     ".png"
@@ -14,7 +14,7 @@
       "name": "texture",
       "id": "6c48a",
       "displayName": "cocosfinish_02_baseColor",
-      "uuid": "a8476571-4174-476a-aea7-02a1202dac49@6c48a",
+      "uuid": "f9e9ee42-6974-44d6-a4e6-0e606e01ef20@6c48a",
       "imported": true,
       "files": [
         ".json"
@@ -29,14 +29,14 @@
         "premultiplyAlpha": false,
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "a8476571-4174-476a-aea7-02a1202dac49",
+        "imageUuidOrDatabaseUri": "f9e9ee42-6974-44d6-a4e6-0e606e01ef20",
         "visible": true
       }
     }
   },
   "userData": {
     "type": "texture",
-    "redirect": "a8476571-4174-476a-aea7-02a1202dac49@6c48a",
+    "redirect": "f9e9ee42-6974-44d6-a4e6-0e606e01ef20@6c48a",
     "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false
   }

@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "b2890eac-37c0-4d9a-8e1a-d678087c172f",
+  "uuid": "f7b1adfc-02f7-4bdf-b298-60ad188da33c",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "1f586": {
       "importer": "gltf-animation",
-      "uuid": "b2890eac-37c0-4d9a-8e1a-d678087c172f@1f586",
+      "uuid": "f7b1adfc-02f7-4bdf-b298-60ad188da33c@1f586",
       "displayName": "",
       "id": "1f586",
       "name": "idle.animation",
@@ -32,7 +32,7 @@
     },
     "97eba": {
       "importer": "gltf-scene",
-      "uuid": "b2890eac-37c0-4d9a-8e1a-d678087c172f@97eba",
+      "uuid": "f7b1adfc-02f7-4bdf-b298-60ad188da33c@97eba",
       "displayName": "",
       "id": "97eba",
       "name": "idle.prefab",
@@ -67,14 +67,14 @@
         ]
       }
     ],
-    "redirect": "b2890eac-37c0-4d9a-8e1a-d678087c172f@97eba",
+    "redirect": "f7b1adfc-02f7-4bdf-b298-60ad188da33c@97eba",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "b2890eac-37c0-4d9a-8e1a-d678087c172f@97eba"
+        "f7b1adfc-02f7-4bdf-b298-60ad188da33c@97eba"
       ]
     }
   }

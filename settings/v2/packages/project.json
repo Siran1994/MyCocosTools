@@ -2,8 +2,8 @@
   "__version__": "1.0.4",
   "general": {
     "designResolution": {
-      "width": 1334,
-      "height": 750,
+      "width": 750,
+      "height": 1334,
       "fitHeight": false,
       "fitWidth": true
     }

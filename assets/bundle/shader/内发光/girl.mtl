@@ -26,13 +26,29 @@
         ]
       }
     },
-    {},
-    {}
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    },
+    {
+      "rasterizerState": {},
+      "depthStencilState": {},
+      "blendState": {
+        "targets": [
+          {}
+        ]
+      }
+    }
   ],
   "_props": [
     {
       "mainTexture": {
-        "__uuid__": "c3730213-f28c-4415-8a0e-78de27bb77da@6c48a",
+        "__uuid__": "2059b1cb-04aa-4672-84f3-75e5ef8c2736@6c48a",
         "__expectedType__": "cc.Texture2D"
       },
       "rimLightColor": {

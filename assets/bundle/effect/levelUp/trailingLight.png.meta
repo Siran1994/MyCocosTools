@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "5df92876-9653-4208-9612-0f1997dc1fcd",
+  "uuid": "1bc533d7-a0b5-462a-8de6-a706edb90014",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "5df92876-9653-4208-9612-0f1997dc1fcd@6c48a",
+      "uuid": "1bc533d7-a0b5-462a-8de6-a706edb90014@6c48a",
       "displayName": "trailingLight",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "linear",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5df92876-9653-4208-9612-0f1997dc1fcd",
+        "imageUuidOrDatabaseUri": "1bc533d7-a0b5-462a-8de6-a706edb90014",
         "visible": true
       },
       "ver": "1.0.22",
@@ -36,7 +36,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "5df92876-9653-4208-9612-0f1997dc1fcd@6c48a",
+    "redirect": "1bc533d7-a0b5-462a-8de6-a706edb90014@6c48a",
     "fixAlphaTransparencyArtifacts": false
   }
 }

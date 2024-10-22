@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417",
+  "uuid": "0c99f834-0b14-4cef-8765-965179b47b5a",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "37358": {
       "importer": "gltf-animation",
-      "uuid": "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417@37358",
+      "uuid": "0c99f834-0b14-4cef-8765-965179b47b5a@37358",
       "displayName": "",
       "id": "37358",
       "name": "atk.animation",
@@ -46,7 +46,7 @@
     },
     "51577": {
       "importer": "gltf-scene",
-      "uuid": "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417@51577",
+      "uuid": "0c99f834-0b14-4cef-8765-965179b47b5a@51577",
       "displayName": "",
       "id": "51577",
       "name": "atk.prefab",
@@ -82,14 +82,14 @@
         ]
       }
     ],
-    "redirect": "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417@51577",
+    "redirect": "0c99f834-0b14-4cef-8765-965179b47b5a@51577",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "08ec09e0-ba38-4fe2-b9d1-d38b0d92b417@51577"
+        "0c99f834-0b14-4cef-8765-965179b47b5a@51577"
       ]
     }
   }

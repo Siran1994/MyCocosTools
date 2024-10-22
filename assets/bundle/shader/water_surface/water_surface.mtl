@@ -31,13 +31,9 @@
         "b": 51,
         "a": 200
       },
-      "reflectTexture": {
-        "__uuid__": "5af201b5-5951-4e2c-a81f-ac4aad9132cb@b47c0",
-        "__expectedType__": "cc.TextureCube"
-      },
       "fReflect": 0.94,
       "noiseTexture": {
-        "__uuid__": "67751246-60ae-4efe-852e-822f0b692f04@6c48a",
+        "__uuid__": "84213b0f-7ddd-4b01-bfe1-1e5d3dce63a6@6c48a",
         "__expectedType__": "cc.Texture2D"
       },
       "rimColor": {

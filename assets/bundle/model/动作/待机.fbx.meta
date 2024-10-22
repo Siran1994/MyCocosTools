@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "27021cf1-6591-45ac-8b5f-7352d2118b39",
+  "uuid": "a380ab0b-74c9-44db-9dbe-daf9c5481f80",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "1f586": {
       "importer": "gltf-animation",
-      "uuid": "27021cf1-6591-45ac-8b5f-7352d2118b39@1f586",
+      "uuid": "a380ab0b-74c9-44db-9dbe-daf9c5481f80@1f586",
       "displayName": "",
       "id": "1f586",
       "name": "idle.animation",
@@ -32,7 +32,7 @@
     },
     "05ab7": {
       "importer": "gltf-scene",
-      "uuid": "27021cf1-6591-45ac-8b5f-7352d2118b39@05ab7",
+      "uuid": "a380ab0b-74c9-44db-9dbe-daf9c5481f80@05ab7",
       "displayName": "",
       "id": "05ab7",
       "name": "待机.prefab",
@@ -67,14 +67,14 @@
         ]
       }
     ],
-    "redirect": "27021cf1-6591-45ac-8b5f-7352d2118b39@05ab7",
+    "redirect": "a380ab0b-74c9-44db-9dbe-daf9c5481f80@05ab7",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "27021cf1-6591-45ac-8b5f-7352d2118b39@05ab7"
+        "a380ab0b-74c9-44db-9dbe-daf9c5481f80@05ab7"
       ]
     }
   }

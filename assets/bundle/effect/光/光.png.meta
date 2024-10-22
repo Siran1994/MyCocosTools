@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "38f21894-8138-42b4-8dfd-fcda901fe965",
+  "uuid": "f3176a78-47d3-45b0-9f54-7aeef6fb4651",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "38f21894-8138-42b4-8dfd-fcda901fe965@6c48a",
+      "uuid": "f3176a78-47d3-45b0-9f54-7aeef6fb4651@6c48a",
       "displayName": "光",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "38f21894-8138-42b4-8dfd-fcda901fe965",
+        "imageUuidOrDatabaseUri": "f3176a78-47d3-45b0-9f54-7aeef6fb4651",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "38f21894-8138-42b4-8dfd-fcda901fe965@6c48a",
+    "redirect": "f3176a78-47d3-45b0-9f54-7aeef6fb4651@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

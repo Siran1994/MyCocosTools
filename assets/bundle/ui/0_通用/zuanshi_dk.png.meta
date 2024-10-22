@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "1f4b43bf-233d-4ded-b5ef-00bbd5d31f46",
+  "uuid": "6daff7ce-fb60-498c-8a02-d8fb2af3ff55",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "1f4b43bf-233d-4ded-b5ef-00bbd5d31f46@6c48a",
+      "uuid": "6daff7ce-fb60-498c-8a02-d8fb2af3ff55@6c48a",
       "displayName": "zuanshi_dk",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "nearest",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1f4b43bf-233d-4ded-b5ef-00bbd5d31f46",
+        "imageUuidOrDatabaseUri": "6daff7ce-fb60-498c-8a02-d8fb2af3ff55",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "1f4b43bf-233d-4ded-b5ef-00bbd5d31f46@f9941",
+      "uuid": "6daff7ce-fb60-498c-8a02-d8fb2af3ff55@f9941",
       "displayName": "zuanshi_dk",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "1f4b43bf-233d-4ded-b5ef-00bbd5d31f46@6c48a",
+        "imageUuidOrDatabaseUri": "6daff7ce-fb60-498c-8a02-d8fb2af3ff55@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "1f4b43bf-233d-4ded-b5ef-00bbd5d31f46@f9941",
+    "redirect": "6daff7ce-fb60-498c-8a02-d8fb2af3ff55@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

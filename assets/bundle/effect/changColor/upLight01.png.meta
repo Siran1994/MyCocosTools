@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "ef4f8846-c00c-4eb3-b239-8958e591b292",
+  "uuid": "9da15bd9-e812-4b5c-ab65-bd6fc3c40e43",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "ef4f8846-c00c-4eb3-b239-8958e591b292@6c48a",
+      "uuid": "9da15bd9-e812-4b5c-ab65-bd6fc3c40e43@6c48a",
       "displayName": "upLight01",
       "id": "6c48a",
       "name": "texture",
@@ -23,7 +23,7 @@
         "premultiplyAlpha": false,
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "ef4f8846-c00c-4eb3-b239-8958e591b292",
+        "imageUuidOrDatabaseUri": "9da15bd9-e812-4b5c-ab65-bd6fc3c40e43",
         "visible": true
       },
       "ver": "1.0.22",
@@ -36,7 +36,7 @@
   },
   "userData": {
     "type": "texture",
-    "redirect": "ef4f8846-c00c-4eb3-b239-8958e591b292@6c48a",
+    "redirect": "9da15bd9-e812-4b5c-ab65-bd6fc3c40e43@6c48a",
     "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false
   }

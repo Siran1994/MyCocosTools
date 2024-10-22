@@ -2,12 +2,12 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "f166884a-7945-4fe9-850d-2d84ae92b5b1",
+  "uuid": "83c32d90-1853-4c8c-ae73-c97fbd1557a6",
   "files": [],
   "subMetas": {
     "e114c": {
       "importer": "gltf-mesh",
-      "uuid": "f166884a-7945-4fe9-850d-2d84ae92b5b1@e114c",
+      "uuid": "83c32d90-1853-4c8c-ae73-c97fbd1557a6@e114c",
       "displayName": "",
       "id": "e114c",
       "name": "Box021.mesh",
@@ -24,7 +24,7 @@
     },
     "0c7c5": {
       "importer": "gltf-scene",
-      "uuid": "f166884a-7945-4fe9-850d-2d84ae92b5b1@0c7c5",
+      "uuid": "83c32d90-1853-4c8c-ae73-c97fbd1557a6@0c7c5",
       "displayName": "",
       "id": "0c7c5",
       "name": "方体.prefab",
@@ -44,16 +44,16 @@
     "fbx": {
       "smartMaterialEnabled": true
     },
-    "redirect": "f166884a-7945-4fe9-850d-2d84ae92b5b1@0c7c5",
+    "redirect": "83c32d90-1853-4c8c-ae73-c97fbd1557a6@0c7c5",
     "assetFinder": {
       "meshes": [
-        "f166884a-7945-4fe9-850d-2d84ae92b5b1@e114c"
+        "83c32d90-1853-4c8c-ae73-c97fbd1557a6@e114c"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "f166884a-7945-4fe9-850d-2d84ae92b5b1@0c7c5"
+        "83c32d90-1853-4c8c-ae73-c97fbd1557a6@0c7c5"
       ]
     }
   }

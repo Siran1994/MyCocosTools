@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "a65307c6-d886-473f-a235-942e1171849d",
+  "uuid": "d904f5e2-1eab-4419-8363-c980a4f2ccfb",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "a65307c6-d886-473f-a235-942e1171849d@6c48a",
+      "uuid": "d904f5e2-1eab-4419-8363-c980a4f2ccfb@6c48a",
       "displayName": "枪口火焰",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "a65307c6-d886-473f-a235-942e1171849d",
+        "imageUuidOrDatabaseUri": "d904f5e2-1eab-4419-8363-c980a4f2ccfb",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "a65307c6-d886-473f-a235-942e1171849d@6c48a",
+    "redirect": "d904f5e2-1eab-4419-8363-c980a4f2ccfb@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

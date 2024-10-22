@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "e07ea6cb-ce08-4bf4-a81f-5f22dd91070f",
+  "uuid": "eb361bfb-db78-4b7b-bcc7-7dd99dd59828",
   "files": [
     ".jpg",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "e07ea6cb-ce08-4bf4-a81f-5f22dd91070f@6c48a",
+      "uuid": "eb361bfb-db78-4b7b-bcc7-7dd99dd59828@6c48a",
       "displayName": "yanjin",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e07ea6cb-ce08-4bf4-a81f-5f22dd91070f",
+        "imageUuidOrDatabaseUri": "eb361bfb-db78-4b7b-bcc7-7dd99dd59828",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
     "type": "texture",
-    "redirect": "e07ea6cb-ce08-4bf4-a81f-5f22dd91070f@6c48a",
+    "redirect": "eb361bfb-db78-4b7b-bcc7-7dd99dd59828@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

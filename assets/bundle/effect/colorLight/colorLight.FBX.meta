@@ -2,12 +2,12 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "135e73d3-3940-43c5-9b21-2cef93f68a98",
+  "uuid": "e1d49cb2-f661-4811-8179-6ce36eb18dd4",
   "files": [],
   "subMetas": {
     "d043b": {
       "importer": "gltf-mesh",
-      "uuid": "135e73d3-3940-43c5-9b21-2cef93f68a98@d043b",
+      "uuid": "e1d49cb2-f661-4811-8179-6ce36eb18dd4@d043b",
       "displayName": "",
       "id": "d043b",
       "name": "colorLight.mesh",
@@ -25,7 +25,7 @@
     },
     "65c50": {
       "importer": "gltf-scene",
-      "uuid": "135e73d3-3940-43c5-9b21-2cef93f68a98@65c50",
+      "uuid": "e1d49cb2-f661-4811-8179-6ce36eb18dd4@65c50",
       "displayName": "",
       "id": "65c50",
       "name": "colorLight.prefab",
@@ -46,18 +46,18 @@
     "dumpMaterials": true,
     "disableMeshSplit": true,
     "materialDumpDir": "db://assets/res/model/map/mechanism/colorLight",
-    "redirect": "135e73d3-3940-43c5-9b21-2cef93f68a98@65c50",
+    "redirect": "e1d49cb2-f661-4811-8179-6ce36eb18dd4@65c50",
     "assetFinder": {
       "meshes": [
-        "135e73d3-3940-43c5-9b21-2cef93f68a98@d043b"
+        "e1d49cb2-f661-4811-8179-6ce36eb18dd4@d043b"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [
-        "e197a2cf-5e9b-48e4-b654-eeefaf1af0bf"
+        "3a4b112a-60a7-43f7-a604-1794200ab720"
       ],
       "scenes": [
-        "135e73d3-3940-43c5-9b21-2cef93f68a98@65c50"
+        "e1d49cb2-f661-4811-8179-6ce36eb18dd4@65c50"
       ]
     },
     "fbx": {

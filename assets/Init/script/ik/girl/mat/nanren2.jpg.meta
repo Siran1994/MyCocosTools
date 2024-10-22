@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "97db1233-fb6c-4718-81b4-5cd85e6e05ff",
+  "uuid": "9853601b-8e60-449a-8a2f-dfe0874a2c88",
   "files": [
     ".jpg",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "97db1233-fb6c-4718-81b4-5cd85e6e05ff@6c48a",
+      "uuid": "9853601b-8e60-449a-8a2f-dfe0874a2c88@6c48a",
       "displayName": "nanren2",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "97db1233-fb6c-4718-81b4-5cd85e6e05ff",
+        "imageUuidOrDatabaseUri": "9853601b-8e60-449a-8a2f-dfe0874a2c88",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
     "type": "texture",
-    "redirect": "97db1233-fb6c-4718-81b4-5cd85e6e05ff@6c48a",
+    "redirect": "9853601b-8e60-449a-8a2f-dfe0874a2c88@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

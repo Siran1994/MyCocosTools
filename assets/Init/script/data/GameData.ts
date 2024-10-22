@@ -137,4 +137,22 @@ export class GameData
     {
         PlayerPrefs.SetInt( 'SignDay', value );
     }
+
+    static get SpiderLv ()//签到日期
+    {
+        return PlayerPrefs.GetInt( 'SpiderLv', 0 );
+    }
+    static set SpiderLv ( value: number )
+    {
+        PlayerPrefs.SetInt( 'SpiderLv', value );
+    }
+
+    static get SpeedLv ()//签到日期
+    {
+        return PlayerPrefs.GetInt( 'SpeedLv', 0 );
+    }
+    static set SpeedLv ( value: number )
+    {
+        PlayerPrefs.SetInt( 'SpeedLv', value );
+    }
 }

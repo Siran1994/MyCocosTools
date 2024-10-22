@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "d0e80fbd-9e86-4894-9418-4c3045d47ec5",
+  "uuid": "501b1190-0a41-4c99-8601-5a1ecedb67de",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "d0e80fbd-9e86-4894-9418-4c3045d47ec5@6c48a",
+      "uuid": "501b1190-0a41-4c99-8601-5a1ecedb67de@6c48a",
       "displayName": "枪",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d0e80fbd-9e86-4894-9418-4c3045d47ec5",
+        "imageUuidOrDatabaseUri": "501b1190-0a41-4c99-8601-5a1ecedb67de",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
     "type": "texture",
-    "redirect": "d0e80fbd-9e86-4894-9418-4c3045d47ec5@6c48a",
+    "redirect": "501b1190-0a41-4c99-8601-5a1ecedb67de@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

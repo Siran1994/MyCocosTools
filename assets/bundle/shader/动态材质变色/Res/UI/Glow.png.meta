@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "af0a8824-02c6-4ec7-a5c7-881468bac95d",
+  "uuid": "0249869c-3ac0-4d27-8f8c-f8e11b4cb1a2",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "af0a8824-02c6-4ec7-a5c7-881468bac95d@6c48a",
+      "uuid": "0249869c-3ac0-4d27-8f8c-f8e11b4cb1a2@6c48a",
       "displayName": "Glow",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "af0a8824-02c6-4ec7-a5c7-881468bac95d",
+        "imageUuidOrDatabaseUri": "0249869c-3ac0-4d27-8f8c-f8e11b4cb1a2",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "af0a8824-02c6-4ec7-a5c7-881468bac95d@f9941",
+      "uuid": "0249869c-3ac0-4d27-8f8c-f8e11b4cb1a2@f9941",
       "displayName": "Glow",
       "id": "f9941",
       "name": "spriteFrame",
@@ -56,7 +56,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "af0a8824-02c6-4ec7-a5c7-881468bac95d@6c48a",
+        "imageUuidOrDatabaseUri": "0249869c-3ac0-4d27-8f8c-f8e11b4cb1a2@6c48a",
         "atlasUuid": "",
         "pixelsToUnit": 100,
         "pivotX": 0.5,
@@ -128,7 +128,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "af0a8824-02c6-4ec7-a5c7-881468bac95d@f9941",
+    "redirect": "0249869c-3ac0-4d27-8f8c-f8e11b4cb1a2@f9941",
     "fixAlphaTransparencyArtifacts": false
   }
 }
