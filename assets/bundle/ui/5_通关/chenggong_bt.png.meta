@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "d9847201-91c4-4fcd-a0fa-4f630afa9938",
+  "uuid": "94a90e0c-d18e-465b-86b9-793b32d85ab9",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "d9847201-91c4-4fcd-a0fa-4f630afa9938@6c48a",
+      "uuid": "94a90e0c-d18e-465b-86b9-793b32d85ab9@6c48a",
       "displayName": "chenggong_bt",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d9847201-91c4-4fcd-a0fa-4f630afa9938",
+        "imageUuidOrDatabaseUri": "94a90e0c-d18e-465b-86b9-793b32d85ab9",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "d9847201-91c4-4fcd-a0fa-4f630afa9938@f9941",
+      "uuid": "94a90e0c-d18e-465b-86b9-793b32d85ab9@f9941",
       "displayName": "chenggong_bt",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d9847201-91c4-4fcd-a0fa-4f630afa9938@6c48a",
+        "imageUuidOrDatabaseUri": "94a90e0c-d18e-465b-86b9-793b32d85ab9@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "d9847201-91c4-4fcd-a0fa-4f630afa9938@f9941",
+    "redirect": "94a90e0c-d18e-465b-86b9-793b32d85ab9@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

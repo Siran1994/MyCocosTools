@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "d8769dd1-faa7-4bd0-ab8b-30281a805af0",
+  "uuid": "851afbba-9270-4aad-88fa-66043bd8b07b",
   "files": [
     ".json",
     ".png"
@@ -11,7 +11,7 @@
     "6c48a": {
       "ver": "1.0.22",
       "importer": "texture",
-      "uuid": "d8769dd1-faa7-4bd0-ab8b-30281a805af0@6c48a",
+      "uuid": "851afbba-9270-4aad-88fa-66043bd8b07b@6c48a",
       "imported": true,
       "files": [
         ".json"
@@ -26,7 +26,7 @@
         "premultiplyAlpha": false,
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "d8769dd1-faa7-4bd0-ab8b-30281a805af0",
+        "imageUuidOrDatabaseUri": "851afbba-9270-4aad-88fa-66043bd8b07b",
         "visible": true
       },
       "displayName": "trailModule01",
@@ -36,7 +36,7 @@
   },
   "userData": {
     "type": "texture",
-    "redirect": "d8769dd1-faa7-4bd0-ab8b-30281a805af0@6c48a",
+    "redirect": "851afbba-9270-4aad-88fa-66043bd8b07b@6c48a",
     "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false
   }

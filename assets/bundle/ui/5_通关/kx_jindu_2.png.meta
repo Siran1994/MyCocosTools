@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "5a24d305-cb2c-4d9d-bda4-f697bced6bee",
+  "uuid": "d04cbb6b-f1c5-44e6-90fe-9d745ca36977",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "5a24d305-cb2c-4d9d-bda4-f697bced6bee@6c48a",
+      "uuid": "d04cbb6b-f1c5-44e6-90fe-9d745ca36977@6c48a",
       "displayName": "kx_jindu_2",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5a24d305-cb2c-4d9d-bda4-f697bced6bee",
+        "imageUuidOrDatabaseUri": "d04cbb6b-f1c5-44e6-90fe-9d745ca36977",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "5a24d305-cb2c-4d9d-bda4-f697bced6bee@f9941",
+      "uuid": "d04cbb6b-f1c5-44e6-90fe-9d745ca36977@f9941",
       "displayName": "kx_jindu_2",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5a24d305-cb2c-4d9d-bda4-f697bced6bee@6c48a",
+        "imageUuidOrDatabaseUri": "d04cbb6b-f1c5-44e6-90fe-9d745ca36977@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "5a24d305-cb2c-4d9d-bda4-f697bced6bee@f9941",
+    "redirect": "d04cbb6b-f1c5-44e6-90fe-9d745ca36977@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

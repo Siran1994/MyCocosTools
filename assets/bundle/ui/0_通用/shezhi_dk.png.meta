@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "8ebd2afa-7ef1-44bf-b8d2-32cce5b794b3",
+  "uuid": "9dc4e0f7-6bd2-4ff3-9a2c-122fada54b74",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "8ebd2afa-7ef1-44bf-b8d2-32cce5b794b3@6c48a",
+      "uuid": "9dc4e0f7-6bd2-4ff3-9a2c-122fada54b74@6c48a",
       "displayName": "shezhi_dk",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "8ebd2afa-7ef1-44bf-b8d2-32cce5b794b3",
+        "imageUuidOrDatabaseUri": "9dc4e0f7-6bd2-4ff3-9a2c-122fada54b74",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "8ebd2afa-7ef1-44bf-b8d2-32cce5b794b3@f9941",
+      "uuid": "9dc4e0f7-6bd2-4ff3-9a2c-122fada54b74@f9941",
       "displayName": "shezhi_dk",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "8ebd2afa-7ef1-44bf-b8d2-32cce5b794b3@6c48a",
+        "imageUuidOrDatabaseUri": "9dc4e0f7-6bd2-4ff3-9a2c-122fada54b74@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "8ebd2afa-7ef1-44bf-b8d2-32cce5b794b3@f9941",
+    "redirect": "9dc4e0f7-6bd2-4ff3-9a2c-122fada54b74@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

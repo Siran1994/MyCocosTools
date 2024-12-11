@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "9c68feab-1f1e-4367-b815-2001cac2ea71",
+  "uuid": "e5af51c6-dcc4-424f-a59b-4af7b44a8a6e",
   "files": [
     ".jpg",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "9c68feab-1f1e-4367-b815-2001cac2ea71@6c48a",
+      "uuid": "e5af51c6-dcc4-424f-a59b-4af7b44a8a6e@6c48a",
       "displayName": "refletMatCap",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9c68feab-1f1e-4367-b815-2001cac2ea71",
+        "imageUuidOrDatabaseUri": "e5af51c6-dcc4-424f-a59b-4af7b44a8a6e",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "type": "texture",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
-    "redirect": "9c68feab-1f1e-4367-b815-2001cac2ea71@6c48a"
+    "redirect": "e5af51c6-dcc4-424f-a59b-4af7b44a8a6e@6c48a"
   }
 }

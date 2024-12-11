@@ -576,9 +576,9 @@ export default class DOTweenAnimation
      * @param extraDec_F 文本框数字前面额外文字
      * @param extraDec_B 文本框数字后面额外文字
      */
-    public static stepNumProgress ( textLab: Sprite, startNum: number, interNum: number, endNum: number, delayTime?: number, extraDec_B?: string, fun?: Function )
+    public static stepNumProgress ( progress: Sprite, startNum: number, interNum: number, endNum: number, delayTime?: number, extraDec_B?: string, fun?: Function )
     {
-        return tween( textLab )
+        return tween( progress )
             .sequence(
                 tween().call( () =>
                 {
@@ -588,7 +588,7 @@ export default class DOTweenAnimation
                         startNum = endNum;
                         fun && fun();
                     }
-                    textLab.fillStart = startNum;
+                    progress.fillStart = startNum;
                 } ),
                 tween().delay( delayTime )
             )
@@ -604,9 +604,9 @@ export default class DOTweenAnimation
      * @param extraDec_F 文本框数字前面额外文字
      * @param extraDec_B 文本框数字后面额外文字
      */
-    public static stepNumProgressFly ( textLab: ProgressBar, startNum: number, interNum: number, endNum: number, delayTime?: number, fun?: Function )
+    public static stepNumProgressFly ( progress: ProgressBar, startNum: number, interNum: number, endNum: number, delayTime?: number, fun?: Function )
     {
-        return tween( textLab )
+        return tween( progress )
             .sequence(
                 tween().call( () =>
                 {
@@ -616,7 +616,7 @@ export default class DOTweenAnimation
                         startNum = endNum;
                         fun && fun();
                     }
-                    textLab.progress = startNum;
+                    progress.progress = startNum;
                 } ),
                 tween().delay( delayTime )
             )
@@ -746,5 +746,16 @@ export default class DOTweenAnimation
             callBack && callBack();
             console.error( aniNode.name, "未找到 sprite 组件" );
         }
+    }
+
+    public static MoveTo ( target: Node, duration: number, endVal: Vec3, fun?: Function )
+    {
+        tween( target ).to( duration, { position: endVal }, { easing: "linear" } )
+            .call( () =>
+            {
+                if ( fun )
+                    fun();
+            } )
+            .start()
     }
 }

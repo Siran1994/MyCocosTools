@@ -2,12 +2,12 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "e0f4f401-f85f-40f7-9edd-91a2975d1e85",
+  "uuid": "5868e61c-f0cc-41b9-8bfd-646506a1bf18",
   "files": [],
   "subMetas": {
     "9a32c": {
       "importer": "gltf-mesh",
-      "uuid": "e0f4f401-f85f-40f7-9edd-91a2975d1e85@9a32c",
+      "uuid": "5868e61c-f0cc-41b9-8bfd-646506a1bf18@9a32c",
       "displayName": "",
       "id": "9a32c",
       "name": "pi.mesh",
@@ -24,7 +24,7 @@
     },
     "2f22c": {
       "importer": "gltf-scene",
-      "uuid": "e0f4f401-f85f-40f7-9edd-91a2975d1e85@2f22c",
+      "uuid": "5868e61c-f0cc-41b9-8bfd-646506a1bf18@2f22c",
       "displayName": "",
       "id": "2f22c",
       "name": "line.prefab",
@@ -42,16 +42,16 @@
   "userData": {
     "imageMetas": [],
     "legacyFbxImporter": false,
-    "redirect": "e0f4f401-f85f-40f7-9edd-91a2975d1e85@2f22c",
+    "redirect": "5868e61c-f0cc-41b9-8bfd-646506a1bf18@2f22c",
     "assetFinder": {
       "meshes": [
-        "e0f4f401-f85f-40f7-9edd-91a2975d1e85@9a32c"
+        "5868e61c-f0cc-41b9-8bfd-646506a1bf18@9a32c"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "e0f4f401-f85f-40f7-9edd-91a2975d1e85@2f22c"
+        "5868e61c-f0cc-41b9-8bfd-646506a1bf18@2f22c"
       ]
     },
     "fbx": {

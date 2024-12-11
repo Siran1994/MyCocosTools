@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "9853601b-8e60-449a-8a2f-dfe0874a2c88",
+  "uuid": "0b89d12f-fd4b-45df-a32f-7d17d0ec3c2e",
   "files": [
     ".jpg",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "9853601b-8e60-449a-8a2f-dfe0874a2c88@6c48a",
+      "uuid": "0b89d12f-fd4b-45df-a32f-7d17d0ec3c2e@6c48a",
       "displayName": "nanren2",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "9853601b-8e60-449a-8a2f-dfe0874a2c88",
+        "imageUuidOrDatabaseUri": "0b89d12f-fd4b-45df-a32f-7d17d0ec3c2e",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
     "type": "texture",
-    "redirect": "9853601b-8e60-449a-8a2f-dfe0874a2c88@6c48a",
+    "redirect": "0b89d12f-fd4b-45df-a32f-7d17d0ec3c2e@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "407e7bc0-b791-4368-bc0a-af59773b31d6",
+  "uuid": "ccc3e49f-3d08-4735-b94a-ed0041c051e1",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "407e7bc0-b791-4368-bc0a-af59773b31d6@6c48a",
+      "uuid": "ccc3e49f-3d08-4735-b94a-ed0041c051e1@6c48a",
       "displayName": "thingSmoke1",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "linear",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "407e7bc0-b791-4368-bc0a-af59773b31d6",
+        "imageUuidOrDatabaseUri": "ccc3e49f-3d08-4735-b94a-ed0041c051e1",
         "visible": true
       },
       "ver": "1.0.22",
@@ -36,7 +36,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "407e7bc0-b791-4368-bc0a-af59773b31d6@6c48a",
+    "redirect": "ccc3e49f-3d08-4735-b94a-ed0041c051e1@6c48a",
     "fixAlphaTransparencyArtifacts": false
   }
 }

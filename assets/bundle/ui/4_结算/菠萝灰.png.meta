@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "a656fee4-b91e-4dc8-add5-24afe6a4ec59",
+  "uuid": "7726de2a-aa11-419f-a3d3-7362ca1e64f5",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "a656fee4-b91e-4dc8-add5-24afe6a4ec59@6c48a",
+      "uuid": "7726de2a-aa11-419f-a3d3-7362ca1e64f5@6c48a",
       "displayName": "菠萝灰",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "a656fee4-b91e-4dc8-add5-24afe6a4ec59",
+        "imageUuidOrDatabaseUri": "7726de2a-aa11-419f-a3d3-7362ca1e64f5",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "a656fee4-b91e-4dc8-add5-24afe6a4ec59@f9941",
+      "uuid": "7726de2a-aa11-419f-a3d3-7362ca1e64f5@f9941",
       "displayName": "菠萝灰",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "a656fee4-b91e-4dc8-add5-24afe6a4ec59@6c48a",
+        "imageUuidOrDatabaseUri": "7726de2a-aa11-419f-a3d3-7362ca1e64f5@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "a656fee4-b91e-4dc8-add5-24afe6a4ec59@f9941",
+    "redirect": "7726de2a-aa11-419f-a3d3-7362ca1e64f5@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

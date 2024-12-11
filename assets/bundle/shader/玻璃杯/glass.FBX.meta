@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b",
+  "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "26775": {
       "importer": "gltf-scene",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@26775",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@26775",
       "displayName": "",
       "id": "26775",
       "name": "glass.prefab",
@@ -25,7 +25,7 @@
     },
     "67067": {
       "importer": "gltf-material",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@67067",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@67067",
       "displayName": "",
       "id": "67067",
       "name": "blinn1SG.material",
@@ -41,7 +41,7 @@
     },
     "ba1aa": {
       "importer": "gltf-mesh",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@ba1aa",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@ba1aa",
       "displayName": "",
       "id": "ba1aa",
       "name": "Object_2.mesh",
@@ -58,7 +58,7 @@
     },
     "9888b": {
       "importer": "gltf-mesh",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@9888b",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@9888b",
       "displayName": "",
       "id": "9888b",
       "name": "Object_3.mesh",
@@ -75,7 +75,7 @@
     },
     "e1aed": {
       "importer": "gltf-mesh",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@e1aed",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@e1aed",
       "displayName": "",
       "id": "e1aed",
       "name": "Object_4.mesh",
@@ -92,7 +92,7 @@
     },
     "73b7f": {
       "importer": "gltf-animation",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@73b7f",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@73b7f",
       "displayName": "",
       "id": "73b7f",
       "name": "Take 001.animation",
@@ -115,7 +115,7 @@
     },
     "5e49e": {
       "importer": "gltf-embeded-image",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@5e49e",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@5e49e",
       "displayName": "",
       "id": "5e49e",
       "name": "base_color_texture-0.image",
@@ -132,7 +132,7 @@
     },
     "ef396": {
       "importer": "gltf-embeded-image",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@ef396",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@ef396",
       "displayName": "",
       "id": "ef396",
       "name": "base_color_texture-1.image",
@@ -149,7 +149,7 @@
     },
     "0a1ef": {
       "importer": "texture",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@0a1ef",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@0a1ef",
       "displayName": "",
       "id": "0a1ef",
       "name": "base_color_texture-0.texture",
@@ -161,7 +161,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "315b805f-77bb-41ae-8bd4-68f94816dc6b@5e49e"
+        "imageUuidOrDatabaseUri": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@5e49e"
       },
       "ver": "1.0.22",
       "imported": true,
@@ -172,7 +172,7 @@
     },
     "05da8": {
       "importer": "texture",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@05da8",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@05da8",
       "displayName": "",
       "id": "05da8",
       "name": "base_color_texture-1.texture",
@@ -184,7 +184,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "315b805f-77bb-41ae-8bd4-68f94816dc6b@ef396"
+        "imageUuidOrDatabaseUri": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@ef396"
       },
       "ver": "1.0.22",
       "imported": true,
@@ -195,7 +195,7 @@
     },
     "4ba61": {
       "importer": "gltf-material",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@4ba61",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@4ba61",
       "displayName": "",
       "id": "4ba61",
       "name": "anisotropic1SG.material",
@@ -211,7 +211,7 @@
     },
     "fbc5c": {
       "importer": "gltf-material",
-      "uuid": "315b805f-77bb-41ae-8bd4-68f94816dc6b@fbc5c",
+      "uuid": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@fbc5c",
       "displayName": "",
       "id": "fbc5c",
       "name": "lambert2SG.material",
@@ -230,11 +230,11 @@
     "imageMetas": [
       {
         "name": "base_color_texture",
-        "uri": "315b805f-77bb-41ae-8bd4-68f94816dc6b@5e49e"
+        "uri": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@5e49e"
       },
       {
         "name": "base_color_texture",
-        "uri": "315b805f-77bb-41ae-8bd4-68f94816dc6b@ef396"
+        "uri": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@ef396"
       }
     ],
     "legacyFbxImporter": false,
@@ -253,25 +253,25 @@
         ]
       }
     ],
-    "redirect": "315b805f-77bb-41ae-8bd4-68f94816dc6b@26775",
+    "redirect": "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@26775",
     "assetFinder": {
       "meshes": [
-        "315b805f-77bb-41ae-8bd4-68f94816dc6b@ba1aa",
-        "315b805f-77bb-41ae-8bd4-68f94816dc6b@9888b",
-        "315b805f-77bb-41ae-8bd4-68f94816dc6b@e1aed"
+        "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@ba1aa",
+        "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@9888b",
+        "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@e1aed"
       ],
       "skeletons": [],
       "textures": [
-        "315b805f-77bb-41ae-8bd4-68f94816dc6b@0a1ef",
-        "315b805f-77bb-41ae-8bd4-68f94816dc6b@05da8"
+        "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@0a1ef",
+        "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@05da8"
       ],
       "materials": [
-        "315b805f-77bb-41ae-8bd4-68f94816dc6b@4ba61",
-        "315b805f-77bb-41ae-8bd4-68f94816dc6b@67067",
-        "315b805f-77bb-41ae-8bd4-68f94816dc6b@fbc5c"
+        "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@4ba61",
+        "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@67067",
+        "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@fbc5c"
       ],
       "scenes": [
-        "315b805f-77bb-41ae-8bd4-68f94816dc6b@26775"
+        "84eb9c70-5122-4ddc-a923-0db2bc6b4ab4@26775"
       ]
     },
     "fbx": {

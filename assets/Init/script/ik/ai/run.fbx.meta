@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "4246e830-cc1b-4d74-a7fa-3ba309ea8a75",
+  "uuid": "57dc0bfc-eb84-45e8-99fa-ef0b743a0754",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "cf5ee": {
       "importer": "gltf-animation",
-      "uuid": "4246e830-cc1b-4d74-a7fa-3ba309ea8a75@cf5ee",
+      "uuid": "57dc0bfc-eb84-45e8-99fa-ef0b743a0754@cf5ee",
       "displayName": "",
       "id": "cf5ee",
       "name": "run.animation",
@@ -39,7 +39,7 @@
     },
     "1471e": {
       "importer": "gltf-scene",
-      "uuid": "4246e830-cc1b-4d74-a7fa-3ba309ea8a75@1471e",
+      "uuid": "57dc0bfc-eb84-45e8-99fa-ef0b743a0754@1471e",
       "displayName": "",
       "id": "1471e",
       "name": "run.prefab",
@@ -74,14 +74,14 @@
         ]
       }
     ],
-    "redirect": "4246e830-cc1b-4d74-a7fa-3ba309ea8a75@1471e",
+    "redirect": "57dc0bfc-eb84-45e8-99fa-ef0b743a0754@1471e",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "4246e830-cc1b-4d74-a7fa-3ba309ea8a75@1471e"
+        "57dc0bfc-eb84-45e8-99fa-ef0b743a0754@1471e"
       ]
     }
   }

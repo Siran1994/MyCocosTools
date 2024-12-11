@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "a5c4c0d1-af6d-4090-80cb-047c0bf73a2a",
+  "uuid": "8b2e0475-a04f-43fa-b835-f7c77e53744d",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "96058": {
       "importer": "gltf-scene",
-      "uuid": "a5c4c0d1-af6d-4090-80cb-047c0bf73a2a@96058",
+      "uuid": "8b2e0475-a04f-43fa-b835-f7c77e53744d@96058",
       "displayName": "",
       "id": "96058",
       "name": "受击.prefab",
@@ -25,7 +25,7 @@
     },
     "79e35": {
       "importer": "gltf-animation",
-      "uuid": "a5c4c0d1-af6d-4090-80cb-047c0bf73a2a@79e35",
+      "uuid": "8b2e0475-a04f-43fa-b835-f7c77e53744d@79e35",
       "displayName": "",
       "id": "79e35",
       "name": "hit.animation",
@@ -67,14 +67,14 @@
         ]
       }
     ],
-    "redirect": "a5c4c0d1-af6d-4090-80cb-047c0bf73a2a@96058",
+    "redirect": "8b2e0475-a04f-43fa-b835-f7c77e53744d@96058",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "a5c4c0d1-af6d-4090-80cb-047c0bf73a2a@96058"
+        "8b2e0475-a04f-43fa-b835-f7c77e53744d@96058"
       ]
     }
   }

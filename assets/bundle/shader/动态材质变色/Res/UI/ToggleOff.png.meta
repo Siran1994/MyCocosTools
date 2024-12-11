@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "bf248d3a-c85b-42ac-98ee-7b4c774d9eb1",
+  "uuid": "fe6e5bb5-8dc0-4413-b7b7-3056b058bc7a",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "bf248d3a-c85b-42ac-98ee-7b4c774d9eb1@6c48a",
+      "uuid": "fe6e5bb5-8dc0-4413-b7b7-3056b058bc7a@6c48a",
       "displayName": "ToggleOff",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "bf248d3a-c85b-42ac-98ee-7b4c774d9eb1",
+        "imageUuidOrDatabaseUri": "fe6e5bb5-8dc0-4413-b7b7-3056b058bc7a",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "bf248d3a-c85b-42ac-98ee-7b4c774d9eb1@f9941",
+      "uuid": "fe6e5bb5-8dc0-4413-b7b7-3056b058bc7a@f9941",
       "displayName": "ToggleOff",
       "id": "f9941",
       "name": "spriteFrame",
@@ -56,7 +56,7 @@
         "borderRight": 0,
         "packable": true,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "bf248d3a-c85b-42ac-98ee-7b4c774d9eb1@6c48a",
+        "imageUuidOrDatabaseUri": "fe6e5bb5-8dc0-4413-b7b7-3056b058bc7a@6c48a",
         "atlasUuid": "",
         "pixelsToUnit": 100,
         "pivotX": 0.5,
@@ -128,7 +128,7 @@
   "userData": {
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "bf248d3a-c85b-42ac-98ee-7b4c774d9eb1@f9941",
+    "redirect": "fe6e5bb5-8dc0-4413-b7b7-3056b058bc7a@f9941",
     "fixAlphaTransparencyArtifacts": false
   }
 }

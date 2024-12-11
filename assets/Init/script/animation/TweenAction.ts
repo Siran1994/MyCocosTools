@@ -104,8 +104,7 @@ export class TweenAction extends Component
         if ( this.target == null )
             this.target = this.node;
         let opts = {};
-        opts[ "easing" ] = Ease[ this.ease ].toString();
-
+        opts[ "easing" ] = Ease[ this.ease ];
 
         if ( this.repeat == -1 )
             this.isLoop = true;

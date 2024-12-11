@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "89e896b9-4e7f-4cdc-a62a-9f22c3660e81",
+  "uuid": "0c55250b-4ddc-4aee-97ae-15173daea47b",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "ee525": {
       "importer": "gltf-animation",
-      "uuid": "89e896b9-4e7f-4cdc-a62a-9f22c3660e81@ee525",
+      "uuid": "0c55250b-4ddc-4aee-97ae-15173daea47b@ee525",
       "displayName": "",
       "id": "ee525",
       "name": "win.animation",
@@ -32,7 +32,7 @@
     },
     "f567a": {
       "importer": "gltf-scene",
-      "uuid": "89e896b9-4e7f-4cdc-a62a-9f22c3660e81@f567a",
+      "uuid": "0c55250b-4ddc-4aee-97ae-15173daea47b@f567a",
       "displayName": "",
       "id": "f567a",
       "name": "胜利.prefab",
@@ -67,14 +67,14 @@
         ]
       }
     ],
-    "redirect": "89e896b9-4e7f-4cdc-a62a-9f22c3660e81@f567a",
+    "redirect": "0c55250b-4ddc-4aee-97ae-15173daea47b@f567a",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "89e896b9-4e7f-4cdc-a62a-9f22c3660e81@f567a"
+        "0c55250b-4ddc-4aee-97ae-15173daea47b@f567a"
       ]
     }
   }

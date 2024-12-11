@@ -37,8 +37,8 @@ export class IkTool extends Component
     lateUpdate ( deltaTime: number )
     {
         this._headFollow( this.Target );
-        this._handFollow( deltaTime, this.LeftHand, new Vec3( this.l_target.worldPosition ), this.l_angle );
-        this._handFollow( deltaTime, this.RightHand, new Vec3( this.r_target.worldPosition ), this.r_angle );
+        // this._handFollow( deltaTime, this.LeftHand, new Vec3( this.l_target.worldPosition ), this.l_angle );
+        // this._handFollow( deltaTime, this.RightHand, new Vec3( this.r_target.worldPosition ), this.r_angle );
     }
 
     _handFollow ( deltaTime: number, _hand: Node, targetPos: Vec3, angle: Vec3 )

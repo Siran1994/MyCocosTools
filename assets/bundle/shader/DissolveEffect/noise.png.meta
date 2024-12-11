@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "84213b0f-7ddd-4b01-bfe1-1e5d3dce63a6",
+  "uuid": "7ddab9d1-46fd-4770-a1ce-0502569e064d",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "84213b0f-7ddd-4b01-bfe1-1e5d3dce63a6@6c48a",
+      "uuid": "7ddab9d1-46fd-4770-a1ce-0502569e064d@6c48a",
       "displayName": "noise",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "84213b0f-7ddd-4b01-bfe1-1e5d3dce63a6",
+        "imageUuidOrDatabaseUri": "7ddab9d1-46fd-4770-a1ce-0502569e064d",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "type": "texture",
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
-    "redirect": "84213b0f-7ddd-4b01-bfe1-1e5d3dce63a6@6c48a"
+    "redirect": "7ddab9d1-46fd-4770-a1ce-0502569e064d@6c48a"
   }
 }

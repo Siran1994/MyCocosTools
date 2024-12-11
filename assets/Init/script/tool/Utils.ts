@@ -223,6 +223,29 @@ export class Utils
         return shuffledArray;
     }
 
+    //指定范围内随机输出一个数,不包含指定数
+    public static getRandomInRangeExcluding ( min: number, max: number, exclude: number ): number
+    {
+        if ( min > max )
+            throw new Error( "最小值不能大于最大值" );
+
+        // 创建一个包含在范围内的数组，排除指定的数  
+        const range: number[] = [];
+        for ( let i = min; i <= max; i++ )
+        {
+            if ( i !== exclude )
+            {
+                range.push( i );
+            }
+        }
+        // 检查是否还有可用的数字  
+        if ( range.length === 0 )
+            throw new Error( "没有可用的随机数" );
+        // 从数组中随机选择一个数  
+        const randomIndex = Math.floor( Math.random() * range.length );
+        return range[ randomIndex ];
+    }
+
     public static random ( min, max )
     {
         var r = Math.random();

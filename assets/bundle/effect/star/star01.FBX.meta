@@ -2,12 +2,12 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "a2bc9be0-fd15-4806-ac6c-1789ef6d8b39",
+  "uuid": "2b57cf41-8fa2-4360-a4bc-cefa65bba0f8",
   "files": [],
   "subMetas": {
     "c6026": {
       "importer": "gltf-mesh",
-      "uuid": "a2bc9be0-fd15-4806-ac6c-1789ef6d8b39@c6026",
+      "uuid": "2b57cf41-8fa2-4360-a4bc-cefa65bba0f8@c6026",
       "displayName": "",
       "id": "c6026",
       "name": "star01.mesh",
@@ -24,7 +24,7 @@
     },
     "006b8": {
       "importer": "gltf-scene",
-      "uuid": "a2bc9be0-fd15-4806-ac6c-1789ef6d8b39@006b8",
+      "uuid": "2b57cf41-8fa2-4360-a4bc-cefa65bba0f8@006b8",
       "displayName": "",
       "id": "006b8",
       "name": "star01.prefab",
@@ -45,18 +45,18 @@
     "dumpMaterials": true,
     "disableMeshSplit": true,
     "materialDumpDir": "db://assets/resources/effect/star",
-    "redirect": "a2bc9be0-fd15-4806-ac6c-1789ef6d8b39@006b8",
+    "redirect": "2b57cf41-8fa2-4360-a4bc-cefa65bba0f8@006b8",
     "assetFinder": {
       "meshes": [
-        "a2bc9be0-fd15-4806-ac6c-1789ef6d8b39@c6026"
+        "2b57cf41-8fa2-4360-a4bc-cefa65bba0f8@c6026"
       ],
       "skeletons": [],
       "textures": [],
       "materials": [
-        "103c4862-1795-4830-84a3-bcabec3b84cf"
+        "7b4a7ec0-b3c6-45bf-bb18-aeb1ef8a25a1"
       ],
       "scenes": [
-        "a2bc9be0-fd15-4806-ac6c-1789ef6d8b39@006b8"
+        "2b57cf41-8fa2-4360-a4bc-cefa65bba0f8@006b8"
       ]
     },
     "fbx": {

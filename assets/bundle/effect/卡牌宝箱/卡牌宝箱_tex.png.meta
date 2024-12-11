@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "3f4608e7-92a2-4670-a771-8547a97ee6b4",
+  "uuid": "57fdd71d-e30e-481c-91b0-c3320816b32c",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "3f4608e7-92a2-4670-a771-8547a97ee6b4@6c48a",
+      "uuid": "57fdd71d-e30e-481c-91b0-c3320816b32c@6c48a",
       "displayName": "卡牌宝箱_tex",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "3f4608e7-92a2-4670-a771-8547a97ee6b4",
+        "imageUuidOrDatabaseUri": "57fdd71d-e30e-481c-91b0-c3320816b32c",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "3f4608e7-92a2-4670-a771-8547a97ee6b4@6c48a"
+    "redirect": "57fdd71d-e30e-481c-91b0-c3320816b32c@6c48a"
   }
 }

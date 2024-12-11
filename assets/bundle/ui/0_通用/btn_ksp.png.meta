@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "e9788d62-2555-43b3-83b0-67b8ccb1fa66",
+  "uuid": "8dbc737a-a4ce-4177-8fd2-d2a0f6ff294e",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "e9788d62-2555-43b3-83b0-67b8ccb1fa66@6c48a",
+      "uuid": "8dbc737a-a4ce-4177-8fd2-d2a0f6ff294e@6c48a",
       "displayName": "btn_ksp",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "nearest",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e9788d62-2555-43b3-83b0-67b8ccb1fa66",
+        "imageUuidOrDatabaseUri": "8dbc737a-a4ce-4177-8fd2-d2a0f6ff294e",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "e9788d62-2555-43b3-83b0-67b8ccb1fa66@f9941",
+      "uuid": "8dbc737a-a4ce-4177-8fd2-d2a0f6ff294e@f9941",
       "displayName": "btn_ksp",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "e9788d62-2555-43b3-83b0-67b8ccb1fa66@6c48a",
+        "imageUuidOrDatabaseUri": "8dbc737a-a4ce-4177-8fd2-d2a0f6ff294e@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "e9788d62-2555-43b3-83b0-67b8ccb1fa66@f9941",
+    "redirect": "8dbc737a-a4ce-4177-8fd2-d2a0f6ff294e@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

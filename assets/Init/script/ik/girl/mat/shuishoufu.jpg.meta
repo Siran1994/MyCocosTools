@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "6353c4a6-a00c-4cae-88fb-3aa8a1d8e591",
+  "uuid": "6372ca5b-4253-45fa-a8f5-320bcd0b6c4d",
   "files": [
     ".jpg",
     ".json"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "6353c4a6-a00c-4cae-88fb-3aa8a1d8e591@6c48a",
+      "uuid": "6372ca5b-4253-45fa-a8f5-320bcd0b6c4d@6c48a",
       "displayName": "shuishoufu",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "6353c4a6-a00c-4cae-88fb-3aa8a1d8e591",
+        "imageUuidOrDatabaseUri": "6372ca5b-4253-45fa-a8f5-320bcd0b6c4d",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,7 +37,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": false,
     "type": "texture",
-    "redirect": "6353c4a6-a00c-4cae-88fb-3aa8a1d8e591@6c48a",
+    "redirect": "6372ca5b-4253-45fa-a8f5-320bcd0b6c4d@6c48a",
     "compressSettings": {
       "useCompressTexture": true
     }

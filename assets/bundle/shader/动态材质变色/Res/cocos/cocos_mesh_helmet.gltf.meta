@@ -2,7 +2,7 @@
   "ver": "2.3.4",
   "importer": "gltf",
   "imported": true,
-  "uuid": "c54acf09-fe95-4f69-a63d-ba814fd49e49",
+  "uuid": "a9bc988b-7a3b-4957-9b54-8525fa52f1e4",
   "files": [],
   "subMetas": {
     "72704": {
@@ -11,7 +11,7 @@
       "name": "cocosfinish_02.mesh",
       "id": "72704",
       "displayName": "",
-      "uuid": "c54acf09-fe95-4f69-a63d-ba814fd49e49@72704",
+      "uuid": "a9bc988b-7a3b-4957-9b54-8525fa52f1e4@72704",
       "imported": true,
       "files": [
         ".bin",
@@ -28,7 +28,7 @@
       "name": "cocos_mesh_helmet.prefab",
       "id": "28c31",
       "displayName": "",
-      "uuid": "c54acf09-fe95-4f69-a63d-ba814fd49e49@28c31",
+      "uuid": "a9bc988b-7a3b-4957-9b54-8525fa52f1e4@28c31",
       "imported": true,
       "files": [
         ".json"
@@ -43,13 +43,13 @@
     "normals": 2,
     "tangents": 2,
     "dumpMaterials": false,
-    "redirect": "c54acf09-fe95-4f69-a63d-ba814fd49e49@28c31",
+    "redirect": "a9bc988b-7a3b-4957-9b54-8525fa52f1e4@28c31",
     "assetFinder": {
       "meshes": [
-        "c54acf09-fe95-4f69-a63d-ba814fd49e49@72704"
+        "a9bc988b-7a3b-4957-9b54-8525fa52f1e4@72704"
       ],
       "scenes": [
-        "c54acf09-fe95-4f69-a63d-ba814fd49e49@28c31"
+        "a9bc988b-7a3b-4957-9b54-8525fa52f1e4@28c31"
       ],
       "skeletons": [],
       "textures": [],

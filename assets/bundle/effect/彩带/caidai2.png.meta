@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "03efce04-9916-47d1-861f-8b6f99defd4b",
+  "uuid": "f3684124-1a9f-4ef6-b7c2-90bc0cf9edc2",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "03efce04-9916-47d1-861f-8b6f99defd4b@6c48a",
+      "uuid": "f3684124-1a9f-4ef6-b7c2-90bc0cf9edc2@6c48a",
       "displayName": "caidai2",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "03efce04-9916-47d1-861f-8b6f99defd4b",
+        "imageUuidOrDatabaseUri": "f3684124-1a9f-4ef6-b7c2-90bc0cf9edc2",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "03efce04-9916-47d1-861f-8b6f99defd4b@6c48a"
+    "redirect": "f3684124-1a9f-4ef6-b7c2-90bc0cf9edc2@6c48a"
   }
 }

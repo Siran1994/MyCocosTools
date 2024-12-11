@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "f0e9d2f9-b8cd-403e-add5-2df0d419104f",
+  "uuid": "0b3e88ab-f2b1-47fa-9c0c-7b57c7ebaf58",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "f0e9d2f9-b8cd-403e-add5-2df0d419104f@6c48a",
+      "uuid": "0b3e88ab-f2b1-47fa-9c0c-7b57c7ebaf58@6c48a",
       "displayName": "章鱼",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "f0e9d2f9-b8cd-403e-add5-2df0d419104f",
+        "imageUuidOrDatabaseUri": "0b3e88ab-f2b1-47fa-9c0c-7b57c7ebaf58",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "f0e9d2f9-b8cd-403e-add5-2df0d419104f@f9941",
+      "uuid": "0b3e88ab-f2b1-47fa-9c0c-7b57c7ebaf58@f9941",
       "displayName": "章鱼",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "f0e9d2f9-b8cd-403e-add5-2df0d419104f@6c48a",
+        "imageUuidOrDatabaseUri": "0b3e88ab-f2b1-47fa-9c0c-7b57c7ebaf58@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "f0e9d2f9-b8cd-403e-add5-2df0d419104f@f9941",
+    "redirect": "0b3e88ab-f2b1-47fa-9c0c-7b57c7ebaf58@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

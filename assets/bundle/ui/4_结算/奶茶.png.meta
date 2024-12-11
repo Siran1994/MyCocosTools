@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "212885f7-2f66-4c6f-8533-2a9393cbcd14",
+  "uuid": "7951c3a6-da6c-41d2-92a8-6f5fc2bc35a4",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "212885f7-2f66-4c6f-8533-2a9393cbcd14@6c48a",
+      "uuid": "7951c3a6-da6c-41d2-92a8-6f5fc2bc35a4@6c48a",
       "displayName": "奶茶",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "212885f7-2f66-4c6f-8533-2a9393cbcd14",
+        "imageUuidOrDatabaseUri": "7951c3a6-da6c-41d2-92a8-6f5fc2bc35a4",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "212885f7-2f66-4c6f-8533-2a9393cbcd14@f9941",
+      "uuid": "7951c3a6-da6c-41d2-92a8-6f5fc2bc35a4@f9941",
       "displayName": "奶茶",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "212885f7-2f66-4c6f-8533-2a9393cbcd14@6c48a",
+        "imageUuidOrDatabaseUri": "7951c3a6-da6c-41d2-92a8-6f5fc2bc35a4@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "212885f7-2f66-4c6f-8533-2a9393cbcd14@f9941",
+    "redirect": "7951c3a6-da6c-41d2-92a8-6f5fc2bc35a4@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

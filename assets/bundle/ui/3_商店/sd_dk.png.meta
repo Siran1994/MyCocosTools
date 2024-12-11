@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "2e3fef86-8f84-46ac-b746-baf012aa1ab3",
+  "uuid": "7bf41234-31c5-48dd-8ad3-fa4ea1b4bde4",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "2e3fef86-8f84-46ac-b746-baf012aa1ab3@6c48a",
+      "uuid": "7bf41234-31c5-48dd-8ad3-fa4ea1b4bde4@6c48a",
       "displayName": "sd_dk",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "2e3fef86-8f84-46ac-b746-baf012aa1ab3",
+        "imageUuidOrDatabaseUri": "7bf41234-31c5-48dd-8ad3-fa4ea1b4bde4",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,7 +34,7 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "2e3fef86-8f84-46ac-b746-baf012aa1ab3@f9941",
+      "uuid": "7bf41234-31c5-48dd-8ad3-fa4ea1b4bde4@f9941",
       "displayName": "sd_dk",
       "id": "f9941",
       "name": "spriteFrame",
@@ -114,7 +114,7 @@
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "2e3fef86-8f84-46ac-b746-baf012aa1ab3@6c48a",
+        "imageUuidOrDatabaseUri": "7bf41234-31c5-48dd-8ad3-fa4ea1b4bde4@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.11",
@@ -129,7 +129,7 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "sprite-frame",
-    "redirect": "2e3fef86-8f84-46ac-b746-baf012aa1ab3@f9941",
+    "redirect": "7bf41234-31c5-48dd-8ad3-fa4ea1b4bde4@f9941",
     "compressSettings": {
       "useCompressTexture": true
     }

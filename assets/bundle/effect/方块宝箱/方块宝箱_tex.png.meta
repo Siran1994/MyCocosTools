@@ -2,7 +2,7 @@
   "ver": "1.0.25",
   "importer": "image",
   "imported": true,
-  "uuid": "34563d59-88e3-4029-a6c1-68dd1467d852",
+  "uuid": "d3064bd6-8a6b-49d5-a8cc-93c3b1579dfa",
   "files": [
     ".json",
     ".png"
@@ -10,7 +10,7 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "34563d59-88e3-4029-a6c1-68dd1467d852@6c48a",
+      "uuid": "d3064bd6-8a6b-49d5-a8cc-93c3b1579dfa@6c48a",
       "displayName": "方块宝箱_tex",
       "id": "6c48a",
       "name": "texture",
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "34563d59-88e3-4029-a6c1-68dd1467d852",
+        "imageUuidOrDatabaseUri": "d3064bd6-8a6b-49d5-a8cc-93c3b1579dfa",
         "visible": true
       },
       "ver": "1.0.22",
@@ -37,6 +37,6 @@
     "fixAlphaTransparencyArtifacts": true,
     "hasAlpha": true,
     "type": "texture",
-    "redirect": "34563d59-88e3-4029-a6c1-68dd1467d852@6c48a"
+    "redirect": "d3064bd6-8a6b-49d5-a8cc-93c3b1579dfa@6c48a"
   }
 }

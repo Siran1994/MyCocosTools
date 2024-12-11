@@ -2,14 +2,14 @@
   "ver": "2.3.4",
   "importer": "fbx",
   "imported": true,
-  "uuid": "c686d2bc-684f-48f8-a29d-5c4ce68f779b",
+  "uuid": "09a82726-6214-4454-8cc8-44b881024c2d",
   "files": [
     "__original-animation-0.cconb"
   ],
   "subMetas": {
     "7f3dc": {
       "importer": "gltf-animation",
-      "uuid": "c686d2bc-684f-48f8-a29d-5c4ce68f779b@7f3dc",
+      "uuid": "09a82726-6214-4454-8cc8-44b881024c2d@7f3dc",
       "displayName": "",
       "id": "7f3dc",
       "name": "walk.animation",
@@ -32,7 +32,7 @@
     },
     "05704": {
       "importer": "gltf-scene",
-      "uuid": "c686d2bc-684f-48f8-a29d-5c4ce68f779b@05704",
+      "uuid": "09a82726-6214-4454-8cc8-44b881024c2d@05704",
       "displayName": "",
       "id": "05704",
       "name": "慢跑.prefab",
@@ -67,14 +67,14 @@
         ]
       }
     ],
-    "redirect": "c686d2bc-684f-48f8-a29d-5c4ce68f779b@05704",
+    "redirect": "09a82726-6214-4454-8cc8-44b881024c2d@05704",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],
       "textures": [],
       "materials": [],
       "scenes": [
-        "c686d2bc-684f-48f8-a29d-5c4ce68f779b@05704"
+        "09a82726-6214-4454-8cc8-44b881024c2d@05704"
       ]
     }
   }
