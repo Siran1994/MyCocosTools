@@ -1,15 +1,155 @@
-import { Texture2D, UIOpacity, UITransform, gfx, sys, v2, v3 } from "cc";
+import { Quat, Texture2D, Tween, UITransform, gfx, sys, v2, v3 } from "cc";
 import { Vec3, bezier, tween, Node } from "cc";
-import BigNumber from '../libs/bignumber.js';
 let tempVec: Vec3 = v3()
 let tempVec2: Vec3 = v3()
 let tempVec3: Vec3 = v3()
 let up = v3()
-
 export class Utils 
 {
-    //#region 时间日期
-    //返回今天的日期,格式20200101
+
+    static getTrailingNumber ( str: string ): number
+    {
+        let index = str.length - 1;
+        while ( index >= 0 && ( str[ index ] >= '0' && str[ index ] <= '9' ) )
+        {
+            index--;
+        }
+        return parseInt( str.substring( index + 1 ), 10 );
+    }
+
+    static flyTo ( item: Node, parent: Node, targetPos: Vec3, t: number = 0.25, ecb?: Function, scb?: Function )
+    {
+        let oldPos = item.worldPosition.clone();
+        let oldRotation = item.worldRotation.clone()
+
+        item.parent = parent;
+        scb && scb();
+        let newAngle = item.eulerAngles.clone()
+
+        item.worldPosition = oldPos;
+        item.worldRotation = oldRotation;
+
+        let startPos = oldPos;
+        let controlPos = v3()
+        let des = targetPos
+        Vec3.add( controlPos, startPos, des )
+        Vec3.multiplyScalar( controlPos, controlPos, 0.5 )
+        controlPos.add( v3( 0, 5, 0 ) )
+
+        //tween( item ).to( t, { eulerAngles: newAngle } ).start();
+        item.scale.multiplyScalar( 0.8 );
+        tween( item )
+            .sequence
+            (
+                tween().to( t, { eulerAngles: newAngle } ),
+                tween().to( t, { scale: Vec3.ONE }, { easing: "backInOut" } ),
+            )
+            .start();
+        this.bezierTo( item, t, startPos, controlPos, des ).call( () =>
+        {
+            ecb && ecb();
+        } ).start();
+    }
+
+    static bezierTo ( target: any, duration: number, p1: Vec3, cp: Vec3, p2: Vec3, opts?: any ): Tween<any>
+    {
+        opts = opts || Object.create( null );
+        let twoBezier = ( t: number, p1: Vec3, cp: Vec3, p2: Vec3 ) =>
+        {
+            let x = ( 1 - t ) * ( 1 - t ) * p1.x + 2 * t * ( 1 - t ) * cp.x + t * t * p2.x;
+            let y = ( 1 - t ) * ( 1 - t ) * p1.y + 2 * t * ( 1 - t ) * cp.y + t * t * p2.y;
+            let z = ( 1 - t ) * ( 1 - t ) * p1.z + 2 * t * ( 1 - t ) * cp.z + t * t * p2.z;
+            return new Vec3( x, y, z );
+        };
+        opts.onUpdate = ( _arg: Vec3, ratio: number ) =>
+        {
+            target.worldPosition = twoBezier( ratio, p1, cp, p2 );
+        };
+        return tween( target ).to( duration, {}, opts );
+    }
+
+    static setRigDir ( target: Node, targetPos )
+    {
+        let direction = new Vec3( target.worldPosition.x - targetPos.x, 0, target.worldPosition.z - targetPos.z ).normalize();
+        let targetDir = new Quat();
+        Quat.rotationTo( targetDir, Vec3.FORWARD, direction );
+        target.setWorldRotation( targetDir );
+    }
+    // 随机旋转轴
+    static randomRotateAxis (): Vec3
+    {
+        return new Vec3(
+            Math.random() * 0.2 * 360,          // X轴减少旋转
+            ( Math.random() + 0.5 ) * 1.2 * 360,  // Y轴强化旋转
+            Math.random() * 0.2 * 360           // Z轴减少旋转
+        );
+    }
+
+    // 生成球形分布点
+    static getSpherePoints ( count: number, radius: number ): Vec3[]
+    {
+        const points: Vec3[] = [];
+        const phi = Math.PI * ( 3 - Math.sqrt( 5 ) ); // 黄金角度
+        for ( let i = 0; i < count; i++ )
+        {
+            const y = 1 - ( i / ( count - 1 ) ) * 2; // y的范围从1到-1
+            const theta = phi * i;
+            const radiusAtY = Math.sqrt( 1 - y * y );
+            const x = Math.cos( theta ) * radiusAtY;
+            const z = Math.sin( theta ) * radiusAtY;
+            const point = new Vec3( x * radius, y * radius, z * radius );
+            points.push( point );
+        }
+        return points;
+    }
+
+
+    //#region 实时抛物线
+    static FlyToTarget ( targetNode: Node, targetPos: Vec3, cb?: Function )
+    {
+        if ( !targetPos ) return;
+        let startPosition = targetNode.worldPosition;
+        let distance = targetPos.subtract( startPosition );
+        let height = Math.max( distance.y + 1, 3 );
+        // 计算飞行路径的控制点  
+        let controlPoint = v3( startPosition.x + distance.x / 2, startPosition.y + height, startPosition.z + distance.z / 2 );
+        // 创建抛物线动画  
+        let startTime = Date.now();
+        let updateProjectilePosition = () =>
+        {
+            let elapsedTime = Date.now() - startTime;
+            let t = Math.min( elapsedTime / 1, 1 );
+            // 计算当前的抛物线位置  
+            let currentPosition = Utils.calculateParabolaPosition( startPosition, controlPoint, targetPos, t );
+            targetNode.setWorldPosition( currentPosition );
+
+            if ( t < 1 )
+            {
+                requestAnimationFrame( updateProjectilePosition );
+            }
+            else
+            {
+                cb && cb();
+            }
+        };
+        requestAnimationFrame( updateProjectilePosition );
+    }
+
+    static calculateParabolaPosition ( start: Vec3, control: Vec3, end: Vec3, t: number ): Vec3
+    {
+        let x = this.interpolate( start.x, control.x, end.x, t );
+        let y = this.interpolate( start.y, control.y, end.y, t );
+        let z = this.interpolate( start.z, control.z, end.z, t );
+        return v3( x, y, z );
+    }
+
+    static interpolate ( p0: number, p1: number, p2: number, t: number ): number
+    {
+        return ( 1 - t ) * ( 1 - t ) * p0 + 2 * ( 1 - t ) * t * p1 + t * t * p2;
+    }
+    //#endregion
+
+
     static getToday ()
     {
         let lt10 = ( v: number ) =>
@@ -21,7 +161,6 @@ export class Utils
         return parseInt( str );
     }
 
-    //计算两个日期的天数差 日期格式20200101
     static deltaDay ( date1: number, date2: number )
     {
         let str1 = date1.toString();
@@ -34,20 +173,13 @@ export class Utils
             return Math.floor( days );
         } else
         {
-            console.error( "日期格式不正确" );
             return -1;
         }
     }
 
-    /**
-     * 根据秒数换算时钟单位分：秒)
-     * @param time 
-     */
-    public static ToMS ( time: number ): string
+    public static ToMS ( time: number ): string //分:秒
     {
         time = Math.floor( time );
-
-
         let minute: number = 0;
         let second: number = 0;
 
@@ -62,11 +194,7 @@ export class Utils
         return minute_string + ":" + second_string
     }
 
-    /**
-     * 根据秒数换算时钟单位(时：分：秒)
-     * @param time 
-     */
-    public static clock ( time: number ): string
+    public static clock ( time: number ): string //时:分:秒
     {
         time = Math.floor( time );
 
@@ -89,13 +217,7 @@ export class Utils
         return hour_string + ":" + minute_string + ":" + second_string
     }
 
-    /**
-    * 将事件戳转化为日期格式,适用于显示倒计时
-    * @param timeMS 倒计时的时间戳(MS)
-    * @param template 模板 1(HH:MM:SS) 2(HH时MM分SS秒) 3(HH?:MM:SS) 4(HH?时MM分SS秒)
-    * @param separator 分隔符 默认(:)
-    */
-    static formatCountDownMS ( timeMS: number, template: 1 | 2 | 3 | 4, separator = ":" )
+    static formatCountDownMS ( timeMS: number, template: 1 | 2 | 3 | 4, separator = ":" )//时:分:秒
     {
         let str: string;
         let lt10 = v =>
@@ -127,12 +249,7 @@ export class Utils
         return str;
     }
 
-    /**
-     * 返回一个格式化的时间字符串
-     * 占位符 YYYY:年 MM:月 DD:日 hh:时 mm:分 ss:秒
-     * @param formatStr 格式化的字符串 例 YYYY-MM-DD hh:mm:ss 返回 2022-01-01 12:30:30
-     */
-    static formatTime ( formatStr: string, date?: Date )
+    static formatTime ( formatStr: string, date?: Date )//年月日时分秒
     {
         if ( date == undefined )
         {
@@ -156,10 +273,8 @@ export class Utils
         formatStr = formatStr.replace( "ss", lt10( second ).toString() );
         return formatStr;
     }
-    /**
-     * 格式化时间戳，返回：XXXX年XX月XX日XX时XX分XX秒
-     */
-    static formatTime2 ( times: number )
+
+    static formatTime2 ( times: number )//年月日时分秒
     {
         const date = new Date( times );
         let lt10 = v =>
@@ -175,9 +290,6 @@ export class Utils
         return `${ year }年${ lt10( month ) }月${ lt10( day ) }日${ lt10( hour ) }时${ lt10( minute ) }分${ lt10( second ) }秒`;;
     }
 
-    /**
-     * 格式化时间戳，返回：XXXX年XX月XX日
-     */
     static formatTime3 ( times: number )
     {
         const date = new Date( times );
@@ -190,26 +302,19 @@ export class Utils
         let day = date.getDate();
         return `${ year }年${ lt10( month ) }月${ lt10( day ) }日`;;
     }
-    //#endregion
 
-    //#region 随机数
-
-
-    //乱序输出一个数组
     public static shuffleArrayNums ( array: number[] ): number[]
     {
         for ( let i = array.length - 1; i > 0; i-- )
         {
-            const j = Math.floor( Math.random() * ( i + 1 ) ); // 随机索引  
-            [ array[ i ], array[ j ] ] = [ array[ j ], array[ i ] ]; // 交换元素  
+            const j = Math.floor( Math.random() * ( i + 1 ) );
+            [ array[ i ], array[ j ] ] = [ array[ j ], array[ i ] ];
         }
         return array;
     }
 
-    //指定范围内随机输出一个数组,不包含指定数
     public static generateShuffledArray ( rangeStart: number, rangeEnd: number, exclude: number ): number[]
     {
-        // 生成范围内的数组  
         const array: number[] = [];
         for ( let i = rangeStart; i <= rangeEnd; i++ )
         {
@@ -218,64 +323,32 @@ export class Utils
                 array.push( i );
             }
         }
-        // 打乱数组  
+
         const shuffledArray = Utils.shuffleArrayNums( array );
         return shuffledArray;
     }
 
-    //指定范围内随机输出一个数,不包含指定数
-    public static getRandomInRangeExcluding ( min: number, max: number, exclude: number ): number
-    {
-        if ( min > max )
-            throw new Error( "最小值不能大于最大值" );
-
-        // 创建一个包含在范围内的数组，排除指定的数  
-        const range: number[] = [];
-        for ( let i = min; i <= max; i++ )
-        {
-            if ( i !== exclude )
-            {
-                range.push( i );
-            }
-        }
-        // 检查是否还有可用的数字  
-        if ( range.length === 0 )
-            throw new Error( "没有可用的随机数" );
-        // 从数组中随机选择一个数  
-        const randomIndex = Math.floor( Math.random() * range.length );
-        return range[ randomIndex ];
-    }
-
     public static random ( min, max )
     {
-        var r = Math.random();
-        var rr = r * ( max - min + 1 ) + min;
+        let r = Math.random();
+        let rr = r * ( max - min + 1 ) + min;
         return Math.floor( rr );
     }
 
     public static rand ( arr: any )
     {
         let arrClone = this.clone( arr );
-        // 首先从最大的数开始遍历，之后递减
+
         for ( let i = arrClone.length - 1; i >= 0; i-- )
         {
-            // 随机索引值randomIndex是从0-arrClone.length中随机抽取的
             const randomIndex = Math.floor( Math.random() * ( i + 1 ) );
-            // 下面三句相当于把从数组中随机抽取到的值与当前遍历的值互换位置
             const itemIndex = arrClone[ randomIndex ];
             arrClone[ randomIndex ] = arrClone[ i ];
             arrClone[ i ] = itemIndex;
         }
-        // 每一次的遍历都相当于把从数组中随机抽取（不重复）的一个元素放到数组的最后面（索引顺序为：len-1,len-2,len-3......0）
         return arrClone;
     }
 
-    /**
-         * 获取一个随机数，区间[min,max]
-         * @param min 最小值
-         * @param max 最大值
-         * @param isInteger 是否是整数 默认true
-         */
     static randomNum ( min: number, max: number, isInteger = true )
     {
         let delta = max - min;
@@ -285,11 +358,6 @@ export class Utils
         return value;
     }
 
-    /**
-  * 在某个区间内取一个整数
-  * @param section1 区间1
-  * @param section2 区间2，不输入则是0~section1
-  */
     public static randomNumber ( section1, section2?: number ): number
     {
         if ( section2 )
@@ -298,11 +366,6 @@ export class Utils
             return Math.round( Math.random() * section1 );
     }
 
-    /**
-    * 在某个区间内取一个数
-    * @param section1 区间1
-    * @param section2 区间2，不输入则是0~section1
-    */
     public static randomNumber_NoRound ( section1, section2?: number ): number
     {
         if ( section2 )
@@ -311,7 +374,6 @@ export class Utils
             return Math.random() * section1;
     }
 
-    // 根据权重,计算随机内容
     public static getWeightRandIndex ( weightArr: any, totalWeight: number )
     {
         const randWeight = Math.floor( Math.random() * totalWeight );
@@ -325,16 +387,9 @@ export class Utils
                 break;
             }
         }
-
         return weightIndex;
     }
 
-    /**
-     * 从n个数中获取m个随机数
-     * @param {Number} n   总数
-     * @param {Number} m    获取数
-     * @returns {Array} array   获取数列
-     */
     public static getRandomNFromM ( n: number, m: number )
     {
         const array: number[] = [];
@@ -368,14 +423,11 @@ export class Utils
 
         return array;
     }
-    //随机数   
 
     static getRandomInt ( min: number, max: number ): number
     {
         return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
     }
-
-    //从0到n-1的范围内生成x个不重复的数字
     static getRandomUniqueNumbers ( n: number, x: number ): number[]
     {
         if ( x > n )
@@ -395,23 +447,30 @@ export class Utils
         return result;
     }
 
-    /**  
-* 在给定范围内生成一个随机数，排除输入参数  
-* @param min 范围的下限  
-* @param max 范围的上限  
-* @param exclude 排除的数  
-* @returns 随机数  
-*/
+    public static getRandomNumbers ( min: number, max: number, count: number ): number[]
+    {
+
+        const randomNumbers = new Set<number>();
+
+        while ( randomNumbers.size < count )
+        {
+            const randomNum = Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+            randomNumbers.add( randomNum );
+        }
+
+        return Array.from( randomNumbers );
+    }
+
     public static getRandomNumber ( min: number, max: number, exclude: number ): number
     {
         if ( min > max )
         {
-            throw new Error( "min应该小于或等于max" );
+            throw new Error( "" );
         }
 
         if ( exclude < min || exclude > max )
         {
-            throw new Error( "exclude必须在给定范围内" );
+            throw new Error( "" );
         }
 
         let randomNumber: number;
@@ -424,12 +483,6 @@ export class Utils
         return randomNumber;
     }
 
-
-    /**
-        *  修正小数位数
-        * @param fractionDigits 保留小数位数
-        * @param canEndWithZero 是否需要用0填补小数位数 默认为false
-        */
     static fixFloat ( value: number, fractionDigits: number, canEndWithZero = false )
     {
         if ( fractionDigits < 0 ) fractionDigits = 0;
@@ -454,19 +507,11 @@ export class Utils
         return str;
     }
 
-    /**
-    * 从带权重的集合中随机获取指定数量的元素
-    * @param list 集合
-    * @param weight 获取item权重的方法
-    * @param num 返回item数量
-    * @param canRepeat item是否可以重复
-    * @returns 
-    */
     public static randomValueByWeight<T> ( list: T[], num = 1, weight?: ( item: T ) => number, canRepeat = false )
     {
         let result: T[] = [];
         if ( !list || list.length == 0 ) return result;
-        if ( list.length < num ) console.warn( "需要返回的item数量大于集合长度" );
+        if ( list.length < num ) console.warn( "" );
         if ( !weight ) weight = ( item: T ) => 1;
 
         let count: number = Math.min( list.length, num );
@@ -487,9 +532,9 @@ export class Utils
                 let w = weight( item );
                 if ( randomV >= tmpWeight && randomV < tmpWeight + w )
                 {
-                    if ( !canRepeat ) //检查是否重复元素
+                    if ( !canRepeat ) 
                     {
-                        var index = result.indexOf( item );
+                        let index = result.indexOf( item );
                         if ( index == -1 ) result.push( item );
                         else break;
                     }
@@ -504,13 +549,8 @@ export class Utils
         return result;
     }
 
-    //#endregion
-
-    //#region 贝塞尔曲线
-    //2阶贝塞尔
     static bezierCurve2 ( duration: number, startPos: Vec3, controlPos: Vec3, endPos: Vec3, targetGo: Node, func?: Function )
     {
-        // 三维空间的缓动
         const quadraticCurve = ( t: number, p1: Vec3, cp: Vec3, p2: Vec3, out: Vec3 ) =>
         {
             out.x = ( 1 - t ) * ( 1 - t ) * p1.x + 2 * t * ( 1 - t ) * cp.x + t * t * p2.x;
@@ -518,12 +558,15 @@ export class Utils
             out.z = ( 1 - t ) * ( 1 - t ) * p1.z + 2 * t * ( 1 - t ) * cp.z + t * t * p2.z;
         }
         const tempVec3 = new Vec3();
-
+        targetGo.scale = new Vec3( 0.3, 0.3, 0.3 );
         tween( targetGo )
             .sequence
             (
                 tween().to( duration,
-                    { position: endPos },
+                    {
+                        position: endPos,
+                        scale: Vec3.ONE,
+                    },
                     {
                         onUpdate: ( target, ratio ) =>
                         {
@@ -539,10 +582,38 @@ export class Utils
             .start();
     }
 
-    //3阶贝塞尔
+    static bezierCurve2World ( duration: number, startPos: Vec3, controlPos: Vec3, endPos: Vec3, targetGo: Node, func?: Function )
+    {
+        const quadraticCurve = ( t: number, p1: Vec3, cp: Vec3, p2: Vec3, out: Vec3 ) =>
+        {
+            out.x = ( 1 - t ) * ( 1 - t ) * p1.x + 2 * t * ( 1 - t ) * cp.x + t * t * p2.x;
+            out.y = ( 1 - t ) * ( 1 - t ) * p1.y + 2 * t * ( 1 - t ) * cp.y + t * t * p2.y;
+            out.z = ( 1 - t ) * ( 1 - t ) * p1.z + 2 * t * ( 1 - t ) * cp.z + t * t * p2.z;
+        }
+        const tempVec3 = new Vec3();
+
+        tween( targetGo )
+            .sequence
+            (
+                tween().to( duration,
+                    { worldPosition: endPos },
+                    {
+                        onUpdate: ( target, ratio ) =>
+                        {
+                            quadraticCurve( ratio, startPos, controlPos, endPos, tempVec3 );
+                            targetGo.setPosition( tempVec3 );
+                        }
+                    } ),
+                tween().call( () =>
+                {
+                    func && func();
+                } )
+            )
+            .start();
+    }
+
     static bezierCurve3 ( duration: number, startPos: Vec3, controlPos1: Vec3, controlPos2: Vec3, endPos: Vec3, targetGo: Node )
     {
-        // 三维空间的缓动
         const bezierCurve = ( t: number, p1: Vec3, cp1: Vec3, cp2: Vec3, p2: Vec3, out: Vec3 ) =>
         {
             out.x = bezier( p1.x, cp1.x, cp2.x, p2.x, t );
@@ -562,47 +633,42 @@ export class Utils
             } )
             .start();
     }
-    //#endregion
-
-    //#region 字符串操作
-    //string 转数组
     public static stringToArray ( string: string )
     {
-        // 用于判断emoji的正则们
-        var rsAstralRange = '\\ud800-\\udfff';
-        var rsZWJ = '\\u200d';
-        var rsVarRange = '\\ufe0e\\ufe0f';
-        var rsComboMarksRange = '\\u0300-\\u036f';
-        var reComboHalfMarksRange = '\\ufe20-\\ufe2f';
-        var rsComboSymbolsRange = '\\u20d0-\\u20ff';
-        var rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange;
-        var reHasUnicode = RegExp( '[' + rsZWJ + rsAstralRange + rsComboRange + rsVarRange + ']' );
+        let rsAstralRange = '\\ud800-\\udfff';
+        let rsZWJ = '\\u200d';
+        let rsVarRange = '\\ufe0e\\ufe0f';
+        let rsComboMarksRange = '\\u0300-\\u036f';
+        let reComboHalfMarksRange = '\\ufe20-\\ufe2f';
+        let rsComboSymbolsRange = '\\u20d0-\\u20ff';
+        let rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange;
+        let reHasUnicode = RegExp( '[' + rsZWJ + rsAstralRange + rsComboRange + rsVarRange + ']' );
 
-        var rsFitz = '\\ud83c[\\udffb-\\udfff]';
-        var rsOptVar = '[' + rsVarRange + ']?';
-        var rsCombo = '[' + rsComboRange + ']';
-        var rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')';
-        var reOptMod = rsModifier + '?';
-        var rsAstral = '[' + rsAstralRange + ']';
-        var rsNonAstral = '[^' + rsAstralRange + ']';
-        var rsRegional = '(?:\\ud83c[\\udde6-\\uddff]){2}';
-        var rsSurrPair = '[\\ud800-\\udbff][\\udc00-\\udfff]';
-        var rsOptJoin = '(?:' + rsZWJ + '(?:' + [ rsNonAstral, rsRegional, rsSurrPair ].join( '|' ) + ')' + rsOptVar + reOptMod + ')*';
-        var rsSeq = rsOptVar + reOptMod + rsOptJoin;
-        var rsSymbol = '(?:' + [ rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral ].join( '|' ) + ')';
-        var reUnicode = RegExp( rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g' );
+        let rsFitz = '\\ud83c[\\udffb-\\udfff]';
+        let rsOptVar = '[' + rsVarRange + ']?';
+        let rsCombo = '[' + rsComboRange + ']';
+        let rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')';
+        let reOptMod = rsModifier + '?';
+        let rsAstral = '[' + rsAstralRange + ']';
+        let rsNonAstral = '[^' + rsAstralRange + ']';
+        let rsRegional = '(?:\\ud83c[\\udde6-\\uddff]){2}';
+        let rsSurrPair = '[\\ud800-\\udbff][\\udc00-\\udfff]';
+        let rsOptJoin = '(?:' + rsZWJ + '(?:' + [ rsNonAstral, rsRegional, rsSurrPair ].join( '|' ) + ')' + rsOptVar + reOptMod + ')*';
+        let rsSeq = rsOptVar + reOptMod + rsOptJoin;
+        let rsSymbol = '(?:' + [ rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral ].join( '|' ) + ')';
+        let reUnicode = RegExp( rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g' );
 
-        var hasUnicode = function ( val: string )
+        let hasUnicode = function ( val: string )
         {
             return reHasUnicode.test( val );
         };
 
-        var unicodeToArray = function ( val: string )
+        let unicodeToArray = function ( val: string )
         {
             return val.match( reUnicode ) || [];
         };
 
-        var asciiToArray = function ( val: string )
+        let asciiToArray = function ( val: string )
         {
             return val.split( '' );
         };
@@ -610,7 +676,6 @@ export class Utils
         return hasUnicode( string ) ? unicodeToArray( string ) : asciiToArray( string );
     }
 
-    /** 生成UUID */
     static genUUID ()
     {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace( /[xy]/g, function ( c )
@@ -621,7 +686,6 @@ export class Utils
         } );
     }
 
-    // 模拟传msg的uuid
     public static simulationUUID ()
     {
         function s4 ()
@@ -635,7 +699,6 @@ export class Utils
             s4() + '-' + s4() + s4() + s4();
     }
 
-    //裁剪前后指定的字符
     static trims ( source: string, ...strs: string[] )
     {
         if ( !source ) return source;
@@ -654,7 +717,6 @@ export class Utils
         return source;
     }
 
-    //去除输入字符串的前导空白和尾部空白
     public static trim ( str: string )
     {
         return str.replace( /(^\s*)|(\s*$)/g, "" );
@@ -679,9 +741,6 @@ export class Utils
         return Math.ceil( len / 2 );
     }
 
-    /**
-     * 格式化字符串,用args的内容替换str中的{i},i从0开始
-     */
     static formatString ( str: string, ...args: any[] )
     {
         args.forEach( ( v, i ) =>
@@ -691,21 +750,19 @@ export class Utils
         return str;
     }
 
-    static upperFirst ( source: string )//输出大写字母
+    static upperFirst ( source: string )
     {
         if ( !source ) return source;
         if ( source.length < 2 ) return source.toUpperCase();
         return source[ 0 ].toUpperCase() + source.substring( 1 );
     }
 
-    static lowerFirst ( source: string )//输出小写字母
+    static lowerFirst ( source: string )
     {
         if ( !source ) return source;
         if ( source.length < 2 ) return source.toLowerCase();
         return source[ 0 ].toLowerCase() + source.substring( 1 );
     }
-
-    //从arr中删除所有在item数组中出现的元素。
     static delItemFromArray<T> ( arr: T[], ...item: T[] )
     {
         if ( arr.length > 0 && item.length > 0 )
@@ -720,8 +777,6 @@ export class Utils
             } )
         }
     }
-
-    /** 统计元素在数组中出现次数 */
     static countValueTimes<T> ( arr: T[], predicate: ( value: T ) => boolean )
     {
         let times = 0;
@@ -735,10 +790,6 @@ export class Utils
         return times;
     }
 
-    /**
-     * 数据加密
-     * @param {String} str 
-     */
     public static encrypt ( str: string )
     {
         let b64Data = this.base64encode( str );
@@ -758,10 +809,6 @@ export class Utils
         return encodeData;
     }
 
-    /**
-     * 数据解密
-     * @param {String} b64Data 
-     */
     public static decrypt ( b64Data: string | string[] )
     {
         let n = 6;
@@ -771,7 +818,7 @@ export class Utils
         }
 
         let decodeData = '';
-        for ( var idx = 0; idx < b64Data.length - n; idx += 2 )
+        for ( let idx = 0; idx < b64Data.length - n; idx += 2 )
         {
             decodeData += b64Data[ idx + 1 ];
             decodeData += b64Data[ idx ];
@@ -784,11 +831,10 @@ export class Utils
         return decodeData;
     }
 
-    //将字符串进行base64编码
     public static base64encode ( input: string )
     {
-        var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-        var output = "", chr1, chr2, chr3, enc1, enc2, enc3, enc4, i = 0;
+        let keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+        let output = "", chr1, chr2, chr3, enc1, enc2, enc3, enc4, i = 0;
         input = this.utf8Encode( input );
         while ( i < input.length )
         {
@@ -813,14 +859,13 @@ export class Utils
         return output;
     }
 
-    // 将字符串进行 UTF-8 编码
     public static utf8Encode ( string: string )
     {
         string = string.replace( /\r\n/g, "\n" );
-        var utftext = "";
-        for ( var n = 0; n < string.length; n++ )
+        let utftext = "";
+        for ( let n = 0; n < string.length; n++ )
         {
-            var c = string.charCodeAt( n );
+            let c = string.charCodeAt( n );
             if ( c < 128 )
             {
                 utftext += String.fromCharCode( c );
@@ -838,19 +883,19 @@ export class Utils
         }
         return utftext;
     }
-    //将字符串进行base64解码
+
     public static base64Decode ( input: string )
     {
-        var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-        var output = "";
-        var chr1;
-        var chr2;
-        var chr3;
-        var enc1;
-        var enc2;
-        var enc3;
-        var enc4;
-        var i = 0;
+        let keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+        let output = "";
+        let chr1;
+        let chr2;
+        let chr3;
+        let enc1;
+        let enc2;
+        let enc3;
+        let enc4;
+        let i = 0;
         input = input.replace( /[^A-Za-z0-9\+\/\=]/g, "" );
         while ( i < input.length )
         {
@@ -874,15 +919,15 @@ export class Utils
         output = this.utf8Decode( output );
         return output;
     }
-    //将字符串进行UTF-8 解码
+
     public static utf8Decode ( utftext: string )
     {
-        var string = "";
-        var i = 0;
-        var c = 0;
-        var c1 = 0;
-        var c2 = 0;
-        var c3 = 0;
+        let string = "";
+        let i = 0;
+        let c = 0;
+        let c1 = 0;
+        let c2 = 0;
+        let c3 = 0;
         while ( i < utftext.length )
         {
             c = utftext.charCodeAt( i );
@@ -906,32 +951,24 @@ export class Utils
         return string;
     }
 
-
-    //#endregion
-
-    //#region object,数组操作
-
-    //将数组进行乱序输出
     public static shuffleArray<T> ( array: T[] ): T[]
     {
-        let shuffledArray = array.slice(); // 创建数组的副本  
+        let shuffledArray = array.slice();
         for ( let i = shuffledArray.length - 1; i > 0; i-- )
         {
-            // 生成一个随机索引  
             const j = Math.floor( Math.random() * ( i + 1 ) );
-            // 交换元素  
+
             [ shuffledArray[ i ], shuffledArray[ j ] ] = [ shuffledArray[ j ], shuffledArray[ i ] ];
         }
         return shuffledArray;
     }
 
-    //返回数组中的最大值
     public static max ( array )
     {
         if ( array && array.length )
         {
-            var result;
-            for ( var i = 0; i < array.length; i++ )
+            let result;
+            for ( let i = 0; i < array.length; i++ )
             {
                 if ( i === 0 )
                 {
@@ -946,7 +983,6 @@ export class Utils
         return undefined;
     }
 
-    //拷贝object
     public static clone ( sObj: any )
     {
         if ( sObj === null || typeof sObj !== "object" )
@@ -964,7 +1000,6 @@ export class Utils
         return s;
     }
 
-    //深度拷贝
     public static cloneDeep ( sObj )
     {
         if ( sObj === null || typeof sObj !== "object" )
@@ -972,13 +1007,13 @@ export class Utils
             return sObj;
         }
 
-        var s = {};
+        let s = {};
         if ( sObj.constructor === Array )
         {
             s = [];
         }
 
-        for ( var i in sObj )
+        for ( let i in sObj )
         {
             if ( sObj.hasOwnProperty( i ) )
             {
@@ -989,10 +1024,9 @@ export class Utils
         return s;
     }
 
-    //在给定的集合中找到第一个满足断言函数条件的元素，然后返回这个元素
     public static find ( collection, predicate )
     {
-        var result;
+        let result;
         if ( !Array.isArray( collection ) )
         {
             collection = this.toArray( collection );
@@ -1007,16 +1041,15 @@ export class Utils
         return undefined;
     }
 
-    //遍历给定的集合，并对集合中的每个元素执行迭代函数
     public static forEach ( collection, iteratee )
     {
         if ( !Array.isArray( collection ) )
         {
-            var array = this.toArrayKey( collection );
+            let array = this.toArrayKey( collection );
             array.forEach( function ( value, index, arr )
             {
-                var key1 = value[ 'key' ];
-                var value1 = value[ 'value' ];
+                let key1 = value[ 'key' ];
+                let value1 = value[ 'value' ];
                 iteratee( value1, key1, collection );
             } );
         } else
@@ -1025,7 +1058,6 @@ export class Utils
         }
     }
 
-    //遍历给定的集合，对集合中的每个元素执行迭代函数，并将迭代函数的返回值组成一个新的数组返回
     public static map ( collection, iteratee )
     {
         if ( !Array.isArray( collection ) )
@@ -1033,7 +1065,7 @@ export class Utils
             collection = this.toArray( collection );
         }
 
-        var arr = [];
+        let arr = [];
         collection.forEach( function ( value, index, array )
         {
             arr.push( iteratee( value, index, array ) );
@@ -1042,12 +1074,10 @@ export class Utils
         return arr;
     }
 
-    //将给定的对象转换为数组，数组的每个元素是一个包含键和值的对象
     public static toArrayKey ( srcObj )
     {
-        var resultArr = [];
-        // to array
-        for ( var key in srcObj )
+        let resultArr = [];
+        for ( let key in srcObj )
         {
             if ( !srcObj.hasOwnProperty( key ) )
             {
@@ -1056,30 +1086,25 @@ export class Utils
 
             resultArr.push( { key: key, value: srcObj[ key ] } );
         }
-
         return resultArr;
     }
 
-    //将给定的对象转换为数组，数组的每个元素是对象的一个属性值
+
     public static toArray ( srcObj )
     {
-        var resultArr = [];
+        let resultArr = [];
 
-        // to array
-        for ( var key in srcObj )
+        for ( let key in srcObj )
         {
             if ( !srcObj.hasOwnProperty( key ) )
             {
                 continue;
             }
-
             resultArr.push( srcObj[ key ] );
         }
-
         return resultArr;
     }
 
-    //使用迭代函数数组对给定的集合进行过滤，并返回一个新的数组，其中包含满足迭代函数条件的元素
     public static filter ( collection, iteratees )
     {
         if ( !Array.isArray( collection ) )
@@ -1090,25 +1115,23 @@ export class Utils
         return collection.filter( iteratees );
     }
 
-    //用于比较两个对象是否相等
     public static isEqual ( x, y )
     {
-        var in1 = x instanceof Object;
-        var in2 = y instanceof Object;
+        let in1 = x instanceof Object;
+        let in2 = y instanceof Object;
         if ( !in1 || !in2 )
         {
             return x === y;
         }
-
         if ( Object.keys( x ).length !== Object.keys( y ).length )
         {
             return false;
         }
 
-        for ( var p in x )
+        for ( let p in x )
         {
-            var a = x[ p ] instanceof Object;
-            var b = y[ p ] instanceof Object;
+            let a = x[ p ] instanceof Object;
+            let b = y[ p ] instanceof Object;
             if ( a && b )
             {
                 return this.isEqual( x[ p ], y[ p ] );
@@ -1121,11 +1144,10 @@ export class Utils
         return true;
     }
 
-    //在数组中查找满足特定条件的元素的索引
     public static findIndex ( array, predicate, fromIndex )
     {
         array = array.slice( fromIndex );
-        var i;
+        let i;
         if ( typeof predicate === "function" )
         {
             for ( i = 0; i < array.length; i++ )
@@ -1139,8 +1161,8 @@ export class Utils
         {
             for ( i = 0; i < array.length; i++ )
             {
-                var key = predicate[ 0 ];
-                var vaule = true;
+                let key = predicate[ 0 ];
+                let vaule = true;
                 if ( predicate.length > 1 )
                 {
                     vaule = predicate[ 1 ];
@@ -1165,17 +1187,16 @@ export class Utils
         return -1;
     }
 
-    //用于连接两个或多个数组。这个方法接受任意数量的参数，把它们全部连接在一起，然后返回一个新的数组
     public static concat ()
     {
-        var length = arguments.length;
+        let length = arguments.length;
         if ( !length )
         {
             return [];
         }
 
-        var array = arguments[ 0 ];
-        var index = 1;
+        let array = arguments[ 0 ];
+        let index = 1;
         while ( index < length )
         {
             array = array.concat( arguments[ index ] );
@@ -1185,19 +1206,18 @@ export class Utils
         return array;
     }
 
-    //从数组中删除所有与给定值value匹配的元素。具体来说，它遍历给定的值value，对于每一个值，它会在数组中寻找与该值匹配的所有元素（通过比较函数comparator）。然后，它会从数组中删除这些匹配的元素
     public static pullAllWith ( array, value, comparator )
     {
         value.forEach( function ( item )
         {
-            var res = array.filter( function ( n )
+            let res = array.filter( function ( n )
             {
                 return comparator( n, item );
             } );
 
             res.forEach( function ( item )
             {
-                var index = array.indexOf( item );
+                let index = array.indexOf( item );
                 if ( array.indexOf( item ) !== -1 )
                 {
                     array.splice( index, 1 );
@@ -1208,12 +1228,11 @@ export class Utils
         return array;
     }
 
-    //从数组中删除所有与给定值value相等的元素。具体来说，它遍历给定的值value，对于每一个值，它会在数组中寻找与该值相等的元素。然后，它会从数组中删除这些相等的元素
     public static pullAll ( array, value )
     {
         value.forEach( function ( item )
         {
-            var index = array.indexOf( item );
+            let index = array.indexOf( item );
             if ( array.indexOf( item ) !== -1 )
             {
                 array.splice( index, 1 );
@@ -1223,7 +1242,6 @@ export class Utils
         return array;
     }
 
-    //从后向前遍历集合中的每个元素，并对每个元素应用迭代函数
     public static forEachRight ( collection, iteratee )
     {
         if ( !Array.isArray( collection ) )
@@ -1231,35 +1249,27 @@ export class Utils
             collection = this.toArray( collection );
         }
 
-        for ( var i = collection.length - 1; i >= 0; i-- )
+        for ( let i = collection.length - 1; i >= 0; i-- )
         {
-            var ret = iteratee( collection[ i ] );
+            let ret = iteratee( collection[ i ] );
             if ( !ret ) break;
         }
     }
 
-    //使用 substr 方法从输入的字符串中提取从指定位置开始的子串，然后使用 startsWith 方法检查这个子串是否以目标子串开始。如果子串以目标子串开始，那么返回 true，否则返回 false
-    //同于使用原生JavaScript的 String.prototype.startsWith()
     public static startsWith ( str, target, position )
     {
         str = str.substr( position );
         return str.startsWith( target );
     }
 
-    //使用 substr 方法从输入的字符串中提取从指定位置结束的子串，然后使用 endsWith 方法检查这个子串是否以目标子串结束。如果子串以目标子串结束，那么返回 true，否则返回 false
-    //等同于使用原生JavaScript的 String.prototype.endsWith()
     public static endsWith ( str, target, position )
     {
         str = str.substr( position );
         return str.endsWith( target );
     }
-    /**
-     * 将object转化为数组。
-     */
     public static objectToArray ( srcObj: any )
     {
         const resultArr = [];
-        // to array
         for ( let key in srcObj )
         {
             if ( !srcObj.hasOwnProperty( key ) )
@@ -1269,13 +1279,10 @@ export class Utils
         return resultArr;
     }
 
-    /**
-     * !#zh 将数组转化为object。
-     */
     public static arrayToObject ( srcObj: any, objectKey: any )
     {
         const resultObj: any = {};
-        // to object
+
         for ( let key in srcObj )
         {
             if ( !srcObj.hasOwnProperty( key ) || !srcObj[ key ][ objectKey ] )
@@ -1284,10 +1291,7 @@ export class Utils
         }
         return resultObj;
     }
-    /**
-     * 判断传入的参数是否为空的Object。数组或undefined会返回false
-     * @param obj
-     */
+
     public static isEmptyObject ( obj: any )
     {
         let result = true;
@@ -1309,7 +1313,6 @@ export class Utils
         return result;
     }
 
-    //用于计算一个对象（Object）的属性数量
     public static getPropertyCount ( o: Object )
     {
         let n, count = 0;
@@ -1322,19 +1325,17 @@ export class Utils
         }
         return count;
     }
-    //在数组中查找指定值的索引
     public static indexOf ( array, value, fromIndex )
     {
         array = array.slice( fromIndex );
         return array.indexOf( value );
     }
 
-    //将数组中的所有元素连接成一个字符串，元素之间用指定的分隔符隔开
     public static join ( array, separator )
     {
         if ( array === null ) return '';
 
-        var result = '';
+        let result = '';
         array.forEach( function ( item )
         {
             result += item + separator;
@@ -1343,7 +1344,6 @@ export class Utils
         return result.substr( 0, result.length - 1 );
     }
 
-    //将字符串按照指定的分隔符拆分为一个数组，并限制返回的数组的长度
     public static split ( string, separator, limit )
     {
         return string.split( separator, limit );
@@ -1351,10 +1351,9 @@ export class Utils
 
 
 
-    //接受一个数组（array）和一个数字（n）作为参数，并从原数组中删除前n个元素，然后返回一个新的数组
     public static drop ( array, n )
     {
-        var length = array === null ? 0 : array.length;
+        let length = array === null ? 0 : array.length;
         if ( !length )
         {
             return [];
@@ -1363,7 +1362,6 @@ export class Utils
         return array.slice( n );
     }
 
-    //接受一个数组（arr）作为参数，并返回一个新的一维数组，其中包含了原数组中的所有元素
     public static flattenDeep ( arr )
     {
         return arr.reduce( function ( prev, cur )
@@ -1372,10 +1370,9 @@ export class Utils
         }, [] );
     }
 
-    //接受一个数组（array）作为参数，并返回一个新数组，其中包含了原数组中的所有唯一元素
     public static uniq ( array )
     {
-        var result = [];
+        let result = [];
         array.forEach( function ( item )
         {
             if ( result.indexOf( item ) === -1 )
@@ -1387,22 +1384,20 @@ export class Utils
         return result;
     }
 
-    //检查一个值是否为NaN
     public static isNaN ( value )
     {
         return this.isNumber( value ) && value !== +value;
     }
 
-    //将原数组拆分成一个数组的数组，其中每个子数组的长度不超过指定的 size
     public static chunk ( array, size )
     {
-        var length = array === null ? 0 : array.length;
+        let length = array === null ? 0 : array.length;
         if ( !length || size < 1 )
         {
             return [];
         }
 
-        var result = [];
+        let result = [];
         while ( array.length > size )
         {
             result.push( array.slice( 0, size ) );
@@ -1413,11 +1408,10 @@ export class Utils
         return result;
     }
 
-    //将输入的 value 转换为一个有限的数字。如果 value 是 null、undefined、false、0、空字符串等，或者 value 是 NaN，那么这个方法将返回0
     public static toFinite ( value )
     {
-        var INFINITY = 1 / 0;
-        var MAX_INTEGER = 1.7976931348623157e+308;
+        let INFINITY = 1 / 0;
+        let MAX_INTEGER = 1.7976931348623157e+308;
         if ( !value )
         {
             return value === 0 ? value : 0;
@@ -1425,18 +1419,17 @@ export class Utils
         value = Number( value );
         if ( value === INFINITY || value === -INFINITY )
         {
-            var sign = ( value < 0 ? -1 : 1 );
+            let sign = ( value < 0 ? -1 : 1 );
             return sign * MAX_INTEGER;
         }
         return value === value ? value : 0;
     }
 
-    //生成一个从 start 到 end（包含两端）的数字数组，其中数字的间隔为 step。如果 fromRight 为 true，那么将从右向左生成数组
     public static baseRange ( start, end, step, fromRight )
     {
-        var nativeMax = Math.max;
-        var nativeCeil = Math.ceil;
-        var index = -1,
+        let nativeMax = Math.max;
+        let nativeCeil = Math.ceil;
+        let index = -1,
             length = nativeMax( nativeCeil( ( end - start ) / ( step || 1 ) ), 0 ),
             result = Array( length );
 
@@ -1448,14 +1441,12 @@ export class Utils
         return result;
     }
 
-    //接受一个参数 value，并检查这个参数是否是一个对象。这个方法使用了 JavaScript 的 typeof 运算符来判断变量的类型
     public static isObject ( value )
     {
-        var type = typeof value;
+        let type = typeof value;
         return value !== null && ( type === 'object' || type === 'function' );
     }
 
-    //接受一个参数 value，并检查这个参数是否是一个在有效范围内的长度值
     public static MAX_SAFE_INTEGER = 9007199254740991;
     public static isLength ( value )
     {
@@ -1463,38 +1454,34 @@ export class Utils
             value > -1 && value % 1 === 0 && value <= Utils.MAX_SAFE_INTEGER;
     }
 
-    //接受一个参数 value，并检查这个参数是否类似于数组（即具有类似于数组的长度属性）
     public static isArrayLike ( value )
     {
-        return value !== null && this.isLength( value.length ) /*&& !isFunction(value)*/;
+        return value !== null && this.isLength( value.length )
     }
 
-    //接受两个参数 value 和 other，并检查这两个参数是否相等
     public static eq ( value, other )
     {
         return value === other || ( value !== value && other !== other );
     }
 
-    //接受两个参数：value 和 length。它检查 value 是否是一个有效的索引值，根据给定的 length 来决定索引的上限
     public static isIndex ( value, length )
     {
-        var type = typeof value;
+        let type = typeof value;
         length = length === null ? Utils.MAX_SAFE_INTEGER : length;
-        var reIsUint = /^(?:0|[1-9]\d*)$/;
+        let reIsUint = /^(?:0|[1-9]\d*)$/;
         return !!length &&
             ( type === 'number' ||
                 ( type !== 'symbol' && reIsUint.test( value ) ) ) &&
             ( value > -1 && value % 1 === 0 && value < length );
     }
 
-    //检查给定的值是否是给定对象的迭代调用
     public static isIterateeCall ( value, index, object )
     {
         if ( !this.isObject( object ) )
         {
             return false;
         }
-        var type = typeof index;
+        let type = typeof index;
         if ( type === 'number' ?
             ( this.isArrayLike( object ) && this.isIndex( index, object.length ) )
             : ( type === 'string' && index in object )
@@ -1505,7 +1492,6 @@ export class Utils
         return false;
     }
 
-    //接受三个参数：value、index 和 object，并检查它们是否满足迭代器调用（iteratee call）的条件
     public static createRange ( fromRight )
     {
         return function ( start, end, step )
@@ -1514,7 +1500,6 @@ export class Utils
             {
                 end = step = undefined;
             }
-            // Ensure the sign of `-0` is preserved.
             start = this.toFinite( start );
             if ( end === undefined )
             {
@@ -1529,14 +1514,13 @@ export class Utils
         };
     }
 
-    //找到数组中通过断言函数返回值最大的元素
     public static maxBy ( array, predicate )
     {
         if ( array && array.length )
         {
-            var result;
-            var objResult;
-            for ( var i = 0; i < array.length; i++ )
+            let result;
+            let objResult;
+            for ( let i = 0; i < array.length; i++ )
             {
                 if ( i === 0 )
                 {
@@ -1553,14 +1537,13 @@ export class Utils
         return undefined;
     }
 
-    //找到数组中通过断言函数返回值最小的元素
     public static minBy ( array, predicate )
     {
         if ( array && array.length )
         {
-            var result;
-            var objResult;
-            for ( var i = 0; i < array.length; i++ )
+            let result;
+            let objResult;
+            for ( let i = 0; i < array.length; i++ )
             {
                 if ( i === 0 )
                 {
@@ -1577,22 +1560,20 @@ export class Utils
         return undefined;
     }
 
-    //计算集合中所有元素通过断言函数返回值的总和
     public static sumBy ( collection, predicate )
     {
-        var sum = 0;
-        for ( var key in collection )
+        let sum = 0;
+        for ( let key in collection )
             sum += predicate( collection[ key ] );
         return sum;
     }
 
-    //统计集合中每个元素通过断言函数返回值出现的次数
     public static countBy ( collection, predicate )
     {
-        var objRet = {};
-        for ( var key in collection )
+        let objRet = {};
+        for ( let key in collection )
         {
-            var value = collection[ key ];
+            let value = collection[ key ];
             if ( objRet.hasOwnProperty( value ) )
                 objRet[ value ] += 1;
             else
@@ -1601,9 +1582,6 @@ export class Utils
         return objRet;
     }
 
-    //#endregion
-
-    //#region 大数值处理
     public static GetSize ( num: number )
     {
         let unitIndex = 0;
@@ -1645,12 +1623,8 @@ export class Utils
         const unitChars = [ '', '万', '亿', '兆', '京', '垓', '秭', '穰', '钩', '涧', '正', '载' ];
         const unitLength = 4;
         const numLength = numStr.length;
-        // 计算数字字符串的位数
         const numUnits = Math.ceil( numLength / unitLength );
-        // 确定第一个单位字符的索引
-        let currentUnitIndex = numUnits - 1;
-        let formattedStr = '';
-        // 处理首个数字的情况
+        let currentUnitIndex = numUnits - 1; let formattedStr = '';
         const firstUnitLength = numLength % unitLength;
         if ( firstUnitLength !== 0 )
         {
@@ -1661,33 +1635,28 @@ export class Utils
             }
             currentUnitIndex--;
         }
-        // 遍历剩余数字字符串，逐个处理单位
-        let zerosFound = 0; // 记录连续的零的数量
+        let zerosFound = 0;
         for ( let i = firstUnitLength; i < numLength && currentUnitIndex >= numUnits - level; i += unitLength )
         {
-            const digits = numStr.slice( i, i + unitLength ); // 取出当前单位的数字
-
-            // 如果当前单位全为零，则不输出
+            const digits = numStr.slice( i, i + unitLength );
             if ( parseInt( digits ) === 0 )
             {
                 zerosFound++;
                 currentUnitIndex--;
                 continue;
             }
-            // 添加当前单位的数字和单位字符
             if ( zerosFound > 0 )
             {
                 if ( formattedStr !== '' )
                 {
                     formattedStr += '0'.repeat( zerosFound );
                 }
-                zerosFound = 0; // 重置连续零的计数
+                zerosFound = 0;
             }
             formattedStr += digits;
             formattedStr += unitChars[ currentUnitIndex ];
             currentUnitIndex--;
         }
-        // 如果结果为空，说明输入的数字字符串全为零
         if ( formattedStr === '' )
         {
             return '0';
@@ -1724,36 +1693,36 @@ export class Utils
         {
             switch ( unitIndex )
             {
-                case 0://万以内
-                case 1://万                   
-                case 2://亿
+                case 0:
+                case 1:
+                case 2:
                     format = '';
                     break;
-                case 3://兆
+                case 3:
                     format = '万';
                     break;
-                case 4://京
+                case 4:
                     format = '亿';
                     break;
-                case 5://垓
+                case 5:
                     format = '兆';
                     break;
-                case 6://秭
+                case 6:
                     format = '京';
                     break;
-                case 7://穰
+                case 7:
                     format = '垓';
                     break;
-                case 8://沟
+                case 8:
                     format = '秭';
                     break;
-                case 9://涧
+                case 9:
                     format = '穰';
                     break;
-                case 10://正
+                case 10:
                     format = '沟';
                     break;
-                case 11://载
+                case 11:
                     format = '涧';
                     break;
             }
@@ -1762,38 +1731,38 @@ export class Utils
         {
             switch ( unitIndex )
             {
-                case 0://万以内
-                case 1://万
+                case 0:
+                case 1:
                     format = '';
                     break;
-                case 2://亿
+                case 2:
                     format = '万';
                     break;
-                case 3://兆
+                case 3:
                     format = '亿';
                     break;
-                case 4://京
+                case 4:
                     format = '兆';
                     break;
-                case 5://垓
+                case 5:
                     format = '京';
                     break;
-                case 6://秭
+                case 6:
                     format = '垓';
                     break;
-                case 7://穰
+                case 7:
                     format = '秭';
                     break;
-                case 8://沟
+                case 8:
                     format = '穰';
                     break;
-                case 9://涧
+                case 9:
                     format = '沟';
                     break;
-                case 10://正
+                case 10:
                     format = '涧';
                     break;
-                case 11://载
+                case 11:
                     format = '正';
                     break;
             }
@@ -1810,69 +1779,6 @@ export class Utils
         return result;
     }
 
-    static bigNumAdd ( a: number | string | BigNumber, b: number | string | BigNumber ) //+
-    {
-        if ( typeof a === 'number' || typeof a === 'string' )
-        {
-            let x = BigNumber( a );
-            let y = BigNumber( b );
-            return x.plus( y );
-        }
-        else
-            return a.plus( b );
-    }
-
-    static bigNumReduce ( a: number | string | BigNumber, b: number | string | BigNumber )//-
-    {
-        if ( typeof a === 'number' || typeof a === 'string' )
-        {
-            let x = BigNumber( a );
-            let y = BigNumber( b );
-            return x.minus( y );
-        }
-        else
-            return a.minus( b );
-    }
-
-    static bigNumMultiply ( a: number | string | BigNumber, b: number | string | BigNumber )//*
-    {
-        if ( typeof a === 'number' || typeof a === 'string' )
-        {
-            let x = BigNumber( a );
-            let y = BigNumber( b );
-            return x.multipliedBy( y );
-        }
-        else
-            return a.multipliedBy( b );
-    }
-
-    static bigNumDivide ( a: number | string | BigNumber, b: number | string | BigNumber )//除
-    {
-        if ( typeof a === 'number' || typeof a === 'string' )
-        {
-            let x = BigNumber( a );
-            let y = BigNumber( b );
-            return x.dividedBy( y );
-        }
-        else
-            return a.dividedBy( b );
-    }
-
-    static bigNumSurplus ( a: number | string | BigNumber, b: number | string | BigNumber )//模
-    {
-        if ( typeof a === 'number' || typeof a === 'string' )
-        {
-            let x = BigNumber( a );
-            let y = BigNumber( b );
-            return x.mod( y );
-        }
-        else
-            return a.mod( b );
-    }
-    //#endregion
-
-    //#region 数值处理
-    //格式化钱数，超过10000 转换位 10K   10000K 转换为 10M
     public static formatMoney ( money: number )
     {
         const arrUnit = [ '', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y', 'B', 'N', 'D' ];
@@ -1892,13 +1798,12 @@ export class Utils
 
         if ( strValue === '' )
         {
-            strValue = Math.floor( money ) + 'U'; //超过最大值就加个U
+            strValue = Math.floor( money ) + 'U';
         }
 
         return strValue;
     }
 
-    //将输入的数值转化为对应的单位字符串
     public static formatValue ( value: number )
     {
         let arrUnit = []
@@ -1921,38 +1826,16 @@ export class Utils
         }
         return strValue;
     }
-
-
-    public static getRandomNumbers (): number[]
-    {
-        const numbers: number[] = [ 0, 1, 2, 3 ];
-        const result: number[] = [];
-        while ( result.length < 4 )
-        {
-            const randomIndex = Math.floor( Math.random() * numbers.length );
-            const selectedNumber = numbers.splice( randomIndex, 1 )[ 0 ];
-            result.push( selectedNumber );
-        }
-        return result;
-    }
-
-    //将输入的数字格式化为两位数 5-->05
     public static formatTwoDigits ( time: number )
     {
         return ( Array( 2 ).join( '0' ) + time ).slice( -2 );
     }
 
-    //是否是数字
     public static isNumber ( value )
     {
         return typeof value === 'number';
     }
 
-    /**
-       * 返回指定小数位的数值
-       * @param num 
-       * @param idx 
-       */
     public static formatNumToFixed ( num: number, idx: number = 0 )
     {
         return Number( num.toFixed( idx ) );
@@ -1968,11 +1851,10 @@ export class Utils
         {
             v = curValue - ( curValue - targetValue ) * ratio;
         }
-
         return v;
     }
 
-    public static getMin ( array: any )//取得最小值
+    public static getMin ( array: any )
     {
         let result = 0;
         if ( array.constructor === Array )
@@ -1992,7 +1874,7 @@ export class Utils
         return result;
     }
 
-    public static getMax ( array: any )//取得最大值
+    public static getMax ( array: any )
     {
         let result = 0;
         if ( array.constructor === Array )
@@ -2012,11 +1894,6 @@ export class Utils
         return result;
     }
 
-    /**
-     * 随机打乱数组
-     * @param arr 
-     * @returns 
-     */
     static disOriginArr ( arr: number[] )
     {
         let len = arr.length;
@@ -2029,11 +1906,7 @@ export class Utils
         }
         return arr;
     }
-    /**
-         * 返回一个差异化数组（将array中diff里的值去掉）
-         * @param array
-         * @param diff
-         */
+
     public static difference ( array: any, diff: any )
     {
         const result: number[] = [];
@@ -2054,13 +1927,12 @@ export class Utils
         return result;
     }
 
-    //从输入数组中移除满足特定条件的元素，并将它们存入一个新的数组
     public static remove ( array: any[], predicate: {
         ( obj: any ): boolean; ( arg0: any ): any;
     } )
     {
-        var result: any[] = [];
-        var indexes: any[] = [];
+        let result: any[] = [];
+        let indexes: any[] = [];
         array.forEach( function ( item: any, index: any )
         {
             if ( predicate( item ) )
@@ -2073,39 +1945,27 @@ export class Utils
         this.basePullAt( array, indexes );
         return result;
     }
-    //从数组中删除指定的索引，并返回删除元素后的数组
+
     public static basePullAt ( array: any, indexes: string | any[] )
     {
-        var length = array ? indexes.length : 0;
-        var lastIndex = length - 1;
-        var previous;
+        let length = array ? indexes.length : 0;
+        let lastIndex = length - 1;
+        let previous;
 
         while ( length-- )
         {
-            var index = indexes[ length ];
+            let index = indexes[ length ];
             if ( length === lastIndex || index !== previous )
             {
                 previous = index;
                 Array.prototype.splice.call( array, index, 1 );
             }
         }
-
         return array;
     }
-    //#endregion
 
-    //#region 通用数学库
-    /**
-         * Rodrigues’ Rotation Formula
-         * 使 v 绕 u 轴旋转 maxAngleDelta （弧度）
-         * @param out 
-         * @param v 
-         * @param u 
-         * @param maxAngleDelta 
-         */
     static rotateAround ( out: Vec3, v: Vec3, u: Vec3, maxAngleDelta: number )
     {
-
         //out = v*cos + uxv*sin  + (u*v)*u*(1- cos);
         const cos = Math.cos( maxAngleDelta );
         const sin = Math.sin( maxAngleDelta );
@@ -2123,29 +1983,15 @@ export class Utils
 
         // + (u*v)*u*(1-cos)
         Vec3.scaleAndAdd( out, tempVec3, u, dot * ( 1.0 - cos ) );
-
     }
 
-    /**
-     * 将 from 向 to 旋转 maxAngleDelta 弧度
-     * @param out 
-     * @param from 
-     * @param to 
-     * @param maxAngleDelta 
-     */
+
     static rotateToward ( out: Vec3, from: Vec3, to: Vec3, maxAngleDelta: number )
     {
         Vec3.cross( up, from, to );
         this.rotateAround( out, from, up, maxAngleDelta );
     }
 
-    /**
-     * 求两个向量间的夹角（带符号）
-     * @param from 
-     * @param to 
-     * @param axis 
-     * @returns 
-     */
     static signAngle ( from: Vec3, to: Vec3, axis: Vec3 ): number
     {
         const angle = Vec3.angle( from, to );
@@ -2153,36 +1999,19 @@ export class Utils
         const sign = Math.sign( axis.x * tempVec.x + axis.y * tempVec.y + axis.z * tempVec.z );
         return angle * sign;
     }
-    //#endregion
-
-    //#region 计数器
-    //延时调用
     public static DelayCallBack ( time: number, func: Function )
     {
         setTimeout( () =>
         {
-            func && func();//回调
+            func && func();
         }, time * 1000 );
     }
 
-    public static ChangColor ( isToGray = false, Opa: UIOpacity, time: number, cb?: Function )
-    {
-        if ( isToGray )
-            tween( Opa ).to( time, { opacity: 0 } ).call( () => { cb && cb() } ).start();//变暗
-        else
-            tween( Opa ).to( time, { opacity: 255 } ).call( () => { cb && cb() } ).start();//变明 
-    }
-
-    //#endregion
-
-    //#region 其他函数库
-    //求中点
     public static getMidPos ( pos1: Vec3, pos2: Vec3 )
     {
         return new Vec3( ( pos1.x + pos2.x ) / 2, ( pos1.y + pos2.y ) / 2, ( pos1.z + pos2.z ) / 2 )
     }
 
-    //检测一个节点是否在另一个节点内
     public static cheakCollierPoint ( currentNode: Node, targetNode: Node ): boolean
     {
         let curNodePosition = currentNode.parent.getComponent( UITransform ).convertToWorldSpaceAR( currentNode.position );
@@ -2193,11 +2022,6 @@ export class Utils
             return false
     };
 
-    /**
-    * 包围盒与包围盒碰撞检测
-    * @param {*} currentNode   当前节点
-    * @param {*} targetNode    目标节点
-    */
     public static cheakCollierBox ( currentNode: Node, targetNode: Node ): boolean
     {
         let curBoundingBox = currentNode.getComponent( UITransform ).getBoundingBoxToWorld();
@@ -2208,43 +2032,30 @@ export class Utils
             return false
     };
 
-    /** 提取出第一个下划线之前的子字符串 （下划线前边）*/
-    public static getTouchName ( _str: string ): string
+    public static getStringBeforeUnderscore ( input: string ): string
     {
-        let outStr: string = "";
-        for ( let i = 0; i < _str.length; i++ )
+        const underscoreIndex = input.indexOf( '_' );
+        if ( underscoreIndex !== -1 )
         {
-            if ( _str[ i ] == '_' )
-            {
-                // 分隔符
-                outStr = _str.substring( 0, i );
-                break;
-            } else
-            {
-                outStr = _str;
-            }
+            // 返回"_"前的所有字符  
+            return input.substring( 0, underscoreIndex );
         }
-        return outStr;
+        // 如果没有找到"_", 返回整个字符串  
+        return input;
     }
 
-    /** 查找第一个下划线后面的数字部分，然后将数字部分转换为数字类型并返回 */
-    public static getTouchNum ( _str: string ): number
+    public static getTouchName ( str: string ): string
     {
-        let outStr: string = "";
-        for ( let i = 0; i < _str.length; i++ )
-        {
-            if ( _str[ i ] == '_' )
-            {
-                // 分隔符
-                outStr = _str.substring( i + 1, _str.length );
-                break;
-            }
-        }
-        return parseInt( outStr );
+        const index = str.indexOf( '_' );      // 直接查找下划线位置
+        return index === -1 ? str : str.substring( 0, index );
     }
-    //#endregion
 
-    //#region   浏览器数据加载与保存
+    public static getTouchNum ( str: string ): number
+    {
+        const match = str.match( /_(\d+)$/ );  // 匹配末尾数字（如 "_3"）
+        return match ? parseInt( match[ 1 ] ) : NaN;
+    }
+
     public static save ()
     {
         if ( sys.platform === sys.Platform.MOBILE_BROWSER ||
@@ -2305,28 +2116,14 @@ export class Utils
         }
     }
 
-    //通过data创建texture
     public static createTexture ( imgData: any, width: number, height: number ): Texture2D
     {
-
-        //默认一张白色纹理
-
         let tex = new Texture2D();
-
-        // /包含 RGBA 四通道的 32 位整形像素格式：RGBA8888。 一字节8位
-
         tex.reset( { width: width, height: height, format: Texture2D.PixelFormat.RGBA8888, mipmapLevel: 0 } );
-
         tex.uploadData( imgData, 0, 0 );
-
-        // 更新 0 级 Mipmap。
-
         tex.updateImage();
-
         return tex;
     }
-
-    //扩展图片
     public static expandImage ( imgData: Uint8Array, width: number, height: number, expand: number = 0 ): Uint8Array
     {
         let buffer = new Uint8Array( imgData.length + 4 * ( expand * width * 2 + expand * height * 2 + height * width * 4 ) );
@@ -2389,7 +2186,6 @@ export class Utils
 
     }
 
-    //读取数组
     public static readPixels ( tex: any ): Uint8Array
     {
         const gfxTexture = tex.getGFXTexture();
@@ -2397,8 +2193,6 @@ export class Utils
         {
             return null;
         }
-
-        //数组长度
         const needSize = 4 * tex.width * tex.height;
         let buffer = new Uint8Array( needSize );
         const gfxDevice = tex._getGFXDevice();
@@ -2406,17 +2200,39 @@ export class Utils
         const regions: gfx.BufferTextureCopy[] = [];
         const region0 = new gfx.BufferTextureCopy();
 
-        //数组设置起始和宽高
         region0.texOffset.x = 0;
         region0.texOffset.y = 0;
         region0.texExtent.width = tex.width;
         region0.texExtent.height = tex.height;
 
-        //copy数据
         regions.push( region0 );
         bufferViews.push( buffer );
         gfxDevice?.copyTextureToBuffers( gfxTexture, bufferViews, regions );
         return buffer;
     }
-    //#endregion
+
+    public static SetNodeChildActive ( root: Node, isShow: boolean = false, showNodeArr?: number[] | Node[] )
+    {
+        for ( let index = 0; index < root.children.length; index++ )
+        {
+            if ( root.children[ index ].active == !isShow )
+                root.children[ index ].active = isShow;
+        }
+
+        for ( let index = 0; showNodeArr && ( index < showNodeArr.length ); index++ )
+        {
+            //    console.log("SetNodeChildActive设置的参数类型",typeof showNodeArr[index])
+            if ( typeof showNodeArr[ index ] == "number" )
+            {
+                let nodeIndex = showNodeArr[ index ] as number;
+                if ( root.children[ nodeIndex ] ) root.children[ nodeIndex ].active = !isShow;
+            }
+
+            if ( typeof showNodeArr[ index ] == "object" )
+            {
+                let node = showNodeArr[ index ] as Node;
+                if ( node ) node.active = !isShow;
+            }
+        }
+    }
 }

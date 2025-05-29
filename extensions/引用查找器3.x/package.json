@@ -1,0 +1,76 @@
+{
+    "$schema": "./@types/schema/package/index.json",
+    "package_version": 2,
+    "name": "ccc-references-finder-3x",
+    "version": "1.0.0",
+    "description": "i18n:ccc-references-finder-3x.description",
+    "author": "原作者:陈皮皮 版本迁移:ovven",
+    "author-info": {
+        "email": "952157129@qq.com",
+        "url": "https://chenpipi.cn",
+        "wechat": "im_chenpipi",
+        "git-home": "https://gitee.com/ifaswind",
+        "official-account": "公众号「菜鸟小栈」"
+    },
+    "repository": "https://gitee.com/ifaswind/ccc-references-finder",
+    "scripts": {
+        "1.clean-dist": "rimraf dist",
+        "2.tsc": "tsc",
+        "3.copy-lib": "copyfiles -u 1 -V source/lib/**/*.* dist/ ",
+        "4.copy-renderer": "copyfiles -u 1 -V source/renderer/**/*.* dist/ ",
+        "build": "npm run 1.clean-dist && npm run 2.tsc && npm run 3.copy-lib && npm run 4.copy-renderer"
+    },
+    "main": "./dist/main.js",
+    "dependencies": {
+        "ccc-references-finder-3x": "file:"
+    },
+    "devDependencies": {
+        "@cocos/creator-types": "^3.8.3",
+        "@types/node": "^18.17.1"
+    },
+    "contributions": {
+        "menu": [
+            {
+                "path": "i18n:menu.extension/i18n:ccc-references-finder-3x.name",
+                "label": "i18n:ccc-references-finder-3x.find",
+                "message": "find-current-selection",
+                "icon": "/images/search.png"
+            },
+            {
+                "path": "i18n:menu.extension/i18n:ccc-references-finder-3x.name",
+                "label": "i18n:ccc-references-finder-3x.settings",
+                "message": "open-settings-panel",
+                "icon": "/images/settings.png"
+            }
+        ],
+        "messages": {
+            "find-current-selection": {
+                "public": true,
+                "description": "查找引用",
+                "methods": [
+                    "findCurrentSelection"
+                ]
+            },
+            "open-settings-panel": {
+                "public": true,
+                "description": "打开设置面板",
+                "methods": [
+                    "openSettingsPanel"
+                ]
+            },
+            "asset-db:asset-change": {
+                "methods": [
+                    "onAssetChanged"
+                ]
+            }
+        },
+        "shortcuts": [
+            {
+                "message": "find-current-selection",
+                "win": "F6",
+                "mac": "F6"
+            }
+        ]
+    },
+    "_storeId": "5fb6ce2b6e2e7cabea209091de1b7838"
+}

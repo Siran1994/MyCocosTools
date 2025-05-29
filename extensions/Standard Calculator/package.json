@@ -1,0 +1,62 @@
+{
+  "package_version": 2,
+  "name": "standard-calculator",
+  "version": "1.0.0",
+  "author": "机灵鸟工作室 · BOLT BIRDIE STUDIO",
+  "editor": ">=3.8.3",
+  "description": "i18n:standard-calculator.description",
+  "main": "./dist/main.js",
+  "panels": {
+    "default": {
+      "title": "i18n:standard-calculator.panel_default_title",
+      "type": "dockable",
+      "main": "dist/panels/defaultPanel",
+      "icon": "dist/icon.svg",
+      "size": {
+        "min-width": 330,
+        "min-height": 500,
+        "width": 330,
+        "height": 500
+      }
+    },
+    "about": {
+      "title": "i18n:standard-calculator.panel_about_title",
+      "type": "simple",
+      "main": "dist/panels/aboutPanel",
+      "size": {
+        "min-width": 250,
+        "min-height": 250,
+        "width": 250,
+        "height": 250
+      }
+    }
+  },
+  "contributions": {
+    "menu": [
+      {
+        "path": "i18n:standard-calculator.editor_menu",
+        "label": "i18n:standard-calculator.open_panel",
+        "message": "open-panel"
+      }
+    ],
+    "messages": {
+      "open-panel": {
+        "methods": [
+          "openPanel"
+        ]
+      },
+      "open-about": {
+        "methods": [
+          "openAbout"
+        ]
+      },
+      "send-to-panel": {
+        "methods": [
+          "default.hello"
+        ]
+      }
+    },
+    "shortcuts": []
+  },
+  "_storeId": "fd3cb2f06cbb7278fc0750e4eac1c41d"
+}

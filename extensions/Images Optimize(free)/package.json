@@ -1,0 +1,61 @@
+{
+  "package_version": 2,
+  "name": "images-optimize-free",
+  "version": "1.0.0",
+  "author": "机灵鸟工作室 · BOLT BIRDIE STUDIO",
+  "editor": ">=3.8.3",
+  "description": "i18n:images-optimize-free.description",
+  "main": "./dist/main.js",
+  "panels": {
+    "default": {
+      "title": "i18n:images-optimize-free.panel_default_title",
+      "type": "dockable",
+      "main": "dist/panels/defaultPanel",
+      "icon": "dist/icon.svg",
+      "size": {
+        "min-width": 350,
+        "min-height": 550,
+        "width": 350,
+        "height": 550
+      }
+    },
+    "about": {
+      "title": "i18n:images-optimize-free.panel_about_title",
+      "type": "simple",
+      "main": "dist/panels/aboutPanel",
+      "size": {
+        "min-width": 350,
+        "min-height": 300,
+        "width": 350,
+        "height": 300
+      }
+    }
+  },
+  "contributions": {
+    "menu": [
+      {
+        "path": "i18n:images-optimize-free.editor_menu_free",
+        "label": "i18n:images-optimize-free.open_panel",
+        "message": "open-panel"
+      },
+      {
+        "path": "i18n:images-optimize-free.editor_menu_free",
+        "label": "i18n:images-optimize-free.open_about",
+        "message": "open-about"
+      }
+    ],
+    "messages": {
+      "open-panel": {
+        "methods": [
+          "openPanel"
+        ]
+      },
+      "open-about": {
+        "methods": [
+          "openAbout"
+        ]
+      }
+    }
+  },
+  "_storeId": "c626e44dd408544bf5012331cab8b0e4"
+}

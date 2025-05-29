@@ -1,0 +1,10 @@
+{
+	"click_switch_language": "click switch language",
+	"hierarchy": {
+		"name": "multLanguage-%{year}"
+	},
+	"rich_text": "<color=#00ff00>Rich</color><color=#0fffff>textTest</color>",
+	"test": {
+		"name": "test"
+	}
+}
