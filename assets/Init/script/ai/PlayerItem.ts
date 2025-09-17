@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, ParticleSystem, Vec3 } from 'cc';
 import { ItemType } from '../data/Enum';
-import { AudioMgr } from '../manager/AudioMgr';
 import { Messager } from '../manager/Messager';
 import { Player } from '../ai/Player';
 

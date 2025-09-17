@@ -11,6 +11,8 @@ import { BasePanel } from './BasePanel';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { Label } from 'cc';
 import { Vec3 } from 'cc';
+import { PoolManager } from '../manager/PoolManager';
+import { Utils } from '../tool/Utils';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'SignPanel' )
@@ -37,20 +39,20 @@ export class SignPanel extends BasePanel
     {
         this.closeBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.mainPanel.node.active = true;
             this.HidePanel();
         }, this );
 
         this.SignBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.DoSign( false );
         }, this );
 
         this.Get2XBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.DoSign( true );
         }, this );
 
@@ -67,22 +69,30 @@ export class SignPanel extends BasePanel
         this.CoinTxt.string = GameData.Coin.toString();
     }
 
-    DoSign ( isGet2x = false )
+    DoSign ( isEarlySign = false )
     {
-        if ( this.isCanSign() )
+        if ( isEarlySign )//提前签到
         {
-
             GameData.SignDay += 1;
             if ( GameData.SignDay > 7 )
                 GameData.SignDay = 1;
-
             Messager.Broadcast( 'SignItem', GameData.SignDay );
-            PlayerPrefs.SetInt( 'signDate', DateUtils.getDate().day );
-            this.GetReward( isGet2x );
+            this.GetReward();
         }
         else
-            TipManager.Instance.showTips( '今天已签到,请明天继续签到!' );
-
+        {
+            if ( this.isCanSign() )
+            {
+                PlayerPrefs.SetInt( 'signDate', DateUtils.getDate().day );
+                GameData.SignDay += 1;
+                if ( GameData.SignDay > 7 )
+                    GameData.SignDay = 1;
+                Messager.Broadcast( 'SignItem', GameData.SignDay );
+                this.GetReward();
+            }
+            else
+                TipManager.Instance.showTips( '今天已签到,请明天继续签到!' );
+        }
     }
 
     isCanSign ()
@@ -134,5 +144,10 @@ export class SignPanel extends BasePanel
         }
         if ( GameData.SignDay != 2 && GameData.SignDay != 7 )
             UiManager.Instance.UpdateCoin( coin, this.CoinTxt, Vec3.ZERO, this.CoinTxt.node.worldPosition );
+        Utils.DelayCallBack( 1, () =>
+        {
+            UiManager.Instance.mainPanel.node.active = true;
+            PoolManager.putNode( this.node );
+        } );
     }
 }

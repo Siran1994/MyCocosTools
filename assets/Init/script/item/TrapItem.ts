@@ -35,7 +35,7 @@ export class TrapItem extends Component
             collider.enabled = false;
             if ( this.propType == PropType.墙 )
             {
-                AudioMgr.Instance.撞墙.Play();
+                AudioMgr.Instance.Play( '撞墙' );
                 this.ani.playOnLoad = true;
                 this.ani.play();
             }

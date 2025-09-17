@@ -67,7 +67,7 @@ export class SelectPanel extends Component
     {
         this.AddRoleBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             if ( GameData.Coin >= GameData.SpiderLv * 50 )
             {
                 GameData.Coin -= GameData.SpiderLv * 50;
@@ -91,7 +91,7 @@ export class SelectPanel extends Component
 
         this.AddTimeBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             if ( GameData.Coin >= GameData.SpeedLv * 100 )
             {
                 GameData.Coin -= GameData.SpeedLv * 100;

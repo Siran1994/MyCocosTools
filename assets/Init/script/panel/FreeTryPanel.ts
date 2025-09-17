@@ -26,15 +26,15 @@ export class FreeTryPanel extends BasePanel
 
     start ()
     {
-        AudioMgr.Instance.奖励弹窗.Play();
+        AudioMgr.Instance.Play( '奖励弹窗' );
         this.adGetBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.HidePanel();
         }, this );
         this.cancelBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.HidePanel();
         }, this );
     }

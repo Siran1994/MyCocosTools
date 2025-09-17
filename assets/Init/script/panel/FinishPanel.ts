@@ -66,7 +66,7 @@ export class FinishPanel extends BasePanel
     {
         this.RestartBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.RestartBtn.interactable = false;
             UiManager.Instance.UpdateCoin( GameManager.Instance.Coin, this.MyCoinTxt, Vec3.ZERO, this.CoinTxt.node.worldPosition );
             Utils.DelayCallBack( 2, () =>
@@ -80,7 +80,7 @@ export class FinishPanel extends BasePanel
 
         this.Reward3x.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.Reward3x.interactable = false;
             UiManager.Instance.UpdateCoin( GameManager.Instance.Coin * 2, this.MyCoinTxt, Vec3.ZERO, this.CoinTxt.node.worldPosition );
             Utils.DelayCallBack( 2, () =>
@@ -114,7 +114,7 @@ export class FinishPanel extends BasePanel
 
     public ShowProgress ()
     {
-        AudioMgr.Instance.奖励解锁进度.Play();
+        AudioMgr.Instance.Play( '奖励解锁进度' );
         let info = this.GetClipItem( GameData.Lv - 1 );
         this.Bg.spriteFrame = info.cardIcon;
         let cardName = GameManager.Instance.GetItemName( info.clipType );

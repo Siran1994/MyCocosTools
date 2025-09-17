@@ -18,14 +18,6 @@ const { ccclass, property } = _decorator;
 @ccclass( 'GameManager' )
 export class GameManager extends Component
 {
-    static showAd ( arg0: () => void )
-    {
-        throw new Error( 'Method not implemented.' );
-    }
-    GetBallType ( targetId: number ): string
-    {
-        throw new Error( 'Method not implemented.' );
-    }
     public static Instance: GameManager = null;
     onLoad () 
     {
@@ -57,10 +49,6 @@ export class GameManager extends Component
             this.targetLv = GameData.Lv;
         this.currentlv = instantiate( PrefabManager.get( this.targetLv.toString(), PrefabManager.LvMap ) );
         this.currentlv.parent = this.node;
-        AudioMgr.init( this.node.parent, () =>
-        {
-            AudioMgr.Instance.游戏背景乐.playMusic();
-        } );
 
         // CsvManager.Instance.getData( 'talk' );//Excel表格使用示例
 
@@ -89,13 +77,13 @@ export class GameManager extends Component
             GameManager.Instance.IsStart = false;
             GameManager.Instance.Play( PlayerCtrl.Instance.anmator, AniState.死亡 );
             UiManager.Instance.faildPanel.node.active = true;
-            AudioMgr.Instance.失败结算.Play();
+            AudioMgr.Instance.Play( '失败结算' );
         }
         else //游戏通关
         {
             GameData.Coin += GameManager.Instance.Coin;
             UiManager.Instance.rewardPanel.node.active = true;
-            AudioMgr.Instance.胜利结算.Play();
+            AudioMgr.Instance.Play( '胜利结算' );
         }
     }
 
@@ -192,5 +180,99 @@ export class GameManager extends Component
     GetItemName ( itemType: ItemType )
     {
         return ItemType[ itemType ].toString();
+    }
+
+    static showAd ( succFun, failFun = null )
+    {
+        //TipManager.Instance.showTips( '请接入SDK!' );
+        succFun();
+        //failFun();
+        // Platforms_QuickGame.getInstance().showVideo(
+        //     () =>
+        //     {
+        //GameData.AdCount += 1;//记录玩家每天广告总次数
+        //GameManager.reportEvent( 'player_ad_times', { player_ad_times: GameData.AdCount } );
+        //         succFun();
+        //     },
+        //     () =>
+        //     {
+        //         failFun();
+        //     } );
+    }
+
+    static reportEvent ( eventName, data )//埋点事件
+    {
+        // this.tt = window[ "tt" ]
+        // if ( this.tt )
+        // {
+        //     console.log( "埋点响应成功" + eventName, data );
+        //     this.tt.reportAnalytics( eventName, data );
+        // }
+        // else
+        {
+            console.log( "埋点测试" + eventName, data );
+        }
+    }
+
+    static AddDesk ( click: Function, succ: Function, fail: Function )//添加桌面
+    {
+        click = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '1.添加桌面', status: '点击' } )
+        }
+        succ = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '1.添加桌面', status: '成功' } )
+        }
+        fail = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '1.添加桌面', status: '失败' } )
+        }
+    }
+
+    static SideBar ( click: Function, succ: Function, fail: Function )//侧边栏
+    {
+        click = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '2.侧边栏', status: '点击' } );
+        }
+        succ = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '2.侧边栏', status: '成功' } );
+        }
+        fail = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '2.侧边栏', status: '失败' } );
+        }
+    }
+    static Collect ( click: Function, succ: Function, fail: Function )//收藏
+    {
+        click = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '3.收藏', status: '点击' } );
+        }
+        succ = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '3.收藏', status: '成功' } );
+        }
+        fail = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '3.收藏', status: '失败' } );
+        }
+    }
+    static Share ( click: Function, succ: Function, fail: Function )//分享
+    {
+        click = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '4.分享', status: '点击' } );
+        }
+        succ = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '4.分享', status: '成功' } );
+        }
+        fail = () =>
+        {
+            GameManager.reportEvent( 'DY_giftPack_id', { DY_giftPack_id: '4.分享', status: '失败' } );
+        }
     }
 }

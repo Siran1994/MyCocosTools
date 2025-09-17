@@ -9,9 +9,9 @@ export class JsonManager extends Component
 
     static Path = 'prefab/json';
 
-    public static loadTextAsset ( path: string )
+    public static loadTextAsset ( bundleName: string, path: string )
     {
-        ResMgr.loadDir( path, JsonAsset, ( completedCount, totalCount ) =>
+        ResMgr.loadDir( bundleName, path, JsonAsset, ( completedCount, totalCount ) =>
         {
             //console.log( '完成个数:' + completedCount + '总数:' + totalCount );
         }, ( assets: JsonAsset[] ) =>

@@ -49,7 +49,7 @@ export class RewardPanel extends BasePanel
     {
         this.AdGetAllBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             Messager.Broadcast( 'OpenAllBox' );
             this.TipTxt.string = '免费开启次数:' + 0;
 
@@ -60,7 +60,7 @@ export class RewardPanel extends BasePanel
 
         this.CancelBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             GameManager.Instance.NextLevel( false, false, () =>
             {
                 GameManager.Instance.init();
@@ -70,7 +70,7 @@ export class RewardPanel extends BasePanel
 
         this.NextLvBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             GameManager.Instance.NextLevel( false, false, () =>
             {
                 GameManager.Instance.init();

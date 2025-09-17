@@ -43,7 +43,7 @@ export class TryPanel extends BasePanel
     {
         this.AdTryBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             GameManager.showAd( () =>
             {
                 Messager.Broadcast( 'ChangeHand', this.targetId );
@@ -55,7 +55,7 @@ export class TryPanel extends BasePanel
 
         this.CancelBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.mainPanel.StartGame();
             this.HidePanel();
         }, this );

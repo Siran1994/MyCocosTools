@@ -36,7 +36,7 @@ export class BoxItem extends Component
             let coin = Utils.random( Config.BoxReward.Min, Config.BoxReward.Max );
             this.CoinNum.node.active = true;
             this.CoinNum.string = coin.toString();
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.ani.playOnLoad = true;
             this.ani.play();
             this.isOpened = true;
@@ -52,7 +52,7 @@ export class BoxItem extends Component
             let coin = Utils.random( Config.BoxReward.Min, Config.BoxReward.Max );
             this.CoinNum.node.active = true;
             this.CoinNum.string = coin.toString();
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.ani.playOnLoad = true;
             this.ani.play();
             UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt, Vec3.ZERO, UiManager.Instance.rewardPanel.CoinTxt.node.worldPosition );
@@ -89,7 +89,7 @@ export class BoxItem extends Component
             let coin = Utils.random( Config.BoxReward.Min, Config.BoxReward.Max );
             this.CoinNum.node.active = true;
             this.CoinNum.string = coin.toString();
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.ani.playOnLoad = true;
             this.ani.play();
             UiManager.Instance.UpdateCoin( coin, UiManager.Instance.rewardPanel.CoinTxt, Vec3.ZERO, UiManager.Instance.rewardPanel.CoinTxt.node.worldPosition );

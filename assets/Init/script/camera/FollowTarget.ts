@@ -2,6 +2,7 @@ import { find } from 'cc';
 import { _decorator, Component, Node, Vec3 } from 'cc';
 import { Config } from '../data/Config';
 import { math } from 'cc';
+import { Messager } from '../manager/Messager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'FollowTarget' )
@@ -22,6 +23,21 @@ export class FollowTarget extends Component
         {
             this.target = find( 'Player' );
         }
+    }
+
+    onEnable ()
+    {
+        Messager.AddListener( 'updateCount', this, this.updateCount );
+    }
+
+    onDisable ()
+    {
+        Messager.RemoveListener( 'updateCount', this, this.updateCount );
+    }
+
+    updateCount ( num: number )
+    {
+        this.offset = new Vec3( 0, 4 + 1 * num, 6.8 + 2 * num );
     }
 
     tmpPos = new Vec3();

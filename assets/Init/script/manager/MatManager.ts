@@ -10,9 +10,9 @@ export class MatManager
 
     static Path = 'prefab/cardskin';
 
-    public static loadMat ( path: string )
+    public static loadMat ( bundleName: string, path: string )
     {
-        ResMgr.loadDir( path, Material, ( completedCount, totalCount ) =>
+        ResMgr.loadDir( bundleName, path, Material, ( completedCount, totalCount ) =>
         {
             //console.log( '完成个数:' + completedCount + '总数:' + totalCount );
         }, ( assets: Material[] ) =>

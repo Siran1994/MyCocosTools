@@ -61,7 +61,7 @@ export class FightPanel extends BasePanel
         {
             this.FightClose.interactable = false;
             Utils.DelayCallBack( 0.5, () => { this.FightClose.interactable = true; } );
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             // if ( GameManager.Instance.coin >= GameManager.Instance.FcPrice )
             // {
             //     GameManager.Instance.coin -= GameManager.Instance.FcPrice;
@@ -80,7 +80,7 @@ export class FightPanel extends BasePanel
         {
             this.FightFor.interactable = false;
             Utils.DelayCallBack( 0.5, () => { this.FightFor.interactable = true; } );
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             // if ( GameManager.Instance.coin >= GameManager.Instance.FFPrice )
             // {
             //     GameManager.Instance.coin -= GameManager.Instance.FFPrice;
@@ -96,7 +96,7 @@ export class FightPanel extends BasePanel
 
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             // var tmpNum = GameManager.Instance.coin;
             // var targetNum = tmpNum + 100;
             // var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 20, targetNum, 0.001, '', () =>

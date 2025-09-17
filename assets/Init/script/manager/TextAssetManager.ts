@@ -10,9 +10,9 @@ export class TextAssetManager extends Component
 
     static Path = 'prefab/lv';
 
-    public static loadTextAsset ( path: string )
+    public static loadTextAsset ( bundle, path: string )
     {
-        ResMgr.loadDir( path, TextAsset, ( completedCount, totalCount ) =>
+        ResMgr.loadDir( bundle, path, TextAsset, ( completedCount, totalCount ) =>
         {
             //console.log( '完成个数:' + completedCount + '总数:' + totalCount );
         }, ( assets: TextAsset[] ) =>

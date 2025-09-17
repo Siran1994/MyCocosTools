@@ -36,7 +36,7 @@ export class ClipPanel extends BasePanel
 
         this.GetBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.progress += 0.3;
             this.BoxAni.playAnimation( '抖', 1 );
             this.progressBar.progress = this.progress
@@ -45,7 +45,7 @@ export class ClipPanel extends BasePanel
                 this.progressBar.progress = 1;
                 this.isCanOpen = true;
                 this.BoxAni.playAnimation( '打开', 1 );
-                AudioMgr.Instance.开箱.Play();
+                AudioMgr.Instance.Play( '开箱' );
                 this.BoxAni.addEventListener( dragonBones.EventObject.COMPLETE, ( event ) =>//开箱
                 {
                     this.HidePanel();

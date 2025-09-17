@@ -758,4 +758,76 @@ export default class DOTweenAnimation
             } )
             .start()
     }
+
+    public static ScaleLoopTimes ( target: Node, toScale: number, bcakScale: number, toTime: number = 0.12, backTime: number = 0.1, cb?: Function )
+    {
+        tween( target )
+            .sequence
+            (
+                tween().to( toTime, { scale: new Vec3( toScale, toScale, toScale ) }, { easing: "linear" } ),
+                tween().to( backTime, { scale: new Vec3( bcakScale, bcakScale, bcakScale ) }, { easing: "linear" } ),
+            )
+            .repeat( 3 )
+            .call( () =>
+            {
+                cb && cb();
+            } )
+            .start();
+    }
+
+    public static MoveY ( target: Node, tomoveY: number, toTime: number = 0.12, cb?: Function )
+    {
+        tween( target )
+            .to( toTime, { position: new Vec3( target.position.x, tomoveY, target.position.z ) }, { easing: "linear" } )
+            .call( () =>
+            {
+                cb && cb();
+            } )
+            .start();
+    }
+
+    public static MoveZ ( target: Node, tomoveZ: number, toTime: number = 0.12, cb?: Function )
+    {
+        tween( target )
+            .to( toTime, { position: new Vec3( target.position.x, target.position.y, tomoveZ ) }, { easing: "linear" } )
+            .call( () =>
+            {
+                cb && cb();
+            } )
+            .start();
+    }
+
+    public static ScaleTo ( target: Node, dur: number = 0.3, toScale: number, cb?: Function )
+    {
+        tween( target )
+            .to( dur, { scale: new Vec3( toScale, toScale, toScale ) }, { easing: "linear" } )
+            .call( () =>
+            {
+                cb && cb();
+            } )
+            .start();
+    }
+	
+	 public static TweenLerp ( self: Vec3, dur: number, target: Vec3, cb?: Function )//线性插值
+    {
+        tween( self )
+            .to( dur, {
+                x: target.x,
+                y: target.y,
+                z: target.z
+            }, {
+                // 线性插值更新函数
+                onUpdate: ( target: Vec3, ratio: number ) =>
+                {
+                    // 计算当前插值进度
+                    const progress = ratio / 2.0;
+                    Vec3.lerp( self, self, target, progress );
+                }
+            } )
+            .call( () =>
+            {
+                cb && cb();
+            } )
+            .start();
+    }
 }

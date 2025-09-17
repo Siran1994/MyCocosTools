@@ -7,6 +7,7 @@ import { PrefabManager } from '../manager/PrefabManager';
 import { PlatformMgr } from '../manager/PlatformMgr';
 import { SpriteManager } from '../manager/SpriteManager';
 import { PlayerPrefs } from '../data/PlayerPrefs';
+import { Config } from '../data/Config';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'Init' )
@@ -15,26 +16,33 @@ export class Init extends Component
     @property( { type: Loading } )
     loader: Loading = null;
 
-    protected onLoad (): void
+    onLoad ()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         this.loadRes();
+        GameData.initData();
     }
 
     async loadRes ()
     {
-        await ResMgr.loadBundle( 'bundle', () =>
+        await ResMgr.loadBundle( Config.BundleName.Base, () =>
         {
-            GameData.initData();
-            PrefabManager.loadPrefab( 'Ui', PrefabManager.Path.Ui );
-            PrefabManager.loadPrefab( 'Lv', PrefabManager.Path.Lv );
-            PrefabManager.loadPrefab( 'Player', PrefabManager.Path.Player );
-            SpriteManager.loadSprite( 'Shop', SpriteManager.Path.shopIcon );
-            SpriteManager.loadSprite( 'Show', SpriteManager.Path.showPath );
-            this.loader.showProgress( 'game', () =>
+            PrefabManager.loadPrefab( Config.BundleName.Base, 'Lv', PrefabManager.Path.Lv, () =>
             {
-                GameManager.Instance.init();
-                PlatformMgr.Instance.getCurrentPlatform();
+                PrefabManager.loadPrefab( Config.BundleName.Base, 'Ui', PrefabManager.Path.Ui, () =>
+                {
+                    ResMgr.loadBundle( Config.BundleName.Monster, () =>
+                    {
+                        PrefabManager.loadPrefab( Config.BundleName.Monster, 'Player', PrefabManager.Path.Player, () =>
+                        {
+                            this.loader.showProgress( 'base', () =>
+                            {
+                                GameManager.Instance.init();
+                                PlatformMgr.Instance.getCurrentPlatform();
+                            } );
+                        } );
+                    } )
+                } );
             } );
         } );
     }

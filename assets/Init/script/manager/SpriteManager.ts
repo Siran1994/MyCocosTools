@@ -14,9 +14,9 @@ export class SpriteManager
             showPath: 'prefab/icon'
         }
 
-    public static loadSprite ( name: string, path: string, cb?: Function )
+    public static loadSprite ( bundle, name: string, path: string, cb?: Function )
     {
-        ResMgr.loadDir( path, SpriteFrame, ( completedCount, totalCount ) =>
+        ResMgr.loadDir( bundle, path, SpriteFrame, ( completedCount, totalCount ) =>
         {
             if ( completedCount == totalCount )
                 cb && cb();

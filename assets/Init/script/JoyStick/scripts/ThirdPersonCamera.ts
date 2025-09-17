@@ -1,5 +1,7 @@
 import { _decorator, Component, Node, Vec3, v3 } from 'cc';
 import { Messager } from '../../manager/Messager';
+import { GameManager } from '../../manager/GameManager';
+import { PlayerCtrl } from '../../role/PlayerCtrl';
 
 const { ccclass, property } = _decorator;
 
@@ -46,6 +48,7 @@ export class ThirdPersonCamera extends Component
 
     start ()
     {
+        Messager.AddListener( 'Camera_Data', this, this.Camera_Data );
         Messager.AddListener( 'Camera_Rotate', this, this.onCameraRotate );
         Messager.AddListener( 'Camera_Zoom', this, this.onCameraZoom );
 
@@ -56,6 +59,15 @@ export class ThirdPersonCamera extends Component
     {
         Messager.RemoveListener( 'Camera_Rotate', this, this.onCameraRotate );
         Messager.RemoveListener( 'Camera_Zoom', this, this.onCameraZoom );
+        Messager.RemoveListener( 'Camera_Data', this, this.Camera_Data );
+    }
+
+    Camera_Data ( y, len )//设置相机高度和/距离
+    {
+        this.lookAtOffset = new Vec3( 0, y, 0 )
+        this.len = len;
+        this.target = PlayerCtrl.Instance.node;
+        this.init();
     }
 
     lateUpdate ( deltaTime: number )
@@ -89,13 +101,9 @@ export class ThirdPersonCamera extends Component
         if ( this.rotateVHSeparately )
         {
             if ( Math.abs( deltaX ) > Math.abs( deltaY ) )
-            {
                 deltaY = 0;
-            }
             else
-            {
                 deltaX = 0;
-            }
         }
         let rotatex = eulerAngles.x + deltaX * ROTATION_STRENGTH;
         if ( rotatex >= 20 )
@@ -118,4 +126,3 @@ export class ThirdPersonCamera extends Component
         }
     }
 }
-

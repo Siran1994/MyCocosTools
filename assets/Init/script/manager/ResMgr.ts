@@ -1,90 +1,54 @@
-import { TextAsset } from 'cc';
 import { Asset, resources } from 'cc';
-import { _decorator, assetManager, AssetManager, Prefab, SpriteAtlas, AudioClip, SpriteFrame } from 'cc';
+import { _decorator, assetManager, AssetManager, Prefab } from 'cc';
+import { Config } from '../data/Config';
 export type ICallback<T = any> = ( bundle: AssetManager.Bundle ) => void;
-export type IcallBack = ( go: any ) => void;
+export type IcallBack = ( go: Prefab ) => void;
 export class ResMgr  
 {
-    static m_bundle: AssetManager.Bundle;
-
-    demo ()//示例用法
+    public static async loadBundle ( bundleName: string, onComplete: ICallback )
     {
-        assetManager.loadBundle( 'bundle', ( err, ab: AssetManager.Bundle ) =>
+        //异步加载,加载好会调用你的函数
+        assetManager.loadBundle( bundleName, ( err, bundle: AssetManager.Bundle ) =>
         {
-            //加载资源 ,路径是资源包路径 
-            ab.load( 'path', Prefab, ( err, prefab ) =>  //加载预制体
-            {
-                if ( err )
-                {
-                    console.log( err ); return;
-                }
-                console.log( prefab );
-
-                ab.release( 'path' );//基于ab包释放单个资源
-                assetManager.getBundle( 'bundle' )?.release( 'path' );//使用asmger来释放单个资源
-                assetManager.releaseAsset( prefab );
-                assetManager.releaseAll();
-            } );
-            ab.load( 'path', SpriteAtlas, ( err, atlas ) => //加载图集
-            {
-                if ( err )
-                {
-                    console.log( err ); return;
-                }
-                console.log( atlas );
-                var sp: SpriteFrame = atlas.getSpriteFrame( 'name' );
-                sp.addRef();//添加引用计数,针对ab?.releaseUnusedAssets();
-                sp.decRef();//ab?.releaseUnusedAssets();的执行由引用计数来判断
-            } );
-
-            ab.load( 'path', AudioClip, ( err, clip ) => //加载音频
-            {
-                if ( err )
-                {
-                    console.log( err ); return;
-                }
-                console.log( clip );
-            } );
-
-            //一.卸载资源
-            //释放单个资源 释放不用资源 释放所有资源(没有)
-            //二.使用assetManager 来卸载资源
-            //释放单个资源 释放不用资源 释放所有资源(没有)
-            //示例
-
-            //加载完成 ,释放ab包,不会释放从ab包里面加载的资源
-            assetManager.removeBundle( ab );
+            onComplete?.call( bundleName, bundle );
         } );
-        //定时释放资源
-        // this.scheduleOnce( () =>
-        {
-            var ab = assetManager.getBundle( 'bundle' );
-            ab?.release( 'path' );//使用asmger来释放单个资源
-            ab?.releaseAll();//释放所有资源            
-            assetManager.removeBundle( ab as AssetManager.Bundle );
-
-        }//, 10 );
     }
 
-    public static async loadBundle ( caller: any, onComplete: ICallback )
+    public static async loadDir ( bundleName: string, path: string, type: any, progressCallback?: Function, completedCallback?: Function )
     {
-        if ( ResMgr.m_bundle != null )
+        assetManager.loadBundle( bundleName, ( err, bundle: AssetManager.Bundle ) =>
         {
-            onComplete?.call( caller, ResMgr.m_bundle );
-        }
-        else
-        {    //异步加载,加载好会调用你的函数
-            assetManager.loadBundle( 'bundle', ( err, bundle: AssetManager.Bundle ) =>
+            bundle.loadDir( path, type, ( completedCount: number, totalCount: number ) =>
             {
-                ResMgr.m_bundle = bundle;
-                onComplete?.call( caller, bundle );
+                progressCallback && progressCallback( completedCount, totalCount );
+            }, ( error: Error, assets: Asset[] ) =>
+            {
+                if ( error )
+                {
+                    console.error( '当前错误是：' + error.message );
+                    return;
+                }
+                completedCallback && completedCallback( assets );
             } );
-        }
+        } );
     }
 
-    public static async loadPrefab ( path: string, onComplete: IcallBack, isDontDes: boolean = false )
+    public static ResloadDir ( path: string, completedCallback: Function )
     {
-        ResMgr.loadBundle( this, ( bundle: AssetManager.Bundle ) =>
+        resources.loadDir( path, ( error: Error, assets: Asset[] ) =>
+        {
+            if ( error )
+            {
+                console.error( '当前错误是：' + error.message );
+                return;
+            }
+            completedCallback && completedCallback( assets );
+        } );
+    }
+
+    public static loadPrefab ( path: string, onComplete: IcallBack, isDontDes: boolean = false )
+    {
+        ResMgr.loadBundle( Config.BundleName.Base, ( bundle: AssetManager.Bundle ) =>
         {
             //加载预制体                
             bundle.load( path, Prefab, function ( err, prefab )
@@ -94,89 +58,40 @@ export class ResMgr
         } );
     }
 
-    public static async loadResource ( path: string, onComplete: IcallBack )
+    /**
+     * 加载指定资源包内资源
+     * @param name  资源包名
+     * @param paths 相对分包文件夹路径的相对路径
+     * @param type  资源类型
+     * @param progressCallback  加载回调
+     * @param completedCallback 完成回调
+     */
+    public static load ( name: string, paths: string, type: typeof Asset, progressCallback?: ( completedCount: number, totalCount: number ) => void, completedCallback?: ( asset: any ) => void ): void
     {
-        // 例如加载一个图片资源
-        await resources.load( path, ( err: any, res: any ) =>
-        {
-            if ( err )
-            {
-                onComplete( res );
-                return;
-            }
-            onComplete( res );
-        } )
-    }
-
-    public static async loadDir ( path: string, type: any, progressCallback?: Function, completedCallback?: Function )
-    {
-        let bundle: AssetManager.Bundle = this.m_bundle;
+        let bundle: AssetManager.Bundle = this.getBundle( name );
         if ( bundle )
         {
-            bundle.loadDir( path, type, ( completedCount: number, totalCount: number ) =>
+            bundle.load( paths, type, ( completedCount: number, totalCount: number ) =>
             {
                 progressCallback && progressCallback( completedCount, totalCount );
-            }, ( error: Error, assets: Asset[] ) =>
+            }, ( error: Error, asset: Asset ) =>
             {
                 if ( error )
-                {
-                    console.error( error.message );
-                    return;
-                }
-                assets.forEach( asset =>
-                {
-                    // console.log( `load ${ asset.name } completed` );
-                } )
-                completedCallback && completedCallback( assets );
-            } );
+                    return console.log( error.message );
+                console.log( `load ${ asset.name } completed` );
+                completedCallback && completedCallback( asset );
+            } )
         }
         else
-        { //异步加载,加载好会调用你的函数
-            assetManager.loadBundle( 'bundle', ( err, bundle: AssetManager.Bundle ) =>
-            {
-                ResMgr.m_bundle = bundle;
-                bundle.loadDir( path, type, ( completedCount: number, totalCount: number ) =>
-                {
-                    progressCallback && progressCallback( completedCount, totalCount );
-                }, ( error: Error, assets: Asset[] ) =>
-                {
-                    if ( error )
-                    {
-                        console.error( error.message );
-                        return;
-                    }
-                    assets.forEach( asset =>
-                    {
-                        // console.log( `load ${ asset.name } completed` );
-                    } )
-                    completedCallback && completedCallback( assets );
-                } );
-            } );
-        }
+            console.warn( `load ${ name } bundle first` );
     }
 
-    public static async loadData ( path: string, onComplete: IcallBack, isDontDes: boolean = false )
+    /**
+     * 获取已加载的分包
+     * @param name 资源包名
+     */
+    public static getBundle ( name: string ): AssetManager.Bundle
     {
-        let bundle: AssetManager.Bundle = this.m_bundle;
-        if ( bundle )
-        {
-            //加载预制体                
-            bundle.load( path, TextAsset, function ( err, textAsset )
-            {
-                onComplete( textAsset );
-            } );
-        }
-        else
-        {
-            assetManager.loadBundle( 'bundle', ( err, bundle: AssetManager.Bundle ) =>
-            {
-                ResMgr.m_bundle = bundle;
-                //加载预制体                
-                bundle.load( path, TextAsset, function ( err, textAsset )
-                {
-                    onComplete( textAsset );
-                } );
-            } );
-        }
+        return assetManager.getBundle( name );
     }
 }

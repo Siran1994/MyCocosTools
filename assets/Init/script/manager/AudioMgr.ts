@@ -1,8 +1,6 @@
-import { _decorator, AudioSource, Component, director, instantiate, Node } from 'cc';
+import { _decorator, assetManager, AudioClip, AudioSource, Component, director } from 'cc';
 import { GameData } from '../data/GameData';
-import { PrefabManager } from './PrefabManager';
-import { AudioClip } from 'cc';
-import { Config } from '../data/Config';
+import { Utils } from '../tool/Utils';
 import { ResMgr } from './ResMgr';
 const { ccclass, property } = _decorator;
 
@@ -18,117 +16,31 @@ export class Time
     }
 }
 
-@ccclass( 'AudioClipExit' )
-export class AudioClipExit 
-{
-    @property( { type: AudioClip } )
-    audioClip: AudioClip;
-
-    minRate = 0.2;//最小播放间隔,限制高频率,优化性能
-    preTime = 0;
-
-    public playMusic ( volume: number = Config.Volume.Music )
-    {
-        if ( !AudioMgr.Instance.misOn ) return;
-        if ( AudioMgr.Instance.musicPlayer.clip != null )
-        {
-            AudioMgr.Instance.musicPlayer.loop = false;
-            AudioMgr.Instance.musicPlayer.stop();
-        }
-
-        AudioMgr.Instance.musicPlayer.volume = volume;
-        AudioMgr.Instance.musicPlayer.clip = this.audioClip;
-        AudioMgr.Instance.musicPlayer.loop = true;
-        AudioMgr.Instance.musicPlayer.play();
-    }
-
-    public StopMusic ()
-    {
-        if ( !AudioMgr.Instance.misOn ) return;
-        AudioMgr.Instance.musicPlayer.stop();
-    }
-
-    public Play ( volume: number = Config.Volume.Audio )
-    {
-        if ( !AudioMgr.Instance.aisOn ) return;
-        if ( Time.time - this.preTime < this.minRate ) return;
-        this.preTime = Time.time;
-        AudioMgr.Instance.audioPlayer.playOneShot( this.audioClip, volume );
-    }
-}
-
 @ccclass( 'AudioMgr' )
 export class AudioMgr extends Component 
 {
     static Instance: AudioMgr = null!;
-
     static AuidoMap: Map<string, AudioClip> = new Map();//基础音效库
+    aisOn = false;
+    misOn = false;
 
     onLoad ()
     {
+        director.addPersistRootNode( this.node );
         AudioMgr.Instance = this;
         this.aisOn = GameData.SoundOn == 1;
         this.misOn = GameData.MusicOn == 1;
-
         // AudioMgr.loadAudios( Config.BundleName.Base, 'audios', () =>
         // {
-        //     console.error( AudioMgr.AuidoMap.size );
-        //     console.error( '基础音效加载完成!' );
-        //     this.playMusic( 'bgm' );
+        //     AudioMgr.Instance.playMusic( 'gamebg' );
         // } );
     }
-
-    @property( { type: AudioClipExit } )
-    金币收集: AudioClipExit = null;//收集音效 
-    @property( { type: AudioClipExit } )
-    开箱: AudioClipExit = null;//收集音效 
-    @property( { type: AudioClipExit } )
-    受击: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    撞墙: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    玩家打击: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    Boss打击: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    完美收集: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    吃到钻石: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    吃到服装: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    到达终点: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    失败结算: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    奖励弹窗: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    奖励解锁进度: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    武器打人: AudioClipExit = null;//收集音效
-    @property( { type: AudioClipExit } )
-    玩家受击: AudioClipExit = null;
-    @property( { type: AudioClipExit } )
-    衣服消失: AudioClipExit = null;
-    @property( { type: AudioClipExit } )
-    胜利结算: AudioClipExit = null;
-    @property( { type: AudioClipExit } )
-    点击广告按钮: AudioClipExit = null;
-    @property( { type: AudioClipExit } )
-    通用按钮: AudioClipExit = null;
-    @property( { type: AudioClipExit } )
-    游戏背景乐: AudioClipExit = null;
-    @property( { type: AudioClipExit } )
-    首页背景乐: AudioClipExit = null;
 
     @property( { displayName: '音效', type: AudioSource } )
     audioPlayer: AudioSource;
 
     @property( { displayName: '音乐', type: AudioSource } )
     musicPlayer: AudioSource;
-
-    aisOn = false;
-    misOn = false;
 
     UpdateState ()
     {
@@ -146,33 +58,129 @@ export class AudioMgr extends Component
             AudioMgr.Instance.musicPlayer.stop();
     }
 
-    public static init ( node: Node, cb: Function )
-    {
-        if ( AudioMgr.Instance == null )
-        {
-            let Prefab = PrefabManager.get( 'AudioMgr', PrefabManager.UiMap )
-            let go = instantiate( Prefab );
-            go.parent = node;
-            director.addPersistRootNode( go );
-            setTimeout( () => { cb && cb(); }, 100 );
 
+    playMusic ( clip: string | AudioClip ) //播放背景音乐
+    {
+        if ( AudioMgr.Instance.misOn == false )
+            return;
+        if ( typeof clip === 'string' )
+        {
+            AudioMgr.Instance.musicPlayer.stop();
+            AudioMgr.Instance.musicPlayer.clip = this.GetClip( clip );
+            AudioMgr.Instance.musicPlayer.play();
         }
         else
-            cb && cb();
+        {
+            AudioMgr.Instance.musicPlayer.stop();
+            AudioMgr.Instance.musicPlayer.clip = clip;
+            AudioMgr.Instance.musicPlayer.play();
+        }
     }
 
-    // public static loadAudios ( bundleName: string, path: string, cb?: Function )
-    // {
-    //     ResMgr.loadDir( bundleName, path, AudioClip, ( completedCount, totalCount ) =>
-    //     {
-    //     }, ( assets: AudioClip[] ) =>
-    //     {
-    //         assets.forEach( asset =>
-    //         {
-    //             console.error( asset.name );
-    //             this.set( asset.name, asset, this.AuidoMap );
-    //         } );
-    //         cb && cb();
-    //     } );
-    // }
+    stopMusic ( audioName: string ) //停止背景音乐
+    {
+        if ( !AudioMgr.Instance.misOn ) return;
+
+        if ( AudioMgr.Instance.musicPlayer.clip.name == audioName )
+        {
+            AudioMgr.Instance.musicPlayer.stop();
+        }
+    }
+
+    Play ( clip: string | AudioClip, isBreak = true, cb?: Function )
+    {
+        if ( AudioMgr.Instance.aisOn == false )
+            return;
+        AudioMgr.Instance.audioPlayer.stop();
+        if ( typeof clip === 'string' )
+        {
+            if ( isBreak )
+            {
+                AudioMgr.Instance.audioPlayer.clip = this.GetClip( clip );
+                AudioMgr.Instance.audioPlayer.play();
+            }
+            else
+            {
+                AudioMgr.Instance.audioPlayer.playOneShot( this.GetClip( clip ) );
+            }
+        }
+        else
+        {
+            if ( isBreak )
+            {
+                AudioMgr.Instance.audioPlayer.clip = clip;
+                AudioMgr.Instance.audioPlayer.play();
+            }
+            else
+            {
+                AudioMgr.Instance.audioPlayer.playOneShot( clip );
+            }
+            Utils.DelayCallBack( clip.getDuration(), () =>
+            {
+                cb && cb();
+            } );
+        }
+    }
+
+    GetClip ( clip: string )
+    {
+        if ( AudioMgr.get( clip, AudioMgr.AuidoMap ) != null )
+            return AudioMgr.get( clip, AudioMgr.AuidoMap );
+    }
+
+    public static loadAudios ( bundleName: string, path: string, cb?: Function )
+    {
+        ResMgr.loadDir( bundleName, path, AudioClip, ( completedCount, totalCount ) =>
+        {
+        }, ( assets: AudioClip[] ) =>
+        {
+            assets.forEach( asset =>
+            {
+                this.set( asset.name, asset, this.AuidoMap );
+            } );
+            cb && cb();
+        } );
+    }
+
+    //添加纹理资源
+    public static set ( key: string, value: AudioClip, targetMap: Map<string, AudioClip> ): void
+    {
+        if ( targetMap.has( key ) )
+        {
+            console.warn( `set fail: ${ key } already exsit in the textureMap` );
+        } else
+        {
+            targetMap.set( key, value );
+        }
+    }
+
+    //获取纹理资源
+    public static get ( key: string, targetMap: Map<string, AudioClip> ): AudioClip
+    {
+        if ( targetMap.has( key ) )
+        {
+            return targetMap.get( key );
+        } else
+        {
+            console.warn( `get fail: ${ key } not exsit in the textureMap` );
+        }
+    };
+
+    //释放单个纹理资源
+    public static releaseAsset ( key, targetMap: Map<string, AudioClip> ): void
+    {
+        if ( targetMap.has( key ) )
+        {
+            var asset: AudioClip = targetMap.get( key );
+            targetMap.delete( key );
+            assetManager.releaseAsset( asset );
+            console.log( "release asset with " + key );
+        }
+    };
+
+    //释放所有纹理资源
+    public static releaseAllAsset (): void
+    {
+        this.AuidoMap.clear();
+    };
 }

@@ -31,14 +31,14 @@ export class ShopList extends BasePanel
     {
         this.CloseBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.mainPanel.node.active = true;
             this.HidePanel();
         }, this );
 
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             var tmpNum = GameData.Coin;
             var targetNum = tmpNum + Config.BoxReward.AdGet;
             var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 10, targetNum, 0.001, '', () =>

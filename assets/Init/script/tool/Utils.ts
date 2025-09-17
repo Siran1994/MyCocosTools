@@ -7,6 +7,142 @@ let up = v3()
 export class Utils 
 {
 
+    //从第二个数组随机选取最多3个不重复元素添加到第一个数组
+    static mergeRandomUnique<T> ( arr: T[], sourceArr: T[] ): T[]
+    {
+        if ( !sourceArr.length ) return arr;
+
+        const existSet = new Set<T>( arr );
+        const candidateSet = new Set<T>();
+
+        // 构建候选集（去重且不在arr中的元素）
+        for ( const element of sourceArr )
+        {
+            if ( !existSet.has( element ) )
+            {
+                candidateSet.add( element );
+            }
+        }
+        // 随机选择最多3个元素
+        const candidates = Array.from( candidateSet );
+        const minCount = Math.min( 3, candidates.length );
+
+        // Fisher-Yates 随机算法
+        for ( let i = 0; i < minCount; i++ )
+        {
+            const randomIndex = Math.floor( Math.random() * ( candidates.length - i ) ) + i;
+            // 交换元素到数组前部
+            [ candidates[ i ], candidates[ randomIndex ] ] = [ candidates[ randomIndex ], candidates[ i ] ];
+            // 添加选中的元素
+            arr.push( candidates[ i ] );
+            existSet.add( candidates[ i ] );
+        }
+
+        return arr;
+    }
+
+    //将第二个数组的元素合并到第一个数组中，排除重复元素
+    static mergeUnique<T> ( arr: T[], elementsToAdd: T[] ): T[]
+    {
+        // 使用Set快速查找重复元素
+        const existSet = new Set<T>( arr );
+
+        // 遍历并添加非重复元素
+        const len = elementsToAdd.length;
+        for ( let i = 0; i < len; i++ )
+        {
+            const element = elementsToAdd[ i ];
+            if ( !existSet.has( element ) )
+            {
+                arr.push( element );
+                existSet.add( element );
+            }
+        }
+
+        return arr;
+    }
+
+    //获取左右相邻的的元素(5个)
+    getSurroundingNumbers ( num, maxNum ): number[]
+    {
+        // 调整数值到1-12范围的辅助函数
+        const adjust = ( x: number ): number => ( ( x - 1 + maxNum ) % maxNum ) + 1;
+        // 计算并返回包含左右各两位的数组
+        return [
+            adjust( num - 2 ), // 左二
+            adjust( num - 1 ), // 左一
+            adjust( num ),     // 当前
+            adjust( num + 1 ), // 右一
+            adjust( num + 2 )  // 右二
+        ];
+    }
+
+    //按照路径点匀速移动
+    moveAlongWorldNodes ( target: Node, pathNodes: Node[], totalDuration: number, cb: Function )
+    {
+        // 参数校验
+        if ( !target || !pathNodes || pathNodes.length < 2 )
+        {
+            console.warn( 'PathMover: 无效参数 - 目标或路径点不足（至少需要2个路径节点）' );
+            return;
+        }
+        // 提前计算出世界坐标路径（避免在动画过程中重复计算）
+        const worldPath: Vec3[] = [];
+        for ( const node of pathNodes )
+        {
+            worldPath.push( new Vec3( node.worldPosition ) );
+        }
+        // 停止可能存在的旧动画
+        tween( target ).stop();
+        // 计算路径总长度
+        let totalDistance = 0;
+        for ( let i = 0; i < worldPath.length - 1; i++ )
+        {
+            totalDistance += Vec3.distance( worldPath[ i ], worldPath[ i + 1 ] );
+        }
+        // 处理零距离特殊情况
+        if ( totalDistance <= 0.001 )
+        {
+            target.worldPosition = worldPath[ worldPath.length - 1 ].clone();
+            return;
+        }
+        // 转换为目标节点的本地坐标系统使用的路径点
+        const localPath: Vec3[] = [];
+        for ( const worldPos of worldPath )
+        {
+            const localPos = target.parent!.inverseTransformPoint( new Vec3(), worldPos );
+            localPath.push( localPos );
+        }
+        // 创建缓动序列
+        const tweenSequence = tween( target );
+        // 设置起始位置
+        tweenSequence.call( () =>
+        {
+            target.worldPosition = worldPath[ 0 ].clone();
+        } );
+
+        // 添加每段路径动画
+        for ( let i = 0; i < worldPath.length - 1; i++ )
+        {
+            const nextPoint = localPath[ i + 1 ];
+            const segmentDistance = Vec3.distance( worldPath[ i ], worldPath[ i + 1 ] );
+            const segmentDuration = totalDuration * ( segmentDistance / totalDistance );
+
+            // 添加路径段动画
+            tweenSequence.to( segmentDuration, {
+                position: new Vec3( nextPoint.x, nextPoint.y, nextPoint.z )
+            } );
+        }
+        // 启动动画
+        tweenSequence
+            .call( () =>
+            {
+                cb();
+            } )
+            .start();
+    }
+
+    //截取字符串后第一带数字的字符
     static getTrailingNumber ( str: string ): number
     {
         let index = str.length - 1;
@@ -17,6 +153,7 @@ export class Utils
         return parseInt( str.substring( index + 1 ), 10 );
     }
 
+    //抛物线飞行
     static flyTo ( item: Node, parent: Node, targetPos: Vec3, t: number = 0.25, ecb?: Function, scb?: Function )
     {
         let oldPos = item.worldPosition.clone();
@@ -1992,6 +2129,7 @@ export class Utils
         this.rotateAround( out, from, up, maxAngleDelta );
     }
 
+    //计算从向量 from 指向向量 to 的旋转角度，并根据给定的轴向量 axis 的方向对角度施加正负符号，返回带符号的角度值。
     static signAngle ( from: Vec3, to: Vec3, axis: Vec3 ): number
     {
         const angle = Vec3.angle( from, to );

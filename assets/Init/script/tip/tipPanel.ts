@@ -26,7 +26,7 @@ export class tipPanel extends Component
     {
         this.CloseBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             PoolManager.putNode( this.node );
         }, this );
     }
@@ -47,9 +47,9 @@ export class tipPanel extends Component
     ConfirmClick ()
     {
         if ( this.Ad.active )
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
         else
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
 
         this.callback();
 

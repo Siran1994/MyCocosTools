@@ -36493,6 +36493,8 @@
     "uiCamera": {
       "__id__": 18
     },
+    "countDowns": [],
+    "time": null,
     "_id": "3d0LBdBMxGYZXfRYIrNqjp"
   },
   {

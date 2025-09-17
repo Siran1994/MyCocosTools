@@ -45,7 +45,7 @@ export class item extends Component
     {
         this.itemBtn.node.on( Toggle.EventType.TOGGLE, ( event: Toggle ) =>//点击
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             if ( event.isChecked ) 
             {
                 this.BtnClick();

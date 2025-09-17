@@ -1,10 +1,9 @@
 import { Button } from 'cc';
-import { _decorator, Component } from 'cc';
+import { _decorator } from 'cc';
 import { AudioMgr } from '../manager/AudioMgr';
 import { GameManager } from '../manager/GameManager';
 import { BasePanel } from './BasePanel';
 import { Label } from 'cc';
-import { GameData } from '../data/GameData';
 import DOTweenAnimation from '../animation/DOTweenAnimation';
 import { UiManager } from '../manager/UiManager';
 import { Vec3 } from 'cc';
@@ -31,7 +30,7 @@ export class FailedPanel extends BasePanel
 
         this.RestartBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.UpdateCoin( GameManager.Instance.Coin, null, Vec3.ZERO, this.CoinTxt.node.worldPosition );
             GameManager.Instance.NextLevel( false, true, () =>
             {
@@ -41,7 +40,7 @@ export class FailedPanel extends BasePanel
 
         this.Reward3x.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.UpdateCoin( GameManager.Instance.Coin * 3, null, Vec3.ZERO, this.CoinTxt.node.worldPosition );
             GameManager.Instance.NextLevel( false, true, () =>
             {
@@ -51,7 +50,7 @@ export class FailedPanel extends BasePanel
 
         this.ReLife.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.node.active = false;
             GameManager.Instance.IsStart = true;
         }, this );

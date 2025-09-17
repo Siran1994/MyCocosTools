@@ -28,7 +28,7 @@ export class SettingPanel extends BasePanel
     {
         this.closeBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.mainPanel.node.active = true;
             this.HidePanel();
         }, this );
@@ -40,7 +40,7 @@ export class SettingPanel extends BasePanel
             else
                 GameData.SoundOn = 0;
             AudioMgr.Instance.UpdateState();
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
         }, this );
 
         this.MusicBtn.node.on( Toggle.EventType.TOGGLE, ( event: Toggle ) =>
@@ -50,7 +50,7 @@ export class SettingPanel extends BasePanel
             else
                 GameData.MusicOn = 0;
             AudioMgr.Instance.UpdateState();
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
         }, this );
 
         this.setBtn.node.on( Button.EventType.CLICK, () =>

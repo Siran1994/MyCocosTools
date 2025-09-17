@@ -5,20 +5,12 @@ import { GameManager } from '../manager/GameManager';
 import { PlayerCtrl } from '../role/PlayerCtrl';
 import { AudioMgr } from '../manager/AudioMgr';
 import { AniState } from '../data/Enum';
-import DOTweenAnimation from '../animation/DOTweenAnimation';
-import { Config } from '../data/Config';
 import { TipManager } from '../manager/TipManager';
-
 const { ccclass, property } = _decorator;
 
 @ccclass( 'MainPanel' )
 export class MainPanel extends Component 
 {
-    StartGame ()
-    {
-        throw new Error( 'Method not implemented.' );
-    }
-
     @property( Button )
     setBtn: Button;//设置
 
@@ -56,7 +48,7 @@ export class MainPanel extends Component
     {
         this.setBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.settingPanel.ShowPanel();
             this.node.active = false;
         }, this );
@@ -69,7 +61,7 @@ export class MainPanel extends Component
 
         this.signBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.signPanel.ShowPanel();
             this.node.active = false;
 
@@ -77,28 +69,28 @@ export class MainPanel extends Component
 
         this.drawBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.drawPanel.ShowPanel();
             this.node.active = false;
         }, this );
 
         this.shopBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.shopList.ShowPanel();
             this.node.active = false;
         }, this );
 
         this.shopBtn2.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.shopPanel.ShowPanel();
             this.node.active = false;
         }, this );
 
         this.moreGame.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             TipManager.Instance.showTips( '请接入SDK的相关功能' );
         }, this );
     }

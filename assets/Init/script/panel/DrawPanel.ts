@@ -50,20 +50,20 @@ export class DrawPanel extends BasePanel
     {
         this.closeBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.mainPanel.node.active = true;
             this.HidePanel();
         }, this );
 
         this.FreeGetBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.updateCount();
         }, this );
 
         this.AdGetBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             this.updateCount( true );
         }, this );
 

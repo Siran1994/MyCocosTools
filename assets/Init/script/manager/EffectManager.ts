@@ -11,9 +11,9 @@ export class EffectManager
 
     static Path = 'prefab/effect';
 
-    public static loadEffect ( path: string = EffectManager.Path, cb?: Function )
+    public static loadEffect ( budle, path: string = EffectManager.Path, cb?: Function )
     {
-        ResMgr.loadDir( path, Prefab, ( completedCount, totalCount ) =>
+        ResMgr.loadDir( budle, path, Prefab, ( completedCount, totalCount ) =>
         {
             //console.log( '完成个数:' + completedCount + '总数:' + totalCount );
             if ( completedCount == totalCount )

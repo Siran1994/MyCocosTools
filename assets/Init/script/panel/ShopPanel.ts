@@ -1,6 +1,5 @@
 import { _decorator, Label, Button, Toggle, Sprite, tween, Vec3, Node } from "cc";
-import { ItemInfo } from "../shop/ItemInfo";
-import { ItemList } from "../shop/ItemList";
+import { ItemInfo, ItemList } from "../shop/ItemList";
 import { AudioMgr } from "../manager/AudioMgr";
 import { SpriteManager } from "../manager/SpriteManager";
 import { TipManager } from "../manager/TipManager";
@@ -12,6 +11,8 @@ import { GameData } from "../data/GameData";
 import { PlayerPrefs } from "../data/PlayerPrefs";
 import { Messager } from "../manager/Messager";
 import { BasePanel } from "./BasePanel";
+import { ScrollView } from "cc";
+import { UITransform, Size } from "cc";
 
 const { ccclass, property } = _decorator;
 
@@ -57,6 +58,9 @@ export class ShopPanel extends BasePanel
     @property( Sprite )
     Tower: Sprite = null;
 
+    @property( ScrollView )
+    LvList: ScrollView;
+
     tmpInfo: ItemInfo = null;
     tmppooltype: ItemPoolType;
 
@@ -75,14 +79,14 @@ export class ShopPanel extends BasePanel
     {
         this.CloseBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.通用按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             UiManager.Instance.mainPanel.node.active = true;
             this.HidePanel();
         }, this );
 
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             var tmpNum = GameData.Coin;
             var targetNum = tmpNum + Config.BoxReward.AdGet;
             var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 10, targetNum, 0.001, '', () =>
@@ -99,7 +103,7 @@ export class ShopPanel extends BasePanel
             {
                 this.KnifePool.initItem();
                 this.tmppooltype = ItemPoolType.武器;
-                AudioMgr.Instance.通用按钮.Play();
+                AudioMgr.Instance.Play( '通用按钮' );
             }
         }, this );
 
@@ -109,7 +113,7 @@ export class ShopPanel extends BasePanel
             {
                 this.HandPool.initItem();
                 this.tmppooltype = ItemPoolType.手套;
-                AudioMgr.Instance.通用按钮.Play();
+                AudioMgr.Instance.Play( '通用按钮' );
             }
         }, this );
 
@@ -123,7 +127,7 @@ export class ShopPanel extends BasePanel
         {
             if ( GameData.Coin >= this.tmpInfo.price )
             {
-                AudioMgr.Instance.通用按钮.Play();
+                AudioMgr.Instance.Play( '通用按钮' );
                 GameData.Coin -= this.tmpInfo.price;
                 this.CoinTxt.string = GameData.Coin.toString();
                 PlayerPrefs.SetBool( ItemType[ this.tmpInfo.itemtype ].toString(), true );
@@ -132,7 +136,7 @@ export class ShopPanel extends BasePanel
             }
             else
             {
-                AudioMgr.Instance.通用按钮.Play();
+                AudioMgr.Instance.Play( '通用按钮' );
                 TipManager.Instance.showTips( '当前金币不足!' );
             }
 
@@ -144,6 +148,7 @@ export class ShopPanel extends BasePanel
         }, this );
 
         DOTweenAnimation.ScaleLoop( this.AdGetBtn.node, 1.1, 1, 0.5, 0.5 );
+        this.LvList.content.getComponent( UITransform ).setContentSize( new Size( 650, this.LvList.content.children[ 0 ].children.length * 73 ) );
     }
 
     onEnable ()
@@ -170,7 +175,7 @@ export class ShopPanel extends BasePanel
         }
         this.HidePanel();
         UiManager.Instance.mainPanel.node.active = true;
-        AudioMgr.Instance.通用按钮.Play();
+        AudioMgr.Instance.Play( '通用按钮' );
     }
 
     BtnState ( state: string )
@@ -194,6 +199,12 @@ export class ShopPanel extends BasePanel
                 this.BuyBtn.node.active = false;
                 this.EquipBtn.node.active = false;
                 this.EquipedBtn.active = true;
+                break;
+            case '装备':
+                this.AdGetBtn.node.active = false;
+                this.BuyBtn.node.active = false;
+                this.EquipBtn.node.active = true;
+                this.EquipedBtn.active = false;
                 break;
         }
     }

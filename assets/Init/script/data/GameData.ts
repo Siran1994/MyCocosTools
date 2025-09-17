@@ -155,4 +155,15 @@ export class GameData
     {
         PlayerPrefs.SetInt( 'SpeedLv', value );
     }
+
+    static SetItemNum ( itemName: string, value: number ) //货物数量
+    {
+        PlayerPrefs.SetInt( itemName + 'Num', value );
+    }
+    static GetItemNum ( itemName: string, value: number = 0 )
+    {
+        if ( PlayerPrefs.GetInt( itemName + 'Num', value ) == 0 || PlayerPrefs.GetInt( itemName + 'Num', value ) == null )
+            PlayerPrefs.SetInt( itemName + 'Num', value );
+        return PlayerPrefs.GetInt( itemName + 'Num', value );
+    }
 }

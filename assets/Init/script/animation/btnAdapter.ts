@@ -59,7 +59,7 @@ export class btnAdapter extends Component
                 }, this.preventTime );
             }
             if ( this.isPlaySound )
-                AudioMgr.Instance.通用按钮.Play();
+                AudioMgr.Instance.Play( '通用按钮' );
         } );
     }
 

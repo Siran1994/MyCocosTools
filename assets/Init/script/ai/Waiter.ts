@@ -1,6 +1,5 @@
 import { _decorator, Enum, macro, Node, SkeletalAnimation, Vec3 } from 'cc';
 import FSM, { FSMAction } from './FSM';
-import { roleBase } from '../game/roleBase';
 import { NavManager } from '../manager/NavManager';
 import { AiState, FoodType } from '../data/Enum';
 import { Utils } from '../tool/Utils';
@@ -10,6 +9,7 @@ import { PoolManager } from '../manager/PoolManager';
 import { PrefabManager } from '../manager/PrefabManager';
 import { Messager } from '../manager/Messager';
 import { GameData } from '../data/GameData';
+import { roleBase } from './roleBase';
 const { ccclass, property } = _decorator;
 export enum W_Action
 {

@@ -36,7 +36,7 @@ export class GamePanel extends Component
     {
         this.AddCoinBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             var tmpNum = GameData.Coin;
             var targetNum = tmpNum + 100;
             var ani = DOTweenAnimation.stepNum( this.CoinTxt, tmpNum, 20, targetNum, 0.001, '', () =>

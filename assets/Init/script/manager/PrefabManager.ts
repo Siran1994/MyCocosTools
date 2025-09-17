@@ -20,9 +20,9 @@ export class PrefabManager
             Ui: 'prefab/ui',
         }
 
-    public static loadPrefab ( name: string, path: string, cb?: Function )
+    public static loadPrefab ( bundleName: string, name: string, path: string, cb?: Function )
     {
-        ResMgr.loadDir( path, Prefab, ( completedCount, totalCount ) =>
+        ResMgr.loadDir( bundleName, path, Prefab, ( completedCount, totalCount ) =>
         {
             // console.log( '完成个数:' + completedCount + '总数:' + totalCount );
             if ( completedCount == totalCount )

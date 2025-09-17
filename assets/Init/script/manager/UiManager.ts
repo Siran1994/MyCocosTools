@@ -20,6 +20,8 @@ import { SpriteFrame } from "cc";
 import { FightPanel } from "../panel/FightPanel";
 import { Camera } from "cc";
 import { Vec3 } from "cc";
+import { Sprite } from "cc";
+import { Utils } from "../tool/Utils";
 
 const { ccclass, property } = _decorator;
 
@@ -107,7 +109,7 @@ export class UiManager extends Component
     {
         this.coinfly.playAnim( stPos, edPos, () =>
         {
-            AudioMgr.Instance.金币收集.Play();
+            AudioMgr.Instance.Play( '金币收集' );
             if ( txt != null )
             {
                 var tmpNum = GameData.Coin;
@@ -127,7 +129,7 @@ export class UiManager extends Component
 
     AdGetCoin ( CoinTxt: Label )
     {
-        AudioMgr.Instance.点击广告按钮.Play();
+        AudioMgr.Instance.Play( '点击广告按钮' );
         var tmpNum = GameData.Coin;
         var targetNum = tmpNum + 100;
         var ani = DOTweenAnimation.stepNum( CoinTxt, tmpNum, 25, targetNum, 0, '', () =>
@@ -136,5 +138,65 @@ export class UiManager extends Component
             GameData.Coin = targetNum;
             CoinTxt.string = GameData.Coin.toString();
         } );
+    }
+
+    //----------倒计时3秒---------
+    @property( Node )
+    countDown: Node;//倒计时
+    @property( SpriteFrame )
+    countDowns: SpriteFrame[] = [];
+    @property( Label )
+    time: Label = null;
+
+    ShowCountDown ( cb?: Function )
+    {
+        AudioMgr.Instance.Play( 'djs' );
+        this.countDown.active = true;
+        let tip = this.countDown.getChildByName( 'timer' ).getComponent( Sprite );
+        for ( let i = 0; i < this.countDowns.length; i++ )
+        {
+            setTimeout( () =>
+            {
+                tip.spriteFrame = this.countDowns[ i ];
+                DOTweenAnimation.ScaleLoopOnce( tip.node, 0.9, 1, 0.25, 0.5 );
+                if ( i == this.countDowns.length - 1 )
+                {
+                    Utils.DelayCallBack( 1, () =>
+                    {
+                        cb && cb();
+                    } );
+                }
+            }, i * 1000 )
+        }
+    }
+
+    //-----------计时器-----------
+    startTimer ( totalTime: number, txt: Label, cb?: Function )
+    {
+        this.OnLineTimer( totalTime, txt, () =>
+        {
+            txt.string = '';
+            txt.node.active = false;
+            cb && cb();
+        } );
+    }
+
+    OnLineTimer ( totalTime: number, txt: Label, cb?: Function )
+    {
+        txt.node.active = true;
+        txt.string = Utils.ToMS( totalTime );
+        this.schedule( () =>//每秒进行在线时间存档
+        {
+            if ( totalTime == 0 )
+                return;
+            totalTime -= 1;
+            txt.string = Utils.ToMS( totalTime );
+            if ( totalTime <= 0 )
+            {
+                txt.node.active = false;
+                totalTime = 0;
+                cb && cb();
+            }
+        }, 1, totalTime );
     }
 }

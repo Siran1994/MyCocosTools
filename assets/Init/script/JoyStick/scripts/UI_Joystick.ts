@@ -1,131 +1,52 @@
 import { _decorator, Node, EventTouch, Touch, Component, UITransform, Input, EventKeyboard, KeyCode, input, EventMouse } from 'cc';
-
-import { Vec2 } from 'cc';
-import { v3 } from 'cc';
-import { v2 } from 'cc';
 import { Messager } from '../../manager/Messager';
+import { GameManager } from '../../manager/GameManager';
+import { Vec3, view } from 'cc';
 const { ccclass, property } = _decorator;
 @ccclass( 'UI_Joystick' )
 export class UI_Joystick extends Component
 {
-    private static _inst: UI_Joystick = null;
-    public static get inst (): UI_Joystick
-    {
-        return this._inst;
-    }
-
     @property( { displayName: '静态/动态' } )
     isDynamic = true;
 
     @property( { displayName: '隐藏/显示' } )
     isShow = true;
 
-
-    private _ctrlRoot: UITransform = null;//摇杆根节点
-    private _ctrlBg: Node = null;//摇杆背景
-    private _ctrlPointer: Node = null;//摇杆中心点
+    private _ctrlRoot: UITransform = null;
+    private _ctrlPointer: Node = null;
     private _checkerCamera: UITransform = null;
-    _buttons: Node = null;
+    private _checkerMovement: UITransform = null;
+    private _buttons: Node = null;
 
-    //#region 动态摇杆
     private _cameraSensitivity: number = 0.1;
     private _distanceOfTwoTouchPoint: number = 0;
+
     private _movementTouch: Touch = null;
     private _cameraTouchA: Touch = null;
     private _cameraTouchB: Touch = null;
-    private _key2buttonMap = {};
-    //#endregion
-
-    //#region 静态摇杆
-    UITf_dot: UITransform = null;//摇杆背景大小  
-    maxLength: number = 0;//滑动半径
-
-    private _dir: Vec2 = new Vec2( 0, 0 );//方向
-    public get dir ()
-    {
-        return this._dir;
-    }
-    public set dir ( value: Vec2 )
-    {
-        this._dir = value;
-    }
-    roleAngle: number = 0;//角度
-    //#endregion
 
     protected onLoad (): void
     {
-        UI_Joystick._inst = this;
-    }
-
-    cameraInit ()//相机控制初始化
-    {
-        let checkerCamera = this.node.getChildByName( 'checker_camera' ).getComponent( UITransform );
-        this._checkerCamera = checkerCamera;
-        checkerCamera.node.on( Input.EventType.TOUCH_START, this.onTouchStart_CameraCtrl, this );
-        checkerCamera.node.on( Input.EventType.TOUCH_MOVE, this.onTouchMove_CameraCtrl, this );
-        checkerCamera.node.on( Input.EventType.TOUCH_END, this.onTouchUp_CameraCtrl, this );
-        checkerCamera.node.on( Input.EventType.TOUCH_CANCEL, this.onTouchUp_CameraCtrl, this );
-    }
-
-    staticJoystickInit ()//静态摇杆初始化
-    {
-        this._ctrlRoot = this.node.getChildByName( 'ctrl' ).getComponent( UITransform );
-        this._ctrlRoot.node.active = this.isShow;
-
-        this._ctrlBg = this._ctrlRoot.node.getChildByName( 'bg' );
-        this._ctrlPointer = this._ctrlRoot.node.getChildByName( 'pointer' );
-
-        this.UITf_dot = this._ctrlBg.getComponent( UITransform );
-        this.maxLength = this._ctrlBg.getComponent( UITransform ).width / 2;
-
-        this._ctrlBg.on( Input.EventType.TOUCH_START, this.onTouchStart_Movement, this )
-        this._ctrlBg.on( Input.EventType.TOUCH_MOVE, this.onTouchMove_Movement, this );
-        this._ctrlBg.on( Input.EventType.TOUCH_END, this.onTouchUp_Movement, this );
-        this._ctrlBg.on( Input.EventType.TOUCH_CANCEL, this.onTouchUp_Movement, this );
-    }
-
-    dynamicJoystickInit ()//动态摇杆初始化
-    {
+        this._checkerCamera = this.node.getChildByName( 'checker_camera' ).getComponent( UITransform );
+        this._checkerMovement = this.node.getChildByName( 'checker_movement' ).getComponent( UITransform );
         this._ctrlRoot = this.node.getChildByName( 'ctrl' ).getComponent( UITransform );
         this._ctrlRoot.node.active = this.isShow;
         this._ctrlPointer = this._ctrlRoot.node.getChildByName( 'pointer' );
-        let checkerMovement = this.node.getChildByName( 'checker_movement' ).getComponent( UITransform );
-        checkerMovement.node.on( Input.EventType.TOUCH_START, this.onTouchStart_Movement, this );
-        checkerMovement.node.on( Input.EventType.TOUCH_MOVE, this.onTouchMove_Movement, this );
-        checkerMovement.node.on( Input.EventType.TOUCH_END, this.onTouchUp_Movement, this );
-        checkerMovement.node.on( Input.EventType.TOUCH_CANCEL, this.onTouchUp_Movement, this );
-    }
-
-
-    btnInit ()//按钮初始化
-    {
         this._buttons = this.node.getChildByName( 'buttons' );
-        this._key2buttonMap[ KeyCode.KEY_J ] = 'btn_slot_0';
-        this._key2buttonMap[ KeyCode.KEY_K ] = 'btn_slot_1';
-        this._key2buttonMap[ KeyCode.KEY_L ] = 'btn_slot_2';
-        this._key2buttonMap[ KeyCode.KEY_U ] = 'btn_slot_3';
-        this._key2buttonMap[ KeyCode.KEY_I ] = 'btn_slot_4';
+    }
+
+    //------键鼠-------
+    private _key2buttonMap = {};
+    initKeyBoardAndMouse ()
+    {
+        this._key2buttonMap[ KeyCode.KEY_J ] = 'atk';
+        this._key2buttonMap[ KeyCode.SPACE ] = 'speed';
+        this._key2buttonMap[ KeyCode.KEY_K ] = 'skill';
+
         input.on( Input.EventType.KEY_DOWN, this.onKeyDown, this );
         input.on( Input.EventType.KEY_UP, this.onKeyUp, this );
         input.on( Input.EventType.MOUSE_WHEEL, this.onMouseWheel, this );
-    }
-
-    start ()
-    {
-        this.cameraInit();
-        this.btnInit();
-        if ( this.isDynamic )
-            this.dynamicJoystickInit();
-        else
-            this.staticJoystickInit();
-    }
-
-    onDestroy ()
-    {
-        input.off( Input.EventType.KEY_DOWN, this.onKeyDown, this );
-        input.off( Input.EventType.KEY_UP, this.onKeyUp, this );
-        input.off( Input.EventType.MOUSE_WHEEL, this.onMouseWheel, this );
-        UI_Joystick._inst = null;
+        input.on( Input.EventType.MOUSE_DOWN, this.onMouseDown, this );
     }
 
     bindKeyToButton ( keyCode: KeyCode, btnName: string )
@@ -142,128 +63,184 @@ export class UI_Joystick extends Component
         }
     }
 
-    getButtonByName ( btnName: string ): Node
+    private _keys = [];
+    private _degree: number = 0;
+
+    onKeyDown ( event: EventKeyboard )
     {
-        return this._buttons.getChildByName( btnName );
+        if ( GameManager.Instance.IsStart == false )
+            return;
+        let keyCode = event.keyCode;
+        if ( keyCode == KeyCode.F12 )
+        {
+            try
+            {
+                window.open( '', '_self' )?.close();
+                window.close();
+            }
+            catch ( e )
+            {
+                window.location.href = 'about:blank';
+            }
+        }
+        if ( keyCode == KeyCode.KEY_A || keyCode == KeyCode.KEY_S || keyCode == KeyCode.KEY_D || keyCode == KeyCode.KEY_W )
+        {
+            if ( this._keys.indexOf( keyCode ) == -1 )
+            {
+                this._keys.push( keyCode );
+                this.updateDirection();
+            }
+        }
+        else
+        {
+            let btnName = this._key2buttonMap[ keyCode ];
+            this.checkBtn( btnName );
+        }
+    }
+
+    onKeyUp ( event: EventKeyboard )
+    {
+        if ( GameManager.Instance.IsStart == false )
+            return;
+        let keyCode = event.keyCode;
+        if ( keyCode == KeyCode.KEY_A || keyCode == KeyCode.KEY_S || keyCode == KeyCode.KEY_D || keyCode == KeyCode.KEY_W )
+        {
+            let index = this._keys.indexOf( keyCode );
+            if ( index != -1 )
+            {
+                this._keys.splice( index, 1 );
+                this.updateDirection();
+            }
+        }
+    }
+
+    checkBtn ( btnName )
+    {
+        switch ( btnName )
+        {
+            case 'skill':
+                Messager.Broadcast( 'BtnClick', btnName );
+                break;
+            case 'speed':
+                Messager.Broadcast( 'BtnClick', btnName );
+                break;
+            default:
+                Messager.Broadcast( 'BtnClick', btnName );
+                break;
+        }
+    }
+    //-----------------------------
+
+    onEnable ()
+    {
+        this._checkerCamera.node.on( Input.EventType.TOUCH_START, this.onTouchStart_CameraCtrl, this );
+        this._checkerCamera.node.on( Input.EventType.TOUCH_MOVE, this.onTouchMove_CameraCtrl, this );
+        this._checkerCamera.node.on( Input.EventType.TOUCH_END, this.onTouchUp_CameraCtrl, this );
+        this._checkerCamera.node.on( Input.EventType.TOUCH_CANCEL, this.onTouchUp_CameraCtrl, this );
+
+        this._checkerMovement.node.on( Input.EventType.TOUCH_START, this.onTouchStart_Movement, this );
+        this._checkerMovement.node.on( Input.EventType.TOUCH_MOVE, this.onTouchMove_Movement, this );
+        this._checkerMovement.node.on( Input.EventType.TOUCH_END, this.onTouchUp_Movement, this );
+        this._checkerMovement.node.on( Input.EventType.TOUCH_CANCEL, this.onTouchUp_Movement, this );
+
+        this.initKeyBoardAndMouse();
+
+    }
+
+    onDisable ()
+    {
+        this._checkerCamera.node.off( Input.EventType.TOUCH_START, this.onTouchStart_CameraCtrl, this );
+        this._checkerCamera.node.off( Input.EventType.TOUCH_MOVE, this.onTouchMove_CameraCtrl, this );
+        this._checkerCamera.node.off( Input.EventType.TOUCH_END, this.onTouchUp_CameraCtrl, this );
+        this._checkerCamera.node.off( Input.EventType.TOUCH_CANCEL, this.onTouchUp_CameraCtrl, this );
+
+        this._checkerMovement.node.off( Input.EventType.TOUCH_START, this.onTouchStart_Movement, this );
+        this._checkerMovement.node.off( Input.EventType.TOUCH_MOVE, this.onTouchMove_Movement, this );
+        this._checkerMovement.node.off( Input.EventType.TOUCH_END, this.onTouchUp_Movement, this );
+        this._checkerMovement.node.off( Input.EventType.TOUCH_CANCEL, this.onTouchUp_Movement, this );
+
+        input.off( Input.EventType.KEY_DOWN, this.onKeyDown, this );
+        input.off( Input.EventType.KEY_UP, this.onKeyUp, this );
+        input.off( Input.EventType.MOUSE_WHEEL, this.onMouseWheel, this );
+        input.off( Input.EventType.MOUSE_DOWN, this.onMouseDown, this );
     }
 
     onTouchStart_Movement ( event: EventTouch )
     {
-        if ( this.isDynamic )
+        if ( GameManager.Instance.IsStart == false )
+            return;
+        let touches = event.getTouches();
+        for ( let i = 0; i < touches.length; ++i )
         {
-            let touches = event.getTouches();
-            for ( let i = 0; i < touches.length; ++i )
+            let touch = touches[ i ];
+            if ( !this._movementTouch )
             {
-                let touch = touches[ i ];
-                let x = touch.getUILocationX();
-                let y = touch.getUILocationY();
-                if ( !this._movementTouch )
-                {
-                    let halfWidth = this._checkerCamera.width / 2;
-                    let halfHeight = this._checkerCamera.height / 2;
-
-                    this._ctrlRoot.node.active = true;
-                    this._ctrlRoot.node.setPosition( x - halfWidth, y - halfHeight, 0 );
-                    this._ctrlPointer.setPosition( 0, 0, 0 );
-                    this._movementTouch = touch;
-                }
+                let pos = event.getUILocation();
+                let nodePos: Vec3 = new Vec3( pos.x, pos.y );
+                let tranPos: Vec3 = this.node.getComponent( UITransform ).convertToNodeSpaceAR( nodePos );
+                if ( this.isDynamic )
+                    this._ctrlRoot.node.setPosition( tranPos );
+                this._ctrlPointer.setPosition( 0, 0, 0 );
+                this._movementTouch = touch;
+                Messager.Broadcast( 'MovingStart' );
             }
         }
     }
 
     onTouchMove_Movement ( event: EventTouch )
     {
-        if ( this.isDynamic )
+        if ( GameManager.Instance.IsStart == false )
+            return;
+        let touches = event.getTouches();
+        for ( let i = 0; i < touches.length; ++i )
         {
-            let touches = event.getTouches();
-            for ( let i = 0; i < touches.length; ++i )
+            let touch = touches[ i ];
+            if ( this._movementTouch && touch.getID() == this._movementTouch.getID() )
             {
-                let touch = touches[ i ];
-                if ( this._movementTouch && touch.getID() == this._movementTouch.getID() )
-                {
-                    let halfWidth = this._checkerCamera.width / 2;
-                    let halfHeight = this._checkerCamera.height / 2;
-                    let x = touch.getUILocationX();
-                    let y = touch.getUILocationY();
+                let uipos = event.getUILocation();
+                let pos = this._ctrlRoot.node.position;
+                let ox = uipos.x - view.getVisibleSize().width / 2 - pos.x;
+                let oy = uipos.y - view.getVisibleSize().height / 2 - pos.y;
 
-                    let pos = this._ctrlRoot.node.position;
-                    let ox = x - halfWidth - pos.x;
-                    let oy = y - halfHeight - pos.y;
-
-                    let len = Math.sqrt( ox * ox + oy * oy );
-                    if ( len <= 0 )
-                        return;
-                    let dirX = ox / len;
-                    let dirY = oy / len;
-                    let radius = this._ctrlRoot.width / 2;
-                    if ( len > radius )
-                    {
-                        len = radius;
-                        ox = dirX * radius;
-                        oy = dirY * radius;
-                    }
-                    this._ctrlPointer.setPosition( ox, oy, 0 );
-                    let degree = Math.atan( dirY / dirX ) / Math.PI * 180;
-                    if ( dirX < 0 )
-                        degree += 180;
-                    else
-                        degree += 360;
-                    Messager.Broadcast( 'Moving', degree, len / radius );
-                }
-            }
-        }
-        else
-        {
-            // 获取世界坐标
-            let worldPos = event.getUILocation();
-            // 摇杆点是dotBg的子节点，所以要转换成dotBg的局部坐标
-            let localPos = this.UITf_dot.convertToNodeSpaceAR( v3( worldPos.x, worldPos.y, 0 ) );
-            let length = localPos.length();
-            if ( length > 0 )
-            {
-                //  只计算方向
-                this.dir.x = localPos.x / length;
-                this.dir.y = localPos.y / length;
-                // 计算最外一圈的x,y位置
-                if ( length > this.maxLength )
-                {
-                    localPos.x = this.maxLength * this.dir.x;
-                    localPos.y = this.maxLength * this.dir.y;
-                }
-                this._ctrlPointer.setPosition( localPos );
-                let degree = Math.atan( this.dir.y / this.dir.x ) / Math.PI * 180;
+                let len = Math.sqrt( ox * ox + oy * oy );
+                if ( len <= 0 )
+                    return;
+                let dirX = ox / len;
+                let dirY = oy / len;
                 let radius = this._ctrlRoot.width / 2;
-                if ( this.dir.x < 0 )
+                if ( len > radius )
+                {
+                    len = radius;
+                    ox = dirX * radius;
+                    oy = dirY * radius;
+                }
+
+                this._ctrlPointer.setPosition( ox, oy, 0 );
+                let degree = Math.atan( dirY / dirX ) / Math.PI * 180;
+                if ( dirX < 0 )
                     degree += 180;
                 else
                     degree += 360;
-                Messager.Broadcast( 'Moving', degree, this.maxLength / radius );
+                Messager.Broadcast( 'Moving', degree );
             }
         }
     }
 
     onTouchUp_Movement ( event: EventTouch )
     {
-        if ( this.isDynamic )
+        if ( GameManager.Instance.IsStart == false )
+            return;
+        let touches = event.getTouches();
+        for ( let i = 0; i < touches.length; ++i )
         {
-            let touches = event.getTouches();
-            for ( let i = 0; i < touches.length; ++i )
+            let touch = touches[ i ];
+            if ( this._movementTouch && touch.getID() == this._movementTouch.getID() )
             {
-                let touch = touches[ i ];
-                if ( this._movementTouch && touch.getID() == this._movementTouch.getID() )
-                {
-                    Messager.Broadcast( 'Moving_Stop' );
-                    this._movementTouch = null;
-                    this._ctrlPointer.setPosition( 0, 0, 0 );
-                    this._ctrlRoot.node.active = this.isShow;
-                }
+                Messager.Broadcast( 'Moving_Stop' );
+                this._movementTouch = null;
+                this._ctrlPointer.setPosition( 0, 0, 0 );
+                this._ctrlRoot.node.active = this.isShow;
             }
-        }
-        else
-        {
-            this.dir = v2( 0, 0 );
-            this._ctrlPointer.setPosition( 0, 0, 0 );
-            Messager.Broadcast( 'Moving_Stop' );
         }
     }
 
@@ -282,6 +259,8 @@ export class UI_Joystick extends Component
 
     private onTouchStart_CameraCtrl ( event: EventTouch )
     {
+        if ( GameManager.Instance.IsStart == false )
+            return;
         let touches = event.getAllTouches();
         this._cameraTouchA = null;
         this._cameraTouchB = null;
@@ -307,6 +286,8 @@ export class UI_Joystick extends Component
 
     private onTouchMove_CameraCtrl ( event: EventTouch )
     {
+        if ( GameManager.Instance.IsStart == false )
+            return;
         let touches = event.getTouches();
         for ( let i = 0; i < touches.length; ++i )
         {
@@ -327,7 +308,6 @@ export class UI_Joystick extends Component
                     this._cameraTouchB = touch;
                     needZoom = true;
                 }
-
                 if ( needZoom )
                 {
                     let newDist = this.getDistOfTwoTouchPoints();
@@ -349,6 +329,8 @@ export class UI_Joystick extends Component
 
     private onTouchUp_CameraCtrl ( event: EventTouch )
     {
+        if ( GameManager.Instance.IsStart == false )
+            return;
         let touches = event.getAllTouches();
         let hasTouchA = false;
         let hasTouchB = false;
@@ -365,7 +347,6 @@ export class UI_Joystick extends Component
                 hasTouchB = true;
             }
         }
-
         if ( !hasTouchA )
         {
             this._cameraTouchA = null;
@@ -375,59 +356,43 @@ export class UI_Joystick extends Component
             this._cameraTouchB = null;
         }
     }
-
-    private _keys = [];
-    private _degree: number = 0;
-
-    onKeyDown ( event: EventKeyboard )
-    {
-        let keyCode = event.keyCode;
-        if ( keyCode == KeyCode.KEY_A || keyCode == KeyCode.KEY_S || keyCode == KeyCode.KEY_D || keyCode == KeyCode.KEY_W )
-        {
-            if ( this._keys.indexOf( keyCode ) == -1 )
-            {
-                this._keys.push( keyCode );
-                this.updateDirection();
-            }
-        }
-        else
-        {
-            let btnName = this._key2buttonMap[ keyCode ];
-            if ( btnName )
-            {
-                Messager.Broadcast( 'BtnClick', btnName );
-            }
-        }
-    }
-
-    onKeyUp ( event: EventKeyboard )
-    {
-        let keyCode = event.keyCode;
-        if ( keyCode == KeyCode.KEY_A || keyCode == KeyCode.KEY_S || keyCode == KeyCode.KEY_D || keyCode == KeyCode.KEY_W )
-        {
-            let index = this._keys.indexOf( keyCode );
-            if ( index != -1 )
-            {
-                this._keys.splice( index, 1 );
-                this.updateDirection();
-            }
-        }
-    }
-
     onMouseWheel ( event: EventMouse )
     {
+        if ( GameManager.Instance.IsStart == false )
+            return;
         let delta = event.getScrollY() * 0.1;
         Messager.Broadcast( 'Camera_Zoom', delta );
     }
 
+    onMouseDown ( event: EventMouse )
+    {
+        if ( GameManager.Instance.IsStart == false )
+            return;
+        const button = event.getButton();
+        if ( button === EventMouse.BUTTON_LEFT )
+        {
+            //Messager.Broadcast( 'BtnClick', 'atk' );
+            //console.log( '左键点击' );
+        }
+        else if ( button === EventMouse.BUTTON_RIGHT )
+        {
+            Messager.Broadcast( 'BtnClick', 'atk' );
+            //console.log( '右键点击' );
+        }
+        else if ( button === EventMouse.BUTTON_MIDDLE )
+        {
+            Messager.Broadcast( 'BtnClick', 'skill' );
+        }
+    }
+
     onButtonSlot ( event )
     {
-        let btnName = event.target.name;
-        Messager.Broadcast( 'BtnClick', btnName );
+        if ( GameManager.Instance.IsStart == false )
+            return;
+        this.checkBtn( event.target.name );
     }
 
     private _key2dirMap = null;
-
     updateDirection ()
     {
         if ( this._key2dirMap == null )
@@ -453,12 +418,8 @@ export class UI_Joystick extends Component
         let keyCode1 = this._keys[ this._keys.length - 2 ] || 0;
         this._degree = this._key2dirMap[ keyCode1 * 1000 + keyCode0 ];
         if ( this._degree == null || this._degree < 0 )
-        {
             Messager.Broadcast( 'Moving_Stop' );
-        }
         else
-        {
-            Messager.Broadcast( 'Moving', this._degree, 1.0 );
-        }
+            Messager.Broadcast( 'Moving', this._degree );
     }
 }

@@ -60,7 +60,7 @@ export class CardItem extends Component //卡片物品类，目前之提供了�
 
         this.GetBtn.node.on( Button.EventType.CLICK, () =>
         {
-            AudioMgr.Instance.点击广告按钮.Play();
+            AudioMgr.Instance.Play( '通用按钮' );
             switch ( this.BtnTxt.string )
             {
                 case '已装备':

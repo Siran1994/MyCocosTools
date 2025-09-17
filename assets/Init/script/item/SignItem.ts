@@ -28,6 +28,12 @@ export class SignItem extends Component
 
     onEnable ()
     {
+        if ( this.index <= GameData.SignDay )
+            this.Signed.active = true;
+        else
+            this.Signed.active = false;
+        if ( GameData.SignDay == 7 )
+            this.Signed.active = false;
         Messager.AddListener( 'SignItem', this, this.SignItem );
     }
 
@@ -40,5 +46,9 @@ export class SignItem extends Component
     {
         if ( this.index == i )
             this.Signed.active = true;
+        if ( this.index <= GameData.SignDay )
+            this.Signed.active = true;
+        else
+            this.Signed.active = false;
     }
 }

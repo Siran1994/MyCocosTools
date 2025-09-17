@@ -12,7 +12,7 @@ export class Config
 
     public static PackageName = '城市飞侠';//默认礼包名称   
 
-    public static PanelName =//自定义资源包名
+    public static Panel =//自定义资源包名
         {
             MainPanel: "MainPanel",//主界面
             GamePanel: "GamePanel",//游戏
@@ -24,6 +24,17 @@ export class Config
             FailedPanel: "ShopPanel",//失败
             RewardPanel: "RewardPanel",//奖励
             FreeTryPanel: "FreeTryPanel",//试用
+        }
+
+    public static BundleName =
+        {
+            Base: "base",//基础包   
+            Monster: 'monster',//怪物资源包
+            Audio: 'audio',//音频资源包
+            JumpGame: 'jumpGame',//跳一跳小游戏
+            mixFight: "mixFight",//吞噬进化   
+            Queen: 'queen',//我就是女王
+            Survival: 'survival',//生存大陆
         }
 
     public static PowerType =
@@ -90,12 +101,26 @@ export class Config
             Total: 500//最高累积
         }
 
-    //自定义资源包名 
-    public static BundleName =
-        {
-            Ui: "ui",//Ui         
-            Audio: "audio",//音频音效
-            Prefab: "prefab",//预制体
-        }
 
+    public static Names: string[] = [
+        '旧梦',
+        '渺远的断云',
+        '蹦瞎卡拉卡',
+        '你是胖虎吗',
+        '颜汐夕',
+        '恋爱裁判',
+        '风清隐',
+        '风月琳琅',
+        '最后的温柔',
+        '守时守约',
+        '時光逗留',
+        '白起床了',
+        '凉心暖男',
+        '夏棠',
+        '笙兮',
+        '花鸢',
+        '樱花蜜桃酥',
+        '愤怒小鸟',
+        '星梵',
+        '書生' ];
 }

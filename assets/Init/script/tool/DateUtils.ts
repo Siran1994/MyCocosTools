@@ -38,11 +38,7 @@ export default class DateUtils
         return Math.floor( new Date().getTime() / 1000 );
     }
 
-    /**
-     * 检测日期的年月日是否匹配
-     * @param curDate   日期1
-     * @param tarDate   日期2
-     */
+    //检测日期的年月日是否匹配
     public static checkDate ( curDate: NewDate, tarDate: NewDate ): boolean
     {
         if ( curDate.year == tarDate.year
@@ -54,11 +50,8 @@ export default class DateUtils
         return false
     }
 
-    /**
-     * 根据秒数换算时钟单位
-     * @param time 
-     */
-    public static clock ( time: number ): string
+    //根据秒数换算时钟单位
+    public static clock ( time: number )//时:分:秒
     {
         time = Math.floor( time );
 
@@ -81,11 +74,8 @@ export default class DateUtils
         return hour_string + ":" + minute_string + ":" + second_string
     }
 
-    /**
-     * 根据秒数换算时钟单位
-     * @param time 
-     */
-    public static clockHMS ( time: number ): string
+    //根据秒数换算时钟单位
+    public static clockHMS ( time: number )//x小时:x分:x秒
     {
         time = Math.floor( time );
 
@@ -105,6 +95,56 @@ export default class DateUtils
         let minute_string: string = minute < 10 ? `0${ minute }` : `${ minute }`;
         let second_string: string = second < 10 ? `0${ second }` : `${ second }`;
 
-        return hour_string + "小时" + minute_string + "分" + second_string + '秒';
+        return hour_string + "时" + minute_string + "分" + second_string + '秒';
+    }
+
+    public static getRemainingSecondsToMidnight ()//获取每日到当日0:00的剩余秒数
+    {
+        const now = new Date(); // 当前时间
+        const nextMidnight = new Date( now );
+        // 重置为当日 00:00 后加上 24 小时得到次日 00:00
+        nextMidnight.setHours( 24, 0, 0, 0 );
+        // 计算时间差（毫秒数）并转换为秒数
+        const delta = nextMidnight.getTime() - now.getTime();
+        return Math.floor( delta / 1000 );
+    }
+
+    public static getWeeklyResetRemaining ()//获取当日到当每周日0:00的剩余秒数
+    {
+        const now = new Date();
+        // 复制当前时间用于计算
+        const nextSunday = new Date( now );
+        // 获取最近的周日（若当前是周日已过期则+7天）
+        const dayDelta = ( 7 - now.getDay() ) % 7;
+        nextSunday.setDate( now.getDate() + dayDelta );
+        nextSunday.setHours( 0, 0, 0, 0 );
+        // 处理当前已过目标周日的情况
+        if ( nextSunday <= now )
+        {
+            nextSunday.setDate( nextSunday.getDate() + 7 );
+        }
+        // 计算差值并向上取整
+        return Math.ceil( ( nextSunday.getTime() - now.getTime() ) / 1000 );
+    }
+
+    //从开始时间到结束时剩余秒数
+    public static getRemainingSeconds ( firstTime, giftTime, cb?: Function ): number
+    {
+        const startTime = firstTime;
+        const currentTime = Date.now();
+
+        // 未记录开始时间时返回0
+        if ( !startTime ) return 0;
+        // 计算剩余时间（精确算法）
+        const endTime = startTime + giftTime * 1000;
+        const remainingMs = endTime - currentTime;
+
+        // 处理超时情况
+        if ( remainingMs <= 0 )
+        {
+            cb && cb();
+            return 0;
+        }
+        return Math.floor( remainingMs / 1000 );
     }
 }
