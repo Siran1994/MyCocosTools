@@ -34,9 +34,39 @@ const getterCast = function ( value: any, index: number, cast: any, d: any )
             return d[ index ] === "true" || d[ index ] === "t" || d[ index ] === "1";
         } else
         {
-            return d[ index ];
+            // ================= 修复部分开始 =================
+            // 当 CSV 头部定义为 string 类型时，尝试解析 JSON 数组或对象
+            let val = d[ index ];
+            if ( typeof val === "string" )
+            {
+                let trimVal = val.trim();
+                // 判断是否像 JSON 数组或对象 (以 [ 开头 ] 结尾 或以 { 开头 } 结尾)
+                if ( ( trimVal.startsWith( "[" ) && trimVal.endsWith( "]" ) ) ||
+                    ( trimVal.startsWith( "{" ) && trimVal.endsWith( "}" ) ) )
+                {
+                    try
+                    {
+                        // 处理 CSV 中常见的单引号问题: ['a', 'b'] -> ["a", "b"]
+                        // 这样就可以正确解析 "['apple','orange']" 这样的数据
+                        let jsonStr = trimVal.replace( /'/g, '"' );
+                        return JSON.parse( jsonStr );
+                    } catch ( e )
+                    {
+                        // 如果解析失败（比如格式不正确），返回原字符串
+                        return val;
+                    }
+                }
+            }
+            return val;
+            // ================= 修复部分结束 =================
         }
-    } else
+    }
+    // 注意：下面这个分支通常用于处理没有类型定义行时的自动推断
+    else if ( value.startsWith( "[" ) && value.endsWith( "]" ) )
+    {
+        return JSON.parse( d[ index ] );
+    }
+    else
     {
         if ( !isNaN( Number( value ) ) )
         {
@@ -505,9 +535,23 @@ export class CsvManager
         return this.instance;
     }
 
-    public getData ( fileName: string, cb?: ( asset: any ) => void )
+    LoadCsv ( cb?: Function )
     {
-        resources.load( fileName, ( err: any, res: TextAsset ) =>
+        var arrTables = [ 'talk', 'car', 'signIn' ];
+        //客户端加载
+        arrTables.forEach( ( tableName, index, array ) =>
+        {
+            this.getData( tableName, ( err, content ) =>
+            {
+                this.addTable( tableName, content );//添加表格
+                cb && cb();
+            } );
+        } );
+    }
+
+    getData ( fileName: string, cb: ( err: Error | null, asset: any ) => void )
+    {
+        resources.load( fileName, ( err, content ) =>
         {
             if ( err )
             {
@@ -515,12 +559,19 @@ export class CsvManager
                 return;
             }
             // // 获取到文本数据
-            // const textData = res.text;
-            this.addTable( fileName, res.text, true );//添加表格
-            // console.error( this.getTable( 'talk' ) );
-            //console.error( this.queryByID( 'talk', '1' )[ 'content' ] );
-            //console.error( this.getTableArr( 'talk' ) );
-            console.error( this.showTalk( 1 ) );
+            const txt = content as unknown as ITextAsset;
+            let text = txt!.text;
+            if ( !text )
+            {
+                resources.load( content.nativeUrl, ( err, content ) =>
+                {
+                    text = content as unknown as string;
+                    cb( err, text );
+                } );
+
+                return;
+            }
+            cb( err, text );
         } )
     }
 
@@ -553,15 +604,20 @@ export class CsvManager
     addTable ( tableName: string, tableContent: string, force?: boolean )
     {
         if ( this.csvTables[ tableName ] && !force )
-        {
             return;
-        }
-
         const tableData: any = {};
         const tableArr: any[] = [];
         const opts = { header: true };
         CSV.parse( tableContent, opts, ( row: any, keyName: string ) =>
         {
+            // --- 新增代码开始：修复字段名带空格的问题 ---
+            const newRow: any = {};
+            const rawKeys = Object.keys( row );
+            for ( let i = 0; i < rawKeys.length; i++ )
+            {
+                const cleanKey = rawKeys[ i ].trim(); // 去除键名的首尾空格，并重新赋值
+                newRow[ cleanKey ] = row[ rawKeys[ i ] ];
+            }
             tableData[ row[ keyName ] ] = row;
             tableArr.push( row );
         } );

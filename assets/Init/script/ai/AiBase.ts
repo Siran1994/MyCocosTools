@@ -111,7 +111,7 @@ export class AiBase extends Component
                 hurtDirection.normalize();
                 this.hurt( hostActor.aiData.atk, hostActor!, hurtDirection );
                 PoolManager.putNode( event.otherCollider.node );
-                AudioMgr.Instance.受击.Play();
+                // AudioMgr.Instance.受击.Play();
             }
         }, this );
     }

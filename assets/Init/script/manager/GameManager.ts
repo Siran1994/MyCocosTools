@@ -49,9 +49,6 @@ export class GameManager extends Component
             this.targetLv = GameData.Lv;
         this.currentlv = instantiate( PrefabManager.get( this.targetLv.toString(), PrefabManager.LvMap ) );
         this.currentlv.parent = this.node;
-
-        // CsvManager.Instance.getData( 'talk' );//Excel表格使用示例
-
     }
 
     start ()
