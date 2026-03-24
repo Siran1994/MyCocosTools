@@ -11,7 +11,7 @@ import { PlayerCtrl } from '../role/PlayerCtrl';
 import { AudioMgr } from './AudioMgr';
 import { Messager } from './Messager';
 import { SkeletalAnimation, AnimationComponent } from 'cc';
-import { CsvManager } from '../other/CsvManager';
+import { CsvManager } from '../csv/CsvManager';
 
 const { ccclass, property } = _decorator;
 

@@ -27,17 +27,13 @@ const getterCast = function ( value: any, index: number, cast: any, d: any )
     if ( cast instanceof Array )
     {
         if ( cast[ index ] === "number" )
-        {
             return Number( d[ index ] );
-        } else if ( cast[ index ] === "boolean" )
-        {
+        else if ( cast[ index ] === "boolean" )
             return d[ index ] === "true" || d[ index ] === "t" || d[ index ] === "1";
-        } else
+        else
         {
-            // ================= 修复部分开始 =================
-            // 当 CSV 头部定义为 string 类型时，尝试解析 JSON 数组或对象
             let val = d[ index ];
-            if ( typeof val === "string" )
+            if ( typeof val === "string" )// 当 CSV 头部定义为 string 类型时，尝试解析 JSON 数组或对象
             {
                 let trimVal = val.trim();
                 // 判断是否像 JSON 数组或对象 (以 [ 开头 ] 结尾 或以 { 开头 } 结尾)
@@ -46,11 +42,15 @@ const getterCast = function ( value: any, index: number, cast: any, d: any )
                 {
                     try
                     {
-                        // 处理 CSV 中常见的单引号问题: ['a', 'b'] -> ["a", "b"]
-                        // 这样就可以正确解析 "['apple','orange']" 这样的数据
                         let jsonStr = trimVal.replace( /'/g, '"' );
+                        jsonStr = jsonStr.replace( /([\[{,]\s*)(\w+):/g, '$1"$2":' );
+                        // if ( jsonStr.startsWith( "[" ) && jsonStr.indexOf( ":" ) > -1 )
+                        // {
+                        //     jsonStr = "{" + jsonStr.substring( 1, jsonStr.length - 1 ) + "}";
+                        // }
                         return JSON.parse( jsonStr );
-                    } catch ( e )
+                    }
+                    catch ( e )
                     {
                         // 如果解析失败（比如格式不正确），返回原字符串
                         return val;
@@ -58,26 +58,18 @@ const getterCast = function ( value: any, index: number, cast: any, d: any )
                 }
             }
             return val;
-            // ================= 修复部分结束 =================
         }
     }
-    // 注意：下面这个分支通常用于处理没有类型定义行时的自动推断
-    else if ( value.startsWith( "[" ) && value.endsWith( "]" ) )
-    {
+    else if ( value.startsWith( "[" ) && value.endsWith( "]" ) ) // 注意：下面这个分支通常用于处理没有类型定义行时的自动推断
         return JSON.parse( d[ index ] );
-    }
     else
     {
         if ( !isNaN( Number( value ) ) )
-        {
             return Number( d[ index ] );
-        } else if ( value == "false" || value == "true" || value == "t" || value == "f" )
-        {
+        else if ( value == "false" || value == "true" || value == "t" || value == "f" )
             return d[ index ] === "true" || d[ index ] === "t" || d[ index ] === "1";
-        } else
-        {
+        else
             return d[ index ];
-        }
     }
 };
 

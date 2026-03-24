@@ -1,6 +1,5 @@
 import { _decorator, Component, Node } from 'cc';
-import { CsvManager } from '../other/CsvManager';
-import { DataManager } from '../manager/DataManager';
+import { CsvManager } from './CsvManager';
 const { ccclass, property } = _decorator;
 
 @ccclass( 'Test' )
@@ -68,6 +67,71 @@ export class Test extends Component
                 console.error( item.strList[ 2 ] );
             } );
 
+            const tableData = CsvManager.Instance.getTableArr( 'talk' );
+            if ( tableData && tableData.length > 0 )
+            {
+                // 取第一条数据作为示例
+                const row = tableData[ 1 ];
+                // console.error( "=== 测试读取 jsonList 字段 ===" );
+                //console.error( "原始数据行:", row );
+
+
+                // === Test.ts 中添加这段调试代码 ===
+                const jsonData = row.jsonList;
+
+                console.error( 'money: ' + jsonData[ 0 ].money );
+                console.error( 'coin: ' + jsonData[ 0 ].coin );
+                console.error( 'gem: ' + jsonData[ 0 ].gem );
+                console.error( 'desc: ' + jsonData[ 0 ].desc );
+
+                // console.log( "1. 原始 jsonList:", jsonData );
+                //console.log( "2. 类型:", typeof jsonData );
+                //console.log( "3. 是否是数组:", Array.isArray( jsonData ) );
+
+                // // 兼容处理
+                // let finalObj = null;
+
+                // if ( Array.isArray( jsonData ) )
+                // {
+                //     console.log( "4. 进入数组分支" );
+                //     if ( jsonData.length > 0 )
+                //     {
+                //         finalObj = jsonData[ 0 ];
+                //         console.log( "5. 取出的第一个元素:", finalObj );
+                //     }
+                // } else if ( typeof jsonData === 'object' && jsonData !== null )
+                // {
+                //     console.log( "6. 进入对象分支" );
+                //     finalObj = jsonData;
+                // }
+
+                // console.log( "7. finalObj:", finalObj );
+                // console.log( "8. money:", finalObj ? finalObj.money : "finalObj为null" );
+
+                // 访问 JsonList 数据
+                // 注意：如果解析成功，这里应该是一个对象，例如：{ money: 10, coin: 20, gem: 5 }
+                // 如果解析失败（格式无法识别），它可能是字符串
+                //const jsonData = row.jsonList;
+                // if ( typeof jsonData === 'object' && jsonData !== null )
+                // {
+                //     console.error( "解析后的 JsonList 对象:", jsonData );
+                //     console.error( "money 值:", jsonData.money );
+                //     console.error( "coin 值:", jsonData.coin );
+                //     console.error( "gem 值:", jsonData.gem );
+                //     console.error( "desc 值:", jsonData.desc );
+                //     // 示例：遍历 jsonList 中的键值对
+                //     for ( const key in jsonData )
+                //     {
+                //         console.error( `Item Key: ${ key }, Value: ${ jsonData[ key ] }` );
+                //     }
+                // } else
+                // {
+                //     console.error( "jsonList 未被解析为对象，可能是字符串:", jsonData );
+                // }
+            }
+
+
+
             // // 查询 talk 表中，类型(type) 为 1, 5, 10 的所有数据
             // const typeList = [ 1, 5, 10 ];
             // const rows1 = CsvManager.Instance.queryIn( 'talk', 'type', typeList );
@@ -90,16 +154,7 @@ export class Test extends Component
             //     const item = rows2[ key ];
             //     console.error( `Type: ${ item.type }, Content: ${ item.content }, Condition: ${ item.condition }` );
             // }
-        } );//Excel表格使用示例
-
-        DataManager.Instance.setItem( 'name', '狂战士' );
-        DataManager.Instance.setItem( 'skill', '大蹦' );
-        DataManager.Instance.setItem( 'desc', '擅长使用巨剑的鬼剑士' );
-        DataManager.Instance.setItem( 'atk', 100 );
-        DataManager.Instance.setItem( 'hp', 200 );
-        DataManager.Instance.setItem( 'def', 50 );
-
-        console.log( DataManager.Instance.getAll() );
+        } );//Excel表格使用示例       
     }
 
 }
